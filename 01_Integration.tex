@@ -409,17 +409,16 @@ Notation des Integrals
 \begin{frame}{\glqq{}Hauptsatz\grqq{} der Differential- und Integralrechnung}
     Sei $f$ eine stetige Funktion und $F$ das unbestimmte Integral definiert durch 
     \begin{gather*}
-        F(x) = \int_a^x f(x)\,dx.
+        F(x) = \int_a^x f(t)\,dt.
     \end{gather*}
     \begin{columns}
         \begin{column}{.59\textwidth}
-        Für den Differentenquotienten von $F$ gilt dann
-        \small
+        Es gilt dann für Differenzen benachbarter Punkte
         \begin{align*}
-            \frac{F(x+h)-F(x)}{h} &= \frac1h\left[
-            \int_{\color{red}a}^{\color{blue}x+h} f\,dx - {\color{red}\int_a^x} f\,dx\right]
-            \\&= \frac1h{\color{blue}\int_x^{x+h}} f\,dx
-            \\&= \frac hh f(z)
+            F(x\!+\!h)\!-\!F(x) &= 
+            \int_{\color{red}a}^{\color{blue}x+h} f(t)\,dt -\! {\color{red}\int_a^x} f(t)\,dt
+            \\&= {\color{blue}\int_x^{x+h}} f(t)\,dt
+            \\&= h f(z)
         \end{align*}
         wobei wir den Mittelwertsatz angewandt haben.
         \end{column}
@@ -427,7 +426,6 @@ Notation des Integrals
             \begin{flushright}
             \includegraphics[width=.8\textwidth]{fig/integral-hauptsatz.tikz}
             \end{flushright}
-            Grenzwert $h\to 0$
         \end{column}
     \end{columns}
 \end{frame}
@@ -436,7 +434,7 @@ Wir gelangen damit zum sogenannten Hauptsatz der Differential- und Integralrechn
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle<presentation>{\glqq{}Hauptsatz\grqq{} der Differential- und Integralrechnung}
-Sei $f$ eine stetige Funktion und $F$ das unbestimmte Integral. Dann ist $F$ differenzierbar und es gilt
+Sei $f$ eine stetige Funktion und $F$ das unbestimmte Integral von $f$. Dann ist $F$ stetig differenzierbar und es gilt
     \begin{gather*}
         F'(x) = \frac{d}{dx} \int_{a}^x f(t)\,dt = f(x).
     \end{gather*}
@@ -468,7 +466,7 @@ Sei $f$ eine stetige Funktion und $F$ das unbestimmte Integral. Dann ist $F$ dif
     \item Was erhalten Sie, wenn Sie eine Stammfunktion der Funktion $f$ ableiten?
     \item Was erhalten Sie, wenn Sie $F$ ableiten und die Stammfunktion der Ableitung bilden?
     \item Wie hilft die Stammfunktion bei der Bestimmung unbestimmter und bestimmter Integrale?
-    \item Warum kann es bei der Bes
+    \item Warum kann es praktisch sein zu betrachten, ob eine Funktion gerade bzw. ungerade ist?
 \end{enumerate}    
 \end{frame}
 
