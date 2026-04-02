@@ -1,0 +1,105 @@
+\mode*
+\section{Mehrdimensionale Funktionen}
+
+\begin{frame}{Arten mehrdimensionaler Funktionen}
+\begin{enumerate}
+    \item Funktionen einer Variablen, die in $\R^n$ abbilden:
+    \begin{gather*}
+        \vf\colon \R\to \R^n,\qquad t\mapsto \vf(t)
+    \end{gather*}
+    \item Funktionen mehrerer Variablen, die nach $\R$ abbilden:
+    \begin{gather*}
+        f\colon \R^m\to \R,\qquad \vx \mapsto f(\vx)
+    \end{gather*}
+    \item Funktionen mehrerer Variablen, die in $\R^n$ abbilden:
+    \begin{gather*}
+        \vf\colon \R^m \to \R^n,\qquad \vx \mapsto \vf(\vx)
+    \end{gather*}
+\end{enumerate}
+Notation: wir schreiben Vektorgrößen als $\vx,\vy,\vf$ zur Unterscheidung von Zahlen $t,x,f$.
+\end{frame}
+
+\subsection{Pfade und Wege}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \begin{Denkpause}
+        Auf einer Wanderung bewegen Sie sich durch eine Landschaft. Was für ein mathematisches Objekt ist geeignet, diese Bewegung zu beschreiben.
+    \end{Denkpause}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Analytische Eigenschaften von Pfaden}
+    \begin{itemize}
+        \item Stetigkeit, Differenzierbarkeit und Integrale von Pfaden sind komponentenweise definiert.
+        \item Ableitungen
+        \begin{gather*}
+            \vf'(t) = \tfrac{d}{dt}
+            \begin{pmatrix}
+                \tfrac{d}{dt} f_1(t)\\
+                \vdots\\
+                \tfrac{d}{dt} f_n(t)
+            \end{pmatrix}
+            = \begin{pmatrix}
+                f_1^(t)\\\vdots\\f_n'(t)
+            \end{pmatrix}
+        \end{gather*}
+        \item Integrale
+        \begin{gather*}
+            \int \vf(t)\,dt = \vF(t),
+        \qquad F_i(t) = \int f_i(t)\,dt,\quad i=1,\dots,n
+        \end{gather*}
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Beispiele in zwei Dimensionen}
+    \begin{columns}
+        \begin{column}{.5\textwidth}
+        \begin{block}{Geradlinige Bewegung}
+            \begin{align*}
+                x(t) &= f_1(t) = x_0 + t u\\
+                y(t) &= f_2(t) = y_0+tv
+            \end{align*}
+            oder in Vektorschreibweise
+            \begin{gather*}
+                \vx(t) = \vx_0+t\vv
+            \end{gather*}
+            Ableitung
+            \begin{gather*}
+                \vx'(t) = \vv
+            \end{gather*}
+        \end{block}         
+        \end{column}
+        \pause
+        \begin{column}{.5\textwidth}
+        \begin{block}{Kreisbewegung}
+            \begin{align*}
+                x(t) &= r \cos t\\
+                y(t) &= r \sin t
+            \end{align*}
+            mit der Ableitung
+            \begin{align*}
+                x(t) &= -r \sin t\\
+                y(t) &= r \cos t
+            \end{align*}
+        \end{block}         
+        \end{column}
+    \end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{envgknote}{hinzufügen}
+   \begin{itemize}
+       \item Wege: parametrische und nullstellen-Darstellung
+       \item Begriffsklärung
+       \item Beispiele Gerade und Kreis
+       \item zu einem Weg kann es mehrere Pfade geben, die ihn parametrisieren
+       \item Beispiel chemische Reaktion oder Biosystem
+       \item Wann ist ein Weg als $y=f(x)$ darstellbar?
+       \item Implizite Differentiation
+   \end{itemize} 
+\end{envgknote}
+\mode<all>

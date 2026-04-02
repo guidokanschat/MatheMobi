@@ -1,0 +1,116 @@
+\section{Wahrscheinlichkeitstheorie}
+\begin{frame}{Wahrscheinlichkeitstheorie vs. Statistik}
+    \begin{itemize}
+        \item Die \textbf{Wahrscheinlichkeitstheorie} versucht, die Ungewissheit zu \textbf{modellieren}. Es können also Vorhersagen gemacht werden (z.B. Umfragen vor einer Wahl).
+        \item Die \textbf{beschreibende} (deskriptive) \textbf{Statistik} versucht, die Beobachtungen zu \textbf{beschreiben}. Es können keine Vorhersagen gemacht werden. 
+        (Bsp.: Kommentare zum Ausgang einer Wahl, wie hat eine Personengruppe gewählt, etc...)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Ereignis}
+    \begin{itemize}
+        \item Ein Ereignis ist ein Geschehnis, dem man eine \textbf{Wahrscheinlichkeit} zuordnen kann (andere Begriffe: \grqq zufälliges Ereignis\grqq , \textit{\grqq random event\grqq })
+        \item Jedem Ereignis $A$ kann eine Wahrscheinlichkeit $P(A)$ zugeordnet werden
+        \item Ereignisse können anhand von Konzepten aus der \textbf{Mengenlehre} beschrieben werden:
+        \begin{itemize}
+            \item Menge $\Omega$: Ereignismenge
+            \item Ereignis $A$ ist eine Teilmenge von $\Omega$  ($A \subseteq \Omega$)
+            \item Leere Menge $\emptyset$: unmögliches Ereignis
+            \item Schnittmenge $A\cap B$: gleichzeitiges Eintreten der Ereignisse $A$ und $B$
+            \item Vereinigungsmenge $A \cup B$: Eintreten der Ereignisse $A$ oder $B$ (evtl. auch gleichzeitig)
+            \item Komplementäre Menge $A^c$: nicht-Eintreten des Ereignisses $A$
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Beispiel: Sechsseitiger Würfel}
+    Ein sechsseitiger Würfel wird geowrfen
+    \begin{itemize}
+        \item $\Omega=\left\{1,2,3,4,5,6\right\}$
+        \item Die Elemente der Menge $\Omega$ beschreiben jeweils ein \textbf{Elementarereignis} (z.B. \grqq eine 4 wird gewürfelt\grqq )
+        \item Es können aber auch andere Ereignisse definiert werden: \grqq eine 2 oder 3 würfeln\grqq , \grqq eine gerade Zahl würfeln\grqq , \grqq eine 7 würfeln\grqq , ...
+        \item Diese Ereignisse sind Teilmengen von $\Omega$:
+       \begin{itemize}
+           \item $A = \left\{1\right\}=$ \grqq eine 1 würfeln\grqq 
+           \item $B = \left\{2,3\right\}=$\grqq eine 2 oder eine 3 würfeln\grqq 
+           \item $C = \left\{2,4,6\right\}=$\grqq eine gerade Zahl würfeln\grqq 
+           \item $D = \left\{\right\}=$\grqq eine 7 würfeln\grqq 
+       \end{itemize} 
+        \item Beispielsweise Ereignis $C$ kann eine Wahrscheinlichkeit zugeordnet werden: $P(C)=0.5$
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Ereignismenge und $\sigma$-Algebra}
+    \begin{itemize}
+        \item Um Wahrscheinlichkeiten zu definieren, muss die Ereignismenge $\Omega$ auf die \textbf{Menge der Teilmengen} $\mathcal{F}(\Omega)$ erweitert werden \mrwarning{F nicht wie in Folien}
+        \item Die Menge $\mathcal{F}(\Omega)$ ist folgendermaßen definiert:
+        \begin{itemize}
+            \item $\mathcal{F}(\Omega)$ ist eine Menge von Teilmengen von $\Omega$
+            \item $\Omega\in\mathcal{F}(\Omega)$
+            \item Ist $A \in \mathcal{F}(\Omega)$, dann ist $A^c \in \mathcal{F}(\Omega)$
+            \item Sind $A_i \in \mathcal{F}(\Omega)$, dann sind auch $\cup_iA_i\in \mathcal{F}(\Omega)$ (alle Vereinigungsmengen aus den Mengen $A_i$ sind in $\mathcal{F}(\Omega)$)
+        \end{itemize}
+        \item Man sagt, dass $\mathcal{F}(\Omega)$ eine $\sigma$-\textbf{Algebra} auf $\Omega$ ist.
+    \end{itemize}
+    \end{frame}
+
+\begin{frame}{Beispiel: Sechsseitiger Würfel}
+    Ein sechsseitiger Würfel wird geowrfen
+    \begin{itemize}
+        \item $\Omega=\left\{1,2,3,4,5,6\right\}$
+        \item Die Elemente der Menge $\Omega$ beschreiben jeweils ein \textbf{Elementarereignis} (z.B. \grqq eine 4 wird gewürfelt\grqq )
+        \item Es können aber auch andere Ereignisse definiert werden: \grqq eine 2 oder 3 würfeln\grqq , \grqq eine gerade Zahl würfeln\grqq , \grqq eine 7 würfeln\grqq , ...
+        \item Diese Ereignisse sind nicht in $\Omega$, dafür aber in $\mathcal{F}(\Omega)$:
+        \begin{align*}
+            \mathcal{F}(\Omega)=&\{\emptyset, \{1\}, \{2\}, ..., \{1,2\}, \{1,3\} \\
+            &\{1,2,3\}, \{1,2,4\}, \dots, \{1,2,3,4\}, \dots, \{1,2,3,4,5,6\}\}
+        \end{align*}
+        \item Beispiel: \grqq eine 1 oder eine 2\grqq = $\{1\}\cup\{2\} \equiv \{1,2\}$
+    \end{itemize}
+\end{frame}
+
+\begin{Denkpause}
+Was wäre die $\sigma$-Algebra $\mathcal{F}$ bei einem doppelten Münzwurf?
+\end{Denkpause}
+
+\begin{frame}{Wahrscheinlichkeiten}
+    Die \textbf{Wahrscheinlichkeit} ist eine Abbildung $P:\mathcal{F}\rightarrow[0,1]$, die folgende Eigenschaften besitzt:
+    \begin{itemize}
+        \item für ein $A\in\mathcal{F}$ gilt: $0\leq P(A) \leq1$
+        \item $P(\Omega)=1$
+        \item Für Ereignisse $A_i$ die jeweils eine leere Schnittmenge haben gilt: 
+        $P(\cup_iA_i)=\sum_iP(A_i)$
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Beispiel 1}
+    Würfelspiel:
+    \begin{itemize}
+        \item $A=$ \grqq Zahl kleiner gleich 2\grqq: $A=\{1,2\}$, $P(A)=\frac{2}{6}=\frac{|A|}{|\Omega|}$
+        \item $B=$ \grqq Zahl größer gleich 4\grqq: $B=\{4,5,6\}, P(B)=\frac{3}{6}$
+        \item Es gilt: $A\cap B = \emptyset$
+        \item Gesucht wird die Wahrscheinlichkeit \grqq Zahl kleiner 2 ODER größer gleich 4\grqq:
+        $$
+        P(A\cup B)= P(A)+P(B) = \frac{2}{6}+\frac{3}{6}=\frac{5}{6}
+        $$
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Beispiel 2}
+    Würfelspiel:
+    \begin{itemize}
+        \item $A=$ \grqq Gerade Zahl\grqq: $A=\{2,4,6\}, P(A)=\frac{3}{6}$
+        \item $B=$ \grqq Zahl größer gleich 3\grqq: $B=\{3,4,5,6\}, P(B)=\frac{4}{6}$
+        \item Hier gilt: $A\cap  B \not= \emptyset$
+        \item Gesucht wird die Wahrscheinlichkeit \grqq Gerade Zahl ODER Zahl größer gleich 3\grqq:
+        \begin{align*}
+        A \cup B &= \{2,3,4,5,6\}, P(A\cup B) = \frac{5}{6} \\
+        \text{aber:} \\
+        P(A)+P(B) &= \frac{3}{6} + \frac{4}{6} = \frac{7}{6 }> 1
+        \end{align*}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Siebformel für überlappende Ereignisse}
+    
+\end{frame}

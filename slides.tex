@@ -1,0 +1,44 @@
+\documentclass%[aspectratio=169]
+{beamer}
+%\usetheme{Madrid}
+\usecolortheme{iwr}
+
+\makeatletter
+\@addtoreset{framenumber}{subsection}
+\makeatother
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{section in toc}[sections numbered]
+\setbeamertemplate{subsection in toc}[subsections numbered]
+\setbeamertemplate{section in toc shaded}[default][50]
+\setbeamertemplate{subsection in toc shaded}[default][50]
+%\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{footline}{
+  \hfill
+  \insertsectionnumber.\insertsubsectionnumber.\insertframenumber
+  \kern1em
+  \vskip2pt
+}
+\setbeamertemplate{headline}{
+  \leavevmode%
+  \hbox{%
+    % Left: section/subsection navigation (default style)
+    \begin{beamercolorbox}[wd=.75\paperwidth,ht=2.5ex,dp=1ex,left]{section in head/foot}%
+      \insertsectionhead\hspace{1em}\insertsubsectionhead
+    \end{beamercolorbox}%
+    
+    % Right: your custom numbering
+    \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.5ex,dp=1ex,right]{section in head/foot}%
+      \insertsectionnumber.\insertsubsectionnumber.\insertframenumber\hspace{1em}
+    \end{beamercolorbox}%
+  }
+}
+%\mode<presentation>
+%{
+%  \usetheme{default}      % or try Darmstadt, Madrid, Warsaw, ...
+%  \usecolortheme{default} % or try albatross, beaver, crane, ...
+%  \usefonttheme{default}  % or try serif, structurebold, ...
+%  \setbeamertemplate{navigation symbols}{}
+%  \setbeamertemplate{caption}[numbered]
+%} 
+\input{top}

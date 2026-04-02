@@ -1,0 +1,34 @@
+\begin{tikzpicture}%[x=1cm,y=0.6cm]
+
+% ---------- Parameter (einheitliche Boxgrößen) ----------
+\def\xmin{-3.5}
+\def\xmax{ 3.5}
+
+% Für die TRIG-Zeile
+\def\yminTrig{-1.5}
+\def\ymaxTrig{ 1.5}
+
+\def\rowsep{8.2}
+
+% Gesamt-Boundingbox festlegen
+%\useasboundingbox (\xmin,\yminTrig) rectangle (\xmax,\ymaxPoly+\rowsep);
+
+% ===================
+% unten: sin(x) (ungerade → rot)
+% ===================
+\begin{scope}
+  \clip (\xmin,\yminTrig) rectangle (\xmax,\ymaxTrig);
+
+  \draw[->] (\xmin,0) -- (\xmax,0);
+  \draw[->] (0,\yminTrig) -- (0,\ymaxTrig);
+
+  \draw[domain=\xmin:\xmax, samples=200, smooth, thick, red]
+    plot ({\x},{sin(\x r)});
+
+  % Ursprungssymmetrie-Markierung
+  \filldraw[red] (0,0) circle (2pt);
+  \filldraw[red] (1,{sin(1 r)}) circle (2pt);
+  \filldraw[red] (-1,{-sin(1 r)}) circle (2pt);
+\end{scope}
+
+\end{tikzpicture}

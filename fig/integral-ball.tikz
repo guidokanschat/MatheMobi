@@ -1,0 +1,34 @@
+\begin{tikzpicture}
+  % Sphere parameters
+  \def\R{1.6}
+
+  % Main sphere outline
+  \shade[ball color=blue!15, opacity=0.55] (0,0) circle (\R);
+  \draw[thick] (0,0) circle (\R);
+
+  % Horizontal slices (latitudes)
+  \foreach \z/\op in {-1.2/0.18,-0.9/0.22,-0.6/0.28,-0.3/0.35,0/0.45,0.3/0.35,0.6/0.28,0.9/0.22,1.2/0.18}{
+    \pgfmathsetmacro{\rx}{sqrt(\R*\R-\z*\z)}
+    \pgfmathsetmacro{\ry}{0.28*\rx}
+
+    % Back half of each slice
+    \draw[gray!55, line width=0.35pt, dashed, opacity=\op]
+      (0,\z) ellipse [x radius=\rx, y radius=\ry];
+
+    % Front half of each slice (viewpoint above the xy-plane)
+    \draw[blue!60!black, line width=0.55pt, opacity=\op]
+      plot[domain=180:360, samples=120]
+      ({\rx*cos(\x)}, {\z + \ry*sin(\x)});
+  }
+
+  % Equator emphasized
+  \draw[very thick, blue!75!black]
+    plot[domain=180:360, samples=160]
+    ({\R*cos(\x)}, {0 + 0.28*\R*sin(\x)});
+  \draw[gray!55, thick, dashed]
+    plot[domain=0:180, samples=160]
+    ({\R*cos(\x)}, {0 + 0.28*\R*sin(\x)});
+
+  % Optional axis label
+  \draw[-stealth, thin] (0,-\R-0.15) -- (0,\R+0.2) node[above] {$z$};
+\end{tikzpicture}

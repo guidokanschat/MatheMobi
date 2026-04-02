@@ -1,0 +1,75 @@
+\begin{tikzpicture}[blend mode=normal]
+
+% -----------------------------
+% SETTINGS
+% -----------------------------
+\def\xmin{0}
+\def\xmax{3.142}   % ~ pi
+\def\ymin{-0.2}
+\def\ymax{1.2}
+\def\sep{4.2}      % Abstand zwischen den beiden Plots
+
+% =============================
+% LEFT: sin(x) with shaded area
+% =============================
+\begin{scope}[shift={(0,0)}]
+  \useasboundingbox (\xmin,\ymin) rectangle (\xmax,\ymax);
+  \clip (\xmin,\ymin) rectangle (\xmax,\ymax);
+
+  % Axes
+  \draw[->] (\xmin,0) -- (\xmax+0.1,0);
+  \draw[->] (0,\ymin) -- (0,\ymax);
+
+  % Shaded area under sin(x)
+  \fill[red,opacity=0.35]
+    (\xmin,0) --
+    plot[domain=\xmin:\xmax, samples=200, smooth] (\x,{sin(\x r)})
+    -- (\xmax,0) -- cycle;
+
+  % Curve
+  \draw[thick,black]
+    plot[domain=\xmin:\xmax, samples=200, smooth] (\x,{sin(\x r)});
+\end{scope}
+
+% ==========================================
+% RIGHT: same sin(x) + modified at single points
+% ==========================================
+\begin{scope}[shift={(\sep,0)}]
+  \useasboundingbox (\xmin,\ymin) rectangle (\xmax,\ymax);
+  \clip (\xmin,\ymin) rectangle (\xmax,\ymax);
+
+  % Axes
+  \draw[->] (\xmin,0) -- (\xmax+0.1,0);
+  \draw[->] (0,\ymin) -- (0,\ymax);
+
+  % Shaded area under the ORIGINAL sin(x) (unchanged)
+  \fill[red,opacity=0.35]
+    (\xmin,0) --
+    plot[domain=\xmin:\xmax, samples=200, smooth] (\x,{sin(\x r)})
+    -- (\xmax,0) -- cycle;
+
+  % Original curve
+  \draw[thick,black]
+    plot[domain=\xmin:\xmax, samples=200, smooth] (\x,{sin(\x r)});
+
+  % ---- Points where we "change" the function value (null set) ----
+  % Choose a few x-values; show original point (hollow) and shifted point (filled) + arrow
+  \foreach \xx/\dy in {0.6/0.35, 1.2/-0.30, 2.0/0.25, 2.6/-0.35}{
+
+    % original y = sin(xx)
+    \pgfmathsetmacro{\yy}{sin(\xx r)}
+    \pgfmathsetmacro{\yshift}{\yy+\dy}
+
+    % original point (open circle)
+    \draw[black] (\xx,\yy) circle (1.6pt);
+
+    % arrow to shifted point
+    \draw[->,black] (\xx,\yy) -- (\xx,\yshift);
+
+    % shifted point (filled)
+    \fill[black] (\xx,\yshift) circle (1.6pt);
+  }
+
+\end{scope}
+
+\end{tikzpicture}

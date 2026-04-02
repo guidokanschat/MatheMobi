@@ -1,0 +1,16 @@
+\begin{tikzpicture}[blend mode=normal]
+  % Koordinatensystem
+  \draw[->] (0,0) -- (3.2,0);
+  \draw[->] (0,0) -- (0,1.1);
+
+  % Gefärbte Fläche unter der Kurve
+  \fill[red,opacity=0.5] (0,0) -- plot[domain=0:3.142] (\x,{sin(\x r)}) %-- (2,0)
+  -- cycle;
+  \fill[blue,opacity=0.4] (0,0) -- plot[domain=0:1.57] (\x,{sin(2*\x r)}) %-- (2,0)
+  -- cycle;
+  
+  % Kurve
+  \draw[thick,black] plot[domain=0:3.142] (\x,{sin(\x r)});
+  \draw[thick,black] plot[domain=0:1.57] (\x,{sin(2*\x r)});
+  
+\end{tikzpicture}

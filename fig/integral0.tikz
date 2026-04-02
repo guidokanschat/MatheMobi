@@ -1,0 +1,12 @@
+\begin{tikzpicture}
+
+\fill[green!50!black!30!white] (0,0) rectangle (3,2.02);
+
+\draw[thick, dashed, green!40!black] (0,2.02)
+  -- node[midway,green!40!black,draw,fill=white] {$v$} (3,2.02);
+
+\draw[->] (0,-.1) node[below] {1} -- (0,2.1) node[left] {$v[\nicefrac{km}{h}]$};
+\draw[->] (3,-.1) node[below] {3} -- (3,2.1);
+\draw[->] (0,0) -- node[below]{$\Delta t$} (3,0)
+  -- (3.1,0) node[below,right] {$t[h]$};
+\end{tikzpicture}

@@ -1,0 +1,70 @@
+\begin{tikzpicture}
+
+% -----------------------------
+% SETTINGS
+% -----------------------------
+\def\xmin{0}
+\def\xmax{4}
+\def\ymin{-0.2}
+\def\ymax{1.6}
+\def\c{1.0}
+\def\sep{5}
+
+% Anzahl der Segmente
+\def\n{40}
+
+% =============================
+% LEFT: normale konstante Funktion
+% =============================
+%\begin{scope}[shift={(0,0)}]
+%  \clip (\xmin,\ymin) rectangle (\xmax,\ymax);
+
+  % Axes
+%  \draw[->] (\xmin,0) -- (\xmax+0.2,0);
+%  \draw[->] (0,\ymin) -- (0,\ymax);
+
+  % Fläche
+%  \fill[red,opacity=0.35] (\xmin,0) rectangle (\xmax,\c);
+
+  % Funktion
+%  \draw[thick,black] (\xmin,\c) -- (\xmax,\c);
+%\end{scope}
+
+% =============================
+% RIGHT: Barcode-Version
+% =============================
+%\begin{scope}[shift={(\sep,0)}]
+  \clip (\xmin,\ymin) rectangle (\xmax,\ymax);
+
+  % Axes
+  \draw[->] (\xmin,0) -- (\xmax+0.2,0);
+  \draw[->] (0,\ymin) -- (0,\ymax);
+
+  % gleiche Fläche
+  \fill[red,opacity=0.35] (\xmin,0) rectangle (\xmax,\c);
+
+  % Breite eines Mini-Intervalls
+  \pgfmathsetmacro{\dx}{(\xmax-\xmin)/\n}
+
+  % viele kleine Segmente mit Lücken
+  \foreach \i in {0,...,\numexpr\n-1} {
+
+    % linke Kante des Intervalls
+    \pgfmathsetmacro{\a}{\xmin + \i*\dx}
+
+    % kleine zufällige Lücke
+    \pgfmathsetmacro{\gap}{0.3*\dx + 0.4*\dx*rnd}
+
+    % rechtes Ende des sichtbaren Segments
+    \pgfmathsetmacro{\b}{\a + \dx - \gap}
+
+    % Segment zeichnen
+    \draw[thick,black] (\a,\c) -- (\b,\c);
+
+    % weißer "Barcode-Strich" (geht ganz runter)
+    \draw[white,line width=1pt] (\b,0) -- (\b,\c);
+  }
+
+%\end{scope}
+
+\end{tikzpicture}

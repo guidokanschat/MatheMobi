@@ -1,0 +1,15 @@
+\begin{tikzpicture}
+
+\fill[blue!20!white] (0,0) rectangle (3,2.02);
+\fill[red!20!white] (0,0) rectangle (3,0.5);
+
+\begin{pgfinterruptboundingbox}
+ \draw[thick, dashed, blue] (0,2.02) -- node[midway,blue,draw,fill=white] {$v_{\text{max}}$} (3,2.02);
+\draw[thick, dashed, red] (0,0.5) -- node[midway,red,draw,fill=white] {$v_{\text{min}}$} (3,0.5);   
+\end{pgfinterruptboundingbox}
+
+\draw [thick] plot [smooth, tension=1] coordinates { (0,0.5) (1,2) (2,1) (3,1.7)};
+\draw[->] (0,-.1) -- (0,2.1);
+\draw[->] (3,-.1) -- (3,2.1);
+\draw[->] (0,0) -- node[below]{$\Delta t$} (3,0) -- (3.1,0);
+\end{tikzpicture}

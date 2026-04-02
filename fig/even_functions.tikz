@@ -1,0 +1,33 @@
+\begin{tikzpicture}%[x=1cm,y=0.6cm]
+
+% ---------- Parameter (einheitliche Boxgrößen) ----------
+\def\xmin{-3.5}
+\def\xmax{ 3.5}
+
+% Für die TRIG-Zeile: einheitlicher y-Bereich
+\def\yminTrig{-1.5}
+\def\ymaxTrig{ 1.5}
+
+% Gesamt-Boundingbox festlegen (wichtig für Resizebox/Columns und damit nichts "überlappt")
+%\useasboundingbox (\xmin,\yminTrig) rectangle (\xmax,\ymaxPoly+\rowsep);
+
+% ===================
+% unten: cos(x) (gerade → blau)
+% ===================
+\begin{scope}
+  \clip (\xmin,\yminTrig) rectangle (\xmax,\ymaxTrig);
+
+  \draw[->] (\xmin,0) -- (\xmax,0);
+  \draw[->] (0,\yminTrig) -- (0,\ymaxTrig);
+
+  \draw[domain=\xmin:\xmax, samples=200, smooth, thick, blue]
+    plot ({\x},{cos(\x r)});
+
+  % Symmetrie-Markierung (±1)
+  \draw[dashed] (1,0) -- (1,{cos(1 r)});
+  \draw[dashed] (-1,0) -- (-1,{cos(1 r)});
+  \filldraw[blue] (1,{cos(1 r)}) circle (2pt);
+  \filldraw[blue] (-1,{cos(1 r)}) circle (2pt);
+\end{scope}
+
+\end{tikzpicture}

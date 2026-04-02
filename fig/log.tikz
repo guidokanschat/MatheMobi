@@ -1,0 +1,23 @@
+\begin{tikzpicture}[x=1cm,y=0.5cm]
+
+\def\xmin{0}
+\def\xmax{2}
+\def\ymin{-2}
+\def\ymax{1}
+
+\useasboundingbox (\xmin,\ymin) rectangle (\xmax,\ymax);
+
+\begin{scope}
+  \clip (\xmin,\ymin) rectangle (\xmax,\ymax);
+
+  % Achsen
+  \draw[->] (\xmin,0) -- (\xmax,0);
+  \draw[->] (0,\ymin) -- (0,\ymax);
+
+  % Funktion
+  \draw[domain=0.05:\xmax, samples=200, smooth, thick, blue]
+    plot ({\x},{ln(\x)});
+
+\end{scope}
+
+\end{tikzpicture}

@@ -1,0 +1,16 @@
+\begin{tikzpicture}
+  % Koordinatensystem
+  \draw[->] (0,0) -- (3,0);
+  \draw[->] (0,-.2) node[below]{$a$} -- (0,4);
+
+  % Kurve
+  \draw[thick,black] plot[domain=0:3] (\x,{3+sin(\x r)});
+
+  % Gefärbte Fläche unter der Kurve
+  \fill[red,opacity=0.5] (0,0) -- plot[domain=0:2] (\x,{3+sin(\x r)}) -- (2,0) node[opacity=1,below]{$x$} -- cycle;
+  \fill[blue,opacity=0.5] (2,0) -- plot[domain=2:2.7] (\x,{3+sin(\x r)}) -- (2.7,0) node[opacity=1,below]{$x+h$} -- cycle;
+
+  \path (2.4, {3+sin(2.4 r)}) node[black] {$\bullet$}
+        (2.4, {3+sin(2.4 r)}) node[above] {$f(z)$};
+  
+\end{tikzpicture}
