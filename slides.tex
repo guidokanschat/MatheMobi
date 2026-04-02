@@ -4,7 +4,7 @@
 \usecolortheme{iwr}
 
 \makeatletter
-\@addtoreset{framenumber}{subsection}
+\@addtoreset{framenumber}{section}
 \makeatother
 
 \setbeamertemplate{navigation symbols}{}
@@ -15,24 +15,25 @@
 %\setbeamertemplate{footline}[frame number]
 \setbeamertemplate{footline}{
   \hfill
-  \insertsectionnumber.\insertsubsectionnumber.\insertframenumber
+  \insertsectionnumber.\insertframenumber
   \kern1em
   \vskip2pt
 }
-\setbeamertemplate{headline}{
-  \leavevmode%
-  \hbox{%
+%\setbeamertemplate{headline}{
+%  \leavevmode%
+%  \hbox{%
     % Left: section/subsection navigation (default style)
-    \begin{beamercolorbox}[wd=.75\paperwidth,ht=2.5ex,dp=1ex,left]{section in head/foot}%
-      \insertsectionhead\hspace{1em}\insertsubsectionhead
-    \end{beamercolorbox}%
+%    \begin{beamercolorbox}[wd=.75\paperwidth,ht=2.5ex,dp=1ex,left]{section in head/foot}%
+%      \insertsectionhead\hspace{1em}\insertsubsectionhead
+%    \end{beamercolorbox}%
     
     % Right: your custom numbering
-    \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.5ex,dp=1ex,right]{section in head/foot}%
-      \insertsectionnumber.\insertsubsectionnumber.\insertframenumber\hspace{1em}
-    \end{beamercolorbox}%
-  }
-}
+%    \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.5ex,dp=1ex,right]{section in head/foot}%
+%    \insertsectionnumber.\insertsubsectionnumber.\insertframenumber\hspace{1em}
+ %   \end{beamercolorbox}%
+%  }
+%}
+
 %\mode<presentation>
 %{
 %  \usetheme{default}      % or try Darmstadt, Madrid, Warsaw, ...
