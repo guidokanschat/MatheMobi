@@ -600,7 +600,7 @@ Berechnen Sie folgende Integrale mittels partieller Integration. \textit{Hinweis
         \begin{gather*}
             {\color{blue}\int_0^{a} f(t+1)\,dt}
             =
-            {\color{red}\int_1^{a+1} f(t)\,dt}
+            {\frac12\color{red}\int_1^{a+1} f(t)\,dt}
         \end{gather*}
     \end{column}
 \end{columns}
@@ -612,63 +612,65 @@ Berechnen Sie folgende Integrale mittels partieller Integration. \textit{Hinweis
     Erinnerung: Kettenregel: $\tfrac{d}{dt} f\bigl(\phi(t)\bigr) = \phi'(t) f'\bigl(\phi(t)\bigr)$
     \pause
     \begin{block}{}
-        Sei $t = \phi(x)$ und daher $\frac{dt}{dx} = \phi'(x)$ mit stetig differenzierbarem $\phi$. Dann gilt
+        Sei $x = \phi(t)$ und daher $\frac{dx}{dt} = \phi'(t)$ mit stetig differenzierbarem $\phi$. Dann gilt
         \begin{gather*}
-            \int_a^b f\bigl(\phi(x)\bigr)\phi'(x)\,dx
-            = \int_{\phi(a)}^{\phi(b)} f(t)\,dt.
+            \int_a^b f\bigl(\phi(t)\bigr)\phi'(t)\,dt
+            = \int_{\phi(a)}^{\phi(b)} f(x)\,dx.
         \end{gather*}
     \end{block}
     \pause
-    Formal funktioniert die Substitutionsregel so, dass wir überall $\phi(x)$ durch $t$ ersetzen und formal
+    Formal funktioniert die Substitutionsregel so, dass wir überall $\phi(t)$ durch $x$ ersetzen und formal
     \begin{gather*}
-        dt = \frac{dt}{dx}\,dx = \phi'(x)\,dx
+        dx = \frac{dx}{dt}\,dt = \phi'(t)\,dt
     \end{gather*}
-    Die Integralgrenzen müssen nun auch in $t = \phi(x)$ ausgedrückt werden.
+    Die Integralgrenzen müssen nun auch in $x = \phi(t)$ ausgedrückt werden.
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Beispiel}
     \begin{gather*}
-        \int_a^b x \cos(x^2)\,dx
-        \only<3->{=\frac12\int_{a^2}^{b^2} \cos(t)\,dt}
+        \int_a^b t \cos(t^2)\,dt
+        \only<3->{=\frac12\int_{a^2}^{b^2} \cos(x)\,dx}
     \end{gather*}
     \pause
-    Benutze $\phi(x) = x^2$, dann gilt $\phi'(x) = 2x$
+    Benutze $\phi(t) = t^2$, dann gilt $\phi'(t) = 2t$
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Substitutionsregel 2. Form}
     \begin{block}{}
-        Sei $t = \phi(x)$ und daher $\frac{dt}{dx} = \phi'(x)$ mit stetig differenzierbarer, \textbf{monotoner} Funktion $\phi$. Dann gilt
+        Sei $x = \phi(t)$ und daher $\frac{dx}{dt} = \phi'(t)$ mit stetig differenzierbarer, \textbf{monotoner} Funktion $\phi$. Dann gilt
         \begin{gather*}
-            \int_{a}^{b} f(t)\,dt =
-            \int_{\phi^{-1}(a)}^{\phi^{-1}(b)} f\bigl(\phi(x)\bigr)\phi'(x)\,dx
+            \int_{a}^{b} f(x)\,dx =
+            \int_{\phi^{-1}(a)}^{\phi^{-1}(b)} f\bigl(\phi(t)\bigr)\phi'(t)\,dt
             .
         \end{gather*}
     \end{block}
 \end{frame}
+
+Der Ausdruck $\phi^{-1}(x)$ bezeichnet hier die Umkehrfunktion zu $\phi(t)$. Deren Existenz ist es auch, die die Monotonie erfordert.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Beispiel}
 \label{frame:circle}
     Berechne das Integral
     \begin{gather*}
-        \int_0^1 \sqrt{1-t^2}\,dt
+        \int_0^1 \sqrt{1-x^2}\,dx
     \end{gather*}
     \only<1>{\begin{Denkpause}
         Es sieht nicht so aus, als hätten wir hier eine wohlbekannte Ableitung als Faktor. Aber womit kann man die Wurzel vereinfachen?
     \end{Denkpause}}
     \pause
-    Es gilt $1-\cos^2 x = \sin^2 x$, wodurch wir die Wurzel ziehen können. Also probieren wir die Substitution
+    Es gilt $1-\cos^2 t = \sin^2 t$, wodurch wir die Wurzel ziehen können. Also probieren wir die Substitution
     \begin{gather*}
-        t = \cos x,\qquad dt = -\sin x \,dx.
+        x = \cos t,\qquad dx = -\sin t \,dt.
     \end{gather*}
     \pause
     Berechnen wir zunächst die Stammfunktion:
     \begin{multline*}
-        \int \sqrt{1-t^2}\,dt = - \int \sqrt{1-\cos^2 x}\sin x\,dx
+        \int \sqrt{1-x^2}\,dx = - \int \sqrt{1-\cos^2 t}\sin t\,dt
         \\
-        = -\int \sin^2 x\,dx
-        = \frac{-1}2\int \bigl(1-\cos (2x)\bigr)\,dx
+        = -\int \sin^2 t\,dt
+        = \frac{-1}2\int \bigl(1-\cos (2t)\bigr)\,dt
     \end{multline*}
 \end{frame}
 
@@ -677,7 +679,7 @@ Berechnen Sie folgende Integrale mittels partieller Integration. \textit{Hinweis
     \frametitle<presentation>{Beispiel (Forts.)}
     Nun können wir elementar die Stammfunktion berechnen: 
     \begin{gather*}
-        f(x) = \frac{\cos(2x)-1}{2},\qquad F(x) = \frac{-\sin(2x)}4-\frac x2
+        f(t) = \frac{\cos(2t)-1}{2},\qquad F(t) = \frac{-\sin(2t)}4-\frac t2
     \end{gather*}
     \pause
     Es bleiben die Intervallgrenzen, die nun so gewählt werden müssen, dass
@@ -687,8 +689,8 @@ Berechnen Sie folgende Integrale mittels partieller Integration. \textit{Hinweis
     \pause
     Das gilt z.B. für $a = -\frac\pi2$ und $b = 0$, also
     \begin{gather*}
-        \int_0^1 \sqrt{1-t^2}\,dt = \left[
-        \frac{-\sin(2x)}4-\frac x2\right]_{-\frac\pi2}^0
+        \int_0^1 \sqrt{1-x^2}\,dx = \left[
+        \frac{-\sin(2t)}4-\frac t2\right]_{-\frac\pi2}^0
         = -0-0+0+\frac\pi4
     \end{gather*}
 \end{frame}
@@ -1426,7 +1428,7 @@ Im Plenum diskutieren wir, wie aus der tabellierten Simpsonregel die vorher prä
             \end{itemize}
         \end{column}
         \begin{column}{.5\textwidth}
-            \includegraphics[width=\textwidth]{fig/integral-ball.tikz}
+            \includegraphics[width=\textwidth]{convert/integral-ball}
         \end{column}
     \end{columns}
 \end{frame}
