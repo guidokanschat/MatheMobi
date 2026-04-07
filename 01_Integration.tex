@@ -784,7 +784,7 @@ Wichtige trigonometrische Identitäten:
     \end{gather*}
     \begin{figure}[H]
       \centering
-      \resizebox{0.4\linewidth}{!}{\input{fig/inverse_cuberoot.tikz}}
+      \resizebox{0.8\linewidth}{!}{\input{fig/inverse_cuberoot.tikz}}
     \end{figure}
     \begin{itemize}
     \item Die Obersumme existiert für keine Zerlegung
@@ -793,10 +793,6 @@ Wichtige trigonometrische Identitäten:
         \int_\epsilon^1 \frac{dt}{\sqrt[3]{t}}
         = \tfrac32 \bigl(1^{2/3} - \epsilon^{2/3}\bigr)
     \end{gather*}
-    \begin{figure}[H]
-      \centering
-      \resizebox{0.4\linewidth}{!}{\input{fig/inverse_cuberoot_integrated.tikz}}
-    \end{figure}
     \item Für $\epsilon\to 0$ konvergiert dieser Term zu 1.
     \end{itemize}
 \end{frame}
@@ -810,7 +806,7 @@ Wichtige trigonometrische Identitäten:
     \end{gather*}
     \begin{figure}[H]
       \centering
-      \resizebox{0.4\linewidth}{!}{\input{fig/inverse_linear.tikz}}
+      \resizebox{0.8\linewidth}{!}{\input{fig/inverse_linear.tikz}}
     \end{figure}
     \begin{itemize}
     \item Für positive $\epsilon$ gilt mit der Stammfunktion $\ln t$
@@ -818,10 +814,6 @@ Wichtige trigonometrische Identitäten:
         \int_\epsilon^1 \frac{dt}{t}
         = \ln 1 - \ln\epsilon
     \end{gather*}
-    \begin{figure}[H]
-      \centering
-      \resizebox{0.4\linewidth}{!}{\input{fig/log.tikz}}
-    \end{figure}
     \item Für $\epsilon\to 0$ divergiert dieser Term zu $-\infty$.
     \end{itemize}
 \end{frame}
@@ -1339,7 +1331,6 @@ Im Plenum diskutieren wir, wie aus der tabellierten Simpsonregel die vorher prä
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\gkerror{$\to$ MR: bitte Funktion in R ergänzen oder Zeile löschen}
 \begin{frame}{Automatische Quadratur}
   Alle Rechensysteme haben automatische Funktionen zur numerischen Quadratur
   \begin{center}
@@ -1347,7 +1338,7 @@ Im Plenum diskutieren wir, wie aus der tabellierten Simpsonregel die vorher prä
       \hline
            Matlab/Octave & \texttt{q = integral(fun,xmin,xmax)} \\
            Python & \texttt{scipy.integrate.quad(fun,xmin,xmax)} \\
-           R & \\\hline
+           \hline
       \end{tabular}
   \end{center}
   \begin{itemize}
@@ -1360,8 +1351,14 @@ Im Plenum diskutieren wir, wie aus der tabellierten Simpsonregel die vorher prä
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \gkerror{Fehlt}
+\mrwarning{Vorschlag für Abschlussfragen}
 \begin{frame}{Abschlussfragen}
-    
+    \begin{enumerate}
+        \item Wann ist die Approximation des Integrals mittels Trapez- und Mittelpunktsregel größer bzw. kleiner als die tatsächliche Fläche?
+        \item Warum sind diese Approximationen exakt, wenn $f$ auf dem Teilintervall ein lineares Polynom ist?
+        \item Was können Sie aus der Tabellierung der Gauß-Quadratur über die Genauigkeit der Approximation für $n \leq 3$ schließen?
+        \item Warum beschäftigt man sich überhaupt mit Approximationen von Integralen?
+    \end{enumerate}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1471,5 +1468,7 @@ Im Plenum diskutieren wir, wie aus der tabellierten Simpsonregel die vorher prä
         \item Wir integrieren diese Flächen entlang der Achse
     \end{enumerate}
 \end{frame}
+\mrnote{Abbildung für die Übungsaufgabe mit dem drehenden Quadrat}
+\includegraphics[width=0.6\textwidth]{fig/drehendes_Quadrat.tikz}
 
 \mode<all>

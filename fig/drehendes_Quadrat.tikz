@@ -1,0 +1,112 @@
+\definecolor{myblue}{HTML}{3AA6E0}
+
+\begin{tikzpicture}[
+  scale=1.25,
+  line join=round,
+  line cap=round,
+  x={(1cm,0cm)},
+  y={(0.55cm,0.32cm)},
+  z={(0cm,1cm)}
+]
+
+% Parameter
+\def\n{80}      % Anzahl der Schichten
+\def\h{0.04}    % vertikaler Abstand
+\def\a{2.2}     % Rotation pro Schicht in Grad
+\def\r{0.9}     % halbe Seitenlänge des Quadrats
+
+% Mantelflächen
+\foreach \i in {0,...,78} {
+  \pgfmathtruncatemacro{\j}{\i+1}
+  \pgfmathsetmacro{\ai}{\i*\a}
+  \pgfmathsetmacro{\aj}{\j*\a}
+  \pgfmathsetmacro{\zi}{\i*\h}
+  \pgfmathsetmacro{\zj}{\j*\h}
+
+  % Seite 1
+  \filldraw[
+    fill=myblue!85!white,
+    draw=myblue!70!black,
+    fill opacity=0.42,
+    draw opacity=0.7,
+    line width=0.12pt
+  ]
+    ({-\r*cos(\ai)+\r*sin(\ai)}, {-\r*sin(\ai)-\r*cos(\ai)}, {\zi}) --
+    ({ \r*cos(\ai)+\r*sin(\ai)}, { \r*sin(\ai)-\r*cos(\ai)}, {\zi}) --
+    ({ \r*cos(\aj)+\r*sin(\aj)}, { \r*sin(\aj)-\r*cos(\aj)}, {\zj}) --
+    ({-\r*cos(\aj)+\r*sin(\aj)}, {-\r*sin(\aj)-\r*cos(\aj)}, {\zj}) -- cycle;
+
+  % Seite 2
+  \filldraw[
+    fill=myblue!72!white,
+    draw=myblue!70!black,
+    fill opacity=0.34,
+    draw opacity=0.65,
+    line width=0.12pt
+  ]
+    ({ \r*cos(\ai)+\r*sin(\ai)}, { \r*sin(\ai)-\r*cos(\ai)}, {\zi}) --
+    ({ \r*cos(\ai)-\r*sin(\ai)}, { \r*sin(\ai)+\r*cos(\ai)}, {\zi}) --
+    ({ \r*cos(\aj)-\r*sin(\aj)}, { \r*sin(\aj)+\r*cos(\aj)}, {\zj}) --
+    ({ \r*cos(\aj)+\r*sin(\aj)}, { \r*sin(\aj)-\r*cos(\aj)}, {\zj}) -- cycle;
+
+  % Seite 3
+  \filldraw[
+    fill=myblue!92!white,
+    draw=myblue!70!black,
+    fill opacity=0.28,
+    draw opacity=0.55,
+    line width=0.12pt
+  ]
+    ({ \r*cos(\ai)-\r*sin(\ai)}, { \r*sin(\ai)+\r*cos(\ai)}, {\zi}) --
+    ({-\r*cos(\ai)-\r*sin(\ai)}, {-\r*sin(\ai)+\r*cos(\ai)}, {\zi}) --
+    ({-\r*cos(\aj)-\r*sin(\aj)}, {-\r*sin(\aj)+\r*cos(\aj)}, {\zj}) --
+    ({ \r*cos(\aj)-\r*sin(\aj)}, { \r*sin(\aj)+\r*cos(\aj)}, {\zj}) -- cycle;
+
+  % Seite 4
+  \filldraw[
+    fill=myblue!60!white,
+    draw=myblue!70!black,
+    fill opacity=0.22,
+    draw opacity=0.45,
+    line width=0.12pt
+  ]
+    ({-\r*cos(\ai)-\r*sin(\ai)}, {-\r*sin(\ai)+\r*cos(\ai)}, {\zi}) --
+    ({-\r*cos(\ai)+\r*sin(\ai)}, {-\r*sin(\ai)-\r*cos(\ai)}, {\zi}) --
+    ({-\r*cos(\aj)+\r*sin(\aj)}, {-\r*sin(\aj)-\r*cos(\aj)}, {\zj}) --
+    ({-\r*cos(\aj)-\r*sin(\aj)}, {-\r*sin(\aj)+\r*cos(\aj)}, {\zj}) -- cycle;
+}
+
+% Untere Deckfläche
+\filldraw[
+  fill=myblue!78!white,
+  draw=myblue!75!black,
+  fill opacity=0.30,
+  draw opacity=0.55,
+  line width=0.18pt
+]
+  ({-\r*cos(0)+\r*sin(0)}, {-\r*sin(0)-\r*cos(0)}, {0}) --
+  ({ \r*cos(0)+\r*sin(0)}, { \r*sin(0)-\r*cos(0)}, {0}) --
+  ({ \r*cos(0)-\r*sin(0)}, { \r*sin(0)+\r*cos(0)}, {0}) --
+  ({-\r*cos(0)-\r*sin(0)}, {-\r*sin(0)+\r*cos(0)}, {0}) -- cycle;
+
+% Obere Deckfläche
+\pgfmathsetmacro{\atop}{79*\a}
+\pgfmathsetmacro{\ztop}{79*\h}
+\filldraw[
+  fill=myblue!68!white,
+  draw=myblue!78!black,
+  fill opacity=1,
+  draw opacity=1,
+  line width=0.18pt
+]
+  ({-\r*cos(\atop)+\r*sin(\atop)}, {-\r*sin(\atop)-\r*cos(\atop)}, {\ztop}) --
+  ({ \r*cos(\atop)+\r*sin(\atop)}, { \r*sin(\atop)-\r*cos(\atop)}, {\ztop}) --
+  ({ \r*cos(\atop)-\r*sin(\atop)}, { \r*sin(\atop)+\r*cos(\atop)}, {\ztop}) --
+  ({-\r*cos(\atop)-\r*sin(\atop)}, {-\r*sin(\atop)+\r*cos(\atop)}, {\ztop}) -- cycle;
+
+% z-Achse
+\draw[->, very thick, black]
+  (0,0,0) -- (0,0,{79*\h + 0.7})
+  node[above] {$z$};
+
+\end{tikzpicture}

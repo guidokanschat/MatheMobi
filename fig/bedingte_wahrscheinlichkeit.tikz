@@ -1,0 +1,51 @@
+\begin{tikzpicture}[scale=1]
+
+% Farben
+\definecolor{frameblue}{RGB}{74,144,226}
+\definecolor{Afill}{RGB}{233,225,162}
+\definecolor{Bfill}{RGB}{174,213,145}
+\definecolor{Atext}{RGB}{240,140,40}
+\definecolor{Btext}{RGB}{40,110,35}
+
+% ---------- Linke Grafik ----------
+\begin{scope}[shift={(0,0)}]
+
+  \draw[frameblue, line width=1.2pt] (0,0) rectangle (6,3.7);
+
+  \node[frameblue, font=\large] at (5.5,3.2) {$\Omega$};
+
+  \fill[Afill] (0.65,1.2) rectangle (3.05,3.25);
+  \fill[Bfill] (1.95,0.45) rectangle (4.15,2.1);
+
+  \node[Atext, font=\large] at (1.05,2.8) {$A$};
+  \node[Btext, font=\large] at (3.95,0.75) {$B$};
+
+  \node[font=\normalsize] at (2.55,1.6) {$A\cap B$};
+
+  \node[font=\normalsize] at (3,-0.55) {$P(A\mid B)=\dfrac{1}{4}$};
+
+\end{scope}
+
+% ---------- Rechte Grafik ----------
+\begin{scope}[shift={(6.5,0)}]
+
+  \draw[frameblue, line width=1.2pt] (0,0) rectangle (6,3.7);
+
+  \node[frameblue, font=\large] at (5.5,3.2) {$\Omega$};
+
+  \fill[Afill] (0.65,1.2) rectangle (3.05,3.25);
+  \fill[Bfill] (1.95,0.45) rectangle (5.15,2.1);
+
+  \node[Atext, font=\large] at (1.05,2.8) {$A$};
+  \node[Btext, font=\large] at (4.65,0.75) {$B$};
+
+  \node[font=\normalsize] at (2.55,1.65) {$A\cap B$};
+
+  \node[font=\normalsize] at (3,-0.55) {$P(A\mid B)=\dfrac{1}{6}$};
+
+\end{scope}
+
+% ---------- Titel oben ----------
+\node[font=\normalsize] at (6.5,4.35) {$P(A\cap B)=\dfrac{1}{20}$};
+
+\end{tikzpicture}

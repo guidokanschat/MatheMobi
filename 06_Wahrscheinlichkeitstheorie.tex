@@ -112,5 +112,47 @@ Was wäre die $\sigma$-Algebra $\mathcal{F}$ bei einem doppelten Münzwurf?
 \end{frame}
 
 \begin{frame}{Siebformel für überlappende Ereignisse}
-    
+    \begin{itemize}
+        \item Für 2 Ereignisse $A$ und $B$ gilt im Allgemeinen:
+        \begin{gather*}
+            P(A\cup B) = P(A) +P(B)-P(A\cap B)    
+        \end{gather*}
+        \item Vorheriges Beispiel:
+        \begin{gather*}
+            A=\left\{2,4,6\right\}, \ B=\left\{3,4,5,6\right\}, \ A\cap B= \left\{4,6\right\} \\
+            \Rightarrow P(A\cap B) = \frac{2}{6}
+        \end{gather*}
+        \item also gilt 
+        \begin{gather*}
+            P(A\cup B)= \frac{3}{6} + \frac{4}{6} - \frac{2}{6} = \frac{5}{6}
+        \end{gather*}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Siebformel für überlappende Ereignisse}
+    Für $n$ Ereignisse gilt allgemein:
+    \begin{gather*}
+        P(\cup_iA_i)=\sum_iP(A_i)-\sum_{i<j}P(A_i\cap A_j) + \sum_{i<j<k}P(A_i\cap A_j \cap A_k) - \dots
+    \end{gather*}
+\end{frame}
+
+\begin{frame}{Eigenschaften der Wahrscheinlichkeit}
+    \begin{itemize}
+        \item $P(A^c)=1-P(A)$
+        \item $P(\emptyset)=0$
+        \item wenn $A\subseteq B \Rightarrow P(A) \leq P(B)$
+        \item $P(A\cup B)\leq P(A)+P(B)$
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Bedingte Wahrscheinlichkeit}
+    \begin{itemize}
+        \item \textbf{Bedingte Wahrscheinlichkeit} bezeichnet die Wahrscheinlichkeit eines Ereignisses $A$ unter dem Wissen, dass Ereignis $B$ bereits eingetreten ist (geschrieben: $P(A|B)$
+        \item Sie ist definiert als:
+        \begin{gather*}
+            P(A|B) = \frac{P(A\cap B)}{P(B)}
+        \end{gather*}
+        \item \textit{"Wie oft sind $A$ und $B$ aufgetreten, gemessen an der Häufigkeit von $B$ allein?}
+    \end{itemize} 
+    \includegraphics[width=0.9\textwidth]{fig/bedingte_Wahrscheinlichkeit.tikz}
 \end{frame}
