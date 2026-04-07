@@ -173,7 +173,8 @@ Die Bilder zeigen exemplarisch, wie sich die Maxima und Minima immer mehr dem Gr
     \begin{gather*}
         a = x_0 < x_1 < \dots < x_n = b
     \end{gather*}
-    in $n$ Teilintervalle geteilt wird. $f_i$ ist ein Funktionswert auf dem Teilintervall $[x_{i-1},x_i]$ und für die Gewichte $h_i$ gilt unabhängig von $n$ \mrwarning{Noch kurz rationalisieren, warum Gewichte hier ein passender Begriff ist}
+    in $n$ Teilintervalle geteilt wird. $f_i$ ist ein Funktionswert auf dem Teilintervall $[x_{i-1},x_i]$.
+    Die $h_i$ nennen wir Gewichte, da sie angeben, wie groß der Anteil von $f_i$ an der Summe ist. Für die Gewichte $h_i$ gilt unabhängig von $n$ 
     \begin{gather*}
         \sum_{i=1}^n h_i = b-a.
     \end{gather*}
@@ -416,7 +417,7 @@ Notation des Integrals
         Es gilt dann für Differenzen benachbarter Punkte
         \begin{align*}
             F(x\!+\!h)\!-\!F(x) &= 
-            \int_{\color{red}a}^{\color{blue}x+h} f(t)\,dt -\! {\color{red}\int_a^x} f(t)\,dt
+            \int^{{\color{blue}x+h}}_{\color{red}a} f(t)\,dt -\! {\color{red}\int_a^x} f(t)\,dt
             \\&= {\color{blue}\int_x^{x+h}} f(t)\,dt
             \\&= h f(z)
         \end{align*}
@@ -430,11 +431,21 @@ Notation des Integrals
     \end{columns}
 \end{frame}
 
-Wir gelangen damit zum sogenannten Hauptsatz der Differential- und Integralrechnung: 
+Nun teilen wir durch $h$ und lassen $h$ gegen null konvergieren. Es gilt dann
+\begin{gather*}
+    \lim_{h\to 0}\frac{F(x+h)-F(x)}{h}
+    = \lim_{h\to 0} f(z) = f(x),
+\end{gather*}
+wobei wir benutzt haben, dass für beliebiges $h$ der Punkt $z$ zwischen $x$ und $x+h$ liegt und daher $z\to x$ konvergiert.
+Wir gelangen somit zum sogenannten Hauptsatz der Differential- und Integralrechnung: 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle<presentation>{\glqq{}Hauptsatz\grqq{} der Differential- und Integralrechnung}
-Sei $f$ eine stetige Funktion und $F$ das unbestimmte Integral von $f$. Dann ist $F$ stetig differenzierbar und es gilt
+Sei $f$ eine stetige Funktion und $F$ das unbestimmte Integral
+\begin{gather*}
+    F(x) = \int_{a}^x f(t)\,dt.
+\end{gather*}
+Dann ist $F$ stetig differenzierbar und es gilt
     \begin{gather*}
         F'(x) = \frac{d}{dx} \int_{a}^x f(t)\,dt = f(x).
     \end{gather*}
@@ -448,25 +459,25 @@ Sei $f$ eine stetige Funktion und $F$ das unbestimmte Integral von $f$. Dann ist
      \end{gather*}
  
     \begin{itemize}
-    \item<+-> Die Stammfunktion ist nur bis auf eine Konstante bestimmt, ansonsten ist sie eindeutig. Schreibweise: $F(x)+C$
-    \item<+-> Für beliebige Intervalle $[a,b]$ im Definitionsbereich von $f$ gilt:
+    \item<+-> Eine Stammfunktion ist nur bis auf eine Konstante bestimmt, ansonsten ist sie eindeutig. Schreibweise: $F(x)+C$
+    \item<+-> Das unbestimmte Integral
+    \begin{gather*}
+        U(x) = \int_a^x f(t)\,dt
+    \end{gather*}
+    ist nach dem Hauptsatz eine Stammfunktion von $f$ und es gilt $U(a) = 0$
+    \item<+-> Für beliebige Intervalle $[a,b]$ im Definitionsbereich von $f$ und eine beliebige Stammfunktion $F$ gilt:
      \begin{gather*}
-         \int_a^b f(t)\,dt = F(b)-F(a).
+         U(b) = \int_a^b f(t)\,dt = F(b)-F(a).
      \end{gather*}
-    \item<+-> Unbestimmtes Integral und Stammfunktion sind eng verwandt,
-         \begin{gather*}
-             G(x) := \int_a^x f(t)\,dt = F(x) - F(a),
-         \end{gather*}
-         $G$ ist also die spezielle Stammfunktion mit der Wahl $G(a) = 0$
      \end{itemize}
 \end{frame}
 
 \begin{frame}{Abschlussfragen}
 \begin{enumerate}
+    \item Warum kann es praktisch sein zu betrachten, ob eine Funktion gerade bzw. ungerade ist?
     \item Was erhalten Sie, wenn Sie eine Stammfunktion der Funktion $f$ ableiten?
     \item Was erhalten Sie, wenn Sie $F$ ableiten und die Stammfunktion der Ableitung bilden?
     \item Wie hilft die Stammfunktion bei der Bestimmung unbestimmter und bestimmter Integrale?
-    \item Warum kann es praktisch sein zu betrachten, ob eine Funktion gerade bzw. ungerade ist?
 \end{enumerate}    
 \end{frame}
 
@@ -1037,6 +1048,7 @@ Wichtige trigonometrische Identitäten:
   \end{Denkpause}
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Zerlegung in Subintervalle}
     Wie bei der Einführung des Integrals zerlegen wir das Integrationsintervall $[a,b]$ in Subintervalle
     \begin{itemize}
@@ -1054,9 +1066,69 @@ Wichtige trigonometrische Identitäten:
     \end{itemize}
 \end{frame}
 
-\mrnote{Hinweis auf die Berechnung der Fläche eines Trapezes}
-\mrnote{Im Video sollte man kurz andeuten, wie diese Umformung funktioniert}
+Die Unter- und Obersummen aus der Herleitung des Integrals sind zu dieser Approximation aus zwei Gründen nicht geeignet:
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle<presentation>{Unter- und Obersummen}
+    \begin{columns}
+    \begin{column}{.3\textwidth}
+        \centering
+    \includegraphics[width=.8\textwidth]{fig/integral-approx-none.tikz}
+    \end{column}
+    \pause
+    \begin{column}{.3\textwidth}
+        \centering
+    \includegraphics[width=.8\textwidth]{fig/integral-approx-upper-lower.tikz}
+    \end{column}
+    \pause
+    \begin{column}{.3\textwidth}
+    \begin{itemize}
+        \item Minima und Maxima sind i.d.R. nicht bekannt
+        \item Berechnung ggf. teuer
+        \item Approximation durch konstante Funktionen ungenau
+    \end{itemize}
+    \end{column}
+\end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Die Trapezregel}
+\begin{columns}
+    \begin{column}{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{fig/integral-approx-none.tikz}
+    \end{column}
+    \pause
+    \begin{column}{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{fig/integral-approx-trapezoidal.tikz}
+    \end{column}
+    \pause
+    \begin{column}{.3\textwidth}
+    \begin{block}{Flächenberechung}
+        \begin{itemize}
+            \item Rechteck
+            \begin{gather*}
+                f_L \cdot\Delta t
+            \end{gather*}
+            \item Dreieck
+             \begin{gather*}
+                 \frac{f_R-f_L}2 \cdot \Delta t
+             \end{gather*}
+             \item Gesamt
+             \begin{gather*}
+                 \frac{f_R+f_L}2 \cdot \Delta t
+             \end{gather*}
+        \end{itemize}
+    \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle<presentation>{Die Trapezregel}
 \begin{itemize}
     \item Auf einem Teilintervall:
     \begin{gather*}
@@ -1097,7 +1169,36 @@ Das Prinzip hinter der Trapezregel ist, dass sie lineare Polynome exakt integrie
 Anwenden der binomischen Formel und Kürzen ergibt die Trapezregel.
 \end{Vertiefung}
 
-\begin{frame}{Die Mittelpunktregel}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Die Mittelpunktsregel}
+\begin{columns}
+    \begin{column}{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{fig/integral-approx-none.tikz}
+    \end{column}
+    \pause
+    \begin{column}{.3\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{fig/integral-approx-midpoint.tikz}
+    \end{column}
+    \pause
+    \begin{column}{.3\textwidth}
+    \begin{block}{Flächenberechung}
+        \begin{itemize}
+            \item Aufspaltung in Konstante plus ungerade Funktion
+            \item Rechteck
+            \begin{gather*}
+                f_M \cdot \Delta t
+            \end{gather*}
+        \end{itemize}
+    \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle<presentation>{Die Mittelpunktsregel}
 \begin{itemize}
     \item Auf einem Teilintervall sei $\overline x_i = (x_i+x_{i+1})/2$:
     \begin{gather*}
@@ -1114,17 +1215,17 @@ Anwenden der binomischen Formel und Kürzen ergibt die Trapezregel.
     \end{gather*}
 \end{itemize}
 \end{frame}
-Da hier nur ein Wert der Funktion $f$ zur Verfügung steht, um das Polynom zu bestimmen, müssen wir das Argument, warum die Formel für lineare Polynome exakt ist, abwandeln. Dazu schreiben wir mit beliebigem Faktor $\alpha$:
-\mrwarning{Ich würde hier auf jeden Fall nochmal darauf verweisen, dass wir eine beliebige Gerade durch unseren definierten Punkt legen und später zeigen, dass die Steigung tatsächlich irrelevant ist, wir also jede beliebige Gerade wählen können}
+Da hier nur ein Wert der Funktion $f$ zur Verfügung steht, um das Polynom zu bestimmen, müssen wir das Argument, warum die Formel für lineare Polynome exakt ist, abwandeln. Dazu legen wir eine Gerade mit beliebiger Steigung $\alpha$ durch den Mittelpunkt:
 \begin{gather*}
     p(t) = f(\overline x_i) + \alpha (t-\overline x_i).
 \end{gather*}
-Da $t-\overline x_i$ bezüglich $\overline x_i$ eine ungerade Funktion ist, ist ihr Integral null \mrwarning{Zumindest im Video nochmal durch eine ganz kurze Skizze verdeutlichen, dass sich beide Seiten aufheben}. Es gilt also
+Da $t-\overline x_i$ bezüglich $\overline x_i$ eine ungerade Funktion ist, ist ihr Integral null. Es gilt also
 \begin{gather*}
     \int_{x_i}^{x_{i+1}} p(t)\,dt = \int_{x_i}^{x_{i+1}} f(\overline x_i) \,dt
     = f(\overline x_i) (x_{i+1}-x_i).
 \end{gather*}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Die Simpsonregel}
     \begin{itemize}
         \item Auf einem Teilintervall
@@ -1148,6 +1249,7 @@ Da $t-\overline x_i$ bezüglich $\overline x_i$ eine ungerade Funktion ist, ist 
 \end{itemize}
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Tabellierung von Quadraturformeln}
 In der Literatur werden Quadraturformeln in der Regel für das Intervall $[0,1]$ oder $[-1,1]$ angegeben. Eine Tabelle sieht dann etwa wie folgt aus:
 \begin{center}
@@ -1157,16 +1259,17 @@ In der Literatur werden Quadraturformeln in der Regel für das Intervall $[0,1]$
     \\\hline
         \vphantom{$\displaystyle\int$}Mittelpunkt & $\left[\frac12\right]$ & $\left[1\right]$
         & $\tfrac{h^3}{24} f''(\xi)$\\
-        \vphantom{$\displaystyle\int$}Trapez & $\left[0\quad1\right]$ & $\left[\tfrac12\quad\tfrac12\right]$
-        & $\tfrac{h^3}{12} f''(\xi)$\\
+        \vphantom{$\displaystyle\int$}Trapez & $\left[0\quad1\right]$ & $\left[-\tfrac12\quad\tfrac12\right]$
+        & $-\tfrac{h^3}{12} f''(\xi)$\\
         \vphantom{$\displaystyle\int$}Simpson & $\left[0\quad\tfrac12\quad1\right]$ & $\left[\tfrac16\quad\tfrac46\quad\tfrac16\right]$
-        & $\tfrac{h^5}{90} f^{(4)}(\xi)$\\
+        & $-\tfrac{h^5}{2880} f^{(4)}(\xi)$\\
         \hline
     \end{tabular}
 \end{center}
     Der Fehlerterm enthält hier eine Potenz der Intervalllänge $h$, einen Vorfaktor und eine Ableitung der Funktion an einer unbekannten Zwischenstelle $\xi$.
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
   \frametitle<presentation>{Benutzung der tabellierten Formeln}
   \begin{itemize}
@@ -1194,7 +1297,6 @@ In der Literatur werden Quadraturformeln in der Regel für das Intervall $[0,1]$
 Im Plenum diskutieren wir, wie aus der tabellierten Simpsonregel die vorher präsentierte Summenformel wird.
 
 \begin{Aufgabe}
-    \mrwarning{Wie genau soll das dann aussehen?}
     \begin{enumerate}
     \item Schreiben Sie eine Funktion, die die Trapezregel mit $n$ Teilintervallen implementiert und den Integralwert zurückgibt. Hierbei soll $n$ ein Funktionsparameter sein, genau wie die rechte und linke Intervallgrenze und die zu integrierende Funktion.
     \item Approximieren Sie mit Ihrer Funktion
@@ -1209,8 +1311,32 @@ Im Plenum diskutieren wir, wie aus der tabellierten Simpsonregel die vorher prä
     und diskutieren Sie das Ergebnis.
     \end{enumerate}
 \end{Aufgabe}
-\gkwarning{Soll ich Gauß-Quadratur auch noch angeben?}
-\mrnote{Zumindest als Randnotiz würde ich sie erwähnen}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Gauß-Quadratur}
+    \begin{itemize}
+        \item Optimierte Quadraturformeln
+        \item I.d.R. tabelliert auf $[-1,1]$
+    \end{itemize}
+    \begin{center}
+        \begin{tabular}{|c|c|c|l|}
+        \hline
+        $n$ & Punkte & Gewichte & Fehler\\\hline
+            \vphantom{$\displaystyle\int$}1
+            & $\left[0\right]$ & $\left[2\right]$
+            & $\tfrac{h^3}{24} f''(\xi)$\\
+            \vphantom{$\displaystyle\int$}2
+            & $\left[-\sqrt{\frac13},\sqrt{\frac13}\right]$
+            & $\left[1,1\right]$
+            & $\tfrac{h^5}{4320} f^{(4)}(\xi)$\\
+            \vphantom{$\displaystyle\int$}3
+            & $\left[-\sqrt{\frac53},0,\sqrt{\frac53}\right]$
+            & $\left[\frac59,\frac89,\frac59\right]$
+            & $\tfrac{h^7}{907200} f^{(6)}(\xi)$\\
+            \hline
+        \end{tabular}
+    \end{center}
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \gkerror{$\to$ MR: bitte Funktion in R ergänzen oder Zeile löschen}
@@ -1327,8 +1453,11 @@ Im Plenum diskutieren wir, wie aus der tabellierten Simpsonregel die vorher prä
             V = \frac43\pi
         \end{gather*}
     \end{itemize}
-    \mrnote{Als Übungsblattaufgabe könnte man analog das allgemeine Volumen einer Kugel herleiten lassen}
 \end{frame}
+
+\begin{Aufgabe}
+    Berechnen Sie das Volumen $V(r)$ einer Kugel vom Radius $r$.
+\end{Aufgabe}
 
 \begin{frame}{Berechnung von Volumina}
     Aus der Berechnung des Kugelvolumens können wir ein allgemeines Prinzip der Berechnung von Volumina ableiten:

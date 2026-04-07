@@ -1,0 +1,14 @@
+\begin{tikzpicture}
+    % Bounding box for midpoint rule
+    \draw[opacity=0] (0,0) -- (0,134/30) -- (2,134/30) -- (2,0) -- cycle;
+
+    \fill[red,opacity=0.2] (0,0) --
+    plot[domain=0:2] (\x,{3+43/30*\x-7/15*\x^2})
+    -- (2,0) -- cycle;
+   
+    \draw (0,0) -- (2,0);
+    \draw (0,0)--(0,3);
+    \draw (2,0)--(2,4);
+
+   \draw[thick,red] plot[domain=0:2] (\x,{3+43/30*\x-7/15*\x^2});
+\end{tikzpicture}
