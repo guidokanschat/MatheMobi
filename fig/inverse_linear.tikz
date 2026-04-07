@@ -1,23 +1,40 @@
 \begin{tikzpicture}[x=1cm,y=0.5cm]
 
+% Gemeinsame Grenzen
 \def\xmin{0}
 \def\xmax{2}
-\def\ymin{0}
+\def\ymin{-2}
 \def\ymax{2.5}
 
-\useasboundingbox (\xmin,\ymin) rectangle (\xmax,\ymax);
+% Abstand zwischen den Plots
+\def\sep{1.5}
 
+% ------------------- Linker Plot: 1/x -------------------
 \begin{scope}
+  \useasboundingbox (\xmin,\ymin) rectangle (\xmax,\ymax);
   \clip (\xmin,\ymin) rectangle (\xmax,\ymax);
 
   % Achsen
   \draw[->] (\xmin,0) -- (\xmax,0);
   \draw[->] (0,\ymin) -- (0,\ymax);
 
-  % Funktion (startet bei 0.05 statt 0)
+  % Funktion
   \draw[domain=0.05:\xmax, samples=200, smooth, thick, red]
     plot ({\x},{1/\x});
+\end{scope}
 
+% ------------------- Rechter Plot: ln(x) -------------------
+\begin{scope}[xshift={(\xmax-\xmin+\sep)*1cm}]
+  \useasboundingbox (\xmin,\ymin) rectangle (\xmax,\ymax);
+  \clip (\xmin,\ymin) rectangle (\xmax,\ymax);
+
+  % Achsen
+  \draw[->] (\xmin,0) -- (\xmax,0);
+  \draw[->] (0,\ymin) -- (0,\ymax);
+
+  % Funktion
+  \draw[domain=0.05:\xmax, samples=200, smooth, thick, blue]
+    plot ({\x},{ln(\x)});
 \end{scope}
 
 \end{tikzpicture}
