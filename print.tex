@@ -1,0 +1,14 @@
+\documentclass[final]{article}
+\usepackage{beamerarticle}
+\usepackage{amssymb}
+\usepackage{hyperref}
+
+\makeatletter
+\mode<article>{\renewenvironment<>{beamer@columnenv}[2][]{ \begin{minipage}[t]{#2}\vspace{0pt}}{\end{minipage}}
+\let\endcolumn\endbeamer@columnenv}
+\makeatother
+
+\parindent0pt
+\parskip 1.5 ex plus 1 ex
+
+\input{top}
