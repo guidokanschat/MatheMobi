@@ -2,13 +2,49 @@
 \usepackage{beamerarticle}
 \usepackage{amssymb}
 \usepackage{hyperref}
+\input{only}
+\input{common}
+
+\setbeamertemplate{frametitle}{\subsubsection{\insertframetitle}}
 
 \makeatletter
-\mode<article>{\renewenvironment<>{beamer@columnenv}[2][]{ \begin{minipage}[t]{#2}\vspace{0pt}}{\end{minipage}}
-\let\endcolumn\endbeamer@columnenv}
+\renewenvironment<>{beamer@columnenv}[2][]{ \begin{minipage}[t]{#2}\vspace{0pt}}{\end{minipage}}
+\let\endcolumn\endbeamer@columnenv
 \makeatother
 
 \parindent0pt
 \parskip 1.5 ex plus 1 ex
 
-\input{top}
+\begin{document}
+
+\maketitle
+
+
+\section*{Danksagung}
+
+Diese Vorlesungsgrundlage basiert in weiten Teilen auf den Folien zum zweiten Semester Mathematik für Molekulare Biotechnologie von Prof. Dr. Carl Herrmann, an einigen Stellen modifiziert, um Lehrinhalte zu vermitteln, die mir besonders wichtig sind. Ich danke insbesondere Herrn Marc Reisert für seine Beiträge, vor allem aber um die kritische Diskussion bei der Aufbereitung des Stoffs.
+
+%\section*{Ziele dieses zweiten Semesters}
+%\begin{itemize}
+%    \item Verständnis für die Rolle und Limitierungen mathematischer Berechnungen im eigenen Fach
+%    \item Benutzung von Standardsoftware zur Lösung dieser Aufgaben bei kritischer Betrachtung der Ergebnisse
+%    \item Exemplarische analytische Lösungsmethoden, soweit sie das Verständnis stärken
+%    \item Einblicke in die Rechentechnik, soweit das zur Einschätzung der Ergebnisse sinnvoll ist
+%    \item Qualitatives Verständnis des Lösungsverhaltens
+%    \item Verifikation von Ergebnissen
+%    \item  Verständnis dafür, dass schwierige Aufgaben mit dem Wissen aus der Vorlesung nicht gelöst werden können und dass es Expert*innen gibt, die man konsultieren sollte.
+%\end{itemize}
+
+\tableofcontents
+
+\include{01_Integration}
+\include{02_Kurven}
+\include{03_Mehrdimensionale_Analysis}
+%\include{03a_Flaechen}
+\include{04_Auswirkungen_von_Eingabe_und_Rechenfehlern}
+\include{05_Gewöhnliche_Differentialgleichungen}
+\include{06_Wahrscheinlichkeitstheorie}
+
+%\input{attic.tex}
+
+\end{document}
