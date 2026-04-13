@@ -1,0 +1,46 @@
+\usepackage[utf8]{inputenc}
+\usepackage[german]{babel}
+\usepackage{url}
+\usepackage{nicefrac}
+%\usepackage[export]{adjustbox} % Used for vertical alignment of tikz images, but failed
+\usepackage{graphicx}
+\usepackage{tikz,tikzscale}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{amsthm}
+\usepackage{float}
+
+\title{Mathematik für Molekulare Biotechnologie B}
+\author{Guido Kanschat}
+\date{Fakultät für Ingenieurwissenschaften\\Universität Heidelberg}
+
+\usepackage[mode=multiuser,status=draft]{fixme}
+%\fxsetup{innerlayout=inline}
+%\fxsetup{targetlayout=colorcb}
+\fxusetheme{color}
+\FXRegisterAuthor{gk}{envgk}{GK}
+\FXRegisterAuthor{mr}{envmr}{MR}
+
+\theoremstyle{remark}
+\newenvironment{Aufgabe}{\subsubsection{Aufgabe}}{}
+\newenvironment{Wdh}{\begin{onlyenv}<article>\textbf{Wiederholung: }}%
+{\end{onlyenv}}
+\newenvironment{Vertiefung}{\begin{onlyenv}<article>\textbf{Vertiefung: }}%
+{\end{onlyenv}}
+\newenvironment{Denkpause}{%
+  \begin{onlyenv}<presentation>%
+    \begin{exampleblock}{Denkpause}%
+}{%
+    \end{exampleblock}%
+  \end{onlyenv}%
+}
+
+\let\epsilon\varepsilon
+\let\phi\varphi
+\def\vecsym#1{\mathbf{#1}}
+\def\vx{\vecsym x}
+\def\vy{\vecsym y}
+\def\vf{\vecsym f}
+\def\vF{\vecsym F}
+\def\vv{\vecsym v}
+\def\R{\mathbb R}

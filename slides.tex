@@ -3,9 +3,14 @@
 %\usetheme{Madrid}
 \usecolortheme{iwr}
 
+\input{common}
+
 \makeatletter
 \@addtoreset{framenumber}{section}
 \makeatother
+
+\AtBeginSection[]{\frame<presentation>{\tableofcontents[currentsection,hideothersubsections]}}
+\AtBeginSubsection[]{\frame<presentation>{\tableofcontents[sectionstyle=show/hide,subsectionstyle=show/shaded/hide]}}
 
 \setbeamertemplate{navigation symbols}{}
 \setbeamertemplate{section in toc}[sections numbered]
@@ -19,27 +24,23 @@
   \kern1em
   \vskip2pt
 }
-%\setbeamertemplate{headline}{
-%  \leavevmode%
-%  \hbox{%
-    % Left: section/subsection navigation (default style)
-%    \begin{beamercolorbox}[wd=.75\paperwidth,ht=2.5ex,dp=1ex,left]{section in head/foot}%
-%      \insertsectionhead\hspace{1em}\insertsubsectionhead
-%    \end{beamercolorbox}%
-    
-    % Right: your custom numbering
-%    \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.5ex,dp=1ex,right]{section in head/foot}%
-%    \insertsectionnumber.\insertsubsectionnumber.\insertframenumber\hspace{1em}
- %   \end{beamercolorbox}%
-%  }
-%}
 
-%\mode<presentation>
-%{
-%  \usetheme{default}      % or try Darmstadt, Madrid, Warsaw, ...
-%  \usecolortheme{default} % or try albatross, beaver, crane, ...
-%  \usefonttheme{default}  % or try serif, structurebold, ...
-%  \setbeamertemplate{navigation symbols}{}
-%  \setbeamertemplate{caption}[numbered]
-%} 
-\input{top}
+%\input{top}
+\begin{document}
+\maketitle
+
+\begin{frame}{Inhaltsübersicht}
+    \tableofcontents[hideallsubsections]
+\end{frame}
+
+\input{01_Integration}
+\input{02_Kurven}
+\input{03_Mehrdimensionale_Analysis}
+%\input{03a_Flaechen}
+\input{04_Auswirkungen_von_Eingabe_und_Rechenfehlern}
+\input{05_Gewöhnliche_Differentialgleichungen}
+\input{06_Wahrscheinlichkeitstheorie}
+
+%\input{attic.tex}
+
+\end{document}
