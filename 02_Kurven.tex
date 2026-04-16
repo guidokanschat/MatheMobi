@@ -3,17 +3,70 @@
 \section{Kurven: Pfade und Wege}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}<presentation>
+  \begin{center}
+    \includegraphics[width=.6\textwidth]{pic/snapshot_01}
+  \end{center}
+\end{frame}
+
+\begin{frame}<presentation>
+  \begin{center}
+    \includegraphics[width=.6\textwidth]{pic/snapshot_02}
+  \end{center}
+\end{frame}
+
+\begin{frame}<presentation>
+  \begin{center}
+    \includegraphics[width=.6\textwidth]{pic/snapshot_03}
+  \end{center}
+\end{frame}
+
+\begin{frame}<presentation>
+  \begin{center}
+    \includegraphics[width=.6\textwidth]{pic/snapshot_04}
+  \end{center}
+\end{frame}
+
+\begin{frame}<presentation>
+  \begin{center}
+    \includegraphics[width=.6\textwidth]{pic/snapshot_05}
+  \end{center}
+\end{frame}
+
+\begin{frame}<presentation>
+  \begin{center}
+    \includegraphics[width=.6\textwidth]{pic/snapshot_06}
+  \end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Snapshots einer Wanderung}
+  \begin{center}
+    \includegraphics[width=.3\textwidth]{pic/snapshot_01}
+    \includegraphics[width=.3\textwidth]{pic/snapshot_02}
+    \includegraphics[width=.3\textwidth]{pic/snapshot_03}
+
+    \includegraphics[width=.3\textwidth]{pic/snapshot_04}
+    \includegraphics[width=.3\textwidth]{pic/snapshot_05}
+    \includegraphics[width=.3\textwidth]{pic/snapshot_06}
+\end{center}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \begin{Denkpause}
         Auf einer Wanderung bewegen Sie sich durch eine Landschaft. Was für ein mathematisches Objekt ist geeignet, diese Bewegung zu beschreiben.
     \end{Denkpause}
 \end{frame}
 
-\begin{frame}{Definition: Weg}
-    Ein Weg ist eine Abbildung von einem Zeitintervall $I$ in einen Vektorraum, zum Beispiel $\R^n$.
-\end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Analytische Eigenschaften von Pfaden}
+\begin{frame}{Definition: Kurve}
+    Eine (parametrische) Kurve ist eine Abbildung von einem Zeitintervall $I$ in einen Vektorraum, zum Beispiel $\R^n$.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\begin{frame}{Analytische Eigenschaften von Kurven}
     \begin{itemize}
         \item Stetigkeit, Differenzierbarkeit und Integrale von Pfaden sind komponentenweise definiert.
         \item Ableitungen
@@ -73,14 +126,72 @@
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Definition Weg}
-\mrerror{Warum wird "Weg" nochmal definiert, wenn dies bereits in 2.0.1 geschieht?}    
+\gkerror{$\to$MR bitte mit korrekten Begriffen nachtragen}
+\begin{frame}{Beispiel Genregulation}
+  \begin{block}{Achtung!}
+      Kurven müssen sich nicht im physikalischen Raum bewegen. Sie beschreiben allgemein das zeitliche Verhalten ein- und mehrdimensionaler Systeme!
+  \end{block}
 \end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Definition Weg}
+  Ein Weg ist eine eindimensionale Teilmenge des $\R^n$
+  \begin{itemize}
+  \item Parameterdarstellung: Sei $\vf: I\to \R^n$ eine Kurve, dann ist
+    \begin{gather*}
+      W = \bigl\{\vf(t) \in \R^n\big|
+      t\in I \bigr\}
+    \end{gather*}
+    ein Weg
+    \begin{itemize}
+    \item Der Weg ist also die Spur, auf der man wandert
+    \item Es ist der anschauliche Weg der täglichen Erfahrung
+    \end{itemize}
+    \pause
+  \item Nullstellendarstellung: Sei $f:\R^n \to \R$ eine Funktion, dann
+    kann ein Weg dargestellt werden als
+    \begin{gather*}
+      W = \bigl\{\vx\in\R^n\big| f(\vx) \only<3->{{\color{red}-C}} = 0
+      \bigr\}
+    \end{gather*}
+  \end{itemize}
+  \visible<4>{
+    \begin{center}
+      Beachten Sie dazu auch die Videos auf Moodle!
+    \end{center}
+  }
+\end{frame}
+
+\begin{frame}{Der Weg der Wanderung}
+  \begin{center}
+    \includegraphics[width=.6\textwidth]{pic/track}
+  \end{center}
+\end{frame}
+
+\gkerror{Tabelle aus Email nachtragen}
+\begin{frame}{Zur Begriffsverwirrung}
+  Die Verwendung der Begriffe \glqq{}Kurve\grqq{} und
+  \glqq{}Weg\grqq{} ist in der Literatur sehr uneinheitlich. Hier eine
+  Tabelle einiger Standardreferenzen:
+  \begin{center}
+    \begin{tabular}{l|l|l}
+      \hline \textbf{hier:} & \textbf{Kurve} & \textbf{Weg} \\\hline
+      Hildebrandt & Kurve & Weg \\
+      Wikipedia & Weg & Kurve \\
+      Heuser & Weg & Bogen \\
+      \hline
+    \end{tabular}
+  \end{center}
+
+  Grundlage meiner Entscheidung: der \glqq{}Weg\grqq{} ist ein anschauliches,
+  physikalisches Objekt
+\end{frame}
+
+
 
 \begin{envgknote}{hinzufügen}
    \begin{itemize}
-       \item Wege: parametrische und nullstellen-Darstellung
-       \item Begriffsklärung
        \item Beispiele Gerade und Kreis
        \item zu einem Weg kann es mehrere Pfade geben, die ihn parametrisieren
        \item Beispiel chemische Reaktion oder Biosystem
