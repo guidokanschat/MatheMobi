@@ -74,7 +74,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Definition Weg}
-    
+\mrerror{Warum wird "Weg" nochmal definiert, wenn dies bereits in 2.0.1 geschieht?}    
 \end{frame}
 
 \begin{envgknote}{hinzufügen}
@@ -88,4 +88,39 @@
        \item Implizite Differentiation
    \end{itemize} 
 \end{envgknote}
+
+\mrnote{Folgende passenden Folien sind provisorisch aus der alten Vorlesung entnommen:}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Darstellung eines Weges als Funktion}
+
+    Unter welchen Bedingungen lässt sich ein Weg auch als \grqq klassischer \grqq Graph einer Funktion $y=f(x)$ betrachten?
+
+    \begin{itemize}
+        \item Bewegung eines Punktes auf einen festen Kreis
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+    $$
+    \left\{\begin{array}{l}
+        x(t) = a\cos(\omega t)\\ y(t) = a\sin(\omega t)
+    \end{array}\right.
+    $$
+\end{column}
+\begin{column}{0.5\textwidth}
+\includegraphics[width=0.5\textwidth]{fig/pk03.png}
+\end{column}
+\end{columns}
+    \item $\sin(\omega t) = \sqrt{1-\cos^2(\omega t)}$ (nur für die obere Kreishälfte!)
+    \item Daher:
+    \begin{multline}
+    y(t) = a\sin(\omega t) \Longrightarrow y(t) = a \sqrt{1-\cos^2(\omega t)} \\ 
+    \Longrightarrow y(t) = \sqrt{a^2-a^2\cos^2(\omega t)} \Longrightarrow y(t) = \sqrt{a^2-x(t)^2} 
+    \end{multline}
+    \item Also: $y = f(x) = \sqrt{a^2-x^2}$ (obere Kreishälfte)
+\end{itemize}
+
+
+\end{frame}
+
 \mode<all>

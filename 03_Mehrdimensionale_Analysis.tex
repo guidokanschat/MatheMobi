@@ -57,6 +57,288 @@ Notation: wir schreiben Vektorgrößen als $\vx,\vy,\vf$ zur Unterscheidung von 
 \end{frame}
 
 \subsection{Partielle Ableitungen}
+\mrnote{Provisorisch sind die Folien aus Carl Herrmanns Teil zu partiellen Ableitungen eingefügt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Definition}
+
+\begin{itemize}
+    \item Die Ableitung $\frac{df(x)}{dx}$ beschreibt die {\bf Änderung} von $f(x)$ bei infinitesimalen Veränderungen von $x$
+    \item {\bf Partielle Ableitung}: Änderung der Funktion $f(x_1,x_2,\ldots)$ bei infinitesimalen Veränderungen {\bf einer} Variablen, wobei die anderen {\bf konstant} bleiben!
+\end{itemize}
+
+    $$
+    \frac{f(x_1,\ldots,x_k+\Delta x_k, \ldots, x_n) - f(x_1,\ldots, x_n)}{\Delta x_k} \xrightarrow{\Delta x_k \to 0} \frac{\partial f(x_1,\ldots,x_n)}{\partial x_k}
+    $$
+
+    
+\end{frame}
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Notation}
+
+    \begin{itemize}
+
+        \item Schreibweisen:
+        $$
+        \frac{\partial f}{\partial x_k}~~\text{oder}~~\partial_{x_k} f ~~\text{oder}~~f_{x_k}~~\text{oder}~~f_{k}
+        $$
+        \item Beispiele:
+        \begin{eqnarray*}
+            f(x,y) = x^2+y^2 &:& \partial_x f = 2x~~~~\partial_y f = 2y \\
+            f(x,y) = 3x^2y^3 &:& \partial_x f = 6xy^3~~~~\partial_y f = 9x^2y^2
+        \end{eqnarray*}
+    \end{itemize}
+    
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Gradient einer Funktion}
+
+    \begin{itemize}
+        \item Wir definieren den {\bf Gradienten} der Funktion $f$:
+        $$
+    \nabla f = \left(\begin{array}{c} \partial_{x_1}f \\ \vdots \\  \partial_{x_n}f \end{array}\right)
+        $$
+        \item $\nabla f(p)$ ist ein Vektor in $\mathbb{R}^n$ am Punkt $p$
+        \item Beispiel: $f(x,y) = 3x^2y^3$:
+        $$
+        \nabla f = \left(\begin{array}{c} 6xy^3 \\ 9x^2y^2 \end{array}\right) ~~\rightarrow~~ \nabla f(1,1) = \left(\begin{array}{c} 6 \\ 9 \end{array}\right)
+        $$
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Mehrfachableitungen}
+
+    \begin{itemize}
+        \item Wie bei Funktionen einer Variablen können wir {\bf mehrfach-Ableitungen} berechnen
+        \item Jedoch sind hier alle Kombinationen von Variablen möglich!
+        \item z.B.\ bei $f(x_1,\ldots,x_k)$:
+        $$
+        f_{ij} = \frac{\partial^2 f}{\partial x_i \partial x_j} =  \frac{\partial}{\partial x_i}\left(\frac{\partial f}{\partial x_j}\right)
+        $$
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Mehrfachableitungen}
+
+    Bei Mehrfachableitungen spielt die Reihenfolge der Ableitungen (bei den Funktionen, die wir betrachten) keine Rolle! (Satz von Schwarz)
+\vspace{1em}
+
+    {\bf Beispiel:} $f(x,y,z) = e^{xy^2}\,\sin z$
+    \begin{itemize}
+        \item $f_x = y^2\,e^{xy^2}\,\sin z$ , $f_y = 2xy\,e^{xy^2}\,\sin z$
+        \item bei doppelten Ableitungen gilt: $f_{xy}=f_{yx}$
+    \end{itemize}
+    \vspace{3cm}
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Partielle Ableitungen und Tangente}
+
+\begin{center}
+    \includegraphics[width=.8\textwidth]{fig/mv10.png}
+\end{center}
+\begin{itemize}
+    \item Gleichung der Tangentialebene am Punkte $(x_0,y_0)$:
+    $$
+    z-z_0 = \frac{\partial f}{\partial x}(x_0,y_0) (x-x_0) +\frac{\partial f}{\partial y}(x_0,y_0) (y-y_0) 
+    $$
+    \item Normalvektor zur Ebene:
+    $$
+    N = (\frac{\partial f}{\partial x}(x_0,y_0), \frac{\partial f}{\partial y}(x_0,y_0),-1)
+    $$
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Beispiel}
+
+    Wir berechnen die Gleichung der Tangentialebene für die Funktion $z=x^2-y-xe^y$ am Punkt $(x_0,y_0) = (1,0)$:
+    \begin{eqnarray*}
+    f_x = 2x-e^y &;& f_x(1,0) = 1 \\
+    f_y = -1-xe^y &;& f_y(1,0) = -2
+    \end{eqnarray*}
+    Da $z_0=f(1,0) = 0$ gilt folgende Gleichung:
+    $$
+    z -z_0 = f_x(1,0)(x-1) + f_y(1,0)(y-0) \iff z = x-1 -2y 
+    $$
+
+    Normalvektor:
+    $$
+    N = (1,-2,-1)
+    $$
+\end{frame}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Totales Differential}
+    
+    \begin{itemize}
+        \item Wir definieren das {\bf totale Differential} der Funktion $f(x,y)$ am Punkt $(x_0,y_0)$:
+        $$
+        df = \frac{\partial f}{\partial x}(x_0,y_0)\,dx +\frac{\partial f}{\partial y}(x_0,y_0)\,dy
+        $$
+        \item $df$ ist das {\bf totale Differential} am Punkt $(x_0,y_0)$
+        \item $dx$ und $dy$ sind infinitesimale Veränderungen der Werte von $x$ und $y$ um den Punkt $(x_0,y_0)$
+    \end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Beispiel: Ideales Gasgesetz}
+
+    \begin{itemize}
+        \item Ein ideales Gas erfüllt die Bedingung: $p = C\frac{T}{V}$ wo $C$ eine Konstante ist, $p$ der Druck, $V$ das Volumen und $T$ die Temperatur.
+        \item Wir möchten Veränderungen des Drucks $p$ bei Veränderungen der anderen Variablen (Temperatur und Volumen) beschreiben um einen Gleichgewichtszustand $(p_0,V_0,T_0)$:
+        \begin{equation}
+        dp = \frac{\partial p}{\partial T}(T_0,V_0)\,dT +\frac{\partial p}{\partial V}(T_0,V_0)\,dV
+        \end{equation}
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Beispiel: Ideales Gasgesetz}
+
+    \begin{itemize}
+        \item es gilt:
+        $$
+        \frac{\partial p}{\partial T}(T_0,V_0) = C\frac{1}{V_0}~~~~~\frac{\partial p}{\partial V}(T_0,V_0) = -C\frac{T_0}{V_0^2}
+        $$
+        \item daher:
+        \begin{equation}
+        dp = C\left( \frac{1}{V_0}\cdot dT -\frac{T_0}{V_0^2}\cdot dV\right)
+        \end{equation}
+        \item Veränderung des Drucks: {\bf positiv} mit Veränderung der Temperatur $T$, {\bf negativ} mit Veränderung des Volumen $V$!
+    \end{itemize}
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Linearisierung}
+
+    \begin{itemize}
+        \item Anhand der Tangentengleichung oder des totalen Differentials können wir eine {\bf lineare Näherung} für die Funktion $f(x,y)$ am Punkt $(x_0,y_0)$ angeben:
+        $$
+        f(x,y) \approx f(x_0,y_0) + \frac{\partial f}{\partial x}(x_0,y_0)(x-x_0) + \frac{\partial f}{\partial y}(x_0,y_0)(y-y_0)
+        $$
+        \item Diese Näherung ist nur gültig, wenn $x$ und $y$ in der Nähe von $x_0$ und $y_0$ liegen!
+        \item Beispiel: $f(x,y) = x^2 + y^2$; $x_0=1$, $y_0=1$; $x=1.1$, $y=1.1$
+        \item Näherung: $f(1.1,1.1) \approx 2 + 2\cdot(0.1) + 2\cdot(0.1) = 2.4$
+        \item reeller Wert: $f(1.1,1.1) = 2.42$
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+    \frametitle{Linearisierung}
+
+    \begin{itemize}
+        \item Wir können die Näherung auch in Form einer Tabelle darstellen:
+        \item Beispiel: $f(x,y) = x^2 + y^2$
+        \item $L(x,y)=f(x_0,y_0) + \frac{\partial f}{\partial x}(x_0,y_0)(x-x_0) + \frac{\partial f}{\partial y}(x_0,y_0)(y-y_0)=   2 + 2\cdot(x-1) + 2\cdot(y-1)$
+    \end{itemize}
+
+\begin{table}[h]
+    \begin{tabular}{|c|c|c|c|c|}
+    \hline
+    $(x,y)$ & Abst. & $f(x,y)$ & $L(x,y)$ & Fehler \\
+    \hline
+    $(1.0, 1.0)$ & $0.00$ & $2.00$ & $2.00$ & $0.00$ \\
+    \hline
+    $(1.1, 1.1)$ & $0.14$ & $2.42$ & $2.40$ & $0.02$ \\
+    \hline
+    $(1.2, 1.2)$ & $0.28$ & $2.88$ & $2.80$ & $0.08$ \\
+    \hline
+    $(1.3, 1.3)$ & $0.42$ & $3.38$ & $3.20$ & $0.18$ \\
+    \hline
+    $(1.5, 1.5)$ & $0.71$ & $4.50$ & $4.00$ & $0.50$ \\
+    \hline
+    $(2.0, 2.0)$ & $1.41$ & $8.00$ & $6.00$ & $2.00$ \\
+    \hline
+    \end{tabular}
+    \end{table}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Beispiel}
+
+
+    \begin{itemize}
+        \item Um den Gleichgewichtspunkt $(p_0,V_0,T_0)$ kann also die Näherungsformel benutzt werden:
+        $$
+        \Delta p \approx C\left( \frac{1}{V_0}\cdot \Delta T -\frac{T_0}{V_0^2}\cdot \Delta V\right)
+        $$
+        \item Beispiel: $V_0=22.4$ l, $T_0=273$ Kelvin
+        \item der Druck soll konstant bleiben ($\Delta p=0$), die Temperatur wird um 2 Grad erhöht ($\Delta T=+2$)
+        \item Daher ergibt sich eine notwendige Veränderung der Volumens:
+        $$
+        \Delta V \approx \frac{V_0}{T_0}\cdot \Delta T = +0.16~\text{l}
+        $$
+ 
+     \end{itemize}
+\end{frame}
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Beispiel}
+
+    {\bf Beispiel 2: Näherung einer Funktion}
+    \begin{itemize}
+        \item Können wir ohne Taschenrechner eine Näherung von $z=\sqrt{2.98^2+4.01^2}$ ausrechnen?
+        \item Wir definieren die Funktion $z=f(x,y)= \sqrt{x^2+y^2}$
+        \item Wir suchen eine Näherung der Funktion am Punkt $(x_0,y_0,z_0)=(3,4,5)$:
+        $$
+        z-5 \approx f_x(3,4)(2.98-3) + f_y(3,4)(4.01-4)
+        $$
+        \item es gilt $f_x = x/\sqrt{x^2+y^2}$ und $f_y = y/\sqrt{x^2+y^2}$
+        \item daher $f_x(3,4) = 3/5$ und $f_y(3,4) = 4/5$
+        $$
+        z\approx 5 + \frac{3}{5}(-0.02) + \frac{4}{5}(0.01) = 5-\frac{2}{500} = 4.996
+            $$
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Abschlussfragen}
+
+    \begin{enumerate}
+        
+        \item Die Fläche eines Dreiecks ist gegeben durch $A(a,b,\theta) = \frac{1}{2}ab\sin\theta$; bestimmen Sie das totale Differential  !
+        \item Das Volumen eines Zylinders ist $V=\pi r^2 h$; verändert sich das Volumen mehr, wenn $r$ von $1.0$ auf $1.1$ oder $h$ von $1.0$ auf $1.1$ erhöht wird?
+    \end{enumerate}
+    
+
+\end{frame}
 
 \begin{envgknote}{Neue Struktur}
     \begin{itemize}
@@ -88,7 +370,139 @@ Notation: wir schreiben Vektorgrößen als $\vx,\vy,\vf$ zur Unterscheidung von 
 \end{envmrnote}
 
 \subsection{Koordinatensysteme}
-
 Kartesische Koordinaten, Polarkoordinaten, etc.
+
+\mrnote{vorläufig sind die Folien aus Carl Herrmanns Teil zu Koordinatensystemen eingefügt. Die Beispiele beziehen sich noch auf Kapitel 2, da der Themenkomplex ursprünglich dort angesiedelt war}
+
+\begin{frame}
+    \frametitle{Koordinatensysteme}
+
+    \begin{itemize}
+        \item Es gibt unterschiedliche {\bf Koordinatensysteme}, um die Position eines Punktes im Raum zu beschreiben
+        \item Beispiele:
+        \begin{enumerate}
+            \item Kartesische Koordinaten $(x,y,z,...)$
+            \item Polarkoordinaten im 2d Raum: $(r,\theta)$
+            \item Kugelkoordinaten im 3d Raum $(r,\theta,\phi)$
+        \end{enumerate}
+        \item Die Wahl des Koordinatensystems is beliebig, aber bestimmte Systeme eignen sich besser als andere, und führen zu einer einfachen Beschreibung.
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Polarkoordinaten}
+
+\begin{center}
+    \includegraphics[width=.3\textwidth]{fig/pk11.png}
+\end{center}
+
+
+ \begin{itemize}
+    \item im 2-dimensionalen Raum kann jeder Punkte entweder durch kartesische Koordinaten $(x,y)$ oder durch Polarkoordinaten $(r,\theta)$ beschrieben werden.
+    \item Umwandlung von Polarkoordinaten in kartesische Koordinaten:
+$$
+\left\{\begin{array}{l} x = r\cos\theta \\ y = r\sin\theta \end{array}\right. ~~~\text{mit}~~r\ge 0, ~~~\theta \in [0,2\pi)~(\text{oder}~\theta \in [-\pi,\pi))
+$$
+     \item Umwandlung von kartesischen in Polarkoordinaten:
+     $$
+    \frac{y}{x} = \frac{r\sin\theta}{r\cos\theta} = \tan\theta~;~~~~r=\sqrt{x^2+y^2}
+     $$
+ \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Polarkoordinaten}
+    \begin{itemize}
+     \item Achtung: da die Umkehrfunktion $\arctan$ definiert ist von $\mathbb{R}\rightarrow (-\frac{\pi}{2},\frac{\pi}{2})$ liefert diese Formel nur einen Winkel zwischen $-\frac{\pi}{2}$ und $\frac{\pi}{2}$!
+     \item je nachdem, in welchem Quadranten sich der Punkt befindet, muss man den Winkel anpassen.
+ \end{itemize}   
+\begin{center}
+\includegraphics[width=.7\textwidth]{fig/pk13.png}
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Beispiele von Parametrisierungen}
+
+
+    {\bf Kreis}, Mittelpunkt bei $(0,0)$, Radius $a$:
+    \begin{columns}
+        \begin{column}{0.7\textwidth}
+        \begin{itemize}
+            \item $\text{kartesische Koordinaten:}~\sqrt{x^2+y^2}=a$
+            \item $\text{Polarkoordinaten:}~ r=a, ~\theta\in[0,2\pi)$
+        \end{itemize}
+    \end{column}
+    \begin{column}{0.3\textwidth}
+        \includegraphics[width=\textwidth]{fig/pk14.png}
+    \end{column}
+\end{columns}
+        {\bf Halbgerade:}
+        \begin{columns}
+            \begin{column}{0.75\textwidth}
+        \begin{itemize}
+            \item $\text{kartesische Koordinaten:}~y=ax$ mit $x,y,a>0$
+            \item $\text{Polarkoordinaten:}~ \theta=\text{Konstante mit}~~ \cos\theta = \frac{1}{\sqrt{1+a^2}}~, r\ge 0$
+        \end{itemize}
+    \end{column}
+    \begin{column}{.25\textwidth}
+        \includegraphics[width=\textwidth]{fig/pk15.png}
+    \end{column}
+\end{columns}
+    
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{3D: Kugelkoordinaten}
+
+    \begin{columns}
+        \begin{column}{.6\textwidth}
+    \begin{itemize}
+        \item Verallgemeinerung der Polarkoordinaten in 3d
+        \item $(x,y,z)~\longrightarrow~(r,\theta,\phi)$
+        \item $r$ = Radius $(r\ge 0)$
+        \item $\theta$ = Polarwinkel $(0\le \theta\le \pi)$
+        \item $\phi$ = Azimutwinkel $(0\le \phi\le 2\pi)$
+    \end{itemize}
+\end{column}
+\begin{column}{.4\textwidth}
+    \begin{center}
+        \includegraphics[width=\textwidth]{fig/pk18.png}
+    \end{center}
+\end{column}
+\end{columns}
+\vspace{.5cm}
+Kugelkoordinaten $\longrightarrow$ kartesische Koordinaten:
+\begin{itemize}
+    \item $x = r\,\sin\theta\,\cos\phi$
+    \item $y=r\,\sin\theta\,\sin\phi$
+    \item $z=r\,\cos\theta$
+\end{itemize}
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Parametrische Kurven in verschiedenen Koordinatensystemen}
+
+    \begin{itemize}
+        \item Wenn wir die Bewegung eines Punktes im 2d/3d Raum beschreiben, können wir die {\bf zurückgelegte Strecke} $L$ oder die {\bf überstrichene Fläche} $S$  bestimmen.
+        \item Dazu muss ein infinitesimales Streckenstück $dL$ oder Flächestück $dS$ integriert werden.
+        \item Der Ausdruck von $dL$ oder $dS$ hängt vom {\bf Koordinatensystem} ab!
+    \end{itemize}
+    \begin{center}
+        \includegraphics[width=.8\textwidth]{fig/pk21.png}
+    \end{center}
+
+\end{frame}
 
 \mode<all>
