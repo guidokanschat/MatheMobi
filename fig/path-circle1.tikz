@@ -1,0 +1,15 @@
+\begin{tikzpicture}
+  \begin{axis}[domain=0:2*pi,
+    xmin=0.,
+    axis equal image,
+    axis lines=middle,
+    legend pos = south west,
+    xtick={pi,2*pi},
+    xticklabels={$\pi$,$2\pi$},
+    xlabel = $t$]
+    \addplot[thick,blue]{cos(deg(x))};
+    \addlegendentry{$x$}
+    \addplot[thick,dashed,red]{sin(deg(x))};
+    \addlegendentry{$y$}
+  \end{axis}
+\end{tikzpicture}

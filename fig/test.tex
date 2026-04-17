@@ -2,6 +2,7 @@
 \usepackage{nicefrac,amsmath}
 \usepackage[RGB]{xcolor}
 \usepackage{tikz,tikzscale}
+\usepackage{pgfplots}
 
 \begin{document}
 %\includegraphics[width=\textwidth]{integral0.tikz}
@@ -10,16 +11,9 @@
 %\includegraphics[width=\textwidth]{integral-shift.tikz}
 %\includegraphics[width=\textwidth]{integral8.tikz}
 
-\begin{tikzpicture}
-    \fill[red,opacity=0.2] (0,0) --
-    plot[domain=0:2] (\x,{3+43/30*\x-7/15*\x^2})
-    -- (2,0) -- cycle;
-   
-    \draw (0,0) -- (2,0);
-    \draw (0,0)--(0,3);
-    \draw (2,0)--(2,4);
-
-   \draw[thick,red] plot[domain=0:2] (\x,{3+43/30*\x-7/15*\x^2});
-\end{tikzpicture}
+\includegraphics[height=4cm]{path-circle0}
+\includegraphics[height=4cm]{path-circle1}
+\includegraphics[height=4cm]{path-circle2}
+\includegraphics[height=4cm]{path-circle3}
 
 \end{document}

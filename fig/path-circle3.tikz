@@ -1,0 +1,16 @@
+\begin{tikzpicture}
+  \begin{axis}[domain=0:2*pi,
+    samples=200,
+    xmin=0.,
+    axis equal image,
+    axis lines=middle,
+    legend pos = south west,
+    xtick={pi,2*pi},
+    xticklabels={$\pi$,$2\pi$},
+    xlabel = $t$]
+    \addplot[thick,blue]{cos(deg((x-pi)*(x-pi)))};
+    \addlegendentry{$x$}
+    \addplot[thick,dashed,red]{sin(deg((x-pi)*(x-pi))};
+    \addlegendentry{$y$}
+  \end{axis}
+\end{tikzpicture}

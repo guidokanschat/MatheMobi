@@ -819,6 +819,17 @@ Wichtige trigonometrische Identitäten:
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle<presentation>{Fazit}
+  \begin{itemize}
+  \item Ist die Stammfunktion am Intervallende beschränkt und stetig,
+    konvergiert das uneigentliche Integral
+  \item ISt die Stammfunktion am Intervallende unstetig oder
+    unbeschränkt, divergiert es
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Uneigentliche Integrale II}
     Es ist auch möglich, dass der Integrand $f$ am Punkt $p$ im Integrationsintervall $[a,b]$ einen Pol hat. Das lässt sich auf den vorherigen Fall zurückführen:
     \begin{gather*}
@@ -844,7 +855,7 @@ Wichtige trigonometrische Identitäten:
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-    \frametitle<presentation>{Warnung}
+    \frametitle<presentation>{Weiteres Beispiel}
     Das uneigentliche Integral
     \begin{gather*}
         \int_{-1}^1 \frac{1}{t}\,dt
@@ -874,7 +885,8 @@ Wichtige trigonometrische Identitäten:
     \begin{gather*}
        \lim_{x\to\infty}\int_a^x f(t)\,dt,
        \qquad \lim_{x\to-\infty}\int_x^b f(t)\,dt
-    \end{gather*}
+     \end{gather*}
+     \pause
     Das dritte Integral kann an einer endlichen Zahl geteilt werden und beide uneigentlichen Integrale müssen existieren.
     \begin{gather*}
         \lim_{x\to\infty}\int_{-x}^c f(t)\,dt
@@ -951,7 +963,7 @@ Wichtige trigonometrische Identitäten:
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Beispiel: Integral über die Sprungfunktion}
-    Sei die Funktion $H$ definiert als
+    Sei die Funktion $H$, auch Heaviside-Funktion genannt, definiert als
     \begin{gather*}
         H(t) = \begin{cases}
             0 & t<0\\1&t\ge 0
@@ -1002,6 +1014,15 @@ Wichtige trigonometrische Identitäten:
     \pause
     Oft findet man in der mathematischen Literatur den Begriff \textbf{fast alle}. Dabei bedeutet \glqq{}Fast alle $t\in[a,b]$\grqq{} soviel wie $t\in [a,b]\setminus N$, wobei $N$ eine Nullmenge oder leer ist.
 \end{frame}
+
+\begin{Vertiefung}
+  Sie werden in vielen mathematischen Lehrbüchern die
+  Dirichlet-Funktion als Beispiel einer nicht integrierbaren Funktion
+  finden. An dieser Stelle unterscheiden sich nämlich die
+  Integraldefinitionen von Riemann und Lebesgue. Folgend dem
+  allgemeinerem Zugang von Lebesgue ist diese Funktion aber
+  tatsächlich integrierbar.
+\end{Vertiefung}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Abschlussfragen}
@@ -1274,14 +1295,15 @@ In der Literatur werden Quadraturformeln in der Regel für das Intervall $[0,1]$
       \begin{itemize}
           \item In der Regel aber die Teilintervalle
       \end{itemize}
-      \item Den Fehlerterm benutzt man zur Schätzung der Genauigkeit
+    \item Den Fehlerterm benutzt man zur Schätzung der Genauigkeit
       \begin{itemize}
           \item $h^k$ bedeutet Reduktion bei Intervallhalbierung auf $2^{-k}$
           \item Wenn die Ableitungen bekannt sind, nutzt man zum Beispiel
           \begin{gather*}
               \left| f^{(k)}(\xi)\right|
               \le \max_{t\in [a,b]} \left| f^{(k)}(t)\right|
-          \end{gather*}
+            \end{gather*}
+            Man nennt dies \textbf{Fehlerabschätzung}
       \end{itemize}
   \end{itemize}
 \end{frame}
@@ -1289,20 +1311,34 @@ In der Literatur werden Quadraturformeln in der Regel für das Intervall $[0,1]$
 Im Plenum diskutieren wir, wie aus der tabellierten Simpsonregel die vorher präsentierte Summenformel wird.
 
 \begin{Aufgabe}
+  Benutzen Sie das zur Verfuung gestellte Jupyter Notebook mit der
+  dort implementierten Funktion, die die Trapezregel für eine
+  beliebige Funktion berechnet.
     \begin{enumerate}
-    \item Schreiben Sie eine Funktion, die die Trapezregel mit $n$ Teilintervallen implementiert und den Integralwert zurückgibt. Hierbei soll $n$ ein Funktionsparameter sein, genau wie die rechte und linke Intervallgrenze und die zu integrierende Funktion.
-    \item Approximieren Sie mit Ihrer Funktion
+    \item Approximieren Sie das Integral
     \begin{gather*}
         \int_0^{\pi} \sin(t)\,dt = 2
     \end{gather*}
     mit $n=1,2,4,8,16,32$. Verifizieren Sie die Potenz der Intervalllänge $h=\nicefrac{2\pi}n$ im Fehlerterm der Tabelle.
-    \item Machen Sie dasselbe für
-    \begin{gather*}
-        \int_0^{2\pi} \cos(16t)\,dt = 0
-    \end{gather*}
-    und diskutieren Sie das Ergebnis.
     \end{enumerate}
-\end{Aufgabe}
+  \end{Aufgabe}
+
+  \begin{Aufgabe}
+    Wir untersuchen die Approximation des Integrals
+    \begin{gather*}
+      \int_0^{2\pi} \cos(16t)\,dt = 0
+    \end{gather*}
+    mit der Trapezregel mit $n=1,2,4,8,16,32$ Teilintervallen.
+    \begin{enumerate}
+    \item Fertigen Sie zunächst eine (grobe) Skizze der Funktion und
+      der Quadraturpunkte an.
+    \item Berechnen Sie nun die Resultate der Trapezregel mit den
+      geforderten Schrittweiten.
+    \item Warum verändern sich die Werte bis $n=16$ nicht?
+    \item Warum steht das nicht im Widerspruch zur Fehlerabschätzung?
+    \item Was ist der Sinn dieser Aufgabe?
+    \end{enumerate}
+  \end{Aufgabe}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Gauß-Quadratur}
