@@ -127,10 +127,32 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \gkerror{$\to$MR bitte mit korrekten Begriffen nachtragen}
+\mrnote{Vorschlag}
 \begin{frame}{Beispiel Genregulation}
   \begin{block}{Achtung!}
       Kurven müssen sich nicht im physikalischen Raum bewegen. Sie beschreiben allgemein das zeitliche Verhalten ein- und mehrdimensionaler Systeme!
   \end{block}
+
+  Ein Protein $P$ reguliert seine eigene Genexpression, indem es an die Promotor-Sequenz assoziiert und eine erfolgreiche Bindung der RNA-Polymerase erschwert. Gleichzeitig wird ein Transkriptionsaktivator $A$ dauerhaft produziert, der die Bindung der RNA-Polymerase fördert.
+\end{frame}
+
+\begin{frame}
+Die berücksichtigten Parameter in Vektorschreibweise sind demnach:
+\begin{equation*}
+\mathbf{x}(t)=
+\begin{pmatrix}
+A(t)\\
+m_{\mathrm{pre}}(t)\\
+m(t)\\
+P(t)
+\end{pmatrix}
+\end{equation*}
+mit
+\begin{align*}
+   A(t) &= f_1(t) = A_0 + t \cdot v_1 \\
+   m(t) &= f_2(t) = m_0 + t \cdot A(t) + t \cdot v_2 -t \cdot P(t) \\
+   P(t) &= f_3(t) = P_0 \ \ + t \cdot m(t) 
+\end{align*}
 \end{frame}
 
 
