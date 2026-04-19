@@ -1,75 +1,76 @@
 \mode*
 
-\section{Kurven: Pfade und Wege}
-
+\section{Wege und  Kurven}
+\subsection{Wege}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}<presentation>
   \begin{center}
-    \includegraphics[width=.6\textwidth]{pic/snapshot_01}
+    \includegraphics[width=.9\textwidth]{pic/snapshot_01}
   \end{center}
 \end{frame}
 
 \begin{frame}<presentation>
   \begin{center}
-    \includegraphics[width=.6\textwidth]{pic/snapshot_02}
+    \includegraphics[width=.9\textwidth]{pic/snapshot_02}
   \end{center}
 \end{frame}
 
 \begin{frame}<presentation>
   \begin{center}
-    \includegraphics[width=.6\textwidth]{pic/snapshot_03}
+    \includegraphics[width=.9\textwidth]{pic/snapshot_03}
   \end{center}
 \end{frame}
 
 \begin{frame}<presentation>
   \begin{center}
-    \includegraphics[width=.6\textwidth]{pic/snapshot_04}
+    \includegraphics[width=.9\textwidth]{pic/snapshot_04}
   \end{center}
 \end{frame}
 
 \begin{frame}<presentation>
   \begin{center}
-    \includegraphics[width=.6\textwidth]{pic/snapshot_05}
+    \includegraphics[width=.9\textwidth]{pic/snapshot_05}
   \end{center}
 \end{frame}
 
 \begin{frame}<presentation>
   \begin{center}
-    \includegraphics[width=.6\textwidth]{pic/snapshot_06}
+    \includegraphics[width=.9\textwidth]{pic/snapshot_06}
   \end{center}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Snapshots einer Wanderung}
   \begin{center}
-    \includegraphics[width=.3\textwidth]{pic/snapshot_01}
-    \includegraphics[width=.3\textwidth]{pic/snapshot_02}
-    \includegraphics[width=.3\textwidth]{pic/snapshot_03}
+    \includegraphics[width=.32\textwidth]{pic/snapshot_01}
+    \includegraphics[width=.32\textwidth]{pic/snapshot_02}
+    \includegraphics[width=.32\textwidth]{pic/snapshot_03}
 
-    \includegraphics[width=.3\textwidth]{pic/snapshot_04}
-    \includegraphics[width=.3\textwidth]{pic/snapshot_05}
-    \includegraphics[width=.3\textwidth]{pic/snapshot_06}
+    \includegraphics[width=.32\textwidth]{pic/snapshot_04}
+    \includegraphics[width=.32\textwidth]{pic/snapshot_05}
+    \includegraphics[width=.32\textwidth]{pic/snapshot_06}
 \end{center}
-\end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
     \begin{Denkpause}
         Auf einer Wanderung bewegen Sie sich durch eine Landschaft. Was für ein mathematisches Objekt ist geeignet, diese Bewegung zu beschreiben.
     \end{Denkpause}
 \end{frame}
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Definition: Kurve}
-    Eine (parametrische) Kurve ist eine Abbildung von einem Zeitintervall $I$ in einen Vektorraum, zum Beispiel $\R^n$.
+%\begin{frame}
+%\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Definition: Weg}
+  Ein Weg (path) ist eine Abbildung von einem Zeitintervall $I$ in
+  einen Vektorraum, zum Beispiel $\R^n$.
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-\begin{frame}{Analytische Eigenschaften von Kurven}
+\begin{frame}{Analytische Eigenschaften von Wegen}
     \begin{itemize}
-        \item Stetigkeit, Differenzierbarkeit und Integrale von Pfaden sind komponentenweise definiert.
-        \item Ableitungen
+        \item Stetigkeit, Differenzierbarkeit und Integrale von Wegen sind komponentenweise definiert.
+        \item Ableitungen (Geschwindigkeitsvektor, velocity)
         \begin{gather*}
             \vf'(t) = \tfrac{d}{dt}
             \begin{pmatrix}
@@ -80,7 +81,8 @@
             = \begin{pmatrix}
                 f_1'(t)\\\vdots\\f_n'(t)
             \end{pmatrix}
-        \end{gather*}
+          \end{gather*}
+        \item Geschwindigkeit, speed: $\left|\vf'\right|$ (euklidische Norm)
         \item Integrale
         \begin{gather*}
             \int \vf(t)\,dt = \vF(t),
@@ -127,57 +129,65 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\gkerror{$\to$MR bitte mit korrekten Begriffen nachtragen}
-\mrnote{Vorschlag}
 \begin{frame}{Beispiel Genregulation}
   \begin{block}{Achtung!}
       Kurven müssen sich nicht im physikalischen Raum bewegen. Sie beschreiben allgemein das zeitliche Verhalten ein- und mehrdimensionaler Systeme!
-  \end{block}
-
-  Ein Protein $P$ reguliert seine eigene Genexpression, indem es an die Promotor-Sequenz assoziiert und eine erfolgreiche Bindung der RNA-Polymerase erschwert. Gleichzeitig wird ein Transkriptionsaktivator $A$ dauerhaft produziert, der die Bindung der RNA-Polymerase fördert.
+    \end{block}
+    
+    Ein Protein $P$ reguliert seine eigene Genexpression, indem es an
+    die Promotor-Sequenz assoziiert und eine erfolgreiche Bindung der
+    RNA-Polymerase erschwert. Gleichzeitig wird ein
+    Transkriptionsaktivator $A$ dauerhaft produziert, der die Bindung
+    der RNA-Polymerase fördert.
+    \begin{gather*}
+      \mathbf{x}(t)=
+      \begin{pmatrix}
+        P(t)\\
+        A(t)\\
+        m_{\text{pre}}(t)\\
+        m(t)\\
+      \end{pmatrix}
+    \end{gather*}
 \end{frame}
 
-\begin{frame}
-Die berücksichtigten Parameter in Vektorschreibweise sind demnach:
-\begin{equation*}
-\mathbf{x}(t)=
-\begin{pmatrix}
-A(t)\\
-m_{\mathrm{pre}}(t)\\
-m(t)\\
-P(t)
-\end{pmatrix}
-\end{equation*}
-mit
-\begin{align*}
-   A(t) &= f_1(t) = A_0 + t \cdot v_1 \\
-   m(t) &= f_2(t) = m_0 + t \cdot A(t) + t \cdot v_2 -t \cdot P(t) \\
-   P(t) &= f_3(t) = P_0 \ \ + t \cdot m(t) 
-\end{align*}
+\gkerror{Beispiel Kreisumfang}
+\begin{frame}{Die Weglänge}
+  \only<1>{\begin{Denkpause}
+    Wie kann die Länge des Weges berechnet werden, den man vom Beginn
+    der Wanderung bis zum Zeitpunkt $t$ zurückgelegt hat?
+  \end{Denkpause}}
+\begin{itemize}
+\item Die Strecke ist das Integral über die Geschwindigkeit
+\item Die Geschwindigkeit ist die euklidische Länge der Ableitung des
+  Wegs
+\end{itemize}
 \end{frame}
 
-
+\subsection{Kurven}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Definition Weg}
-  Ein Weg ist eine eindimensionale Teilmenge des $\R^n$
+\begin{frame}{Definition Kurve}
+  Eine Kurve (curve) ist eine eindimensionale Teilmenge des $\R^n$
   \begin{itemize}
-  \item Parameterdarstellung: Sei $\vf: I\to \R^n$ eine Kurve, dann ist
+  \item Parameterdarstellung: Sei $\vf: I\to \R^n$ ein Weg, dann ist
     \begin{gather*}
       W = \bigl\{\vf(t) \in \R^n\big|
       t\in I \bigr\}
     \end{gather*}
-    ein Weg
+    eine Kurve
     \begin{itemize}
-    \item Der Weg ist also die Spur, auf der man wandert
-    \item Es ist der anschauliche Weg der täglichen Erfahrung
+    \item Die Kurve ist also die Spur, auf der man wandert
+    \item Sie ist der anschauliche Weg der täglichen Erfahrung
     \end{itemize}
     \pause
   \item Nullstellendarstellung: Sei $f:\R^n \to \R$ eine Funktion, dann
-    kann ein Weg dargestellt werden als
+    kann eine Kurve dargestellt werden als
     \begin{gather*}
       W = \bigl\{\vx\in\R^n\big| f(\vx) \only<3->{{\color{red}-C}} = 0
       \bigr\}
     \end{gather*}
+    \begin{itemize}
+    \item Höhenlinien
+    \end{itemize}
   \end{itemize}
   \visible<4>{
     \begin{center}
@@ -186,45 +196,47 @@ mit
   }
 \end{frame}
 
-\begin{frame}{Der Weg der Wanderung}
+\begin{frame}{Die Kurve der Wanderung}
   \begin{center}
-    \includegraphics[width=.6\textwidth]{pic/track}
+    \includegraphics[width=.9\textwidth]{pic/track}
   \end{center}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \gkerror{Tabelle aus Email nachtragen}
 \begin{frame}{Zur Begriffsverwirrung}
-  Die Verwendung der Begriffe \glqq{}Kurve\grqq{} und
-  \glqq{}Weg\grqq{} ist in der Literatur sehr uneinheitlich. Hier eine
+  Die Verwendung der Begriffe \glqq{}Weg\grqq{} und
+  \glqq{}Kurve\grqq{} ist in der Literatur sehr uneinheitlich. Hier eine
   Tabelle einiger Standardreferenzen:
   \begin{center}
     \begin{tabular}{l|l|l}
-      \hline \textbf{hier:} & \textbf{Kurve} & \textbf{Weg} \\\hline
-      Hildebrandt & Kurve & Weg \\
+      \hline \textbf{hier:} & \textbf{Weg} & \textbf{Kurve} \\\hline
       Wikipedia & Weg & Kurve \\
+      Fritsche & Weg & Spur \\
+      Hildebrandt & Kurve & Weg \\
+      Forster & Kurve & --- \\
       Heuser & Weg & Bogen \\
+      Königsberger & Kurve & Spur \\
       \hline
     \end{tabular}
   \end{center}
-
-  Grundlage meiner Entscheidung: der \glqq{}Weg\grqq{} ist ein anschauliches,
-  physikalisches Objekt
+  Eine sichere Bezeichnung ist \glqq{}parametrische Kurve\grqq{} für
+  das, was hier als Weg bezeichnet wird.
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Darstellung von Kurven und Wegen}
   \begin{itemize}
-  \item Wege im $\R^2$ kann man gut als Linien in der Ebene darstellen
+  \item Kurven im $\R^2$ kann man gut als Linien in der Ebene darstellen
     \begin{itemize}
     \item Beispiele: Landkarte, Kreislinie
     \end{itemize}
-  \item Kurven sind dann Bewegungen entlang dieser Linien
+  \item Wege sind dann Bewegungen entlang dieser Linien
     \begin{itemize}
     \item Filme (s. Moodle), Snapshots
     \item 3D Linien
     \end{itemize}
-  \item Kurven können auch als Satz von Funktionen über der Zeitachse
+  \item Wege können auch als Satz von Funktionen über der Zeitachse
     dargestellt werden
   \end{itemize}
 \end{frame}
@@ -234,7 +246,7 @@ mit
   \frametitle<presentation>{Beispiel der Wanderung}
   \mode<article>{Am Beispiel der Wanderung stellen wir in der Graphik geogr. Breite, Länge und die Höhe dar}
   \begin{center}
-    \includegraphics[width=.6\textwidth]{fig/wanderung-functions}
+    \includegraphics[width=.9\textwidth]{fig/wanderung-functions}
   \end{center}
 \end{frame}
 
@@ -248,19 +260,67 @@ mit
     \end{column}
     \begin{column}{.6\textwidth}
       \begin{center}
-        \includegraphics[width=.9\textwidth]{fig/path-circle1.tikz}
-        \includegraphics[width=.9\textwidth]{fig/path-circle2.tikz}
-        \includegraphics[width=.9\textwidth]{fig/path-circle3.tikz}        
+        \includegraphics[width=.9\textwidth]{convert/path-circle1}
+        \includegraphics[width=.9\textwidth]{convert/path-circle2}
+        \includegraphics[width=.9\textwidth]{convert/path-circle3}        
       \end{center}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Funktionsgraphen sind Kurven}
+  Sei $f(t)$ eine stetige Funktion auf dem Intervall $[a,b]$. Dann ist
+  \begin{gather*}
+    \vf(t) =
+    \begin{pmatrix}
+      t \\ f(t)
+    \end{pmatrix}
+  \end{gather*}
+  ein Weg und der Graph der Funktion
+  \begin{gather*}
+    G = \left\{
+      \begin{pmatrix}
+        t\\f(t)
+      \end{pmatrix}
+      \middle|
+      t\in [a,b] \right\}
+  \end{gather*}
+  eine Kurve.
+\end{frame}
+
+\begin{frame}{Darstellung eines Weges als Funktion}
+  \begin{columns}
+    \begin{column}{.3\textwidth}
+      \begin{center}
+        \includegraphics[width=.9\textwidth]{fig/path-circle0.tikz}
+      \end{center}
+      Parameterdarstellung:
+      \begin{gather*}
+        \vx(t) =
+        \begin{pmatrix}
+          \cos t\\\sin t
+        \end{pmatrix}
+      \end{gather*}
+
+      Nullstellendarstellung
+      \begin{gather*}
+        x^2+y^2=1
+      \end{gather*}
+    \end{column}
+    \begin{column}{.65\textwidth}
+      \begin{itemize}
+      \item Nur ein Wert $y$ für jeden Wert $x$!
+      \item Oberer oder unterer Halbkreis sind Funktionen
+        \begin{itemize}
+        \item $t\in[0,\pi]$ oder $t\in [\pi,2\pi]$
+        \end{itemize}
+      \end{itemize}
     \end{column}
   \end{columns}
 \end{frame}
 
 \begin{envgknote}{hinzufügen}
    \begin{itemize}
-       \item Beispiele Gerade und Kreis
-       \item zu einem Weg kann es mehrere Pfade geben, die ihn parametrisieren
-       \item Beispiel chemische Reaktion oder Biosystem
        \item Wann ist ein Weg als $y=f(x)$ darstellbar?
        \item Implizite Differentiation
    \end{itemize} 

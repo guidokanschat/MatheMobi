@@ -25,21 +25,26 @@
   \vskip2pt
 }
 
-%\input{top}
+
+\setcounter{section}{1}
+\makeatletter
+\beamer@tocsectionnumber=1 % TOC also starts from 3
+\makeatother
+
 \begin{document}
 \maketitle
 
-\begin{frame}{Inhaltsübersicht}
-    \tableofcontents[hideallsubsections]
-\end{frame}
+%\begin{frame}{Inhaltsübersicht}
+%    \tableofcontents[hideallsubsections]
+%\end{frame}
 
-\input{01_Integration}
+%\input{01_Integration}
 \input{02_Kurven}
-\input{03_Mehrdimensionale_Analysis}
+%\input{03_Mehrdimensionale_Analysis}
 %\input{03a_Flaechen}
-\input{04_Auswirkungen_von_Eingabe_und_Rechenfehlern}
-\input{05_Gewöhnliche_Differentialgleichungen}
-\input{06_Wahrscheinlichkeitstheorie}
+%\input{04_Auswirkungen_von_Eingabe_und_Rechenfehlern}
+%\input{05_Gewöhnliche_Differentialgleichungen}
+%\input{06_Wahrscheinlichkeitstheorie}
 
 %\input{attic.tex}
 
