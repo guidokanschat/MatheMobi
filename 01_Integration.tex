@@ -814,7 +814,7 @@ Wichtige trigonometrische Identitäten:
         \int_\epsilon^1 \frac{dt}{t}
         = \ln 1 - \ln\epsilon
     \end{gather*}
-    \item Für $\epsilon\to 0$ divergiert dieser Term zu $-\infty$.
+    \item Für $\epsilon\to 0$ divergiert dieser Term zu $\infty$.
     \end{itemize}
 \end{frame}
 
@@ -864,7 +864,7 @@ Wichtige trigonometrische Identitäten:
         Konvergiert dieses Integral?
     \end{Denkpause}}
     \pause
-    ist nicht null, obwohl die Funktion $\tfrac1x$ ungerade ist, da die beiden uneigentlichen Integrale
+    \noindent ist nicht null, obwohl die Funktion $\tfrac1x$ ungerade ist, da die beiden uneigentlichen Integrale
     \begin{gather*}
         \int_{-1}^0 \frac{dt}{t},\qquad
         \int_0^{-1} \frac{dt}{t}
@@ -878,7 +878,7 @@ Wichtige trigonometrische Identitäten:
     \begin{gather*}
         \int_a^\infty f(t)\,dt,
         \qquad \int_\infty^b f(t)\,dt,
-        \qquad\int_\infty^\infty f(t)\,dt,
+        \qquad\int_{-\infty}^\infty f(t)\,dt,
     \end{gather*}
 
     In diesem Falle sind die uneigentlichen Integrale über die folgenden Grenzwerte definiert:
@@ -889,7 +889,7 @@ Wichtige trigonometrische Identitäten:
      \pause
     Das dritte Integral kann an einer endlichen Zahl geteilt werden und beide uneigentlichen Integrale müssen existieren.
     \begin{gather*}
-        \lim_{x\to\infty}\int_{-x}^c f(t)\,dt
+        \lim_{x\to-\infty}\int_{x}^c f(t)\,dt
         + \lim_{x\to\infty}\int_{c}^x f(t)\,dt
     \end{gather*}
 \end{frame}
@@ -973,9 +973,7 @@ Wichtige trigonometrische Identitäten:
     \mode<article>{es zur Berechnung des folgenden Integrals zunächst hilfreich, das Integral am Unstetigkeitspunkt zu teilen. Dann bleiben zwei Integrale über konstante Funktionen, wo bei eine am Endpunkt springt. Da wir aber gesehen haben, dass dies irrelevant ist, können wir einfach das Integral berechnen.}
     \begin{gather*}
         \int_{-1}^1 H(t)\,dt
-        \pause
         = \int_{-1}^0 H(t)\,dt + \int_{0}^1 H(t)\,dt
-        \pause
         = 0+1 = 1
     \end{gather*}
     Es ist dabei egal, ob die Funktion im Punkt null den Wert 1, 0, oder irgendeinen anderen annimmt.
@@ -1310,6 +1308,27 @@ In der Literatur werden Quadraturformeln in der Regel für das Intervall $[0,1]$
 
 Im Plenum diskutieren wir, wie aus der tabellierten Simpsonregel die vorher präsentierte Summenformel wird.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Benutzung der Fehlerabschätzung}
+  
+  \begin{description}
+  \item[Fall A] Die Funktion ist als \glqq{}Formel\grqq{} bekannt
+    \begin{itemize}
+    \item Man kann ableiten und das Maxiumum der Ableitung suchen
+    \item Typischerweise findet man einfacher eine Schranke für die Ableitung
+    \end{itemize}
+  \item[Fall B] Es sind nur einzelne Werte z.B.\ durch Messungen bekannt
+    \begin{itemize}
+    \item Man hat Verständnis für den zugrundeliegenden Prozess
+    \item Daraus ergeben sich Schranken für die Ableitung
+    \end{itemize}
+  \end{description}
+  \pause
+  \begin{block}{Warnung}
+    In beiden Fällen wir die Schranke für die Ableitung deutlich größer sein als die Ableitung am Zwischenwert!
+  \end{block}
+\end{frame}
+
 \begin{Aufgabe}
   Benutzen Sie das zur Verfuung gestellte Jupyter Notebook mit der
   dort implementierten Funktion, die die Trapezregel für eine
@@ -1427,7 +1446,7 @@ Im Plenum diskutieren wir, wie aus der tabellierten Simpsonregel die vorher prä
         \item Sei nun der Radius des Kreises $r$. Dann gilt
         \begin{align*}
             x &= r \cos t\\
-            y &= r \sin t = r\sqrt{1-\cos t} = r \sqrt{1-\left(\tfrac{x}{r}\right)^2}
+            y &= r \sin t = r\sqrt{1-\cos^2 t} = r \sqrt{1-\left(\tfrac{x}{r}\right)^2}
         \end{align*}
         \item Mit linearer Substitution $t=\nicefrac{x}{r}$ und $dx = r \,dt$:
         \begin{gather*}
