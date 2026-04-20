@@ -663,33 +663,34 @@ Der Ausdruck $\phi^{-1}(x)$ bezeichnet hier die Umkehrfunktion zu $\phi(t)$. Der
         x = \cos t,\qquad dx = -\sin t \,dt.
     \end{gather*}
     \pause
-    Berechnen wir zunächst die Stammfunktion:
-    \begin{multline*}
-        \int \sqrt{1-x^2}\,dx = - \int \sqrt{1-\cos^2 t}\sin t\,dt
-        \\
-        = -\int \sin^2 t\,dt
-        = \frac{-1}2\int \bigl(1-\cos (2t)\bigr)\,dt
-    \end{multline*}
+    Die Intervallgrenzen müssen nun so gewählt werden, dass
+    \begin{gather*}
+        \cos a = 0,\qquad \cos b = 1.
+    \end{gather*}
+    Das gilt z.B. für $a = -\frac\pi2$ und $b = 0$.
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle<presentation>{Beispiel (Forts.)}
+    Berechnen wir nun die Stammfunktion (der Sinus ist im Integrationsbereich negativ):
+    \begin{multline*}
+        \int_0^1 \sqrt{1-x^2}\,dx = - \int_{-\frac\pi2}^0 \sqrt{1-\cos^2 t}\,\sin t\,dt
+        \\
+        = \int_{-\frac\pi2}^0 \sin^2 t\,dt
+        = \frac{1}2\int \bigl(1-\cos (2t)\bigr)\,dt
+    \end{multline*}
     Nun können wir elementar die Stammfunktion berechnen: 
     \begin{gather*}
-        f(t) = \frac{\cos(2t)-1}{2},\qquad F(t) = \frac{-\sin(2t)}4-\frac t2
+        f(t) = \frac{1-\cos(2t)}{2},\qquad F(t)
+        = \frac t2-\frac{\sin(2t)}4
     \end{gather*}
     \pause
-    Es bleiben die Intervallgrenzen, die nun so gewählt werden müssen, dass
-    \begin{gather*}
-        \cos a = 0,\qquad \cos b = 1.
-    \end{gather*}
-    \pause
-    Das gilt z.B. für $a = -\frac\pi2$ und $b = 0$, also
+    und einsetzen
     \begin{gather*}
         \int_0^1 \sqrt{1-x^2}\,dx = \left[
-        \frac{-\sin(2t)}4-\frac t2\right]_{-\frac\pi2}^0
-        = -0-0+0+\frac\pi4
+        \frac t2-\frac{\sin(2t)}4\right]_{-\frac\pi2}^0
+        = 0-0+0+\frac\pi4
     \end{gather*}
 \end{frame}
 
