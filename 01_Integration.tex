@@ -565,10 +565,10 @@ Berechnen Sie folgende Integrale mittels partieller Integration. \textit{Hinweis
     \begin{align*}
     \begin{alignedat}{3}
     \text{a)}\;& \int_0^{\ln{(2)}} xe^x\, dx \qquad &
-    \text{b)}\;& \int  x \cos(x) \, dx \qquad &
-    \text{c)}\;& \int  x^2e^x\,dx \qquad \\
+    \text{b)}\;& \int_0^\pi  x \cos(x) \, dx \qquad &
+    \text{c)}\;& \int_0^1  x^2e^x\,dx \qquad \\
     \text{d)}\;& \int_0^{\pi} x^2\sin(x)\,dx \qquad &
-    \text{e)}\;& \int  \sin(x)\cos(x)\,dx \qquad
+    \text{e)}\;& \int_0^\pi \sin(x)\cos(x)\,dx \qquad
     \end{alignedat}
     \end{align*}
 \end{Aufgabe}
@@ -588,7 +588,7 @@ Berechnen Sie folgende Integrale mittels partieller Integration. \textit{Hinweis
         \begin{gather*}
             {\color{blue}\int_0^{a} f(2t)\,dt}
             =
-            {\color{red}\int_0^{2a} f(t)\,dt}
+            {\frac12\color{red}\int_0^{2a} f(t)\,dt}
         \end{gather*}
     \end{column}
     \begin{column}{.49\textwidth}
@@ -598,7 +598,7 @@ Berechnen Sie folgende Integrale mittels partieller Integration. \textit{Hinweis
         \begin{gather*}
             {\color{blue}\int_0^{a} f(t+1)\,dt}
             =
-            {\frac12\color{red}\int_1^{a+1} f(t)\,dt}
+            {\color{red}\int_1^{a+1} f(t)\,dt}
         \end{gather*}
     \end{column}
 \end{columns}
@@ -708,7 +708,7 @@ Wichtige trigonometrische Identitäten:
 \end{Wdh}
 
 \begin{Aufgabe}
-    Berechnen Sie folgende Integrale. Nutzen Sie ggf. die trigonometrischen Identitäten.
+    Berechnen Sie die Stammfunktionen folgender Integrale. Nutzen Sie ggf. die trigonometrischen Identitäten.
     \begin{align*}
     \begin{alignedat}{2}
         \text{a)}\;& \int \sin(x)\cos(x)\,dx \qquad &
