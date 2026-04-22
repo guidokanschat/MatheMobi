@@ -64,6 +64,25 @@
 \begin{frame}{Definition: Weg}
   Ein Weg (path) ist eine Abbildung von einem Zeitintervall $[a,b]$ in
   einen Vektorraum, zum Beispiel $\R^n$.
+
+  Wir schreiben
+  \begin{gather*}
+    \vf(t) =
+    \begin{pmatrix}
+      f_1(t)\\\vdots\\f_n(t)
+    \end{pmatrix},
+  \end{gather*}
+  also eine Funktion, die jeder Zahl $t$ einen Vektor zuordnet, oder
+  einen Vektor von Funktionen.
+
+  \pause
+
+  Auf diese Funktionen kann man die üblichen Operationen der linearen
+  Algebra anwenden, zum beispiel die euklidische Länge berechnen:
+  \begin{gather*}
+    \left| \vf(t) \right|
+      = \sqrt{f_1(t)^2 + f_2(t)^2 + \dots + f_n(t)^2}
+  \end{gather*}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
@@ -75,20 +94,26 @@
         \begin{gather*}
             \vf'(t) = \tfrac{d}{dt}
             \begin{pmatrix}
-                \tfrac{d}{dt} f_1(t)\\
-                \vdots\\
-                \tfrac{d}{dt} f_n(t)
+              f_1(t)\\
+              \vdots\\
+              f_n(t)
+            \end{pmatrix}
+            =
+            \begin{pmatrix}
+              \tfrac{d}{dt} f_1(t)\\
+              \vdots\\
+              \tfrac{d}{dt} f_n(t)
             \end{pmatrix}
             = \begin{pmatrix}
                 f_1'(t)\\\vdots\\f_n'(t)
             \end{pmatrix}
           \end{gather*}
-        \item Geschwindigkeit, speed: $\left|\vf'\right|$ (euklidische Norm)
+        \item Geschwindigkeit, speed: $\left|\vf'\right|$ (euklidische Länge)
         \item Integrale
-        \begin{gather*}
+          \begin{gather*}
             \int \vf(t)\,dt = \vF(t),
-        \qquad F_i(t) = \int f_i(t)\,dt,\quad i=1,\dots,n
-        \end{gather*}
+            \qquad F_i(t) = \int f_i(t)\,dt,\quad i=1,\dots,n
+          \end{gather*}
     \end{itemize}
 \end{frame}
 
@@ -123,6 +148,7 @@
                 x(t) &= -r \sin t\\
                 y(t) &= r \cos t
             \end{align*}
+            und der Geschwindigkeit $r$.
         \end{block}         
         \end{column}
     \end{columns}
@@ -156,13 +182,12 @@ Eine höhere Konzentration von P wird dafür sorgen, dass sich die mRNA Menge la
 Man könnte hier kurz sagen, dass das auch ein biotechnologisch relevantes Anwendungsgebiet dieser Wege sein kann, die Prozesse aber zur akkuraten Beschreibung recht komplexe Differntialgleichungen benötigen.
 \end{mrnote}
 
-
-\gkerror{Beispiel Kreisumfang}
 \begin{frame}{Die Weglänge}
   \only<1>{\begin{Denkpause}
     Wie kann die Länge des Weges berechnet werden, den man vom Beginn
     der Wanderung bis zum Zeitpunkt $t$ zurückgelegt hat?
   \end{Denkpause}}
+\pause
 \begin{itemize}
 \item Die Strecke ist das Integral über die Geschwindigkeit
 \item Die Geschwindigkeit ist die euklidische Länge der Ableitung des
@@ -323,10 +348,10 @@ Man könnte hier kurz sagen, dass das auch ein biotechnologisch relevantes Anwen
     \pause
     \begin{itemize}
         \item Da es viele Wege gibt, die eine Kurve parametrisieren, muss die Definition der Kurvenlänge unabhängig von der Parametrisierung sein!
-        \item Länge einer Parametrisierung
+        \item Länge einer Parametrisierung \only<3>{{\color{red}Substitution}}
         \begin{gather*}
             L = \int_a^b \left|\vf'(t)\right|\,dt
-            \only<2>{{\color{red}=
+            \only<3>{{\color{red}=\;
             \int_{\phi^{-1}(a)}^{\phi^{-1}(b)} \left|\vf'\bigl(\phi(t)\bigr)\right|
             \phi'(t)\,dt
             }}
