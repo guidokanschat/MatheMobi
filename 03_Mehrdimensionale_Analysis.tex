@@ -3,7 +3,7 @@
 
 \begin{frame}{Arten mehrdimensionaler Funktionen}
 \begin{enumerate}
-    \item Funktionen einer Variablen, die in $\R^n$ abbilden:
+    \item Funktionen einer Variablen, die in $\R^n$ abbilden (Wege):
     \begin{gather*}
         \vf\colon \R\to \R^n,\qquad t\mapsto \vf(t)
     \end{gather*}
@@ -61,18 +61,18 @@ Notation: wir schreiben Vektorgrößen als $\vx,\vy,\vf$ zur Unterscheidung von 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-    \frametitle{Definition}
+    \frametitle{Partielle Ableitungen}
 
 \begin{itemize}
-    \item Die Ableitung $\frac{df(x)}{dx}$ beschreibt die {\bf Änderung} von $f(x)$ bei infinitesimalen Veränderungen von $x$
-    \item {\bf Partielle Ableitung}: Änderung der Funktion $f(x_1,x_2,\ldots)$ bei infinitesimalen Veränderungen {\bf einer} Variablen, wobei die anderen {\bf konstant} bleiben!
+    \item Eine Raumdimension
+    \begin{itemize}
+        \item Die Ableitung $\frac{df(t)}{dt}$ beschreibt die {\bf Änderung} von $f(t)$ bei infinitesimalen Veränderungen von $t$
+    \end{itemize}
+    \item {\bf Partielle Ableitung}: Änderung der Funktion $f(x_1,\ldots,x_n)$ bei infinitesimalen Veränderungen {\bf einer} Variablen, wobei die anderen {\bf konstant} bleiben!
 \end{itemize}
-
-    $$
-    \frac{f(x_1,\ldots,x_k+\Delta x_k, \ldots, x_n) - f(x_1,\ldots, x_n)}{\Delta x_k} \xrightarrow{\Delta x_k \to 0} \frac{\partial f(x_1,\ldots,x_n)}{\partial x_k}
-    $$
-
-    
+    \begin{gather*}
+        \frac{f(x_1,\ldots,x_k+h, \ldots, x_n) - f(x_1,\ldots, x_n)}{h} \xrightarrow{h \to 0} \frac{\partial f(x_1,\ldots,x_n)}{\partial x_k}  
+    \end{gather*}
 \end{frame}
  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -83,16 +83,14 @@ Notation: wir schreiben Vektorgrößen als $\vx,\vy,\vf$ zur Unterscheidung von 
 
         \item Schreibweisen:
         $$
-        \frac{\partial f}{\partial x_k}~~\text{oder}~~\partial_{x_k} f ~~\text{oder}~~f_{x_k}~~\text{oder}~~f_{k}
+        \frac{\partial f}{\partial x_k}=\partial_{x_k} f =f_{x_k}=f_{k}
         $$
         \item Beispiele:
-        \begin{eqnarray*}
-            f(x,y) = x^2+y^2 &:& \partial_x f = 2x~~~~\partial_y f = 2y \\
-            f(x,y) = 3x^2y^3 &:& \partial_x f = 6xy^3~~~~\partial_y f = 9x^2y^2
-        \end{eqnarray*}
+        \begin{xalignat*}3
+            f(x,y) &= x^2+y^2 & \partial_x f &= 2x &\partial_y f &= 2y \\
+            f(x,y) &= 3x^2y^3 & \partial_x f &= 6xy^3 & \partial_y f &= 9x^2y^2
+        \end{xalignat*}
     \end{itemize}
-    
-
 \end{frame}
 
 
@@ -116,11 +114,11 @@ Notation: wir schreiben Vektorgrößen als $\vx,\vy,\vf$ zur Unterscheidung von 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-    \frametitle{Mehrfachableitungen}
+    \frametitle{Mehrfache Ableitungen}
 
     \begin{itemize}
-        \item Wie bei Funktionen einer Variablen können wir {\bf mehrfach-Ableitungen} berechnen
-        \item Jedoch sind hier alle Kombinationen von Variablen möglich!
+        \item Wie bei Funktionen einer Variablen können wir mehrfache Ableitungen berechnen
+        \item Alle Kombinationen von Variablen sind möglich!
         \item z.B.\ bei $f(x_1,\ldots,x_k)$:
         $$
         f_{ij} = \frac{\partial^2 f}{\partial x_i \partial x_j} =  \frac{\partial}{\partial x_i}\left(\frac{\partial f}{\partial x_j}\right)
@@ -130,7 +128,7 @@ Notation: wir schreiben Vektorgrößen als $\vx,\vy,\vf$ zur Unterscheidung von 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-    \frametitle{Mehrfachableitungen}
+    \frametitle<presentation>{Vertauschung von Ableitungen}
 
     Bei Mehrfachableitungen spielt die Reihenfolge der Ableitungen (bei den Funktionen, die wir betrachten) keine Rolle! (Satz von Schwarz)
 \vspace{1em}
@@ -151,13 +149,13 @@ Notation: wir schreiben Vektorgrößen als $\vx,\vy,\vf$ zur Unterscheidung von 
     \frametitle{Partielle Ableitungen und Tangente}
 
 \begin{center}
-    \includegraphics[width=.8\textwidth]{fig/mv10.png}
+    %\includegraphics[width=.8\textwidth]{fig/mv10.png}
 \end{center}
 \begin{itemize}
     \item Gleichung der Tangentialebene am Punkte $(x_0,y_0)$:
-    $$
-    z-z_0 = \frac{\partial f}{\partial x}(x_0,y_0) (x-x_0) +\frac{\partial f}{\partial y}(x_0,y_0) (y-y_0) 
-    $$
+    \begin{gather*}
+    z-z_0 = \frac{\partial f}{\partial x}(x_0,y_0) (x-x_0) +\frac{\partial f}{\partial y}(x_0,y_0) (y-y_0)         
+    \end{gather*}
     \item Normalvektor zur Ebene:
     $$
     N = (\frac{\partial f}{\partial x}(x_0,y_0), \frac{\partial f}{\partial y}(x_0,y_0),-1)

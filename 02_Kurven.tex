@@ -62,11 +62,12 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Definition: Weg}
-  Ein Weg (path) ist eine Abbildung von einem Zeitintervall $I$ in
+  Ein Weg (path) ist eine Abbildung von einem Zeitintervall $[a,b]$ in
   einen Vektorraum, zum Beispiel $\R^n$.
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\mrwarning{Im Video sollte kurz erklärt werden, was die euklidische Norm ist}
 \begin{frame}{Analytische Eigenschaften von Wegen}
     \begin{itemize}
         \item Stetigkeit, Differenzierbarkeit und Integrale von Wegen sind komponentenweise definiert.
@@ -142,13 +143,19 @@
     \begin{gather*}
       \mathbf{x}(t)=
       \begin{pmatrix}
-        P(t)\\
-        A(t)\\
-        m_{\text{pre}}(t)\\
-        m(t)\\
+        [P](t)\\
+        [A](t)\\
+        [mRNA](t)\\
       \end{pmatrix}
     \end{gather*}
 \end{frame}
+
+\begin{mrnote}{Kurze Erklärung}
+Eine höhere Konzentration von P wird dafür sorgen, dass sich die mRNA Menge langsamer erhöht. Eine höhere Konzentration von A wird dafür sorgen, dass sie sich schneller erhöht. Gleichzeitig werden alle 3 auch mit einer gewissen Rate natürlich zersetzt (bei der mRNA gibt es dafür spezifische Enzyme, sogenannte Nucleasen, die die chemische Halbwertszeit nochmal deutlich reduzieren). Soweit sollte das auch allen Studierenden bekannt sein; ggf. werden eher Anmerkungen in der Richtung 'sollte man nicht noch xy berücksichten?' kommen. Falls gewünscht könnte ich auch nochmal eine etwas vollständigere Sammlung an relevanten Konzentrationen in den Vektor schreiben.
+
+Man könnte hier kurz sagen, dass das auch ein biotechnologisch relevantes Anwendungsgebiet dieser Wege sein kann, die Prozesse aber zur akkuraten Beschreibung recht komplexe Differntialgleichungen benötigen.
+\end{mrnote}
+
 
 \gkerror{Beispiel Kreisumfang}
 \begin{frame}{Die Weglänge}
@@ -160,7 +167,31 @@
 \item Die Strecke ist das Integral über die Geschwindigkeit
 \item Die Geschwindigkeit ist die euklidische Länge der Ableitung des
   Wegs
+\item Damit ist die Länge des Weges $\vf$, der im Zeitintervall $[0,T]$ zurückgelegt wurde
+\begin{gather*}
+    L(T) = \int_0^T \left|\vf'(t)\right| \,dt.
+\end{gather*}
 \end{itemize}
+\end{frame}
+
+\begin{frame}{Beispiel: Kreisumfang}
+    \begin{gather*}
+        \vf(t) = \begin{pmatrix}
+            r \cos t\\r \sin t
+        \end{pmatrix},
+        \qquad
+        \vf'(t) = \begin{pmatrix}
+            -r \sin t\\ r\cos t
+        \end{pmatrix},
+        \qquad
+        \left|\vf'(t)\right| = r
+    \end{gather*}
+    \begin{itemize}
+    \item Der Kreis wird auf dem Intervall $[0,2\pi]$ einmal komplett durchlaufen
+        \begin{gather*}
+            \int_0^{2\pi} \left|\vf'(t)\right| \,dt = \int_0^{2\pi} r\,dt = 2\pi r
+        \end{gather*}
+    \end{itemize}
 \end{frame}
 
 \subsection{Kurven}
@@ -256,6 +287,7 @@
       \begin{center}
         \includegraphics[width=.9\textwidth]{fig/path-circle0.tikz}
       \end{center}
+      \only<2>{Wir nennen diese Wege Parametrisierungen der Kurve}
     \end{column}
     \begin{column}{.6\textwidth}
       \begin{center}
@@ -267,6 +299,75 @@
   \end{columns}
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Charakterisierung von Parametrisierungen}
+\begin{itemize}
+        \item In einem Punkt der Kurve $\vx$ können sich zwei Parametrisierungen nur in der Geschwindigkeit, nicht in der Richtung unterscheiden
+        \begin{itemize}
+            \item Ausnahme: Kreuzungspunkte o.ä.
+        \end{itemize}
+        \item Deswegen können sich zwei Parametrisierungen nur durch verschiedenes Durchlaufen der Zeitachse unterscheiden
+\begin{gather*}
+    \biggl\{\vf(t) \bigg|\; t\in [a,b] \biggr\}
+    =
+    \biggl\{\vf\bigl(\phi(t)\bigr) \bigg|\; t\in \Bigl[\phi^{-1}(a),\phi^{-1}(b)\Bigr] \biggr\}
+\end{gather*}
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Länge einer Kurve}
+    \only<1>{\begin{Denkpause}
+        Wir haben im letzten Abschnitt die Weglänge definiert. Wie würden Sie die Länge einer Kurve definieren? Worauf müssen Sie achten?
+    \end{Denkpause}}
+    \pause
+    \begin{itemize}
+        \item Da es viele Wege gibt, die eine Kurve parametrisieren, muss die Definition der Kurvenlänge unabhängig von der Parametrisierung sein!
+        \item Länge einer Parametrisierung
+        \begin{gather*}
+            L = \int_a^b \left|\vf'(t)\right|\,dt
+            \only<2>{{\color{red}=
+            \int_{\phi^{-1}(a)}^{\phi^{-1}(b)} \left|\vf'\bigl(\phi(t)\bigr)\right|
+            \phi'(t)\,dt
+            }}
+        \end{gather*}
+        \item Länge einer zweiten Parametrisierung
+        \begin{gather*}
+            L = \int_{\phi^{-1}(a)}^{\phi^{-1}(b)} \left|\vf'\bigl(\phi(t)\bigr)\right|
+            \left|\phi'(t)\right|\,dt
+        \end{gather*}
+        
+        \item Beide Integrale sind gleich, wenn überall $\phi'(t) \ge 0$.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Beispiel Kreisumfang}
+            \begin{gather*}
+        \vf(t) = \begin{pmatrix}
+            r \cos t^2\\r \sin t^2
+        \end{pmatrix},
+        \qquad
+        \vf'(t) = \begin{pmatrix}
+            -2rt \sin t^2 \\ 2rt \cos t^2
+        \end{pmatrix},
+        \qquad
+        \left|\vf'(t)\right| = 2rt
+    \end{gather*}
+
+    \begin{itemize}
+    \item Der Kreis wird auf dem Intervall $[0,\sqrt{2\pi}]$ einmal komplett durchlaufen
+        \begin{gather*}
+            \int_0^{\sqrt{2\pi}} \left|\vf'(t)\right| \,dt = \int_0^{\sqrt{2\pi}} 2rt\,dt = \Bigl[rt^2\Bigr]_0^{\sqrt{2\pi}} = 2\pi r
+        \end{gather*}
+    \end{itemize}
+    \pause
+    \begin{Denkpause}
+        Wie hängt das mit der Substitutionsregel beim Integral zusammen?
+    \end{Denkpause}
+ \end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Funktionsgraphen sind Kurven}
   Sei $f(t)$ eine stetige Funktion auf dem Intervall $[a,b]$. Dann ist
   \begin{gather*}
@@ -287,7 +388,11 @@
   eine Kurve.
 \end{frame}
 
-\begin{frame}{Darstellung eines Weges als Funktion}
+\begin{Aufgabe}
+Berechnen Sie die Länge des Graphen der Funktion $f(t) = t^2$ auf dem Intervall $[0,3]$. Leiten Sie dazu das nötige Integral her und benutzen Sie Hilfsmittel Ihrer Wahl zur Berechnung. Dokumentieren Sie die Schritte.
+\end{Aufgabe}
+
+\begin{frame}{Darstellung einer Kurve als Funktion}
   \begin{columns}
     \begin{column}{.3\textwidth}
       \begin{center}
@@ -307,56 +412,46 @@
       \end{gather*}
     \end{column}
     \begin{column}{.65\textwidth}
+      Wann kann ich die Kurve als Graph einer Funktion $y=y(x)$ darstellen?
       \begin{itemize}
-      \item Nur ein Wert $y$ für jeden Wert $x$!
+      \item Es darf nur einen Wert $y$ für jeden Wert $x$ geben!
       \item Oberer oder unterer Halbkreis sind Funktionen
         \begin{itemize}
         \item $t\in[0,\pi]$ oder $t\in [\pi,2\pi]$
+        \item Wir haben das für den Kreis bereits in 1.3 berechnet
         \end{itemize}
       \end{itemize}
     \end{column}
   \end{columns}
 \end{frame}
 
-\begin{envgknote}{hinzufügen}
-   \begin{itemize}
-       \item Wann ist ein Weg als $y=f(x)$ darstellbar?
-       \item Implizite Differentiation
-   \end{itemize} 
-\end{envgknote}
+\begin{frame}{Implizite Differentiation}
+    Aus der Nullstellendarstellung $x^2+y^2=r^2$ eines Kreises vom Radius $r$ lässt sich die Ableitung $y'(x)$ berechnen:
+    \begin{enumerate}
+        \item Schreibe $y=y(x)$, also $x^2+y(x)^2 = r^2$
+        \item Leite die Nullstellengleichung auf beiden Seiten nach $x$ ab:
+        \begin{gather*}
+            \frac{d}{dx}\bigl(x^2+y(x)^2)\bigr)
+            = 2x + 2y(x)y'(x) = 0
+        \end{gather*}
+        \item Löse nach $y'(x)$ auf
+        \begin{gather*}
+            y'(x) = - \frac{x}{y(x)}
+        \end{gather*}
+    \end{enumerate}
+    \pause
+    Diesen Prozess der impliziten Differentiation werden wir später noch im Detail kennenlernen
+\end{frame}
 
-\mrnote{Folgende passenden Folien sind provisorisch aus der alten Vorlesung entnommen:}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-    \frametitle{Darstellung eines Weges als Funktion}
-
-    Unter welchen Bedingungen lässt sich ein Weg auch als \grqq klassischer \grqq Graph einer Funktion $y=f(x)$ betrachten?
-
-    \begin{itemize}
-        \item Bewegung eines Punktes auf einen festen Kreis
-    \begin{columns}
-        \begin{column}{0.5\textwidth}
-    $$
-    \left\{\begin{array}{l}
-        x(t) = a\cos(\omega t)\\ y(t) = a\sin(\omega t)
-    \end{array}\right.
-    $$
-\end{column}
-\begin{column}{0.5\textwidth}
-\includegraphics[width=0.5\textwidth]{fig/pk03.png}
-\end{column}
-\end{columns}
-    \item $\sin(\omega t) = \sqrt{1-\cos^2(\omega t)}$ (nur für die obere Kreishälfte!)
-    \item Daher:
-    \begin{multline}
-    y(t) = a\sin(\omega t) \Longrightarrow y(t) = a \sqrt{1-\cos^2(\omega t)} \\ 
-    \Longrightarrow y(t) = \sqrt{a^2-a^2\cos^2(\omega t)} \Longrightarrow y(t) = \sqrt{a^2-x(t)^2} 
-    \end{multline}
-    \item Also: $y = f(x) = \sqrt{a^2-x^2}$ (obere Kreishälfte)
-\end{itemize}
-
-
+\gkerror{$\to$MR: weitere Fragen?}
+\mrnote{Fragen 2-4 ergänzt}
+\begin{frame}{Abschlussfragen}
+    \begin{enumerate}
+        \item Was ist der Unterschied zwischen Weg und Kurve?
+        \item Wann kann es praktisch sein, mehrere Funktionen gemeinsam über einer Zeitachse darzustellen?
+        \item Wie viele Möglichkeiten gibt es, um ein Kurve zu parametrisieren? Welche Parametrisierungen sind nützlich, um die Länge der Kurve zu bestimmen?
+        \item Worauf muss geachtet werden, wenn man eine Kurve als Funktion darstellt?
+    \end{enumerate}
 \end{frame}
 
 \mode<all>
