@@ -186,8 +186,8 @@ Notation: wir schreiben Vektorgrößen als $\vx,\vy,\vf$ zur Unterscheidung von 
     \begin{itemize}
         \item Die partiellen Ableitungen $\partial_x f$ unf $\partial_y f$ beschreiben die Veränderungen von $z=f(x,y)$ wenn man sich in $x-$ bzw $y-$Richtung bewegt
         \item Wie verändert sich die Funktion, wenn man sich in eine beliebige Richtung bewegt?
-        \item Richtung gegeben durch {\bf Richtungsvektor} $\vu=(u_1,u_2)$ mit $|\vu|=1$
-        \item {\bf Richtungsableitung:}
+        \item Richtung gegeben durch Vektor $\vu$
+        \item {\bf Richtungsableitung} (in 2 Dimensionen):
         $$
         D_u f = \frac{\partial f}{\partial x}\cdot u_1 + \frac{\partial f}{\partial y}\cdot u_2
         $$
@@ -209,12 +209,18 @@ Notation: wir schreiben Vektorgrößen als $\vx,\vy,\vf$ zur Unterscheidung von 
         $$
         \item $D_u f(p)$ gibt an, wie stark die Steigung in $\vu$-Richtung am Punkt $p$ ist
         \item $D_u f(p)>0$ bzw. $D_u f(p)< 0$: es geht nach oben bzw.\ nach unten!
+          \pause
+        \item Die Richtungsableitung hängt von der Länge des Richtungsvektors ab
+          \begin{itemize}
+          \item Manche Autoren fordern $\left|\vu\right| = 1$
+          \item Wir normieren bei Bedarf
+          \end{itemize}
     \end{itemize}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-    \frametitle{Richtungsableitung}
+    \frametitle{Richtung konstanter Werte}
 
     \begin{center}
         \includegraphics[width=.3\textwidth]{img/mv18.png}
@@ -230,7 +236,7 @@ Notation: wir schreiben Vektorgrößen als $\vx,\vy,\vf$ zur Unterscheidung von 
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-    \frametitle{Richtungsableitung}
+    \frametitle{Abstiegs- und Aufstiegsrichtungen}
 
     \begin{center}
         \includegraphics[width=.3\textwidth]{img/mv19.png}
@@ -239,15 +245,14 @@ Notation: wir schreiben Vektorgrößen als $\vx,\vy,\vf$ zur Unterscheidung von 
     \begin{itemize}
         \item In welche Richtung ist die Veränderung {\bf am größten}?
         $$
-        \max_{\vu} D_u f ~\iff ~ \vu ~~ \parallel ~~\nabla f
+        \max_{\vu} D_u f ~\iff ~ \vu \parallel\nabla f
         $$
-        \item Da $\vu$ Einheitsvektor: $\vu=\frac{\nabla f}{|\nabla f|}$; daher
+        \item Wenn $\vu$ Einheitsvektor: $\vu=\frac{\nabla f}{|\nabla f|}$; daher
         $
         D_u f = \nabla f \cdot \frac{\nabla f}{|\nabla f|} = |\nabla f|
         $
         \item Der Gradient gibt an jedem Punkt die Richtung der {\bf größten Veränderung} (orthogonal zu den  Höhenlinien)
     \end{itemize}
-
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -255,14 +260,17 @@ Notation: wir schreiben Vektorgrößen als $\vx,\vy,\vf$ zur Unterscheidung von 
     \frametitle{Beispiel}
 
     \begin{itemize}
-        \item $f(x,y) = \frac{1}{3}(14-x^2-y^2)$
+        \item $f(x,y) = \frac{1}{2}(14-x^2-y^2)$
         \item Gradient:
+          \begin{gather*}
+            \nabla f =
+            \begin{pmatrix}
+              -x\\-y
+            \end{pmatrix}
+          \end{gather*}
+        \item Am Punkt $(x_0,y_0) = (1,2)$: $z_0 = \nicefrac92$
         $$
-    f_x = -\frac{2}{3}x~;~f_y = -\frac{2}{3}y~~\text{daher}~\overrightarrow{\nabla f} = \left(\begin{array}{c}-2/3x \\ -2/3y\end{array}\right)
-        $$
-        \item Am Punkt $(x_0,y_0) = (1,2)$: $z_0 = 3$
-        $$
-        \overrightarrow{\nabla f} (x_0,y_0) = \left(\begin{array}{c}-2/3 \\ -4/3\end{array}\right)
+        \nabla f (x_0,y_0) = \left(\begin{array}{c}-1 \\ -2\end{array}\right)
         $$
 
         \end{itemize}
@@ -270,182 +278,78 @@ Notation: wir schreiben Vektorgrößen als $\vx,\vy,\vf$ zur Unterscheidung von 
 
    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
    \begin{frame}
-    \frametitle{Beispiel}
+    \frametitle<presentation>{Beispiel}
 
     \begin{itemize}
         \item Größte Steigung am Punkt $(x_0,y_0)$:
         $$
-            |\overrightarrow{\nabla f} (x_0,y_0)| = \sqrt{\left(-\frac{2}{3}\right)^2+\left(-\frac{4}{3}\right)^2} = \frac{\sqrt{20}}{3}
+            |\nabla f (x_0,y_0)| = \sqrt{\left(-1\right)^2+\left(-2\right)^2} = \sqrt{5}
         $$
         \item Richtung der Höhenlinien: entlang der Höhenlinien ist die Steigung Null; daher erfüllt der Tangentialvektor zu den Höhenlinien die Bedingung:
         $$
-        \overrightarrow{\nabla f} (x_0,y_0)\cdot \vu = 0 ~\iff~ \vu ~~\parallel~~ \left(\begin{array}{c}4/3 \\ -2/3\end{array}\right)
+        \nabla f (x_0,y_0)\cdot \vu = 0 ~\iff~ \vu ~~\parallel~~ \left(\begin{array}{c}2 \\ -1\end{array}\right)
         $$
         \item Einheitsvektor:  $\vec{e}_u = \frac{\vu}{|\vu|} ~\Rightarrow~ \vec{e}_u= \frac{1}{\sqrt{5}}\left(\begin{array}{c}2 \\ -1\end{array}\right) $
     \end{itemize}
 \end{frame}
 
-
-
-
-
-
-
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-    \frametitle{Totales Differential}
-    
-    \begin{itemize}
-        \item Wir definieren das {\bf totale Differential} der Funktion $f(x,y)$ am Punkt $(x_0,y_0)$:
-        $$
-        df = \frac{\partial f}{\partial x}(x_0,y_0)\,dx +\frac{\partial f}{\partial y}(x_0,y_0)\,dy
-        $$
-        \item $df$ ist das {\bf totale Differential} am Punkt $(x_0,y_0)$
-        \item $dx$ und $dy$ sind infinitesimale Veränderungen der Werte von $x$ und $y$ um den Punkt $(x_0,y_0)$
-    \end{itemize}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-    \frametitle{Beispiel: Ideales Gasgesetz}
-
-    \begin{itemize}
-        \item Ein ideales Gas erfüllt die Bedingung: $p = C\frac{T}{V}$ wo $C$ eine Konstante ist, $p$ der Druck, $V$ das Volumen und $T$ die Temperatur.
-        \item Wir möchten Veränderungen des Drucks $p$ bei Veränderungen der anderen Variablen (Temperatur und Volumen) beschreiben um einen Gleichgewichtszustand $(p_0,V_0,T_0)$:
-        \begin{equation}
-        dp = \frac{\partial p}{\partial T}(T_0,V_0)\,dT +\frac{\partial p}{\partial V}(T_0,V_0)\,dV
-        \end{equation}
-    \end{itemize}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-    \frametitle{Beispiel: Ideales Gasgesetz}
-
-    \begin{itemize}
-        \item es gilt:
-        $$
-        \frac{\partial p}{\partial T}(T_0,V_0) = C\frac{1}{V_0}~~~~~\frac{\partial p}{\partial V}(T_0,V_0) = -C\frac{T_0}{V_0^2}
-        $$
-        \item daher:
-        \begin{equation}
-        dp = C\left( \frac{1}{V_0}\cdot dT -\frac{T_0}{V_0^2}\cdot dV\right)
-        \end{equation}
-        \item Veränderung des Drucks: {\bf positiv} mit Veränderung der Temperatur $T$, {\bf negativ} mit Veränderung des Volumen $V$!
-    \end{itemize}
-\end{frame}
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-    \frametitle{Linearisierung}
-
-    \begin{itemize}
-        \item Anhand der Tangentengleichung oder des totalen Differentials können wir eine {\bf lineare Näherung} für die Funktion $f(x,y)$ am Punkt $(x_0,y_0)$ angeben:
-        $$
-        f(x,y) \approx f(x_0,y_0) + \frac{\partial f}{\partial x}(x_0,y_0)(x-x_0) + \frac{\partial f}{\partial y}(x_0,y_0)(y-y_0)
-        $$
-        \item Diese Näherung ist nur gültig, wenn $x$ und $y$ in der Nähe von $x_0$ und $y_0$ liegen!
-        \item Beispiel: $f(x,y) = x^2 + y^2$; $x_0=1$, $y_0=1$; $x=1.1$, $y=1.1$
-        \item Näherung: $f(1.1,1.1) \approx 2 + 2\cdot(0.1) + 2\cdot(0.1) = 2.4$
-        \item reeller Wert: $f(1.1,1.1) = 2.42$
-    \end{itemize}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-    \frametitle{Linearisierung}
-
-    \begin{itemize}
-        \item Wir können die Näherung auch in Form einer Tabelle darstellen:
-        \item Beispiel: $f(x,y) = x^2 + y^2$
-        \item $L(x,y)=f(x_0,y_0) + \frac{\partial f}{\partial x}(x_0,y_0)(x-x_0) + \frac{\partial f}{\partial y}(x_0,y_0)(y-y_0)=   2 + 2\cdot(x-1) + 2\cdot(y-1)$
-    \end{itemize}
-
-\begin{table}[h]
-    \begin{tabular}{|c|c|c|c|c|}
-    \hline
-    $(x,y)$ & Abst. & $f(x,y)$ & $L(x,y)$ & Fehler \\
-    \hline
-    $(1.0, 1.0)$ & $0.00$ & $2.00$ & $2.00$ & $0.00$ \\
-    \hline
-    $(1.1, 1.1)$ & $0.14$ & $2.42$ & $2.40$ & $0.02$ \\
-    \hline
-    $(1.2, 1.2)$ & $0.28$ & $2.88$ & $2.80$ & $0.08$ \\
-    \hline
-    $(1.3, 1.3)$ & $0.42$ & $3.38$ & $3.20$ & $0.18$ \\
-    \hline
-    $(1.5, 1.5)$ & $0.71$ & $4.50$ & $4.00$ & $0.50$ \\
-    \hline
-    $(2.0, 2.0)$ & $1.41$ & $8.00$ & $6.00$ & $2.00$ \\
-    \hline
-    \end{tabular}
-    \end{table}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-    \frametitle{Beispiel}
-
-
-    \begin{itemize}
-        \item Um den Gleichgewichtspunkt $(p_0,V_0,T_0)$ kann also die Näherungsformel benutzt werden:
-        $$
-        \Delta p \approx C\left( \frac{1}{V_0}\cdot \Delta T -\frac{T_0}{V_0^2}\cdot \Delta V\right)
-        $$
-        \item Beispiel: $V_0=22.4$ l, $T_0=273$ Kelvin
-        \item der Druck soll konstant bleiben ($\Delta p=0$), die Temperatur wird um 2 Grad erhöht ($\Delta T=+2$)
-        \item Daher ergibt sich eine notwendige Veränderung der Volumens:
-        $$
-        \Delta V \approx \frac{V_0}{T_0}\cdot \Delta T = +0.16~\text{l}
-        $$
- 
-     \end{itemize}
-\end{frame}
-
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-    \frametitle{Beispiel}
-
-    {\bf Beispiel 2: Näherung einer Funktion}
-    \begin{itemize}
-        \item Können wir ohne Taschenrechner eine Näherung von $z=\sqrt{2.98^2+4.01^2}$ ausrechnen?
-        \item Wir definieren die Funktion $z=f(x,y)= \sqrt{x^2+y^2}$
-        \item Wir suchen eine Näherung der Funktion am Punkt $(x_0,y_0,z_0)=(3,4,5)$:
-        $$
-        z-5 \approx f_x(3,4)(2.98-3) + f_y(3,4)(4.01-4)
-        $$
-        \item es gilt $f_x = x/\sqrt{x^2+y^2}$ und $f_y = y/\sqrt{x^2+y^2}$
-        \item daher $f_x(3,4) = 3/5$ und $f_y(3,4) = 4/5$
-        $$
-        z\approx 5 + \frac{3}{5}(-0.02) + \frac{4}{5}(0.01) = 5-\frac{2}{500} = 4.996
-            $$
-    \end{itemize}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Abschlussfragen}
-
-    \begin{enumerate}
-        
         \item Die Fläche eines Dreiecks ist gegeben durch $A(a,b,\theta) = \frac{1}{2}ab\sin\theta$; bestimmen Sie das totale Differential  !
         \item Das Volumen eines Zylinders ist $V=\pi r^2 h$; verändert sich das Volumen mehr, wenn $r$ von $1.0$ auf $1.1$ oder $h$ von $1.0$ auf $1.1$ erhöht wird?
     \end{enumerate}
-    
+\end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Ableitung entlang eines Weges}
+  \begin{itemize}
+  \item Wir bewegen uns entlang eines Weges $\vx(t)$ im Raum
+  \item Im Raum ist eine differenzierbare Funktion $f(\vx)$ definiert
+  \item Wie ändert sich der Wert dieser Funktion abhängig von $t$?
+  \item Kettenregel:
+    \begin{gather*}
+      \frac{d}{dt} f(\vx(t)) = \nabla f(\vx(t)) \cdot \vx'(t)
+    \end{gather*}
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Beispiel}
+  \begin{gather*}
+    f(\vx) = \tfrac12(x^2+y^2),\qquad
+    \nabla f =
+    \begin{pmatrix}
+      x\\y
+    \end{pmatrix}
+  \end{gather*}
+  \begin{itemize}
+  \item Kreislinie:
+    \begin{gather*}
+      \vx(t) =
+      \begin{pmatrix}
+        \cos t\\\sin t
+      \end{pmatrix},
+      \qquad
+      \vx'(t) =
+      \begin{pmatrix}
+        -\sin t\\\cos t
+      \end{pmatrix},
+      \qquad
+      \nabla f(\vx)\cdot \vx'(t) = 0
+    \end{gather*}
+    \pause
+  \item Gerade durch null:
+    \begin{gather*}
+      \vx = \sqrt2
+      \begin{pmatrix}
+        t\\t
+      \end{pmatrix},\qquad
+      \vx'(t) =
+      \begin{pmatrix}
+        1\\1
+      \end{pmatrix},
+      \qquad
+      \nabla f(\vx)\cdot \vx'(t) = t
+    \end{gather*}
+  \end{itemize}
 \end{frame}
 
 \begin{envgknote}{Neue Struktur}
@@ -461,7 +365,7 @@ Notation: wir schreiben Vektorgrößen als $\vx,\vy,\vf$ zur Unterscheidung von 
 
 \begin{envmrerror}{Ergänzungen aus der aktuellen Vorlesung}
 \begin{itemize}
-    \item Höhenlinien- und Schnittliniendiagramme (Vorlesung 3.1)
+    \item Schnittliniendiagramme (Vorlesung 3.1)
     \item Fehlerfortpflanzung additiver und multiplikativer Fehler (Vorlesung 3.3). Hier könnte überlegt werden, ob ausgehend von der bestehenden Vorlesung ein Übergang zum Kapitel 4 \textit{Auswirkung von Eingabe- und Rechenfehlern} gemacht werden könnte.
     \item Extremwertaufgaben, Hesse-Matrix, Definitheit von Matrizen (Vorlesung 3.4)
     \item Optimierung mittels Lagrange-Multiplikatoren (Vorlesung 3.7)

@@ -1,0 +1,145 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Totales Differential}
+    
+    \begin{itemize}
+        \item Wir definieren das {\bf totale Differential} der Funktion $f(x,y)$ am Punkt $(x_0,y_0)$:
+        $$
+        df = \frac{\partial f}{\partial x}(x_0,y_0)\,dx +\frac{\partial f}{\partial y}(x_0,y_0)\,dy
+        $$
+        \item $df$ ist das {\bf totale Differential} am Punkt $(x_0,y_0)$
+        \item $dx$ und $dy$ sind infinitesimale Veränderungen der Werte von $x$ und $y$ um den Punkt $(x_0,y_0)$
+    \end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Beispiel: Ideales Gasgesetz}
+
+    \begin{itemize}
+        \item Ein ideales Gas erfüllt die Bedingung: $p = C\frac{T}{V}$ wo $C$ eine Konstante ist, $p$ der Druck, $V$ das Volumen und $T$ die Temperatur.
+        \item Wir möchten Veränderungen des Drucks $p$ bei Veränderungen der anderen Variablen (Temperatur und Volumen) beschreiben um einen Gleichgewichtszustand $(p_0,V_0,T_0)$:
+        \begin{equation}
+        dp = \frac{\partial p}{\partial T}(T_0,V_0)\,dT +\frac{\partial p}{\partial V}(T_0,V_0)\,dV
+        \end{equation}
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Beispiel: Ideales Gasgesetz}
+
+    \begin{itemize}
+        \item es gilt:
+        $$
+        \frac{\partial p}{\partial T}(T_0,V_0) = C\frac{1}{V_0}~~~~~\frac{\partial p}{\partial V}(T_0,V_0) = -C\frac{T_0}{V_0^2}
+        $$
+        \item daher:
+        \begin{equation}
+        dp = C\left( \frac{1}{V_0}\cdot dT -\frac{T_0}{V_0^2}\cdot dV\right)
+        \end{equation}
+        \item Veränderung des Drucks: {\bf positiv} mit Veränderung der Temperatur $T$, {\bf negativ} mit Veränderung des Volumen $V$!
+    \end{itemize}
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Linearisierung}
+
+    \begin{itemize}
+        \item Anhand der Tangentengleichung oder des totalen Differentials können wir eine {\bf lineare Näherung} für die Funktion $f(x,y)$ am Punkt $(x_0,y_0)$ angeben:
+        $$
+        f(x,y) \approx f(x_0,y_0) + \frac{\partial f}{\partial x}(x_0,y_0)(x-x_0) + \frac{\partial f}{\partial y}(x_0,y_0)(y-y_0)
+        $$
+        \item Diese Näherung ist nur gültig, wenn $x$ und $y$ in der Nähe von $x_0$ und $y_0$ liegen!
+        \item Beispiel: $f(x,y) = x^2 + y^2$; $x_0=1$, $y_0=1$; $x=1.1$, $y=1.1$
+        \item Näherung: $f(1.1,1.1) \approx 2 + 2\cdot(0.1) + 2\cdot(0.1) = 2.4$
+        \item reeller Wert: $f(1.1,1.1) = 2.42$
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+    \frametitle{Linearisierung}
+
+    \begin{itemize}
+        \item Wir können die Näherung auch in Form einer Tabelle darstellen:
+        \item Beispiel: $f(x,y) = x^2 + y^2$
+        \item $L(x,y)=f(x_0,y_0) + \frac{\partial f}{\partial x}(x_0,y_0)(x-x_0) + \frac{\partial f}{\partial y}(x_0,y_0)(y-y_0)=   2 + 2\cdot(x-1) + 2\cdot(y-1)$
+    \end{itemize}
+
+\begin{table}[h]
+    \begin{tabular}{|c|c|c|c|c|}
+    \hline
+    $(x,y)$ & Abst. & $f(x,y)$ & $L(x,y)$ & Fehler \\
+    \hline
+    $(1.0, 1.0)$ & $0.00$ & $2.00$ & $2.00$ & $0.00$ \\
+    \hline
+    $(1.1, 1.1)$ & $0.14$ & $2.42$ & $2.40$ & $0.02$ \\
+    \hline
+    $(1.2, 1.2)$ & $0.28$ & $2.88$ & $2.80$ & $0.08$ \\
+    \hline
+    $(1.3, 1.3)$ & $0.42$ & $3.38$ & $3.20$ & $0.18$ \\
+    \hline
+    $(1.5, 1.5)$ & $0.71$ & $4.50$ & $4.00$ & $0.50$ \\
+    \hline
+    $(2.0, 2.0)$ & $1.41$ & $8.00$ & $6.00$ & $2.00$ \\
+    \hline
+    \end{tabular}
+    \end{table}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Beispiel}
+
+
+    \begin{itemize}
+        \item Um den Gleichgewichtspunkt $(p_0,V_0,T_0)$ kann also die Näherungsformel benutzt werden:
+        $$
+        \Delta p \approx C\left( \frac{1}{V_0}\cdot \Delta T -\frac{T_0}{V_0^2}\cdot \Delta V\right)
+        $$
+        \item Beispiel: $V_0=22.4$ l, $T_0=273$ Kelvin
+        \item der Druck soll konstant bleiben ($\Delta p=0$), die Temperatur wird um 2 Grad erhöht ($\Delta T=+2$)
+        \item Daher ergibt sich eine notwendige Veränderung der Volumens:
+        $$
+        \Delta V \approx \frac{V_0}{T_0}\cdot \Delta T = +0.16~\text{l}
+        $$
+ 
+     \end{itemize}
+\end{frame}
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Beispiel}
+
+    {\bf Beispiel 2: Näherung einer Funktion}
+    \begin{itemize}
+        \item Können wir ohne Taschenrechner eine Näherung von $z=\sqrt{2.98^2+4.01^2}$ ausrechnen?
+        \item Wir definieren die Funktion $z=f(x,y)= \sqrt{x^2+y^2}$
+        \item Wir suchen eine Näherung der Funktion am Punkt $(x_0,y_0,z_0)=(3,4,5)$:
+        $$
+        z-5 \approx f_x(3,4)(2.98-3) + f_y(3,4)(4.01-4)
+        $$
+        \item es gilt $f_x = x/\sqrt{x^2+y^2}$ und $f_y = y/\sqrt{x^2+y^2}$
+        \item daher $f_x(3,4) = 3/5$ und $f_y(3,4) = 4/5$
+        $$
+        z\approx 5 + \frac{3}{5}(-0.02) + \frac{4}{5}(0.01) = 5-\frac{2}{500} = 4.996
+            $$
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Abschlussfragen}
+
+    \begin{enumerate}
+        
