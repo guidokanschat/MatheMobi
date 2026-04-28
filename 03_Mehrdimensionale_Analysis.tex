@@ -176,6 +176,15 @@ Notation: wir schreiben Vektorgrößen als $\vx,\vy,\vf$ zur Unterscheidung von 
 \end{itemize}
 \end{frame}
 
+\begin{frame}{Abschlussfragen}
+  \begin{itemize}
+  \item Wie können Sie Funktionen auf dem $\R^2$ darstellen?
+  \item Was sind partielle Ableitungen?
+  \item Wie hängen sie mit der \glqq{}normalen\grqq{} Ableitung einer eindimensionalen Funktion zusammen?
+  \item Was ist der Gradient einer Funktion?
+  \item Was ist das Besondere bei mehrfachen, partiellen Ableitungen?
+  \end{itemize}
+\end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Richtungsableitungen}
@@ -184,13 +193,12 @@ Notation: wir schreiben Vektorgrößen als $\vx,\vy,\vf$ zur Unterscheidung von 
     \frametitle{Veränderungen in beliebige Richtungen}
 
     \begin{itemize}
-        \item Die partiellen Ableitungen $\partial_x f$ unf $\partial_y f$ beschreiben die Veränderungen von $z=f(x,y)$ wenn man sich in $x-$ bzw $y-$Richtung bewegt
+        \item Die partiellen Ableitungen $\partial_x f$ unf $\partial_y f$ beschreiben die Veränderungen von $z=f(x,y)$ wenn man sich in $x$-  bzw $y$-Richtung bewegt
         \item Wie verändert sich die Funktion, wenn man sich in eine beliebige Richtung bewegt?
-        \item Richtung gegeben durch Vektor $\vu$
-        \item {\bf Richtungsableitung} (in 2 Dimensionen):
-        $$
-        D_u f = \frac{\partial f}{\partial x}\cdot u_1 + \frac{\partial f}{\partial y}\cdot u_2
-        $$
+        \item Ableitung entlang des Vektors $\vu \neq 0$:
+          \begin{gather*}
+            \partial_{\vu} f(\vx) = \lim_{h\to 0} \frac{f(\vx+h\vu)-f(\vx)}{h}
+          \end{gather*}
     \end{itemize}
     \begin{center}
         \includegraphics[width=.3\textwidth]{img/mv17.png}
@@ -205,15 +213,18 @@ Notation: wir schreiben Vektorgrößen als $\vx,\vy,\vf$ zur Unterscheidung von 
     \begin{itemize}
         \item Schreibweise mit Gradient (Skalarprodukt!):
         $$
-        D_u f = \nabla f \cdot \vu
+        \partial_{\vu} f = \nabla f \cdot \vu
         $$
-        \item $D_u f(p)$ gibt an, wie stark die Steigung in $\vu$-Richtung am Punkt $p$ ist
-        \item $D_u f(p)>0$ bzw. $D_u f(p)< 0$: es geht nach oben bzw.\ nach unten!
+        \item $\partial_{\vu} f(\vx)$ gibt an, wie stark die Steigung in $\vu$-Richtung am Punkt $\vx$ ist
+        \item $\partial_{\vu} f(\vx)>0$ bzw. $\partial_{\vu} f(\vx)< 0$: es geht nach oben bzw.\ nach unten!
           \pause
-        \item Die Richtungsableitung hängt von der Länge des Richtungsvektors ab
+        \item Diese Ableitung hängt von der Länge des Richtungsvektors ab
           \begin{itemize}
           \item Manche Autoren fordern $\left|\vu\right| = 1$
-          \item Wir normieren bei Bedarf
+          \item Wir normieren bei Bedarf die Richtungsableitung
+            \begin{gather*}
+              D_{\vu} f (\vx) = \frac{\partial_{\vu} f(\vx)}{|\vu|}
+            \end{gather*}
           \end{itemize}
     \end{itemize}
 \end{frame}
@@ -229,14 +240,16 @@ Notation: wir schreiben Vektorgrößen als $\vx,\vy,\vf$ zur Unterscheidung von 
     \begin{itemize}
         \item In welche Richtung verändert sich die Funktion {\bf nicht}?
         $$
-        D_u f = 0 ~\iff~ \nabla f \cdot \vu =0 ~\iff ~ \nabla f \perp \vu
+        \partial_{\vu} f = 0 ~\iff~ \nabla f \cdot \vu =0 ~\iff ~ \nabla f \perp \vu
         $$
-        \item $\vu$ ist ein {\bf Tangentialvektor} zu den Höhenlinien!
+      \item $\vu$ ist ein {\bf Tangentialvektor} zu den Höhenlinien!
+      \item Der Gradient ist orthogonal zu den Höhenlinien
     \end{itemize}
-\end{frame}
+  \end{frame}
+  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-    \frametitle{Abstiegs- und Aufstiegsrichtungen}
+    \frametitle{Anstiegsrichtung}
 
     \begin{center}
         \includegraphics[width=.3\textwidth]{img/mv19.png}
@@ -245,13 +258,13 @@ Notation: wir schreiben Vektorgrößen als $\vx,\vy,\vf$ zur Unterscheidung von 
     \begin{itemize}
         \item In welche Richtung ist die Veränderung {\bf am größten}?
         $$
-        \max_{\vu} D_u f ~\iff ~ \vu \parallel\nabla f
+        \max_{\vu} \partial_{\vu} f ~\iff ~ \vu \parallel\nabla f
         $$
         \item Wenn $\vu$ Einheitsvektor: $\vu=\frac{\nabla f}{|\nabla f|}$; daher
         $
-        D_u f = \nabla f \cdot \frac{\nabla f}{|\nabla f|} = |\nabla f|
+        \partial_{\vu} f = \nabla f \cdot \frac{\nabla f}{|\nabla f|} = |\nabla f|
         $
-        \item Der Gradient gibt an jedem Punkt die Richtung der {\bf größten Veränderung} (orthogonal zu den  Höhenlinien)
+        \item Der Gradient ist an jedem Punkt die Richtung des steilsten Anstiegs
     \end{itemize}
 \end{frame}
 
@@ -293,11 +306,18 @@ Notation: wir schreiben Vektorgrößen als $\vx,\vy,\vf$ zur Unterscheidung von 
     \end{itemize}
 \end{frame}
 
-        \item Die Fläche eines Dreiecks ist gegeben durch $A(a,b,\theta) = \frac{1}{2}ab\sin\theta$; bestimmen Sie das totale Differential  !
-        \item Das Volumen eines Zylinders ist $V=\pi r^2 h$; verändert sich das Volumen mehr, wenn $r$ von $1.0$ auf $1.1$ oder $h$ von $1.0$ auf $1.1$ erhöht wird?
-    \end{enumerate}
+\begin{frame}{Abschlussfragen}
+  \begin{itemize}
+  \item Wie verhält sich die Definition der Ableitung
+    $\partial_{\vu} f$ zur Ableitung in einer Dimension?
+  \item Wie verhält sich die Richtungsableitung zur partiellen Ableitung?
+  \item Welche Ableitungsrichtungen in einem Punkt haben besondere Bedeutung?
+  \end{itemize}
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Ableitung entlang eines  Wegs}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Ableitung entlang eines Weges}
   \begin{itemize}
@@ -310,6 +330,13 @@ Notation: wir schreiben Vektorgrößen als $\vx,\vy,\vf$ zur Unterscheidung von 
     \end{gather*}
   \end{itemize}
 \end{frame}
+
+\begin{Vertiefung}
+  Die Kettenregel für Wege ergibt sich tatsächlich aus der
+  konsequenten Anwendung der eindimensionalen Kettenregel und der
+  Definition der Ableitung entlang des Tangentenvektors des Weges.
+  \gkerror{Vervollständigen!}
+\end{Vertiefung}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Beispiel}
@@ -352,11 +379,56 @@ Notation: wir schreiben Vektorgrößen als $\vx,\vy,\vf$ zur Unterscheidung von 
   \end{itemize}
 \end{frame}
 
+\begin{frame}{Explizite Abhängigkeit vom Wegparameter}
+  \begin{gather*}
+    f(t,\vx)
+  \end{gather*}
+  \begin{itemize}
+  \item Diese Funktion hängt nicht nur vom Punkt im Raum ab, sondern
+    auch von der \glqq{}Zeit\grqq
+  \item Sei nun $\vx(t)$ ein Weg.
+    \only<1>{\begin{Denkpause}
+      was ist $\frac{d}{dt}f(t,\vx(t))$?
+    \end{Denkpause}}
+    \pause
+  \item Mit der Kettenregel erhalten wir hier
+    \begin{gather*}
+      \frac{d}{dt}f(t,\vx(t)) = \partial_t f(t,\vx(t))
+      + \nabla_{\vx} f(t,\vx(t)) \cdot \vx'(t),
+    \end{gather*}
+    wobei $\nabla_{\vx}$ der Gradient bezüglich $(x_1,\dots,x_n)$ ist.
+  \item Wir unterscheiden die partielle Ableitung $\partial_t f$ und die totale Ableitung $d_t f$
+  \end{itemize}
+\end{frame}
+
+Wie sind wir auf diese Formel gekommen?
+Wir erweitern zunächst den Weg $\vx(t)$ um eine Komponente und erhalten
+\begin{gather*}
+  \tilde\vx(t) =
+  \begin{pmatrix}
+    t\\\vx(t)
+  \end{pmatrix},\qquad
+  \tilde\vx'(t) =
+  \begin{pmatrix}
+    1\\vx'(t)
+  \end{pmatrix}
+\end{gather*}
+
+Damit können wir dann die Standardableitung entlang des Wegs einsetzen und erhalten
+\begin{align*}
+  \frac{d}{dt}f(t,\vx(t))
+  &= \frac{d}{dt}f(\tilde\vx(t))\\
+  &= \partial_t f + \sum_{k=1}^n \partial_{x_k} f x_k'.
+\end{align*}
+
+%\gkerror{Ergänzen!}
+%\begin{frame}{Beispiel}
+%  
+%\end{frame}
+
 \begin{envgknote}{Neue Struktur}
     \begin{itemize}
-    \item Höhenlinien- und Schnittliniendiagramme (Vorlesung 3.1)
     \item Isoflächen, Orbitale?
-    \item Partielle Ableitungen, Gradient, Richtungsableitungen
     \item Extremwertaufgaben über Variationsprinzip (Vorlesung 3.4)
     \item Gradient Descent (Vorlesung 3.6)
     \item Optimierung mittels Lagrange-Multiplikatoren (Vorlesung 3.7)
@@ -369,7 +441,6 @@ Notation: wir schreiben Vektorgrößen als $\vx,\vy,\vf$ zur Unterscheidung von 
     \item Fehlerfortpflanzung additiver und multiplikativer Fehler (Vorlesung 3.3). Hier könnte überlegt werden, ob ausgehend von der bestehenden Vorlesung ein Übergang zum Kapitel 4 \textit{Auswirkung von Eingabe- und Rechenfehlern} gemacht werden könnte.
     \item Extremwertaufgaben, Hesse-Matrix, Definitheit von Matrizen (Vorlesung 3.4)
     \item Optimierung mittels Lagrange-Multiplikatoren (Vorlesung 3.7)
-    \item Richtungsableitungen (Vorlesung 3.5)    
     \item Gradient Descent (Vorlesung 3.6)
 \end{itemize}
 \end{envmrerror}
