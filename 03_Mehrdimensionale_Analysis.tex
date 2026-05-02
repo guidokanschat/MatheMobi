@@ -379,6 +379,66 @@ Notation: wir schreiben Vektorgrößen als $\vx,\vy,\vf$ zur Unterscheidung von 
   \end{itemize}
 \end{frame}
 
+\begin{frame}{Beispiel: ideales Gasgesetz}
+      \begin{itemize}
+      \item Für ein ideales Gas in einem geschlossenen Behälter gilt
+        mit einer Konstanten $C$:
+        \begin{gather*}
+         p = C\frac{T}{V}
+        \end{gather*}
+      \item Wie ändert sich der Druck $p$ bei Veränderungen der
+        anderen Variablen (Temperatur und Volumen) von einen
+        Gleichgewichtszustand $(p_0,V_0,T_0)$?
+        \pause
+        \begin{equation}
+          \frac{dp}{dt}
+          = \frac{\partial p}{\partial T}(T_0,V_0)\,\frac{dT}{dt}
+          +\frac{\partial p}{\partial V}(T_0,V_0)\,\frac{dV}{dt}
+        \end{equation}
+      \end{itemize}
+      \pause Anmerkung: in der Physik benutzt man auch das Konzept des
+      Differentials anstelle der Ableitung, lässt also überall den
+      Nenner $dt$ weg.
+\end{frame}
+Dann fällt aber der Charakter der Ableitung weg, weshalb in der
+Mathematikdidaktik lieber mit Ableitungen operiert wird. Ein
+Differential allein ist nur in der Integration von Bedeutung und dort
+haben wir gesehen, wie sich durch Substitution Differentiale
+transformieren. Wenn wir hingegen hier das $1/dt$ weglassen, so ist
+die Ableitung immer mitgedacht.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle<presentation>{Beispiel: Ideales Gasgesetz}
+  
+  \begin{itemize}
+  \item es gilt:
+    \begin{gather*}
+      \frac{\partial p}{\partial T}(T_0,V_0) = C\frac{1}{V_0}
+      \qquad\frac{\partial p}{\partial V}(T_0,V_0) = -C\frac{T_0}{V_0^2}      
+    \end{gather*}
+        \item daher:
+        \begin{equation}
+          \frac{dp}{dt}
+          = C\left( \frac{1}{V_0} \frac{dT}{dt}
+            -\frac{T_0}{V_0^2} \frac{dV}{dt}\right)
+        \end{equation}
+      \item Veränderung des Drucks:
+        \begin{itemize}
+        \item  {\bf positiv} mit Veränderung der
+          Temperatur $T$
+          \item {\bf negativ} mit Veränderung des Volumen $V$
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\gkerror{Beispiel: Federpendel}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\gkerror{Lineare Näherung in höheren Dimensionen}
+
+
 \begin{frame}{Explizite Abhängigkeit vom Wegparameter}
   \begin{gather*}
     f(t,\vx)
@@ -414,12 +474,14 @@ Wir erweitern zunächst den Weg $\vx(t)$ um eine Komponente und erhalten
   \end{pmatrix}
 \end{gather*}
 
-Damit können wir dann die Standardableitung entlang des Wegs einsetzen und erhalten
+Damit können wir dann die gewöhnliche Ableitung entlang des Wegs einsetzen und erhalten
 \begin{align*}
   \frac{d}{dt}f(t,\vx(t))
   &= \frac{d}{dt}f(\tilde\vx(t))\\
   &= \partial_t f + \sum_{k=1}^n \partial_{x_k} f x_k'.
 \end{align*}
+
+
 
 \mode<all>
 \input{attic/totales_differential}
