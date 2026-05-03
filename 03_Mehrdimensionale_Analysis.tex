@@ -331,12 +331,12 @@ Notation: wir schreiben Vektorgrößen als $\vx,\vy,\vf$ zur Unterscheidung von 
   \end{itemize}
 \end{frame}
 
-\begin{Vertiefung}
-  Die Kettenregel für Wege ergibt sich tatsächlich aus der
-  konsequenten Anwendung der eindimensionalen Kettenregel und der
-  Definition der Ableitung entlang des Tangentenvektors des Weges.
-  \gkerror{Vervollständigen!}
-\end{Vertiefung}
+%\begin{Vertiefung}
+%  Die Kettenregel für Wege ergibt sich tatsächlich aus der
+%  konsequenten Anwendung der eindimensionalen Kettenregel und der
+%  Definition der Ableitung entlang des Tangentenvektors des Weges.
+%  \gkerror{Vervollständigen!}
+%\end{Vertiefung}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Beispiel}
@@ -435,9 +435,6 @@ die Ableitung immer mitgedacht.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \gkerror{Beispiel: Federpendel}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\gkerror{Lineare Näherung in höheren Dimensionen}
-
 
 \begin{frame}{Explizite Abhängigkeit vom Wegparameter}
   \begin{gather*}
@@ -481,14 +478,302 @@ Damit können wir dann die gewöhnliche Ableitung entlang des Wegs einsetzen und
   &= \partial_t f + \sum_{k=1}^n \partial_{x_k} f x_k'.
 \end{align*}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Taylor-Reihen}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Lineare Näherung in höheren Dimensionen}
+  \begin{itemize}
+  \item In einer Dimension kennen wir die lineare Näherung
+    \begin{gather*}
+      f(t) \approx f(t_0) + f'(t_0) (t-t_0)
+    \end{gather*}
+    \only<1>{
+      \begin{Denkpause}
+        Warum ist das in höheren Dimensionen komplizierter? Was können wir tun?
+      \end{Denkpause}}
+    \pause
+  \item Wir legen eine Gerade durch $\vx_0$ und $\vx$. Hilfsfunktion:
+    \begin{gather*}
+      g(t) = f\bigl(\vx_0+t(\vx-\vx_0)\bigr),
+      \qquad g(0) = f(\vx_0),
+      \qquad g(1) = f(\vx).
+    \end{gather*}
+  \item Lineare Näherung
+    \begin{gather*}
+      g(1) \approx g(0) + g'(0)
+      = f(\vx_0) + \nabla f(\vx_0)\cdot(\vx-\vx_0)
+    \end{gather*}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Beispiel}
+  \begin{gather*}
+    f(x,y) = x^2 + y^2,\qquad x_0 = 1,\qquad y_0 = 1
+  \end{gather*}
+  \begin{itemize}
+  \item Näherung im Punkt $x=y=1.1$
+    \begin{align*}
+      f(1.1,1.1)
+      &\approx 2 +
+        \begin{pmatrix}
+          2\\2
+        \end{pmatrix}
+      \cdot
+      \begin{pmatrix}
+        .1\\.1
+      \end{pmatrix}
+      = 2.4\\
+      f(1.1,1.1) &= 1.21+1.21 = 2.42
+    \end{align*}
+    \pause
+  \item Näherung im Punkt $x=y=5$:
+    \begin{align*}
+      f(5,5)
+      &\approx 2+
+        \begin{pmatrix}
+          2\\2
+        \end{pmatrix}
+      \cdot
+      \begin{pmatrix}
+        4\\4
+      \end{pmatrix}
+      = 32\\
+      f(5,5) &= 25+25 = 50
+    \end{align*}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \begin{block}{Fazit}
+    Wie in einer Dimension, so ist auch in höheren Dimensionen die
+    lineare Näherung umso besser, je näher die Punkte bei einaner
+    liegen
+  \end{block}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle<presentation>{Anwendungsbeispiel}
+    \begin{itemize}
+        \item Können wir ohne Taschenrechner eine Näherung von $z=\sqrt{2.98^2+4.01^2}$ ausrechnen?
+        \item Wir definieren die Funktion $z=f(x,y)= \sqrt{x^2+y^2}$
+        \item Wir suchen eine Näherung der Funktion um den Punkt $(x_0,y_0)=(3,4)$:
+        $$
+        z \approx 5+ f_x(3,4)(2.98-3) + f_y(3,4)(4.01-4)
+        $$
+        \item es gilt $f_x = x/\sqrt{x^2+y^2}$ und $f_y = y/\sqrt{x^2+y^2}$
+        \item daher $f_x(3,4) = 3/5$ und $f_y(3,4) = 4/5$
+        $$
+        z\approx 5 + \frac{3}{5}(-0.02) + \frac{4}{5}(0.01) = 5-\frac{2}{500} = 4.996
+            $$
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Taylor-Reihen in höheren Dimensionen}
+  \begin{itemize}
+  \item In einer Dimension
+    \begin{gather*}
+      g(t) = \sum_{k=0}^\infty \frac{g^{(k)}(t_0)}{k!} (t-t_0)
+    \end{gather*}
+  \item Anwendung auf die Hilfsfunktion $g(t) = f\bigl(\vx_0+t(\vx-\vx_0)\bigr)$
+  \item $k=1$, hier in zwei Dimensionen, $\vx = (x,y)$
+    \begin{gather*}
+      \nabla f(\vx_0) (\vx-\vx_0) = \partial_xf(\vx_0)(x-x_0) + \partial_yf(\vx_0)(y-y_0)
+    \end{gather*}
+  \item<2-> $k=2$: Berechnung von $g''(0)$
+    \begin{align*}
+      \nabla \partial_xf(\vx_0)(\vx-\vx_0)
+      &= \partial_{xx}f(\vx_0)(x-x_0) + \partial_{yx}f(\vx_0)(y-y_0)\\
+      \nabla \partial_yf(\vx_0)(\vx-\vx_0)
+      &= \partial_{xy}f(\vx_0)(x-x_0) + \partial_{yy}f(\vx_0)(y-y_0)
+    \end{align*}
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle<presentation>{Darstellung des zweiten Terms}
+  \begin{multline*}
+    \partial_{xx}f(\vx_0)(x-x_0)^2+\partial_{yy}f(\vx_0)(y-y_0)^2\\
+    +\partial_{yx}f(\vx_0)(x-x_0)(y-y_0)
+    +\partial_{xy}f(\vx_0)(x-x_0)(y-y_0)
+  \end{multline*}
+  \begin{itemize}
+  \item Schreibe als Matrix-Vektor-Produkt
+    \begin{gather*}
+      (\vx-\vx_0)^T \nabla^2f(\vx_0)(\vx-\vx_0),
+      \qquad
+      \nabla^2f(\vx_0) =
+      \begin{pmatrix}
+        \partial_{xx}f(\vx_0)&\partial_{xy}f(\vx_0)\\
+        \partial_{yx}f(\vx_0)&\partial_{yy}f(\vx_0)
+      \end{pmatrix}
+    \end{gather*}
+  \item Die \textbf{Hesse-Matrix} $\nabla^2f(\vx_0)$ ist symmetrisch
+  \item<2-> Quadratische Näherung
+    \begin{gather*}
+      f(\vx) \approx f(\vx_0) + \nabla f(\vx_0)\cdot(\vx-\vx_0)
+      +\frac12 (\vx-\vx_0)^T \nabla^2f(\vx_0)(\vx-\vx_0)
+    \end{gather*}
+  \end{itemize}
+\end{frame}
 
 
-\mode<all>
-\input{attic/totales_differential}
-%\gkerror{Ergänzen!}
-%\begin{frame}{Beispiel}
-%  
-%\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Beispiel}
+  \begin{gather*}
+    f(\vx) = \cos x\cos y\cos z,
+    \qquad \vx_0 = (0,0,0)
+  \end{gather*}
+  \begin{itemize}
+  \item Erste Ableitungen: $\nabla f(\vx_0) = (0,0,0)$
+  \item Zweite Ableitungen:
+    \begin{gather*}
+      \nabla^2 f(\vx_0) =
+      \begin{pmatrix}
+        -1 & 0 & 0\\
+        0 & -1 & 0\\
+        0 & 0 & -1
+      \end{pmatrix}
+    \end{gather*}
+  \item Wir nähern die Funktion linear im Punkt $\vx=(0.1,0.2,0.3)$
+    \begin{gather*}
+      f(\vx) \approx (1,1,1)
+    \end{gather*}
+  \item Quadratisch erhalten wir
+    \begin{gather*}
+      f(\vx) \approx 1- 0.1^2-0.2^2-0.3^2 = 0.86
+    \end{gather*}
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Extremwertaufgaben}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\begin{frame}{Erste Definitionen}
+  \begin{itemize}
+  \item Umgebung eines Punktes $\vx_0$: eine Menge, in deren Inneren $\vx_0$ liegt.
+  \item Ein Punkt $\vx$ hei\ss{}t lokales Minimum (Maximum), wenn für
+    alle Punkte $\vx$ in einer Umgebung $U(\vx_0)$ gilt:
+    \begin{gather*}
+      f(\vx_0)
+      \begin{cases}
+        \le f(\vx)&\text{Minimum} \\
+        \ge f(\vx)&\text{Maximum}
+      \end{cases}
+    \end{gather*}
+  \item $\vx_0$ ist kritischer Punkt von $f$, falls $\nabla f(\vx_0) = 0$
+  \end{itemize}
+  \begin{block}{Notwendige Bedingung}
+    Jedes lokale Minimum oder Maximum ist ein kritischer Punkt
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \begin{block}{Variationsprinzip}
+    Der Punkt $\vx_0$ ist ein Minimum(Maximum) der Funktion $f$, genau
+    dann, wenn für jeden Vektor $\vv\neq 0$ der Wert 0 ein lokales
+    Minimum(Maximum) der Hilfsfunktion
+    \begin{gather*}
+      g(t) = f(\vx_0+t\vv)
+    \end{gather*}
+    ist.
+  \end{block}
+  \begin{itemize}
+  \item Eindimensional!
+  \item Notwendige Bedingung: $g'(0)=0=\nabla f(\vx_0)\cdot \vv$
+  \item Hinreichend zusätzlich: $g''(0) \ge 0$ bzw. $g''(0) \le 0$
+  \item Es handelt sich um ein striktes oder isoliertes Extremum, wenn
+    die Ungleichungen strikt gelten
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Bedingung an die Hesse-Matrix}
+  \begin{gather*}
+    H = \nabla^2 f(\vx_0),\qquad
+    \vv^TH\vv
+    \begin{cases}
+      \ge 0 & \text{Minimum}\\
+      \le 0 & \text{Maximum}
+    \end{cases}
+  \end{gather*}
+  \begin{itemize}
+  \item Die Ungleichung muss für alle $\vv$ gelten.
+  \end{itemize}
+  \begin{block}{Definition}
+    Eine Matrix $H$ heißt positiv bzw. negativ definit, wenn für alle Vektoren $\vv\neq 0$ gilt:
+    \begin{gather*}
+      \vv^T H \vv > 0
+      \quad\text{bzw.}\quad
+      \vv^T H \vv < 0
+    \end{gather*}
+    Sie heißt semidefinit, wenn in den Ungleichungen Gleichheit erlaubt ist.
+  \end{block}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Beispiel}
+  \begin{gather*}
+    f(x,y) = \frac{ax^2+by^2}2,
+    \qquad
+    \nabla f(x,y) =
+    \begin{pmatrix}
+      ax\\by
+    \end{pmatrix}
+    H = \nabla^2f(x,y) =
+    \begin{pmatrix}
+      a & 0\\ 0 & b
+    \end{pmatrix}
+  \end{gather*}
+  \only<1>{
+    \begin{Denkpause}
+      Wir werden nun Extrema dieser Funktion abhängig von $a$ und $b$ suchen
+    \end{Denkpause}}
+  \pause
+  \begin{itemize}
+  \item Wir verschieben die Sonderfälle $a=0$ und $b=0$
+  \item Es gilt $\nabla f(0,0) = 0$, daher ist der Nullpunkt ein kritischer Punkt
+  \item Für die Hesse-Matrix $H$ gilt
+    \begin{gather*}
+      \vv^T H \vv = av_1^2+bv_2^2
+      \begin{cases}
+        > 0&\text{falls } a,b > 0\\
+        < 0&\text{falls } a,b < 0
+      \end{cases}
+    \end{gather*}
+  \item Damit haben wir im ersten Fall ein Minimum, im zweiten ein Maximum
+  \item Das Extremum ist isoliert
+  \end{itemize}
+\end{frame}
+\gkerror{Plot the functions}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle<presentation>{Fortsetzung des Beispiels}
+  \begin{itemize}
+  \item<+-> Sei nun $a=0$, dann gilt $\nabla f(x,0) = 0$ für beliebiges $x$.
+    \begin{itemize}
+    \item Gilt $b>0$, so ist $H$ positiv semidefinit, denn
+      \begin{gather*}
+        \vv^TH\vv = bv_2^2 \ge 0
+      \end{gather*}
+    \item Alle diese Punkt sind also lokale Minima, aber nicht isoliert
+    \item Für $b<0$ gilt dies analog und es sind Maxima
+    \end{itemize}
+  \item<+-> Sei $a=b=0$. Die Funktion is dann konstant und nach der
+    Definition ist jeder Punkt ein Extremum
+  \end{itemize}
+  \begin{Denkpause}<+->
+    Was passiert, wenn $a$ und $b$ unterschiedliches Vorzeichen haben?
+  \end{Denkpause}
+\end{frame}
 
 \begin{envgknote}{Neue Struktur}
     \begin{itemize}
