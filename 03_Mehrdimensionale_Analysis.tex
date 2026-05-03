@@ -379,6 +379,79 @@ Notation: wir schreiben Vektorgrößen als $\vx,\vy,\vf$ zur Unterscheidung von 
   \end{itemize}
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Weglänge auf unebener Fläche}
+  \begin{itemize}
+  \item Bei der Länge eines Wanderweges haben wir nur die ebene
+    Bewegung, nicht aber die Höhe berücksichtigt.
+  \item Wir betrachten nun neben $x(t)$ und $y(t)$ auch $z(t)$, gegeben durch
+    \begin{gather*}
+      z(t) = f\bigl(x(t),y(t)\bigr)
+    \end{gather*}
+  \item Daraus ergibt sich ein Weg $\vg(t) = \bigl(x(t),y(t),z(t)\bigr)$
+  \item Sein Geschwindigkeitsvektor ist:
+    \begin{gather*}
+      \vg'(t) =
+      \begin{pmatrix}
+        x'(t)\\y'(t)\\\nabla f\bigl(x(t),y(t)\bigr)\cdot \bigl(x'(t),y'(t)\bigr)
+      \end{pmatrix}
+    \end{gather*}
+  \item Das ist nun die Geschwindigkeit, die wir in die Formel für die
+    Weglänge einsetzen müssen
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Beispiel: Weglänge}
+  \begin{gather*}
+    x(t) = \cos t,\qquad y(t) = \sin t,\qquad f(x,y) = xy
+  \end{gather*}
+  \begin{itemize}
+  \item Wir berechnen
+    \begin{gather*}
+      x'(t) = -\sin t,\quad y'(t) = \cos t,\quad
+      \partial_x f(x,y) = y,\quad
+      \partial_y f(x,y) = x
+    \end{gather*}
+  \item Der Geschwindigkeitsvektor ist
+    \begin{gather*}
+      \vg'(t) =
+      \begin{pmatrix}
+        -\sin t\\ \cos t\\ -\sin^2 t + \cos^2 t
+      \end{pmatrix}
+    \end{gather*}
+  \item Das Quadrat seiner Länge ist
+    \begin{align*}
+      \left|\vg'(t)\right|^2
+      &= \sin^2t+\cos^2t+ \bigl[\cos^2t-\sin^2t\bigr]^2\\
+      &= 1+ \bigl[\cos^2t-\sin^2t\bigr]^2
+    \end{align*}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle<presentation>{Beispiel: Weglänge (Forts.)}
+  \begin{itemize}
+  \item Wir benutzen $\cos^2t-\sin^2t = \cos 2t$ und erhalten
+    \begin{gather*}
+      \left|\vg'(t)\right|^2 = 1+\cos^2(2t)
+    \end{gather*}
+  \item Die Weglänge für eine Umdrehung $[0,2\pi]$ ist
+    \begin{gather*}
+      L = \int_0^{2\pi} \left|\vg'(t)\right|\,dt
+      = \int_0^{2\pi} \sqrt{1+\cos^2(2t)}\,dt
+    \end{gather*}
+  \item Für dieses Integral gibt es keine Stammfunktion, numerische
+    Quadratur ergibt
+    \begin{gather*}
+      L \approx 7.64
+    \end{gather*}
+    \item Vergleich mit dem \glqq{}ebenen\grqq{} Kreis: $L=2\pi\approx 6.28$
+  \end{itemize}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Beispiel: ideales Gasgesetz}
       \begin{itemize}
       \item Für ein ideales Gas in einem geschlossenen Behälter gilt
@@ -454,7 +527,6 @@ die Ableitung immer mitgedacht.
       + \nabla_{\vx} f(t,\vx(t)) \cdot \vx'(t),
     \end{gather*}
     wobei $\nabla_{\vx}$ der Gradient bezüglich $(x_1,\dots,x_n)$ ist.
-  \item Wir unterscheiden die partielle Ableitung $\partial_t f$ und die totale Ableitung $d_t f$
   \end{itemize}
 \end{frame}
 
@@ -478,6 +550,18 @@ Damit können wir dann die gewöhnliche Ableitung entlang des Wegs einsetzen und
   &= \partial_t f + \sum_{k=1}^n \partial_{x_k} f x_k'.
 \end{align*}
 
+\begin{frame}{Abschlussfragen}
+  \begin{enumerate}
+  \item Wie sieht die Kettenregel für zwei Funktionen
+    $f\colon \R^n\to \R$ und $g\colon \R \to \R^n$ aus?
+  \item Was ist der Unterschied zwischen partieller und totaler
+    Ableitung von $f(t,\vx(t))$ nach $t$?
+  \item Wie berechnet man die totale Ableitung?
+  \item Wir unterscheiden die partielle Ableitung $\partial_t f$ und die totale Ableitung $d_t f$?
+    \item Wie unterscheiden sich Weglängen in der Ebene von solchen auf \glqq{}Funktionsflächen\grqq{}?
+  \end{enumerate}
+\end{frame}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Taylor-Reihen}
@@ -494,17 +578,18 @@ Damit können wir dann die gewöhnliche Ableitung entlang des Wegs einsetzen und
         Warum ist das in höheren Dimensionen komplizierter? Was können wir tun?
       \end{Denkpause}}
     \pause
-  \item Wir legen eine Gerade durch $\vx_0$ und $\vx$. Hilfsfunktion:
+  \item Wir legen eine Gerade durch $\vx_0$ und $\vx$ und rechnen eindimensional
+  \item Hilfsfunktion:
     \begin{gather*}
       g(t) = f\bigl(\vx_0+t(\vx-\vx_0)\bigr),
       \qquad g(0) = f(\vx_0),
       \qquad g(1) = f(\vx).
     \end{gather*}
   \item Lineare Näherung
-    \begin{gather*}
-      g(1) \approx g(0) + g'(0)
-      = f(\vx_0) + \nabla f(\vx_0)\cdot(\vx-\vx_0)
-    \end{gather*}
+    \begin{align*}
+      g(1) & \approx g(0) + g'(0) \\
+      f(\vx) &\approx f(\vx_0) + \nabla f(\vx_0)\cdot(\vx-\vx_0)
+    \end{align*}
   \end{itemize}
 \end{frame}
 
@@ -650,6 +735,28 @@ Damit können wir dann die gewöhnliche Ableitung entlang des Wegs einsetzen und
   \end{itemize}
 \end{frame}
 
+\begin{frame}{Weitere Terme}
+  \begin{itemize}
+  \item Für die dritte Ableitung von $g$ müssen wir in zwei
+    Dimensionen 4 verschiedene Ableitungen mit Potenzen von $(x-x_0)$
+    und $(y-y_0)$ multiplizieren.
+  \item Wir haben dann keine Kurzformeln mehr
+  \item Das funktioniert nach demselben Prinzip, wird aber
+    unübersichtlich
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Abschlussfragen}
+  \begin{enumerate}
+  \item Mit welchem \glqq{}Trick\grqq{} kann man Taylor-Entwicklung in
+    höheren Dimensionen einführen?
+  \item Was hat die lineare Näherung mit der Richtungsableitung zu tun?
+  \item Wie sieht die lineare Näherung aus?
+  \item Wie sieht die quadratische Näherung aus?
+  \item Was ist die Hesse-Matrix?
+  \end{enumerate}
+\end{frame}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Extremwertaufgaben}
@@ -721,12 +828,12 @@ Damit können wir dann die gewöhnliche Ableitung entlang des Wegs einsetzen und
 \begin{frame}{Beispiel}
   \begin{gather*}
     f(x,y) = \frac{ax^2+by^2}2,
-    \qquad
+    \quad
     \nabla f(x,y) =
     \begin{pmatrix}
       ax\\by
-    \end{pmatrix}
-    H = \nabla^2f(x,y) =
+    \end{pmatrix},\quad
+    \nabla^2f(x,y) =
     \begin{pmatrix}
       a & 0\\ 0 & b
     \end{pmatrix}
@@ -739,7 +846,7 @@ Damit können wir dann die gewöhnliche Ableitung entlang des Wegs einsetzen und
   \begin{itemize}
   \item Wir verschieben die Sonderfälle $a=0$ und $b=0$
   \item Es gilt $\nabla f(0,0) = 0$, daher ist der Nullpunkt ein kritischer Punkt
-  \item Für die Hesse-Matrix $H$ gilt
+  \item Für die Hesse-Matrix $H = \nabla^2f(x,y)$ gilt
     \begin{gather*}
       \vv^T H \vv = av_1^2+bv_2^2
       \begin{cases}
@@ -751,8 +858,15 @@ Damit können wir dann die gewöhnliche Ableitung entlang des Wegs einsetzen und
   \item Das Extremum ist isoliert
   \end{itemize}
 \end{frame}
-\gkerror{Plot the functions}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle<presentation>{Beispiel: Darstellung der Funktionen}
+  \begin{center}
+    \includegraphics[width=.45\textwidth]{pic/parabol-up}
+    \includegraphics[width=.45\textwidth]{pic/parabol-down}
+  \end{center}
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
@@ -775,10 +889,23 @@ Damit können wir dann die gewöhnliche Ableitung entlang des Wegs einsetzen und
   \end{Denkpause}
 \end{frame}
 
+\begin{frame}{Sattelpunkte}
+  \begin{itemize}
+  \item Sattelpunkte sind eine Art von kritischen Punkten, die es in
+    einer Dimension nicht gibt.
+  \item Die Hesse-Matrix ist \textbf{indefinit}, je nach Richtung sind die
+    Linien durch den Punkt aufwärts und abwärts gekrümmt.
+  \end{itemize}
+  \begin{center}
+    \includegraphics[width=.55\textwidth]{pic/saddle}    
+  \end{center}
+\end{frame}
+
+
+
 \begin{envgknote}{Neue Struktur}
     \begin{itemize}
     \item Isoflächen, Orbitale?
-    \item Extremwertaufgaben über Variationsprinzip (Vorlesung 3.4)
     \item Gradient Descent (Vorlesung 3.6)
     \item Optimierung mittels Lagrange-Multiplikatoren (Vorlesung 3.7)
     \end{itemize}
