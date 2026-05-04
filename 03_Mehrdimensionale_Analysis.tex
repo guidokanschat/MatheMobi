@@ -550,12 +550,82 @@ Damit können wir dann die gewöhnliche Ableitung entlang des Wegs einsetzen und
   &= \partial_t f + \sum_{k=1}^n \partial_{x_k} f x_k'.
 \end{align*}
 
+\begin{frame}{Totale vs. partielle Ableitung}
+  \begin{itemize}
+  \item Die \textbf{partielle} Ableitung
+    \begin{gather*}
+      \partial_t f\bigl(t,\vx(t)\bigr)
+    \end{gather*}
+    ist die Ableitung von $f$ nach dem ersten Argument
+  \item Die \textbf{totale} Ableitung
+    \begin{gather*}
+      d_t f\bigl(t,\vx(t)\bigr)
+    \end{gather*}
+    ist Ableitung der gesamten Funktion nach der Zeit mit der Kettenregel
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Beispiel: Bewegung eines Moleküls in einem Stoffgemisch}
+  \begin{itemize}
+  \item 
+    Orts- und zeitabhängige Konzentration:
+    \begin{gather*}
+      c(t,x) = c_0 e^{-kt} \sin\left(\frac{\pi x}{L}\right)
+    \end{gather*}
+    
+  \item Ein Molekül bewege sich entlang des Weges:
+    \begin{gather*}
+      x(t) = vt
+    \end{gather*}
+    
+  \item Dann ergibt sich entlang des Weges:
+    \begin{gather*}
+      c(t,x(t)) = c_0 e^{-kt} \sin\left(\frac{\pi vt}{L}\right)
+    \end{gather*}
+    
+  \item Die totale Ableitung (Wegableitung) lautet:
+    \begin{gather*}
+      \frac{d}{dt} c(t,x(t)) 
+      = \frac{\partial c}{\partial t} 
+      + \frac{\partial c}{\partial x} \frac{dx}{dt}
+    \end{gather*}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle<presentation>{Beispiel Forts.}
+Berechnung der Terme:
+\begin{gather*}
+\frac{\partial c}{\partial t} 
+= -k c_0 e^{-kt} \sin\left(\frac{\pi x}{L}\right)
+\\
+\frac{\partial c}{\partial x} 
+= c_0 e^{-kt} \frac{\pi}{L} \cos\left(\frac{\pi x}{L}\right)
+\end{gather*}
+
+Mit \( \frac{dx}{dt} = v \) folgt:
+\begin{gather*}
+\frac{d c}{dt}
+=
+- k c_0 e^{-kt} \sin\left(\frac{\pi vt}{L}\right)
++
+c_0 e^{-kt} \frac{\pi v}{L} \cos\left(\frac{\pi vt}{L}\right)
+\end{gather*}
+
+\end{frame}
+
+Die biochemische Interpretation dieser Formeln könnte etwa wie folgt aussehen:
+\begin{itemize}
+\item Der Term \( \frac{\partial c}{\partial t} \) beschreibt die lokale zeitliche Änderung der Konzentration, z.\,B. durch enzymatischen Abbau oder Zerfall des Stoffes.
+\item Der Term \( \frac{\partial c}{\partial x} \frac{dx}{dt} \) beschreibt die Änderung entlang des Weges, da sich das Molekül durch einen räumlichen Konzentrationsgradienten bewegt (z.\,B. Diffusion oder gerichteter Transport).
+\item Die totale Ableitung \( \frac{dc}{dt} \) gibt somit die tatsächlich vom Molekül „erlebte“ Konzentrationsänderung entlang seiner Trajektorie an.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Abschlussfragen}
   \begin{enumerate}
   \item Wie sieht die Kettenregel für zwei Funktionen
-    $f\colon \R^n\to \R$ und $g\colon \R \to \R^n$ aus?
-  \item Was ist der Unterschied zwischen partieller und totaler
-    Ableitung von $f(t,\vx(t))$ nach $t$?
+    $f\colon \R^n\to \R$ und $\vg\colon \R \to \R^n$ aus?
   \item Wie berechnet man die totale Ableitung?
   \item Wir unterscheiden die partielle Ableitung $\partial_t f$ und die totale Ableitung $d_t f$?
     \item Wie unterscheiden sich Weglängen in der Ebene von solchen auf \glqq{}Funktionsflächen\grqq{}?
@@ -640,7 +710,7 @@ Damit können wir dann die gewöhnliche Ableitung entlang des Wegs einsetzen und
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-    \frametitle<presentation>{Anwendungsbeispiel}
+    \frametitle<presentation>{Beispiel}
     \begin{itemize}
         \item Können wir ohne Taschenrechner eine Näherung von $z=\sqrt{2.98^2+4.01^2}$ ausrechnen?
         \item Wir definieren die Funktion $z=f(x,y)= \sqrt{x^2+y^2}$
@@ -655,6 +725,44 @@ Damit können wir dann die gewöhnliche Ableitung entlang des Wegs einsetzen und
             $$
     \end{itemize}
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Steuerung eines Bioreaktors}
+  \begin{itemize}
+  \item Kenngrößen
+    \begin{itemize}
+    \item \(G\): Glukosekonzentration
+    \item \(O_2\): gelöste Sauerstoffkonzentration
+    \item \(R(G,O_2)\): Wachstumsrate    
+    \end{itemize}
+  \item Stabiler Betriebszustand \((G^*, O_2^*)\)
+  \item Die lineare Taylor-Näherung lautet:
+    \begin{multline*}
+      R(G, O_2)
+      \approx
+      R(G^*, O_2^*)\\
+      +
+      \frac{\partial R}{\partial G}(G^*, O_2^*)
+      \left(G - G^*\right)
+      +
+      \frac{\partial R}{\partial O_2}(G^*, O_2^*)
+      \left(O_2 - O_2^*\right)
+    \end{multline*}
+  \end{itemize}
+\end{frame}
+
+\begin{itemize}
+\item Die Funktion \(R(G,O_2)\) beschreibt die Wachstumsrate von Mikroorganismen im Bioreaktor.
+\item Der Arbeitspunkt \((G^*, O_2^*)\) entspricht einem gewünschten Betriebszustand.
+\item Die lineare Näherung beschreibt, wie empfindlich die Wachstumsrate auf kleine Änderungen der Prozessgrößen reagiert.
+\item Die partiellen Ableitungen geben an:
+\begin{itemize}
+\item wie stark das Wachstum auf Änderungen der Glukosekonzentration reagiert,
+\item wie stark es auf Änderungen der Sauerstoffversorgung reagiert.
+\end{itemize}
+\item Dies entspricht einer lokalen Sensitivitätsanalyse und wird in der Praxis zur Prozessregelung verwendet.
+\item Die Regelung sorgt dafür, dass \(G-G^*\) und \(O_2 - O_2^*\) klein bleiben, die lineare Näherung bleibt hinreichend genau
+\end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Taylor-Reihen in höheren Dimensionen}
@@ -754,6 +862,7 @@ Damit können wir dann die gewöhnliche Ableitung entlang des Wegs einsetzen und
   \item Wie sieht die lineare Näherung aus?
   \item Wie sieht die quadratische Näherung aus?
   \item Was ist die Hesse-Matrix?
+  \item Welche wichtige Eigenschaft hat sie?
   \end{enumerate}
 \end{frame}
 
@@ -764,8 +873,8 @@ Damit können wir dann die gewöhnliche Ableitung entlang des Wegs einsetzen und
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \begin{frame}{Erste Definitionen}
   \begin{itemize}
-  \item Umgebung eines Punktes $\vx_0$: eine Menge, in deren Inneren $\vx_0$ liegt.
-  \item Ein Punkt $\vx$ hei\ss{}t lokales Minimum (Maximum), wenn für
+  \item \textbf{Umgebung} eines Punktes $\vx_0$: eine Menge, in deren Inneren $\vx_0$ liegt.
+  \item Ein Punkt $\vx_0$ heißt \textbf{lokales} Minimum (Maximum), wenn für
     alle Punkte $\vx$ in einer Umgebung $U(\vx_0)$ gilt:
     \begin{gather*}
       f(\vx_0)
@@ -774,7 +883,7 @@ Damit können wir dann die gewöhnliche Ableitung entlang des Wegs einsetzen und
         \ge f(\vx)&\text{Maximum}
       \end{cases}
     \end{gather*}
-  \item $\vx_0$ ist kritischer Punkt von $f$, falls $\nabla f(\vx_0) = 0$
+  \item $\vx_0$ ist \textbf{kritischer Punkt} von $f$, falls $\nabla f(\vx_0) = 0$
   \end{itemize}
   \begin{block}{Notwendige Bedingung}
     Jedes lokale Minimum oder Maximum ist ein kritischer Punkt
@@ -814,13 +923,14 @@ Damit können wir dann die gewöhnliche Ableitung entlang des Wegs einsetzen und
   \item Die Ungleichung muss für alle $\vv$ gelten.
   \end{itemize}
   \begin{block}{Definition}
-    Eine Matrix $H$ heißt positiv bzw. negativ definit, wenn für alle Vektoren $\vv\neq 0$ gilt:
+    Eine Matrix $H$ heißt positiv bzw. negativ \textbf{definit}, wenn für alle Vektoren $\vv\neq 0$ gilt:
     \begin{gather*}
       \vv^T H \vv > 0
       \quad\text{bzw.}\quad
       \vv^T H \vv < 0
     \end{gather*}
-    Sie heißt semidefinit, wenn in den Ungleichungen Gleichheit erlaubt ist.
+    Sie heißt \textbf{semidefinit}, wenn in den Ungleichungen $\ge$ oder $\le$
+    steht, also auch die Gleichheit erlaubt ist.
   \end{block}
 \end{frame}
 
@@ -889,6 +999,7 @@ Damit können wir dann die gewöhnliche Ableitung entlang des Wegs einsetzen und
   \end{Denkpause}
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Sattelpunkte}
   \begin{itemize}
   \item Sattelpunkte sind eine Art von kritischen Punkten, die es in
@@ -900,6 +1011,130 @@ Damit können wir dann die gewöhnliche Ableitung entlang des Wegs einsetzen und
     \includegraphics[width=.55\textwidth]{pic/saddle}    
   \end{center}
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Kriterien für definite Matrizen}
+  \begin{itemize}
+  \item Eine symmetrische Matrix ist positiv (negativ) definit, genau dann, wenn
+    alle ihre Eigenwerte positiv (negativ) sind
+  \item Eine semidefinite Matrix darf auch Nulleigenwerte haben
+  \item Ein indefinite Matrix hat immer Eigenwerte beider Vorzeichen
+  \end{itemize} 
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Gerschgorin-Kriterium}
+  Eine Matrix ist positiv definit, wenn alle Diagonaleinträge positiv
+  sind und in jeder Zeile gilt
+  \begin{gather*}
+    a_{ii} > \sum_{j\neq i} \left|a_{ij}\right|
+  \end{gather*}
+
+  Solche Matrizen heißen auch \textbf{diagonaldominant}.
+\end{frame}
+
+\begin{frame}{Beispiel}
+  \begin{gather*}
+    \begin{pmatrix}
+      9 & -2 & 1 & 0 & 0 \\
+      -2 & 10 & -2 & 1 & 0 \\
+      1 & -2 & 11 & -2 & 1 \\
+      0 & 1 & -2 & 10 & -2 \\
+      0 & 0 & 1 & -2 & 9
+    \end{pmatrix}
+  \end{gather*}
+
+  Die Matrix ist diagonaldominant und daher positiv definit.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Determinantenkriterium}
+  In zwei Dimensionen kann man das Determinantenkriterium anwenden:
+  \begin{enumerate}
+  \item Ist die Determinante negativ, ist die Matrix indefinit
+  \item Ist die Determinante positiv, haben beide Eigenwerte gleiches Vorzeichen
+    \begin{itemize}
+    \item Ist dann \(a_{11}>0\), so ist auch die Matrix positive definit
+    \end{itemize}
+  \end{enumerate}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Freie Energie eines Protein-Ligand-Systems}
+  \begin{gather*}
+E = E(r,\vartheta)
+\end{gather*}
+\begin{itemize}
+\item \(r\): Abstand zwischen Ligand und Bindungstasche,
+\item \(\vartheta\): Konformationswinkel der Bindungstasche.
+\item Energieminimum: \((r^*, \vartheta^*)\)
+\end{itemize}
+\only<1>{
+  \begin{Denkpause}
+    Wie sieht die quadratische Näherung von $E$ um \((r^*, \vartheta^*)\) aus?
+  \end{Denkpause}
+}
+\pause
+\begin{itemize}
+\item Kritischer Punkt: \(\nabla E(r^*,\vartheta^*) = 0\)
+\item Hesse-Matrix
+  \begin{gather*}
+    H =
+    \begin{pmatrix}
+      \frac{\partial^2 E}{\partial r^2} & \frac{\partial^2 E}{\partial r \partial \vartheta} \\[1ex]
+      \frac{\partial^2 E}{\partial \vartheta \partial r} & \frac{\partial^2 E}{\partial \vartheta^2}
+    \end{pmatrix}_{(r^*,\vartheta^*)}
+  \end{gather*}
+  \only<3>{
+  \begin{Denkpause}
+    Was wissen wir über die Hesse-Matrix?
+  \end{Denkpause}}
+\only<4>{\item $H$ ist symmetrisch und positiv definit, weil es sich um ein Minimum handelt
+\item Die Größe der Einträge von $H$ beschreibt die Steifheit der Bindung
+}
+\end{itemize}
+\end{frame}
+
+Das Minimum \( (r^*,\vartheta^*) \) beschreibt den stabilen gebundenen Zustand. Die Energie verhält sich in der Nähe dieses Zustands wie eine „Schüssel“ mit positiv definiter Hesse-Matrix.
+Große Werte von \( \frac{\partial^2 E}{\partial r^2} \) bedeuten, dass der Abstand ist stark fixiert ist (steife Bindung).
+Große Werte von \( \frac{\partial^2 E}{\partial \vartheta^2} \) bedeuten, dass die Konformation ist stark eingeschränkt ist.
+Die gemischte Ableitung beschreibt Kopplung, z.\,B. dass sich die Bindungstasche beim Annähern des Liganden mitverformt.
+Diese quadratische Näherung ist die Grundlage der harmonischen Approximation in der Molekülphysik.
+
+\begin{frame}
+  \begin{block}{Fazit}
+    Oft schließt man ais physikalischen Eigenschaften des Systems auf
+    die Eigenschaften der Ableitungen
+  \end{block}
+\end{frame}
+
+\begin{frame}{Abschlussfragen}
+  \begin{enumerate}
+  \item Was sind lokale Extrema?
+  \item Wie sind sie charakterisiert?
+  \item Was ist ein Sattelpunkt?
+  \item Was ist eine positiv definite Matrix?
+  \item Wie hängt das mit den Eigenwerten zusammen?
+  \end{enumerate}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Steilster Abstieg (gradient descent)}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Lagrange-Multiplikatoren}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Koordinatensysteme}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Integration}
+
+
 
 
 
