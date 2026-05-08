@@ -1,0 +1,48 @@
+\begin{tikzpicture}
+
+% Koordinatenachsen
+\draw[->] (-0.2,0) -- (1.2,0) node[right] {$x$};
+\draw[->] (0,-0.2) -- (0,2.2) node[above] {$y$};
+
+% Iterationspunkte
+\coordinate (P0)  at (1.000000,2.000000);
+\coordinate (P1)  at (0.966459,1.283229);
+\coordinate (P2)  at (0.689861,0.707189);
+\coordinate (P3)  at (0.426948,0.302436);
+\coordinate (P4)  at (0.281581,0.096787);
+\coordinate (P5)  at (0.205925,0.001778);
+\coordinate (P6)  at (0.164734,-0.038145);
+\coordinate (P7)  at (0.139288,-0.051422);
+\coordinate (P8)  at (0.121434,-0.052008);
+\coordinate (P9)  at (0.107321,-0.048044);
+\coordinate (P10) at (0.095426,-0.042250);
+\coordinate (P11) at (0.085050,-0.036065);
+\coordinate (P12) at (0.075823,-0.030008);
+\coordinate (P13) at (0.067511,-0.024287);
+\coordinate (P14) at (0.059951,-0.018945);
+\coordinate (P15) at (0.053025,-0.013963);
+\coordinate (P16) at (0.046647,-0.009305);
+\coordinate (P17) at (0.040749,-0.004936);
+\coordinate (P18) at (0.035278,-0.000828);
+\coordinate (P19) at (0.030191,0.003044);
+
+% Gepunktete Verbindungslinie
+\draw[dotted, thick]
+(P0)--(P1)--(P2)--(P3)--(P4)--(P5)--(P6)--(P7)--(P8)--(P9)
+--(P10)--(P11)--(P12)--(P13)--(P14)--(P15)--(P16)--(P17)--(P18)--(P19);
+
+% Punkte zeichnen
+\foreach \i in {0,...,19}
+{
+    \fill (P\i) circle (0.8pt);
+}
+
+% Startpunkt markieren
+\node[right] at (P0) {$\vx_0$};
+\node[right] at (P1) {$\vx_1$};
+\node[right] at (P2) {$\vx_2$};
+
+% Zielpunkt markieren
+% \node[below left] at (P19) {$x_{19}$};
+
+\end{tikzpicture}
