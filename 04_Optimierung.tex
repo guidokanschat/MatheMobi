@@ -1,0 +1,247 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Steilster Abstieg (gradient descent)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Wie findet man Minima?}
+  Bleiben wir beim Bild der Wanderung
+  \only<1>{
+    \begin{Denkpause}
+      Sie stehen an einem Hang und wollen die Talsohle erreichen. In
+      welche Richtung gehen Sie?
+    \end{Denkpause}
+  }
+  \pause
+  \begin{itemize}
+  \item Nach unten!
+  \item Am schnellsten abwärts geht es in Richtung
+    \begin{gather*}
+      -\nabla f
+    \end{gather*}
+  \item Das ist die \textbf{Richtung des steilsten Abstiegs}
+  \item Daraus leitet sich das \textbf{Verfahren des steilsten
+      Abstiegs}, auf Englisch \textbf{gradient descent} ab.
+  \item Es wird eingesetzt zur Minimierung, z.B. einer Energie
+  \item In der Sprache der Optimierung minimieren wir eine
+    \textbf{Kostenfunktion}
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Definition des Verfahrens des steilsten Abstiegs}
+  Gradient descent
+  \begin{itemize}
+  \item Ausgehend von einem \textbf{Startwert} $\vx_0$ generiert das
+    Verfahren eine Folge
+    \begin{gather*}
+      \vx_1,\vx_2,\ldots
+    \end{gather*}
+    mit dem Ziel, sich dem Minimum anzunähern.
+  \item Sei $f(\vx)$ die Kostenfunktion
+  \item Nach $n$ Schritten des Verfahrens berechnen wir $\vx_{n+1}$ durch
+    \begin{gather*}
+      \vx_{n+1} = \vx_{n} - \eta \nabla f(\vx_{n})
+    \end{gather*}
+  \item $\eta$ ist die \textbf{Lernrate} oder auch \textbf{Schrittweite}
+  \end{itemize}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Beispiel}
+  \begin{gather*}
+    f(x,y) = x^2+2y^2+2\sin(xy)
+    \qquad
+    \nabla f(x,y) = \begin{pmatrix}2x+2y\cos(xy) \\ 4y+2x\cos(xy)\end{pmatrix}
+  \end{gather*}
+  \begin{itemize}
+  \item Startpunkt: $(x_0,y_0) = (1,2)$
+  \item Lernrate: $\eta=0.1$
+  \item Iteration:
+    \begin{center}
+      \begin{tabular}[b]{c|rr}
+        Schritt & $x$ & $y$ \\\hline
+        $\vx_0$ & 1.0000 & 2.0000 \\
+        $\vx_1$ & 0.9665 & 1.2832 \\
+        $\vx_2$ & 0.6899 & 0.7072 \\
+        $\vx_3$ & 0.4269 & 0.3024 \\
+        $\vx_4$ & 0.2816 & 0.0968 \\
+        \vdots & \vdots & \vdots\\
+        $\vx_{100}$ & 0.0001 & -0.0001
+      \end{tabular}
+      \includegraphics[width=.25\textwidth]{fig/steepest.tikz}
+    \end{center}
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Abbruchkriterien}
+  Das Verfahren läuft undendlich weiter, was aber nicht praktikabel
+  ist. Wir können es stoppen, wenn
+  \begin{itemize}
+  \item Der Gradient klein ist,
+    \begin{gather*}
+      \left|\nabla f(\vx_n)\right| < \varepsilon
+    \end{gather*}
+    \begin{itemize}
+    \item Äquivalent zu Schrittweite klein:
+      \begin{gather*}
+        |\vx_{n+1}- \vx_n| < \eta \varepsilon
+      \end{gather*}
+    \end{itemize}
+  \item Maximale Schrittzahl erreicht $n=n_{\text{max}}$
+    \begin{itemize}
+    \item Nothalt, damit das Programm nicht hängen bleibt
+    \end{itemize}
+  \item Falls der minimale Wert $f_{\text{min}}$ von $f$ bekannt ist
+    \begin{gather*}
+      f(\vx_{n}) - f_{\text{min}} < \varepsilon
+    \end{gather*}
+    \begin{itemize}
+    \item Zum Beispiel bei der Nullstellensuche
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \begin{gather*}
+    f(x,y) = x^2+2y^2+2\sin(xy)\qquad
+    \nabla f(x,y) = \begin{pmatrix}2x+2y\cos(xy) \\ 4y+2x\cos(xy)\end{pmatrix}
+  \end{gather*}
+  
+\centerline{\includegraphics[width=.9\textwidth]{img/gd1.png}}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Wahl der Lernrate}
+    
+    \begin{itemize}
+    \item Das Bild der Wanderung hinkt
+      \begin{itemize}
+      \item Wir folgen dem Gradienten nicht stetig
+      \item Wir teleportieren abhängig von der Lernrate
+      \end{itemize}
+      \only<1>{
+        \begin{Denkpause}
+          Was kann dadurch schiefgehen?
+        \end{Denkpause}
+      }
+      \pause
+    \item Wahl der Lernrate $\eta$ entscheidend
+      \begin{itemize}
+      \item Zu klein: langsame Konvergenz
+      \item Zu groß: divergiert, springt über Minimum
+      \end{itemize}
+    \end{itemize}
+    \centerline{\includegraphics[width=1.1\textwidth]{img/gd4.png}}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Strategien für die Lernrate}
+  \begin{itemize}
+  \item \glqq{}Schrittweitenhalbierung\grqq{} mit gewählter Grundschrittweite $\eta$
+    \begin{enumerate}
+    \item Berechne $\vd_n = -\eta\nabla f(\vx_n)$
+    \item Berechne $f(\vx_n+\vd_n)$
+    \item Ist dieser Wert größer als $f(\vx_n)$, halbiere $\vd_n$ und gehe zu 2.
+      \begin{itemize}
+      \item Hintergrund: wenn wir minimieren ist es nicht sinnvoll zu
+        größeren Werten zu gehen
+      \end{itemize}
+    \end{enumerate}
+  \item Line search
+    \begin{enumerate}
+    \item Betrachte die Funktion $g(t) = f(\vx_n-t\nabla f(\vx_n))$
+    \item Finde deren Minimum für $t>0$
+      \begin{itemize}
+      \item Eindimensionale Minimierung ist einfacher!
+      \end{itemize}
+      \item Wähle dieses $t$ als Schrittweite $\eta$
+    \end{enumerate}
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Wahl des Startpunkts}
+    \begin{itemize}
+        \item Konvergenz hängt vom {\bf Startpunkt} ab
+          \begin{itemize}
+            \item Kann viele Iterationsschritte benötigen
+            \item Kann in ein lokales Minimum führen
+            \item Kann in einen Sattelpunkt führen (unwahrscheinlich)
+        \end{itemize}
+    \end{itemize}
+
+    \centerline{\includegraphics[width=.8\textwidth]{img/gd3.png}}
+    \begin{itemize}
+        \item Mögliche Strategien: zufällige, mehrfache Startpunkte; benutzen von Vorwissen; ...
+    \end{itemize}
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\begin{frame}
+    \frametitle{Kristische Aspekte bei Gradient descent}
+    \begin{itemize}
+        \item GD konvergiert zu einem {\bf lokalen Minimum}!
+            \item Lokales Minimum: $f(x) \ge f(x_0)$ für alle $x$ in einer Umgebung von $x_0$.
+            \item Globales Minimum: $f(x) \ge f(x_0)$ für alle $x$ im Definitionsbereich.
+        \item Meistens suchen wir jedoch das {\bf globale Minimum}
+    \end{itemize}
+\centerline{\includegraphics[width=.6\textwidth]{img/local.png}}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Konvexe Funktionen}
+    \begin{itemize}
+        \item Eine Funktion $f$ ist {\bf konvex}, wenn für alle $p_1, p_2 \in \mathbb{R}^n$ im Definitionsbereich gilt:
+        $$
+        f(\lambda p_1 + (1-\lambda)p_2) \leq \lambda f(p_1) + (1-\lambda)f(p_2)~~~~~\forall \lambda \in [0,1]
+        $$
+        \item anders gesagt: verbindet man 2 Punkte auf der Fläche, dann ist die Verbindungslinie immer oberhalb der Fläche.
+        \item Besitzt eine konvexe Funktion ein Minimum, dann ist es immer ein {\bf globales Minimum}: bei den Funktionen funktioniert GD besonders gut!
+        \item Beispiel: $f(x,y) = x^2 + 2y^2$ ist konvex.
+    \end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Anwendungen in der Bioinformatik}
+
+    \begin{itemize}
+        \item Proteinfaltungsvorhersage:
+        \begin{itemize}
+        \item Finden der energetisch günstigsten Konformation
+        \item Die Energielandschaft hat viele lokale Minima
+        \item Gradientenabstieg mit stochastischen Komponenten
+        \end{itemize}
+         \item Molekulardynamik-Simulationen:\
+        \begin{itemize}
+            \item Energieminimierung von Molekülstrukturen
+            \item Berechnung stabiler Konformationen von Biomolekülen
+        \end{itemize}        
+        \item Machine Learning in der Genomik:
+        \begin{itemize}
+        \item Training von neuronalen Netzen zur Klassifizierung von Tumor-Subtypen anhand von Genexpressionsdaten.
+        \item Vorhersage von Protein-Protein-Interaktionen
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\gkerror{Todo}
+\begin{frame}{Abschlussfragen}
+  
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Lagrange-Multiplikatoren}
+

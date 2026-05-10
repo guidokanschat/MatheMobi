@@ -1120,271 +1120,450 @@ Diese quadratische Näherung ist die Grundlage der harmonischen Approximation in
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Steilster Abstieg (gradient descent)}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Wie findet man Minima?}
-  Bleiben wir beim Bild der Wanderung
-  \only<1>{
-    \begin{Denkpause}
-      Sie stehen an einem Hang und wollen die Talsohle erreichen. In
-      welche Richtung gehen Sie?
-    \end{Denkpause}
-  }
-  \pause
-  \begin{itemize}
-  \item Nach unten!
-  \item Am schnellsten abwärts geht es in Richtung
-    \begin{gather*}
-      -\nabla f
-    \end{gather*}
-  \item Das ist die \textbf{Richtung des steilsten Abstiegs}
-  \item Daraus leitet sich das \textbf{Verfahren des steilsten
-      Abstiegs}, auf Englisch \textbf{gradient descent} ab.
-  \item Es wird eingesetzt zur Minimierung, z.B. einer Energie
-  \item In der Sprache der Optimierung minimieren wir eine
-    \textbf{Kostenfunktion}
-  \end{itemize}
-\end{frame}
+\subsection{Vektorfelder und Koordinatensysteme}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Definition des Verfahrens des steilsten Abstiegs}
-  Gradient descent
-  \begin{itemize}
-  \item Ausgehend von einem \textbf{Startwert} $\vx_0$ generiert das
-    Verfahren eine Folge
-    \begin{gather*}
-      \vx_1,\vx_2,\ldots
-    \end{gather*}
-    mit dem Ziel, sich dem Minimum anzunähern.
-  \item Sei $f(\vx)$ die Kostenfunktion
-  \item Nach $n$ Schritten des Verfahrens berechnen wir $\vx_{n+1}$ durch
-    \begin{gather*}
-      \vx_{n+1} = \vx_{n} - \eta \nabla f(\vx_{n})
-    \end{gather*}
-  \item $\eta$ ist die \textbf{Lernrate} oder auch \textbf{Schrittweite}
-  \end{itemize}
-\end{frame}
+\mrnote{vorläufig sind die Folien aus Carl Herrmanns Teil zu Koordinatensystemen eingefügt. Die Beispiele beziehen sich noch auf Kapitel 2, da der Themenkomplex ursprünglich dort angesiedelt war}
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Beispiel}
+\begin{frame}{Mehrdimensionale Funktionen mehrerer Variablen}
   \begin{gather*}
-    f(x,y) = x^2+2y^2+2\sin(xy)
-    \qquad
-    \nabla f(x,y) = \begin{pmatrix}2x+2y\cos(xy) \\ 4y+2x\cos(xy)\end{pmatrix}
+    \vf\colon \R^n \to \R^m
   \end{gather*}
   \begin{itemize}
-  \item Startpunkt: $(x_0,y_0) = (1,2)$
-  \item Lernrate: $\eta=0.1$
-  \item Iteration:
-    \begin{center}
-      \begin{tabular}[b]{c|rr}
-        Schritt & $x$ & $y$ \\\hline
-        $\vx_0$ & 1.0000 & 2.0000 \\
-        $\vx_1$ & 0.9665 & 1.2832 \\
-        $\vx_2$ & 0.6899 & 0.7072 \\
-        $\vx_3$ & 0.4269 & 0.3024 \\
-        $\vx_4$ & 0.2816 & 0.0968 \\
-        \vdots & \vdots & \vdots\\
-        $\vx_{100}$ & 0.0001 & -0.0001
-      \end{tabular}
-      \includegraphics[width=.25\textwidth]{fig/steepest.tikz}
-    \end{center}
+  \item $\vf$ ordnet jedem Punkt im Raum einen Vektor zu
+    \begin{gather*}
+      \vf(\vx) =
+      \begin{pmatrix}
+        f_1(x_1,\dots,x_n)\\
+        \vdots\\
+        f_m(x_1,\dots,x_n)
+      \end{pmatrix}
+    \end{gather*}
+%  \item Anwendung der Prinzipien dieses Kapitels auf Funktionen, die
+    selbst Vektoren sind
+  \item Gradient wird zur \textbf{Jacobi-Matrix}
+    \begin{gather*}
+      \nabla \vf =
+      \begin{pmatrix}
+        \partial_1 f_1 & \cdots & \partial_n f_1\\
+        \vdots && \vdots \\
+        \partial_1 f_m & \cdots & \partial_n f_m        
+      \end{pmatrix}
+    \end{gather*}
+    \begin{itemize}
+    \item Argumente der Übersichtlichkeit halber weggelassen
+    \item Merkregel: wende Gradient zeilenweise an
+    \end{itemize}
   \end{itemize}
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Abbruchkriterien}
-  Das Verfahren läuft undendlich weiter, was aber nicht praktikabel
-  ist. Wir können es stoppen, wenn
+\begin{frame}{Beispiel: Chemotaxis}
   \begin{itemize}
-  \item Der Gradient klein ist,
+  \item Konzentration eines Signalstoffs (z.B. Nahrung)
     \begin{gather*}
-      \left|\nabla f(\vx_n)\right| < \varepsilon
+      c(x,y) = c_0 e^{-(x^2+y^2)}
     \end{gather*}
-    \begin{itemize}
-    \item Äquivalent zu Schrittweite klein:
-      \begin{gather*}
-        |\vx_{n+1}- \vx_n| < \eta \varepsilon
-      \end{gather*}
-    \end{itemize}
-  \item Maximale Schrittzahl erreicht $n=n_{\text{max}}$
-    \begin{itemize}
-    \item Nothalt, damit das Programm nicht hängen bleibt
-    \end{itemize}
-  \item Falls der minimale Wert $f_{\text{min}}$ von $f$ bekannt ist
+  \item Bakterien folgen dem Gradienten
     \begin{gather*}
-      f(\vx_{n}) - f_{\text{min}} < \varepsilon
+      \vf(x,y) = \nabla c(x,y) = 
+      \begin{pmatrix}
+        \frac{\partial c}{\partial x}\\
+        \frac{\partial c}{\partial y}
+      \end{pmatrix}
+      =
+      \begin{pmatrix}
+        -2 c_0 xe^{-(x^2+y^2)}\\
+        -2 c_0 ye^{-(x^2+y^2)}
+      \end{pmatrix}
     \end{gather*}
-    \begin{itemize}
-    \item Zum Beispiel bei der Nullstellensuche
-    \end{itemize}
+  \item Eine Funktion $\vf\colon \R^n\to\R^n$ nennt man auch
+    \textbf{Vektorfeld}
+  \item In diesem Falle Gradientenfeld
   \end{itemize}
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-  \begin{gather*}
-    f(x,y) = x^2+2y^2+2\sin(xy)\qquad
-    \nabla f(x,y) = \begin{pmatrix}2x+2y\cos(xy) \\ 4y+2x\cos(xy)\end{pmatrix}
-  \end{gather*}
-  
-\centerline{\includegraphics[width=.9\textwidth]{img/gd1.png}}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-    \frametitle{Wahl der Lernrate}
-    
-    \begin{itemize}
-    \item Das Bild der Wanderung hinkt
+\begin{frame}{Darstellung}
+  \begin{columns}
+    \begin{column}{.59\textwidth}
+      \includegraphics[width=.95\textwidth]{pic/gradient-field}
+    \end{column}
+    \begin{column}{.39\textwidth}
       \begin{itemize}
-      \item Wir folgen dem Gradienten nicht stetig
-      \item Wir teleportieren abhängig von der Lernrate
+      \item Konzentration als Farbe
+      \item Vektorfeld als Pfeile
+        \begin{itemize}
+        \item Richtung
+        \item Länge
+        \end{itemize}
       \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Beispiel}
+  \begin{columns}
+    \begin{column}{.59\textwidth}
+      \includegraphics[width=.95\textwidth]{pic/rotation}
+    \end{column}
+    \begin{column}{.39\textwidth}
       \only<1>{
         \begin{Denkpause}
-          Was kann dadurch schiefgehen?
+          Was stellt dieses Vektorfeld dar?
         \end{Denkpause}
       }
       \pause
-    \item Wahl der Lernrate $\eta$ entscheidend
       \begin{itemize}
-      \item Zu klein: langsame Konvergenz
-      \item Zu groß: divergiert, springt über Minimum
+      \item Rotation um den Mittelpunkt
+      \item Geschwindigkeit innen 0, nach au\ss{}en wachsend
+      \item Alternative: Pfeile farbig
       \end{itemize}
+    \end{column}
+  \end{columns}  
+\end{frame}
+
+\begin{Aufgabe}
+  Betrachten Sie diese Darstellung des Geschwindigkeitsfeldes in einem
+  Bioreaktor:
+  \begin{center}
+    \includegraphics[width=.8\textwidth]{pic/bioreaktor-rotation}
+  \end{center}
+  Intepretieren Sie die Eigenschaften der Strömung. Skizzieren Sie die
+  Geschwindigkeit abhängig vom Abstand zum Mittelpunkt.
+\end{Aufgabe}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Koordinatensysteme}
+
+    \begin{itemize}
+        \item Es gibt unterschiedliche {\bf Koordinatensysteme}, um die Position eines Punktes im Raum zu beschreiben
+        \item Beispiele:
+        \begin{enumerate}
+            \item Kartesische Koordinaten $(x,y,z,...)$
+            \item Polarkoordinaten im 2d Raum: $(r,\theta)$
+            \item Kugelkoordinaten im 3d Raum $(r,\theta,\phi)$
+        \end{enumerate}
+        \item Die Wahl des Koordinatensystems is beliebig, aber bestimmte Systeme eignen sich besser als andere, und führen zu einer einfachen Beschreibung.
     \end{itemize}
-    \centerline{\includegraphics[width=1.1\textwidth]{img/gd4.png}}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Strategien für die Lernrate}
+\begin{frame}
+    \frametitle{Polarkoordinaten}
+
+\begin{center}
+    \includegraphics[width=.3\textwidth]{fig/pk11.png}
+\end{center}
+
+
+ \begin{itemize}
+ \item im 2-dimensionalen Raum kann jeder Punkt dargestellt werden durch
+   \begin{itemize}
+   \item Kartesische Koordinaten $x$ und $y$
+   \item Polarkoordinaten: Radius $r$ und Winkel $\theta$ 
+   \end{itemize}
+   \begin{gather*}
+     \begin{pmatrix}
+       x\\y
+     \end{pmatrix}
+     =
+     \begin{pmatrix}
+       r\cos\theta \\ r\sin\theta
+     \end{pmatrix}
+     \qquad r \ge 0
+   \end{gather*}
+   \begin{itemize}
+   \item $\sin$ und $\cos$ sind $2\pi$-periodisch, daher Optionen
+     \begin{itemize}
+     \item $\theta\in [0,2\pi)$ ist intuitiv
+     \item $\theta\in [-\pi,\pi)$ ist praktisch (s.u.)
+     \end{itemize}
+   \end{itemize}
+ \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle<presentation>{Polarkoordinaten}
+  Umwandlung von kartesischen in Polarkoordinaten:
+  \begin{gather*}
+    r=\sqrt{x^2+y^2},\qquad
+    \tan\theta = \frac{r\sin\theta}{r\cos\theta} = \frac{y}{x}
+  \end{gather*}
   \begin{itemize}
-  \item \glqq{}Schrittweitenhalbierung\grqq{} mit gewählter Grundschrittweite $\eta$
-    \begin{enumerate}
-    \item Berechne $\vd_n = -\eta\nabla f(\vx_n)$
-    \item Berechne $f(\vx_n+\vd_n)$
-    \item Ist dieser Wert größer als $f(\vx_n)$, halbiere $\vd_n$ und gehe zu 2.
-      \begin{itemize}
-      \item Hintergrund: wenn wir minimieren ist es nicht sinnvoll zu
-        größeren Werten zu gehen
-      \end{itemize}
-    \end{enumerate}
-  \item Line search
-    \begin{enumerate}
-    \item Betrachte die Funktion $g(t) = f(\vx_n-t\nabla f(\vx_n))$
-    \item Finde deren Minimum für $t>0$
-      \begin{itemize}
-      \item Eindimensionale Minimierung ist einfacher!
-      \end{itemize}
-      \item Wähle dieses $t$ als Schrittweite $\eta$
-    \end{enumerate}
+  \item Im Nullpunkt ist der Winkel unbestimmt
+  \item Die Umkehrfunktion $\arctan$ ist definiert von $\mathbb{R}\rightarrow (-\frac{\pi}{2},\frac{\pi}{2})$
+  \item Winkel zwischen $-\frac{\pi}{2}$ und $\frac{\pi}{2}$
+  \item $\arctan$ sieht nur das Produkt der Vorzeichen von $x$ und $y$, nicht die individuellen Vorzeichen
   \end{itemize}
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-    \frametitle{Wahl des Startpunkts}
-    \begin{itemize}
-        \item Konvergenz hängt vom {\bf Startpunkt} ab
-          \begin{itemize}
-            \item Kann viele Iterationsschritte benötigen
-            \item Kann in ein lokales Minimum führen
-            \item Kann in einen Sattelpunkt führen (unwahrscheinlich)
-        \end{itemize}
-    \end{itemize}
-
-    \centerline{\includegraphics[width=.8\textwidth]{img/gd3.png}}
-    \begin{itemize}
-        \item Mögliche Strategien: zufällige, mehrfache Startpunkte; benutzen von Vorwissen; ...
-    \end{itemize}
+  \frametitle{Anpassung der Winkel auf $[0,2\pi)$}
+  \begin{center}
+    \includegraphics[width=.7\textwidth]{fig/pk13.png}
+  \end{center}
 \end{frame}
 
+\begin{Aufgabe}
+  Wie sieht die Winkelanpassung für das Ziel-Intervall $[-\pi,\pi)$
+  aus? Finden Sie eine einfache Darstellung, die nur vom Vorzeichen
+  von $x$ abhängt.
+\end{Aufgabe}
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-\begin{frame}
-    \frametitle{Kristische Aspekte bei Gradient descent}
-    \begin{itemize}
-        \item GD konvergiert zu einem {\bf lokalen Minimum}!
-            \item Lokales Minimum: $f(x) \ge f(x_0)$ für alle $x$ in einer Umgebung von $x_0$.
-            \item Globales Minimum: $f(x) \ge f(x_0)$ für alle $x$ im Definitionsbereich.
-        \item Meistens suchen wir jedoch das {\bf globale Minimum}
-    \end{itemize}
-\centerline{\includegraphics[width=.6\textwidth]{img/local.png}}
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Koordinatenwechsel}
+  \begin{gather*}
+    f(x,y) = \left(x^2+y^2\right)^{3/2},\qquad g(r,\theta) = r^3
+  \end{gather*}
+  \begin{itemize}
+  \item Sei $T$ die Transformation von Polarkoordinaten auf kartesische Koordinaten
+    \begin{gather*}
+      \begin{pmatrix}
+        x\\y
+      \end{pmatrix}
+      = T
+      \begin{pmatrix}
+        r\\\theta
+      \end{pmatrix},
+      \qquad
+      \begin{pmatrix}
+        r\\\theta
+      \end{pmatrix}
+      = T^{-1}
+      \begin{pmatrix}
+        x\\y
+      \end{pmatrix}
+    \end{gather*}
+  \item Es gilt dann
+    \begin{gather*}
+      f\bigl(T(r,\theta)\bigr) = g(r,\theta),\qquad
+      g\bigl(T^{-1}(x,y)\bigr) = f(x,y)
+    \end{gather*}
+  \item Diese Beziehung gilt allgemein beim Koordinatenwechsel
+  \end{itemize}
 \end{frame}
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-    \frametitle{Konvexe Funktionen}
+\begin{frame}{Kettenregel}
+  Gesucht ist die Ableitung von $f$ nach $r$ und $\theta$
+  \begin{itemize}
+  \item $g(r,\theta)= f(r\cos\theta,r\sin\theta)$
+  \item Jetzt können wir die Kettenregel der Wegableitung benutzen:
+    \begin{align*}
+      \partial_r g = d_r f
+      &= \partial_x f\cos\theta+\partial_y f \sin\theta\\
+      \partial_\phi g = d_\phi f
+      &= \partial_x f\; (-r\sin\phi) + \partial_y f\; r \cos \phi
+    \end{align*}
+  \item
+  \item Berechnen wir die Jacobi-Matrix von $T$, erhalten wir
+    \begin{gather*}
+      \nabla T(r,\theta) =
+      \begin{pmatrix}
+        \cos \theta & -r \sin \theta \\
+        \sin \theta & r \cos \theta
+      \end{pmatrix}      
+    \end{gather*}
+  \item Es gilt also (sogar allgemein für beliebige $T$)
+    \begin{gather*}
+      \nabla g(r,\theta)
+      = \nabla f\bigl(T(r,\theta)\bigr) \nabla T(r,\theta)
+    \end{gather*}
     \begin{itemize}
-        \item Eine Funktion $f$ ist {\bf konvex}, wenn für alle $p_1, p_2 \in \mathbb{R}^n$ im Definitionsbereich gilt:
-        $$
-        f(\lambda p_1 + (1-\lambda)p_2) \leq \lambda f(p_1) + (1-\lambda)f(p_2)~~~~~\forall \lambda \in [0,1]
-        $$
-        \item anders gesagt: verbindet man 2 Punkte auf der Fläche, dann ist die Verbindungslinie immer oberhalb der Fläche.
-        \item Besitzt eine konvexe Funktion ein Minimum, dann ist es immer ein {\bf globales Minimum}: bei den Funktionen funktioniert GD besonders gut!
-        \item Beispiel: $f(x,y) = x^2 + 2y^2$ ist konvex.
+    \item Alle Gradienten enthalten die partiellen Ableitungen
+    \item Gradienten werden im Matrixprodukt als Zeilenvektoren gelesen
     \end{itemize}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-    \frametitle{Anwendungen in der Bioinformatik}
-
-    \begin{itemize}
-        \item Proteinfaltungsvorhersage:
-        \begin{itemize}
-        \item Finden der energetisch günstigsten Konformation
-        \item Die Energielandschaft hat viele lokale Minima
-        \item Gradientenabstieg mit stochastischen Komponenten
-        \end{itemize}
-         \item Molekulardynamik-Simulationen:\
-        \begin{itemize}
-            \item Energieminimierung von Molekülstrukturen
-            \item Berechnung stabiler Konformationen von Biomolekülen
-        \end{itemize}        
-        \item Machine Learning in der Genomik:
-        \begin{itemize}
-        \item Training von neuronalen Netzen zur Klassifizierung von Tumor-Subtypen anhand von Genexpressionsdaten.
-        \item Vorhersage von Protein-Protein-Interaktionen
-        \end{itemize}
-    \end{itemize}
+  \end{itemize}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\gkerror{Todo}
-\begin{frame}{Abschlussfragen}
+\begin{frame}{Anwendung auf das Beispiel}
+  \begin{gather*}
+    f(x,y) = \left(x^2+y^2\right)^{3/2},\qquad g(r,\theta) = r^3
+  \end{gather*}
+  \begin{itemize}
+  \item Gradient von $f$
+    \begin{gather*}
+      \nabla f(x,y) =
+      \begin{pmatrix}
+        3x\sqrt{x^2+y^2}\\3y\sqrt{x^2+y^2}
+      \end{pmatrix}
+      =
+      \begin{pmatrix}
+        3 r^2 \cos \theta\\3 r^2 \sin\theta
+      \end{pmatrix}
+    \end{gather*}
+  \item Ableitung nach $r$: $\nabla f$ mal erste Spalte von $\nabla T$
+    \begin{gather*}
+      d_r f(T(r,\theta)) =
+      \begin{pmatrix}
+        3 r^2 \cos \theta\\3 r^2 \sin\theta
+      \end{pmatrix}\cdot
+      \begin{pmatrix}
+        \cos\theta\\\sin\theta
+      \end{pmatrix} = 3r^2 = \partial_r g(r,\theta)
+    \end{gather*}
+    \pause
+  \item Ableitung nach $\theta$: $\nabla f$ mal zweite Spalte von $\nabla T$
+    \begin{gather*}
+      d_\theta f(T(r,\theta)) =
+      \begin{pmatrix}
+        3 r^2 \cos \theta\\3 r^2 \sin\theta
+      \end{pmatrix}\cdot
+      \begin{pmatrix}
+        -r\sin\theta\\r\cos\theta
+      \end{pmatrix} = 0 = \partial_\theta g(r,\theta)
+    \end{gather*}
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \begin{block}{Fazit}
+    Die richtige Wahl des Koordinatensystems kann die Berechnung enorm vereinfachen!
+  \end{block}
+\end{frame}
+
+\begin{Aufgabe}
+  Stellen Sie folgende Funktion in Polarkoordinaten dar und berechnen
+  Sie ihre Ableitung nach Radius und Winkel:
+  \begin{gather*}
+    f(x,y) = x^3 + x y^2
+  \end{gather*}
+\end{Aufgabe}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Ableitung der Umkehrabbildung}
+  \begin{itemize}
+  \item Die Umkehrabbildung und ihre Ableitung lauten
+    \begin{gather*}
+      T^{-1}(x,y) = 
+    \end{gather*}
+  \end{itemize}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Beispiel: Kurven}
+
+    {\bf Kreis}, Mittelpunkt bei $(0,0)$, Radius $a$:
+    \begin{columns}
+        \begin{column}{0.7\textwidth}
+        \begin{itemize}
+            \item Kartesische Koordinaten: $\sqrt{x^2+y^2}=a$
+            \item Polarkoordinaten: $ r=a, \;\theta\in[0,2\pi)$
+        \end{itemize}
+    \end{column}
+    \begin{column}{0.3\textwidth}
+        \includegraphics[width=\textwidth]{fig/pk14.png}
+    \end{column}
+\end{columns}
+        {\bf Halbgerade:}
+        \begin{columns}
+            \begin{column}{0.75\textwidth}
+        \begin{itemize}
+            \item $\text{kartesische Koordinaten:}~y=ax$ mit $x,y,a>0$
+            \item $\text{Polarkoordinaten:}~ \theta=\text{Konstante mit}~~ \cos\theta = \frac{1}{\sqrt{1+a^2}}~, r\ge 0$
+        \end{itemize}
+    \end{column}
+    \begin{column}{.25\textwidth}
+        \includegraphics[width=\textwidth]{fig/pk15.png}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{3D: Kugelkoordinaten}
+
+    \begin{columns}
+        \begin{column}{.6\textwidth}
+    \begin{itemize}
+        \item Verallgemeinerung der Polarkoordinaten in 3d
+        \item $(x,y,z)~\longrightarrow~(r,\theta,\phi)$
+        \item $r$ = Radius $(r\ge 0)$
+        \item $\theta$ = Polarwinkel $(0\le \theta\le \pi)$
+        \item $\phi$ = Azimutwinkel $(0\le \phi\le 2\pi)$
+    \end{itemize}
+\end{column}
+\begin{column}{.4\textwidth}
+    \begin{center}
+        \includegraphics[width=\textwidth]{fig/pk18.png}
+    \end{center}
+\end{column}
+\end{columns}
+\vspace{.5cm}
+Kugelkoordinaten $\longrightarrow$ kartesische Koordinaten:
+\begin{itemize}
+    \item $x = r\,\sin\theta\,\cos\phi$
+    \item $y=r\,\sin\theta\,\sin\phi$
+    \item $z=r\,\cos\theta$
+\end{itemize}
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle{Parametrische Kurven in verschiedenen Koordinatensystemen}
   
+  \begin{itemize}
+  \item Wenn wir die Bewegung eines Punktes im 2d/3d Raum beschreiben, können wir die {\bf zurückgelegte Strecke} $L$ oder die {\bf überstrichene Fläche} $S$  bestimmen.
+  \item Dazu muss ein infinitesimales Streckenstück $dL$ oder Flächestück $dS$ integriert werden.
+  \item Der Ausdruck von $dL$ oder $dS$ hängt vom {\bf Koordinatensystem} ab!
+  \end{itemize}
+  \begin{center}
+    \includegraphics[width=.8\textwidth]{fig/pk21.png}
+  \end{center}
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Lagrange-Multiplikatoren}
+\subsection{Mehrdimensionale Integration}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Koordinatensysteme}
+\begin{frame}{Der Satz von Fubini}
+  Mehrdimensionale Integrale können Richtung für Richtung berechnet
+  werden. Die Reihenfolge spielt dabei keine Rolle.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Integration}
+  \vspace{1ex}
+  
+  Beispiel: Würfel $Q=[0,1]^2$
+  \begin{gather*}
+    \iint_Q f(\vx)\,d\vx = \int_0^1\int_0^1 f(x,y) \,dx\,dy
+     = \int_0^1\int_0^1 f(x,y) \,dy\,dx
+   \end{gather*}
 
+   Dabei wird bei der Integration $dx$ die Variable $y$ konstant angenommen und umgekehrt.
 
+   \vspace{1ex}
 
+   \pause
+   Die Notation $\iint$ und $\iiint$ für 2- und 3-dimensionale
+   Integrale ist in der Mathematik weniger gebräuchlich und wird oft
+   durch das einfache Integralzeichen $\int$ ersetzt. Die Dimension
+   ergibt sich dann aus dem vektorwertigen Differential $d\vx$.
+\end{frame}
+
+\begin{frame}{Beispiel}
+  \begin{multline*}
+    \int_0^1\int_0^1 e^{\frac y3}\sin(\pi x)\,dy\,dx
+    = 3\Bigl[ e^{\frac y3}\Bigr]_0^1 \int_0^1 \sin(\pi x)\,dx \\
+    = 3 \Bigl[ e^{\frac y3}\Bigr]_0^1 \tfrac{-1}\pi \Bigl[\cos(\pi x)\Bigr)_0^1
+  \end{multline*}
+\end{frame}
 
 
 \begin{envgknote}{Neue Struktur}
     \begin{itemize}
     \item Isoflächen, Orbitale?
-    \item Gradient Descent (Vorlesung 3.6)
     \item Optimierung mittels Lagrange-Multiplikatoren (Vorlesung 3.7)
     \end{itemize}
 \end{envgknote}
