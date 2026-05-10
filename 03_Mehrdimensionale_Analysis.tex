@@ -1240,7 +1240,7 @@ Diese quadratische Näherung ist die Grundlage der harmonischen Approximation in
         \item Beispiele:
         \begin{enumerate}
             \item Kartesische Koordinaten $(x,y,z,...)$
-            \item Polarkoordinaten im 2d Raum: $(r,\theta)$
+            \item Polarkoordinaten im 2d Raum: $(r,\phi)$
             \item Kugelkoordinaten im 3d Raum $(r,\theta,\phi)$
         \end{enumerate}
         \item Die Wahl des Koordinatensystems is beliebig, aber bestimmte Systeme eignen sich besser als andere, und führen zu einer einfachen Beschreibung.
@@ -1260,7 +1260,7 @@ Diese quadratische Näherung ist die Grundlage der harmonischen Approximation in
  \item im 2-dimensionalen Raum kann jeder Punkt dargestellt werden durch
    \begin{itemize}
    \item Kartesische Koordinaten $x$ und $y$
-   \item Polarkoordinaten: Radius $r$ und Winkel $\theta$ 
+   \item Polarkoordinaten: Radius $r$ und Winkel $\phi$ 
    \end{itemize}
    \begin{gather*}
      \begin{pmatrix}
@@ -1268,15 +1268,15 @@ Diese quadratische Näherung ist die Grundlage der harmonischen Approximation in
      \end{pmatrix}
      =
      \begin{pmatrix}
-       r\cos\theta \\ r\sin\theta
+       r\cos\phi \\ r\sin\phi
      \end{pmatrix}
      \qquad r \ge 0
    \end{gather*}
    \begin{itemize}
    \item $\sin$ und $\cos$ sind $2\pi$-periodisch, daher Optionen
      \begin{itemize}
-     \item $\theta\in [0,2\pi)$ ist intuitiv
-     \item $\theta\in [-\pi,\pi)$ ist praktisch (s.u.)
+     \item $\phi\in [0,2\pi)$ ist intuitiv
+     \item $\phi\in (-\pi,\pi]$ ist typisch auf Computern
      \end{itemize}
    \end{itemize}
  \end{itemize}
@@ -1287,7 +1287,7 @@ Diese quadratische Näherung ist die Grundlage der harmonischen Approximation in
   Umwandlung von kartesischen in Polarkoordinaten:
   \begin{gather*}
     r=\sqrt{x^2+y^2},\qquad
-    \tan\theta = \frac{r\sin\theta}{r\cos\theta} = \frac{y}{x}
+    \tan\phi = \frac{r\sin\phi}{r\cos\phi} = \frac{y}{x}
   \end{gather*}
   \begin{itemize}
   \item Im Nullpunkt ist der Winkel unbestimmt
@@ -1306,68 +1306,93 @@ Diese quadratische Näherung ist die Grundlage der harmonischen Approximation in
 \end{frame}
 
 \begin{Aufgabe}
-  Wie sieht die Winkelanpassung für das Ziel-Intervall $[-\pi,\pi)$
+  Wie sieht die Winkelanpassung für das Ziel-Intervall $(-\pi,\pi]$
   aus? Finden Sie eine einfache Darstellung, die nur vom Vorzeichen
   von $x$ abhängt.
 \end{Aufgabe}
 
+\begin{frame}{Implementation der Umkehrabbildung}
+  \begin{itemize}
+  \item Auf Computern ist die Funktion \texttt{atan2(x,y)}
+    implementiert, die zur Berechnung von $\phi$ benutzt werden
+    kann.
+  \item \texttt{atan2(x,y)} ist definiert als der eindeutige Winkel
+    $\phi\in(-\pi,\pi]$, so dass
+    \begin{gather*}
+      x = r \cos \phi,\qquad y = r \sin\phi\qquad
+      \text{falls } r = \sqrt{x^2+y^2} > 0
+    \end{gather*}
+  \item \texttt{atan2(0,0)} ist mathematisch undefiniert und in der
+    Implementation meistens 0.
+  \item Die Transformation von Polarkoordinaten auf kartesische ist damit
+    \begin{gather*}
+      \begin{pmatrix}
+        r\\\phi
+      \end{pmatrix}
+      =
+      \begin{pmatrix}
+        \sqrt{x^2+y^2}\\\operatorname{atan2}(x,y)
+      \end{pmatrix}
+    \end{gather*}
+  \end{itemize}
+\end{frame}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Koordinatenwechsel}
   \begin{gather*}
-    f(x,y) = \left(x^2+y^2\right)^{3/2},\qquad g(r,\theta) = r^3
+    f(x,y) = \left(x^2+y^2\right)^{3/2},\qquad g(r,\phi) = r^3
   \end{gather*}
   \begin{itemize}
-  \item Sei $T$ die Transformation von Polarkoordinaten auf kartesische Koordinaten
+  \item Sei $\vT$ die Transformation von Polarkoordinaten auf kartesische Koordinaten
     \begin{gather*}
       \begin{pmatrix}
         x\\y
       \end{pmatrix}
-      = T
+      = \vT
       \begin{pmatrix}
-        r\\\theta
+        r\\\phi
       \end{pmatrix},
       \qquad
       \begin{pmatrix}
-        r\\\theta
+        r\\\phi
       \end{pmatrix}
-      = T^{-1}
+      = \vT^{-1}
       \begin{pmatrix}
         x\\y
       \end{pmatrix}
     \end{gather*}
   \item Es gilt dann
     \begin{gather*}
-      f\bigl(T(r,\theta)\bigr) = g(r,\theta),\qquad
-      g\bigl(T^{-1}(x,y)\bigr) = f(x,y)
+      f\bigl(\vT(r,\phi)\bigr) = g(r,\phi),\qquad
+      g\bigl(\vT^{-1}(x,y)\bigr) = f(x,y)
     \end{gather*}
   \item Diese Beziehung gilt allgemein beim Koordinatenwechsel
   \end{itemize}
 \end{frame}
 
 \begin{frame}{Kettenregel}
-  Gesucht ist die Ableitung von $f$ nach $r$ und $\theta$
+  Gesucht ist die Ableitung von $f$ nach $r$ und $\phi$
   \begin{itemize}
-  \item $g(r,\theta)= f(r\cos\theta,r\sin\theta)$
+  \item $g(r,\phi)= f(r\cos\phi,r\sin\phi)$
   \item Jetzt können wir die Kettenregel der Wegableitung benutzen:
     \begin{align*}
       \partial_r g = d_r f
-      &= \partial_x f\cos\theta+\partial_y f \sin\theta\\
+      &= \partial_x f\cos\phi+\partial_y f \sin\phi\\
       \partial_\phi g = d_\phi f
       &= \partial_x f\; (-r\sin\phi) + \partial_y f\; r \cos \phi
     \end{align*}
-  \item
-  \item Berechnen wir die Jacobi-Matrix von $T$, erhalten wir
+  \item Berechnen wir die Jacobi-Matrix von $\vT$, erhalten wir
     \begin{gather*}
-      \nabla T(r,\theta) =
+      \nabla \vT(r,\phi) =
       \begin{pmatrix}
-        \cos \theta & -r \sin \theta \\
-        \sin \theta & r \cos \theta
+        \cos \phi & -r \sin \phi \\
+        \sin \phi & r \cos \phi
       \end{pmatrix}      
     \end{gather*}
-  \item Es gilt also (sogar allgemein für beliebige $T$)
+  \item Es gilt also (sogar allgemein für beliebige $\vT$)
     \begin{gather*}
-      \nabla g(r,\theta)
-      = \nabla f\bigl(T(r,\theta)\bigr) \nabla T(r,\theta)
+      \nabla g(r,\phi)
+      = \nabla f\bigl(\vT(r,\phi)\bigr) \nabla \vT(r,\phi)
     \end{gather*}
     \begin{itemize}
     \item Alle Gradienten enthalten die partiellen Ableitungen
@@ -1379,7 +1404,7 @@ Diese quadratische Näherung ist die Grundlage der harmonischen Approximation in
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Anwendung auf das Beispiel}
   \begin{gather*}
-    f(x,y) = \left(x^2+y^2\right)^{3/2},\qquad g(r,\theta) = r^3
+    f(x,y) = \left(x^2+y^2\right)^{3/2},\qquad g(r,\phi) = r^3
   \end{gather*}
   \begin{itemize}
   \item Gradient von $f$
@@ -1390,29 +1415,29 @@ Diese quadratische Näherung ist die Grundlage der harmonischen Approximation in
       \end{pmatrix}
       =
       \begin{pmatrix}
-        3 r^2 \cos \theta\\3 r^2 \sin\theta
+        3 r^2 \cos \phi\\3 r^2 \sin\phi
       \end{pmatrix}
     \end{gather*}
-  \item Ableitung nach $r$: $\nabla f$ mal erste Spalte von $\nabla T$
+  \item Ableitung nach $r$: $\nabla f$ mal erste Spalte von $\nabla \vT$
     \begin{gather*}
-      d_r f(T(r,\theta)) =
+      d_r f(\vT(r,\phi)) =
       \begin{pmatrix}
-        3 r^2 \cos \theta\\3 r^2 \sin\theta
+        3 r^2 \cos \phi\\3 r^2 \sin\phi
       \end{pmatrix}\cdot
       \begin{pmatrix}
-        \cos\theta\\\sin\theta
-      \end{pmatrix} = 3r^2 = \partial_r g(r,\theta)
+        \cos\phi\\\sin\phi
+      \end{pmatrix} = 3r^2 = \partial_r g(r,\phi)
     \end{gather*}
     \pause
-  \item Ableitung nach $\theta$: $\nabla f$ mal zweite Spalte von $\nabla T$
+  \item Ableitung nach $\phi$: $\nabla f$ mal zweite Spalte von $\nabla \vT$
     \begin{gather*}
-      d_\theta f(T(r,\theta)) =
+      d_\phi f(\vT(r,\phi)) =
       \begin{pmatrix}
-        3 r^2 \cos \theta\\3 r^2 \sin\theta
+        3 r^2 \cos \phi\\3 r^2 \sin\phi
       \end{pmatrix}\cdot
       \begin{pmatrix}
-        -r\sin\theta\\r\cos\theta
-      \end{pmatrix} = 0 = \partial_\theta g(r,\theta)
+        -r\sin\phi\\r\cos\phi
+      \end{pmatrix} = 0 = \partial_\phi g(r,\phi)
     \end{gather*}
   \end{itemize}
 \end{frame}
@@ -1437,43 +1462,140 @@ Diese quadratische Näherung ist die Grundlage der harmonischen Approximation in
 
 \begin{frame}{Ableitung der Umkehrabbildung}
   \begin{itemize}
-  \item Die Umkehrabbildung und ihre Ableitung lauten
+  \item Die Umkehrabbildung ist
     \begin{gather*}
-      T^{-1}(x,y) = 
+      \begin{pmatrix}
+        r\\\phi
+      \end{pmatrix}
+      \vT^{-1}
+      \begin{pmatrix}
+        x\\y
+      \end{pmatrix}
+      =
+      \begin{pmatrix}
+        \sqrt{x^2+y^2}\\\operatorname{atan2}(x,y)
+      \end{pmatrix}
     \end{gather*}
+  \item Ihre Jacobi-Matrix ist
+    \begin{gather*}
+      \nabla \left(\vT^{-1}\right) =
+      \begin{pmatrix}
+        \frac x{\sqrt{x^2+y^2}} & \frac y{\sqrt{x^2+y^2}}\\
+        \frac {-y}{x^2+y^2} & \frac x{x^2+y^2}
+      \end{pmatrix}
+      =
+      \begin{pmatrix}
+        \cos\phi & \sin \phi\\
+        \tfrac{-\sin\phi}r & \tfrac{\cos\phi}r
+      \end{pmatrix}
+    \end{gather*}
+  \item Es gilt
+    \begin{gather*}
+      \nabla \left(\vT^{-1}\right) \nabla \vT\
+      = \begin{pmatrix}
+          \cos\phi & \sin \phi\\
+          \tfrac{-\sin\phi}r & \tfrac{\cos\phi}r
+        \end{pmatrix}
+              \begin{pmatrix}
+        \cos \phi & -r \sin \phi \\
+        \sin \phi & r \cos \phi
+      \end{pmatrix} =
+      \begin{pmatrix}
+        1 & 0 \\ 0 & 1
+      \end{pmatrix}
+    \end{gather*}
+  \item Es ist also $\nabla \left(\vT^{-1}\right) =  \left(\nabla \vT\right)^{-1}$ (auch dies gilt allgemein)
   \end{itemize}
 \end{frame}
 
+\begin{Vertiefung}
+  Wir zeigen, dass tatsächlich ganz all gemein für eine Funktion
+  $\vT\colon \R^n \t- \R^n$ und ihre Umkehrfunktion $\vS$ gilt, dass
+  \begin{gather*}
+    \nabla \vS = (\nabla \vT)^{-1}.
+  \end{gather*}
+  Nach Definition der Umkehrfunktion gilt (wo sie zumindest lokal existiert)
+  \begin{gather*}
+    \vS(\vT(\vx)) = \vx.
+  \end{gather*}
+  Wir leiten beide Seiten nach $\vx$ ab. Links steht nach der Kettenregel
+  \begin{gather*}
+    D \vS(\vT(\vx)) = \nabla \vS(\vT(\vx)) \nabla \vT(\vx),
+  \end{gather*}
+  wobei wir mit $D$ den Vektor der totalen Ableitungen nachden
+  Koeffizienten von $\vx$ bezeichnen. Rechts sieht man leicht ein, dass die Jacobi-Matrix der Abbildung
+  \begin{gather*}
+    \operatorname{id}\colon \vx\mapsto \vx
+  \end{gather*}
+  die Einheitsmatrix $I$ sein muss. Daraus folgt
+  \begin{gather*}
+    \nabla \vS(\vT(\vx)) \nabla \vT(\vx) = I,
+  \end{gather*}
+  und \(\nabla \vS(\vT(\vx))\) ist daher die eindeutig definierte Inverse von \( \nabla \vT(\vx)\)
+\end{Vertiefung}
+
+\begin{frame}{Anwendung auf das Beispiel}
+  \begin{gather*}
+    f(x,y) = \left(x^2+y^2\right)^{3/2},\qquad g(r,\phi) = r^3
+  \end{gather*}
+  \begin{itemize}
+  \item Gradient von $g$
+    \begin{gather*}
+      \nabla g(r,\phi) =
+      \begin{pmatrix}
+        3r^2\\ 0
+      \end{pmatrix}
+      =
+      \begin{pmatrix}
+        3x^2+3y^2\\0
+      \end{pmatrix}
+    \end{gather*}
+  \item Ableitung nach $x$: $\nabla g$ mal erste Spalte von $\nabla \vT^{-1}$
+    \begin{gather*}
+      \only<presentation>{\hspace{-3em}}
+      d_x g\bigl(\vT^{-1}(x,y)\bigr) =
+      \begin{pmatrix}
+        3x^2+3y^2\\0
+      \end{pmatrix}\cdot
+      \begin{pmatrix}
+        \frac x{\sqrt{x^2+y^2}}\\
+        \frac {-y}{x^2+y^2}
+      \end{pmatrix} = 3x\sqrt{x^2+y^2} = \partial_x f(x,y)
+    \end{gather*}
+    \pause
+  \item Die Ableitung nach $y$ funktioniert analog
+  \end{itemize}  
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-    \frametitle{Beispiel: Kurven}
+% \begin{frame}
+%     \frametitle{Beispiel: Kurven}
 
-    {\bf Kreis}, Mittelpunkt bei $(0,0)$, Radius $a$:
-    \begin{columns}
-        \begin{column}{0.7\textwidth}
-        \begin{itemize}
-            \item Kartesische Koordinaten: $\sqrt{x^2+y^2}=a$
-            \item Polarkoordinaten: $ r=a, \;\theta\in[0,2\pi)$
-        \end{itemize}
-    \end{column}
-    \begin{column}{0.3\textwidth}
-        \includegraphics[width=\textwidth]{fig/pk14.png}
-    \end{column}
-\end{columns}
-        {\bf Halbgerade:}
-        \begin{columns}
-            \begin{column}{0.75\textwidth}
-        \begin{itemize}
-            \item $\text{kartesische Koordinaten:}~y=ax$ mit $x,y,a>0$
-            \item $\text{Polarkoordinaten:}~ \theta=\text{Konstante mit}~~ \cos\theta = \frac{1}{\sqrt{1+a^2}}~, r\ge 0$
-        \end{itemize}
-    \end{column}
-    \begin{column}{.25\textwidth}
-        \includegraphics[width=\textwidth]{fig/pk15.png}
-    \end{column}
-\end{columns}
-\end{frame}
+%     {\bf Kreis}, Mittelpunkt bei $(0,0)$, Radius $a$:
+%     \begin{columns}
+%         \begin{column}{0.7\textwidth}
+%         \begin{itemize}
+%             \item Kartesische Koordinaten: $\sqrt{x^2+y^2}=a$
+%             \item Polarkoordinaten: $ r=a, \;\phi\in[0,2\pi)$
+%         \end{itemize}
+%     \end{column}
+%     \begin{column}{0.3\textwidth}
+%         \includegraphics[width=\textwidth]{fig/pk14.png}
+%     \end{column}
+% \end{columns}
+%         {\bf Halbgerade:}
+%         \begin{columns}
+%             \begin{column}{0.75\textwidth}
+%         \begin{itemize}
+%             \item $\text{kartesische Koordinaten:}~y=ax$ mit $x,y,a>0$
+%             \item $\text{Polarkoordinaten:}~ \phi=\text{Konstante mit}~~ \cos\phi = \frac{1}{\sqrt{1+a^2}}~, r\ge 0$
+%         \end{itemize}
+%     \end{column}
+%     \begin{column}{.25\textwidth}
+%         \includegraphics[width=\textwidth]{fig/pk15.png}
+%     \end{column}
+% \end{columns}
+% \end{frame}
 
 
 
@@ -1504,24 +1626,32 @@ Kugelkoordinaten $\longrightarrow$ kartesische Koordinaten:
     \item $y=r\,\sin\theta\,\sin\phi$
     \item $z=r\,\cos\theta$
 \end{itemize}
-
 \end{frame}
 
-
+\begin{frame}{Abschlussfragen}
+  \begin{enumerate}
+  \item Was ist die Jacobi-Matrix und was ist ihr Bezug zum Gradienten?
+  \item Was kann man mit Vektorfeldern darstellen?
+  \item Wozu dienen Koordinatensysteme?
+  \item Was ist ein Koordinatenwechsel?
+  \item Wie sieht die Kettenregel für $f\bigl(\vg(\vx)\bigr)$ aus?
+  \item Wie verhält sich die Jacobi-Matrix der Umkehrfunktion zu der der ursprünglichen Funktion?
+  \end{enumerate}
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-  \frametitle{Parametrische Kurven in verschiedenen Koordinatensystemen}
+% \begin{frame}
+%   \frametitle{Parametrische Kurven in verschiedenen Koordinatensystemen}
   
-  \begin{itemize}
-  \item Wenn wir die Bewegung eines Punktes im 2d/3d Raum beschreiben, können wir die {\bf zurückgelegte Strecke} $L$ oder die {\bf überstrichene Fläche} $S$  bestimmen.
-  \item Dazu muss ein infinitesimales Streckenstück $dL$ oder Flächestück $dS$ integriert werden.
-  \item Der Ausdruck von $dL$ oder $dS$ hängt vom {\bf Koordinatensystem} ab!
-  \end{itemize}
-  \begin{center}
-    \includegraphics[width=.8\textwidth]{fig/pk21.png}
-  \end{center}
-\end{frame}
+%   \begin{itemize}
+%   \item Wenn wir die Bewegung eines Punktes im 2d/3d Raum beschreiben, können wir die {\bf zurückgelegte Strecke} $L$ oder die {\bf überstrichene Fläche} $S$  bestimmen.
+%   \item Dazu muss ein infinitesimales Streckenstück $dL$ oder Flächestück $dS$ integriert werden.
+%   \item Der Ausdruck von $dL$ oder $dS$ hängt vom {\bf Koordinatensystem} ab!
+%   \end{itemize}
+%   \begin{center}
+%     \includegraphics[width=.8\textwidth]{fig/pk21.png}
+%   \end{center}
+% \end{frame}
 
 
 
