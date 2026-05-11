@@ -1,0 +1,41 @@
+\begin{tikzpicture}[scale=1.2, line join=round, line cap=round]
+
+% Three spanning vectors
+\coordinate (A) at (0,0);
+\coordinate (u) at (3.0,0.35);
+\coordinate (v) at (0.75,1.85);
+\coordinate (w) at (1.25,0.95);
+
+% Parallelepiped vertices
+\coordinate (B) at ($(A)+(u)$);
+\coordinate (D) at ($(A)+(v)$);
+\coordinate (E) at ($(A)+(w)$);
+\coordinate (C) at ($(A)+(u)+(v)$);
+\coordinate (F) at ($(A)+(u)+(w)$);
+\coordinate (H) at ($(A)+(v)+(w)$);
+\coordinate (G) at ($(A)+(u)+(v)+(w)$);
+
+% Visible faces
+\draw[fill=blue!12] (A) -- (B) -- (C) -- (D) -- cycle;
+\draw[fill=blue!25] (B) -- (F) -- (G) -- (C) -- cycle;
+\draw[fill=blue!18] (D) -- (C) -- (G) -- (H) -- cycle;
+
+% Hidden edges
+\draw[dashed] (A) -- (E);
+\draw[dashed] (E) -- (F);
+\draw[dashed] (E) -- (H);
+
+% Visible outer edges
+\draw[thick] (A) -- (B) -- (F) -- (G) -- (H) -- (D) -- cycle;
+\draw[thick] (B) -- (C) -- (D);
+\draw[thick] (C) -- (G);
+
+% Spanning vectors
+\draw[-{Latex[length=3mm]}, very thick, red!75!black]
+  (A) -- (B) node[midway, below] {\only<-2>{$\vu$}\only<3->{$du$}};
+\draw[-{Latex[length=3mm]}, very thick, green!45!black]
+  (A) -- (D) node[midway, left] {\only<-2>{$\vv$}\only<3->{$dv$}};
+\draw[-{Latex[length=3mm]}, very thick, orange!85!black, dashed]
+  (A) -- (E) node[midway, right] {\only<-2>{$\vw$}\only<3->{$dw$}};
+
+\end{tikzpicture}

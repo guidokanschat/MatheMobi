@@ -1683,28 +1683,273 @@ Kugelkoordinaten $\longrightarrow$ kartesische Koordinaten:
 \end{frame}
 
 \begin{frame}{Beispiel}
+  \begin{gather*}
+    \int_0^1\int_0^1\frac1{(1+xy)^2} \,dy\,dx\\
+  \end{gather*}
+  \begin{enumerate}
+  \item Zuerst integrieren wir $dy$, wobei $x$ konstant ist
+    \begin{multline*}
+      \int_0^1\frac1{(1+xy)^2} \,dy = \left[
+        \frac{-1}{x(1+xy)}
+      \right]^1_0
+      \\= \frac1x - \frac{1}{x(1+x)}
+      = \frac{1+x-1}{x(1+x)} = \frac1{(1+x)}
+    \end{multline*}
+  \item Nun integrieren wir $dx$
+    \begin{gather*}
+      \int_0^1  \frac1{(1+x)}\,dx = \Bigl[\ln(1+x)\Bigr]_0^1
+      = \ln 2
+    \end{gather*}
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Faktorisierende Integrale}
+  Hat der Integrand die Struktur \(f(x)g(y)\), dann lässt sich das
+  Integral besonders einfach berechnen, da ja eine Funktion beüglich
+  der anderen Integration immer eine Konstante ist. Daher:
+  \begin{gather*}
+    \int_a^b\int_c^d f(x) g(y) \,dx\,dy
+    = \int_c^d f(x) \,dx \int_a^b g(y) \,dy
+  \end{gather*}
+
+  \pause
+  Beispiel:
   \begin{multline*}
     \int_0^1\int_0^1 e^{\frac y3}\sin(\pi x)\,dy\,dx
-    = 3\Bigl[ e^{\frac y3}\Bigr]_0^1 \int_0^1 \sin(\pi x)\,dx \\
-    = 3 \Bigl[ e^{\frac y3}\Bigr]_0^1 \tfrac{-1}\pi \Bigl[\cos(\pi x)\Bigr)_0^1
+    = \int_0^1 e^{\frac y3}\,dy \int_0^1 \sin(\pi x)\,dx \\
+    = \Bigl[ 3e^{\frac y3}\Bigr]_0^1  \Bigl[\tfrac{-1}\pi \cos(\pi x)\Bigr]_0^1
   \end{multline*}
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Kompliziertere Gebiete}
+  \begin{itemize}
+  \item Aufgabe: Integriere die Funktion $f(\vx) \equiv 1$ auf dem Einheitskreis
+  \item Integriere über $y\in[-1,1]$
+  \item Integriere über $x\in[-\sqrt{1-y^2},\sqrt{1-y^2}]$
+  \end{itemize}
+  \pause
+  \begin{gather*}
+    \int\limits_{-1}^1 \int\limits_{-\sqrt{1-y^2}}^{\sqrt{1-y^2}} 1 \,dx\,dy
+    = \int\limits_{-1}^1 2 \sqrt{1-y^2} \,dy
+    = \pi
+  \end{gather*}
+  \only<2>{
+    \begin{Denkpause}
+      Wie sähe das für die Kugel aus?
+    \end{Denkpause}
+  }
+  \only<3>{
+    Einheitskugel
+    \begin{gather*}
+      \int\limits_{-1}^1 \int\limits_{-\sqrt{1-z^2}}^{\sqrt{1-z^2}}
+      \int\limits_{-\sqrt{1-y^2-z^2}}^{\sqrt{1-y^2-z^2}}1 \,dx\,dy\,dz
+    \end{gather*}
+  }
+\end{frame}
 
-\begin{envgknote}{Neue Struktur}
-    \begin{itemize}
-    \item Isoflächen, Orbitale?
-    \item Optimierung mittels Lagrange-Multiplikatoren (Vorlesung 3.7)
-    \end{itemize}
-\end{envgknote}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Integration in Polarkoordinaten}
+  \only<1>{\begin{Denkpause}
+      \begin{gather*}
+        \int_{B_R} f(\vx)\,d\vx \stackrel?= \int_0^{2\pi}\int_0^R  f(r,\phi) \,dr\,d\phi
+      \end{gather*}
+    \end{Denkpause}}
+  \pause
+  \begin{itemize}
+  \item Substitutionsregel 1D: eine Seite braucht die Ableitung der Transformation
+    \begin{gather*}
+      \int_{\Phi(a)}^{\Phi(b)} f(x)\,dx=
+      \int_a^b f\bigl(\Phi(t)\bigr)\Phi'(t)\,dt
+    \end{gather*}
+  \item Was kann das hier sein?
+  \item $dx$ ist die infinitesimale Intervalllänge
+  \item $\Phi'(t)\,dt$ ebenfalls, mit Streckungsfaktor $T'$
+    \pause
+  \item In zwei Dimensionen benötigen wir eine Fläche $d\vx$
+  \item In drei Dimensionen benötigen wir ein Volumen $d\vx$
+  \item Was ersetzt den Streckungsfaktor $T'$?
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Abbildung von Volumina}
+  \begin{columns}
+    \begin{column}{.54\textwidth}
+      \begin{itemize}
+      \item Die Vektoren $\vu,\vv,\vw$ spannen ein Parallelepiped auf
+      \item Sei die Matrix $A = (\vu,\vv,\vw)$
+      \item Das Volumen ist $\operatorname{det}(A)$
+        \visible<2->{
+        \item $(dx,dy,dz)$ spannen einen infinitesimalen Einheitswürfel mit Volumen $d\vx$ auf}
+        \visible<3->{
+        \item Sie werden mit der Jacobi-Matrix $\nabla T$ auf $(du,dv,dw)$ abgebildet
+        \item Die Volumenänderung ist die Jacobi-Determinante
+          \begin{gather*}
+            \operatorname{det}(\nabla T)
+          \end{gather*}
+        }
+      \end{itemize}      
+    \end{column}
+    \begin{column}{.44\textwidth}
+      \begin{center}
+        \includegraphics[width=.99\textwidth]{fig/parallelepiped.tikz}
+
+        \vspace{3ex}
+        
+        \visible<2->{
+        \includegraphics[width=.8\textwidth]{fig/cube.tikz}
+          }      
+      \end{center}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Transformationssatz}
+  \begin{itemize}
+  \item Ein Integrationsgebiet $\Omega\subset \R^n$
+  \item Eine Transformation $\vT:\R^n\to\R^n$ differenzierbar
+  \item Eine Funktion $f\colon \R^n\to \R$
+  \item $\vT(\Omega)$ das Bild von $\Omega$ durch Transformation
+  \end{itemize}
+  \begin{gather*}
+    \int\limits_{\vT(\Omega)} f(\vx)\,d\vx =
+    \int\limits_{\Omega} f\bigl(\vT(\vu)\bigr) \;
+    \bigl|\operatorname{det}\bigl(\nabla \vT(\vu)\bigr)\bigr|\,d\vu
+  \end{gather*}
+\end{frame}
+
+\begin{frame}{Polarkoordinaten}
+  \begin{itemize}
+  \item Abbildung
+    \begin{gather*}
+      \vT(r,\phi) =
+      \begin{pmatrix}
+        r \cos\phi\\
+        r \sin\phi
+      \end{pmatrix},
+      \qquad
+      \nabla \vT(r,\phi) =
+      \begin{pmatrix}
+        \cos \phi & -r \sin \phi \\
+        \sin \phi & r \cos \phi
+      \end{pmatrix}
+    \end{gather*}
+  \item Determinante
+    \begin{gather*}
+      \operatorname{det}\bigl(\nabla \vT(r,\phi)\bigr) = r
+    \end{gather*}
+  \item Integral über den Kreis vom Radius $R$
+    \begin{gather*}
+      \int\limits_{B_R} f(\vx)\,d\vx
+      = \int\limits_0^{2\pi}\int\limits_0^R  f\bigl(\vT(r,\phi)\bigr) \,rdr\,d\phi
+    \end{gather*}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Beispiel}
+  \begin{itemize}
+  \item Integral über den Kreis $B_R$ vom Radius $R$ um den Nullpunkt
+  \item $f(x,y) = 1/\sqrt{x^2+y^2}$
+  \end{itemize}
+  \begin{gather*}
+    \int\limits_{B_R} \frac{1}{\sqrt{x^2+y^2}}\,d\vx
+    = \int\limits_0^{2\pi}\int\limits_0^R  \frac1r \,rdr\,d\phi
+    = 2\pi \Bigl[r\Bigr]_0^R = 2\pi R
+  \end{gather*}
+\end{frame}
+
+\begin{frame}{Kugelkoordinaten}
+  \begin{itemize}
+  \item Abbildung
+    \begin{gather*}
+      \small
+      \hspace{-2em}
+      \vT
+      \only<article>{\begin{pmatrix}
+       r\\\theta\\\phi 
+      \end{pmatrix}}
+       =
+      \begin{pmatrix}
+        r\sin\theta\cos\phi\\
+        r\sin\theta\sin\phi\\
+        r\cos\theta
+      \end{pmatrix},\quad
+      \nabla \vT
+      \only<article>{\begin{pmatrix}
+       r\\\theta\\\phi 
+      \end{pmatrix}}
+      =
+      \begin{pmatrix}
+        \sin\theta\cos\phi
+        &
+          r\cos\theta\cos\phi
+        &
+          -r\sin\theta\sin\phi
+        \\
+        \sin\theta\sin\phi
+        &
+          r\cos\theta\sin\phi
+        &
+          r\sin\theta\cos\phi
+        \\
+        \cos\theta
+        &
+          -r\sin\theta
+        &
+          0
+      \end{pmatrix}
+    \end{gather*}
+  \item Determinante
+    \begin{gather*}
+      \operatorname{det}\bigl(\nabla \vT(r,\phi)\bigr) = r^2\sin\theta
+    \end{gather*}
+  \item Integral über die Kugel vom Radius $R$
+    \begin{gather*}
+      \int\limits_{B_R} f(\vx)\,d\vx
+      = \int\limits_0^{2\pi}\int\limits_0^{\pi}\int\limits_0^R
+      f\bigl(\vT(r,\theta,\phi)\bigr) \,r^2dr\,\sin\theta d\theta\,d\phi
+    \end{gather*}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Beispiel}
+  \begin{itemize}
+  \item Integral über die Kugel $B_R$ vom Radius $R$ um den Nullpunkt
+  \item $f(x,y) = 1/(x^2+y^2+z^2)$
+  \end{itemize}
+  \begin{multline*}
+    \int\limits_{B_R} \frac{1}{x^2+y^2+z^2}\,d\vx
+    = \int\limits_0^{2\pi}\int\limits_0^{\pi}\int\limits_0^R
+    \frac1{r^2} \,r^2dr\,\sin\theta d\theta\,d\phi\\
+    = 2\pi \Bigl[r\Bigr]_0^R
+    \Bigl[-\cos\theta\Bigr]_0^\pi = 4\pi R
+  \end{multline*}  
+\end{frame}
+
+\begin{frame}{Bemerkung}
+  \begin{itemize}
+  \item In einer Dimension konvergiert das Integral über  $1/t$ von null bis $R$ nicht
+  \item In zwei Dimensionen ist $1/r$ über $B_R$ integrierbar
+  \item In drei Dimensionen ist $1/r^2$ über $B_R$ integrierbar
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Abschlussfragen}
+  \begin{enumerate}
+  \item Wie kann ich mehrdimensionale Integrale allgemein auswerten?
+  \item Wie vereinfacht sich das Integral für Funktionen der Form $f(x)g(y)h(z)$?
+  \item Wie lautet der Transformationssatz?
+  \item Was hat er mit der Substitutionsregel gemeinsam?
+  \item Wie sehen Integrale in Polar- und Kugelkoordinaten aus?
+  \end{enumerate}
+\end{frame}
 
 \begin{envmrerror}{Ergänzungen aus der aktuellen Vorlesung}
 \begin{itemize}
     \item Schnittliniendiagramme (Vorlesung 3.1)
     \item Fehlerfortpflanzung additiver und multiplikativer Fehler (Vorlesung 3.3). Hier könnte überlegt werden, ob ausgehend von der bestehenden Vorlesung ein Übergang zum Kapitel 4 \textit{Auswirkung von Eingabe- und Rechenfehlern} gemacht werden könnte.
-    \item Extremwertaufgaben, Hesse-Matrix, Definitheit von Matrizen (Vorlesung 3.4)
     \item Optimierung mittels Lagrange-Multiplikatoren (Vorlesung 3.7)
-    \item Gradient Descent (Vorlesung 3.6)
 \end{itemize}
 \end{envmrerror}
 

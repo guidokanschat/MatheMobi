@@ -1,0 +1,41 @@
+\begin{tikzpicture}[line join=round, line cap=round]
+
+% Three spanning vectors for a cube
+\coordinate (A) at (0,0);
+\coordinate (dx) at (2.4,0);
+\coordinate (dy) at (0,2.4);
+\coordinate (dz) at (1.1,0.8);
+
+% Cube vertices
+\coordinate (B) at ($(A)+(dx)$);
+\coordinate (D) at ($(A)+(dy)$);
+\coordinate (E) at ($(A)+(dz)$);
+\coordinate (C) at ($(A)+(dx)+(dy)$);
+\coordinate (F) at ($(A)+(dx)+(dz)$);
+\coordinate (H) at ($(A)+(dy)+(dz)$);
+\coordinate (G) at ($(A)+(dx)+(dy)+(dz)$);
+
+% Visible faces
+\draw[fill=blue!12] (A) -- (B) -- (C) -- (D) -- cycle;
+\draw[fill=blue!25] (B) -- (F) -- (G) -- (C) -- cycle;
+\draw[fill=blue!18] (D) -- (C) -- (G) -- (H) -- cycle;
+
+% Hidden edges
+\draw[dashed] (A) -- (E);
+\draw[dashed] (E) -- (F);
+\draw[dashed] (E) -- (H);
+
+% Visible outer edges
+\draw[thick] (A) -- (B) -- (F) -- (G) -- (H) -- (D) -- cycle;
+\draw[thick] (B) -- (C) -- (D);
+\draw[thick] (C) -- (G);
+
+% Spanning vectors
+\draw[-{Latex[length=3mm]}, very thick, red!75!black]
+  (A) -- (B) node[midway, below] {$dx$};
+\draw[-{Latex[length=3mm]}, very thick, green!45!black]
+  (A) -- (D) node[midway, left] {$dy$};
+\draw[-{Latex[length=3mm]}, very thick, orange!85!black, dashed]
+  (A) -- (E) node[midway, right] {$dz$};
+
+\end{tikzpicture}
