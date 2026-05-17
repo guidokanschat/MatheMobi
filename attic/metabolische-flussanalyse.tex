@@ -1,0 +1,79 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+    \frametitle{Metabolische Flussanalyse (MFA)?}
+
+\textbf{Ziel:} Bestimmung der Reaktionsraten (Flüsse) in einem Stoffwechselnetzwerk
+
+\textbf{Grundidee:}
+\begin{itemize}
+  \item Jedes Stoffwechselnetzwerk besteht aus Metaboliten und Reaktionen
+  \item Stationärer Zustand: Konzentration jedes Metaboliten bleibt konstant
+\end{itemize}
+
+\textbf{Mathematische Formulierung:}
+\begin{itemize}
+  \item $S \in \mathbb{R}^{m \times n}$: Stöchiometriematrix (m Metabolite, n Reaktionen)
+  \item $v \in \mathbb{R}^{n}$: Vektor der Flussraten
+  \item \textbf{Nebenbedingung:} $S \cdot v = 0$ (Konzentration bleibt konstant)
+  \item \textbf{Zielfunktion:} z.\,B. $c^T v \rightarrow \max$ (z.\,B. Wachstum)
+\end{itemize}
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    
+    \frametitle{Beispiel: Vereinfachter zentraler Kohlenstoffmetabolismus}
+
+\textbf{Reaktionen:}
+\begin{itemize}
+  \item $v_1$: Glukose\textsubscript{ext} $\rightarrow$ Glukose-6-P
+  \item $v_2$: Glukose-6-P $\rightarrow$ Pyruvat
+  \item $v_3$: Pyruvat $\rightarrow$ 2 ATP
+  \item $v_4$: Glukose-6-P $\rightarrow$ 1 ATP (alternativer Weg)
+  \item $v_5$: ATP $\rightarrow$ Biomasse (Zielreaktion)
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Metabolite:} Glukose-6-P, Pyruvat, ATP
+
+\vspace{0.5em}
+\textbf{Stöchiometriematrix $S$:}
+
+\[
+\begin{array}{c|ccccc}
+ & v_1 & v_2 & v_3 & v_4 & v_5 \\
+\hline
+\text{Glu-6-P} & +1 & -1 &  0 & -1 & 0 \\
+\text{Pyruvat} &  0 & +1 & -1 &  0 & 0 \\
+\text{ATP}     &  0 &  0 & +2 & +1 & -1 \\
+\end{array}
+\]
+\end{frame}
+
+% Folie 2: Mathematische Formulierung
+\begin{frame}{Mathematische Formulierung}
+
+\textbf{Nebenbedingungen (Steady-State):}
+\[
+\begin{aligned}
+v_1 - v_2 - v_4 &= 0 \quad \text{(Glu-6-P)} \\
+v_2 - v_3 &= 0 \quad \text{(Pyruvat)} \\
+2v_3 + v_4 - v_5 &= 0 \quad \text{(ATP)}
+\end{aligned}
+\]
+
+\textbf{Zielfunktion:}
+\[
+\max_{v} \; c^T v = \max v_5
+\]
+
+\textbf{Interpretation:} Maximierung der ATP-Nutzung für Wachstum unter Massenerhaltung
+
+\textbf{Frage:} Wie kann das LGS gelöst werden, unter Einhaltung der Bedingung? 
+$\Rightarrow$ {\bf Lagrange-Multiplikatoren}
+
+\end{frame}
+
