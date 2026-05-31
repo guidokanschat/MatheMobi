@@ -9,7 +9,7 @@ void f(double x, double y)
   std::cout << x << '\t'
 	    << y << '\t'
 	    << (scale * 1.) << '\t'
-	    << (scale * (y*(1-y)+.5*std::sin(2*x))) << '\n';
+	    << (scale * (y*(1-y)+std::sin(3.2*x))) << '\n';
 }
 
 int main()

@@ -149,7 +149,6 @@ set lmargin  -1
 set bmargin  -1
 set rmargin  -1
 set tmargin  -1
-set locale "de_DE.UTF-8"
 set pm3d explicit at s
 set pm3d scansautomatic
 set pm3d interpolate 1,1 flush begin noftriangles noborder corners2color mean
@@ -170,6 +169,8 @@ VoxelDistance = 0.0
 ## Last datafile plotted: "logistic.dat"
 set output "logistic.pdf"
 plot 'logistic.dat' with vectors
+set output "sinelog.pdf"
+plot [0:2][0:2] 'sinelog.dat' with vectors
 set output "logisticm.pdf"
 plot 'logisticm.dat' with vectors
 set size square
