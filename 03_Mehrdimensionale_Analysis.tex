@@ -1,4 +1,3 @@
-\mode*
 \section{Mehrdimensionale Funktionen}
 
 \begin{frame}{Arten mehrdimensionaler Funktionen}
@@ -176,16 +175,15 @@ Notation: wir schreiben Vektorgrößen als $\vx,\vy,\vf$ zur Unterscheidung von 
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Abschlussfragen}
-  \begin{itemize}
-  \item Wie können Sie Funktionen auf dem $\R^2$ darstellen?
-  \item Was sind partielle Ableitungen?
-  \item Wie hängen sie mit der \glqq{}normalen\grqq{} Ableitung einer eindimensionalen Funktion zusammen?
-  \item Was ist der Gradient einer Funktion?
-  \item Was ist das Besondere bei mehrfachen, partiellen Ableitungen?
-  \end{itemize}
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{Abschluss}
+\item Wie können Sie Funktionen auf dem $\R^2$ darstellen?
+\item Was sind partielle Ableitungen?
+\item Wie hängen sie mit der \glqq{}normalen\grqq{} Ableitung einer eindimensionalen Funktion zusammen?
+\item Was ist der Gradient einer Funktion?
+\item Was ist das Besondere bei mehrfachen, partiellen Ableitungen?
+\end{Abschluss}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Richtungsableitungen}
 
@@ -306,14 +304,12 @@ Notation: wir schreiben Vektorgrößen als $\vx,\vy,\vf$ zur Unterscheidung von 
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Abschlussfragen}
-  \begin{itemize}
-  \item Wie verhält sich die Definition der Ableitung
-    $\partial_{\vu} f$ zur Ableitung in einer Dimension?
-  \item Wie verhält sich die Richtungsableitung zur partiellen Ableitung?
-  \item Welche Ableitungsrichtungen in einem Punkt haben besondere Bedeutung?
-  \end{itemize}
-\end{frame}
+\begin{Abschluss}
+\item Wie verhält sich die Definition der Ableitung
+  $\partial_{\vu} f$ zur Ableitung in einer Dimension?
+\item Wie verhält sich die Richtungsableitung zur partiellen Ableitung?
+\item Welche Ableitungsrichtungen in einem Punkt haben besondere Bedeutung?
+\end{Abschluss}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -473,12 +469,13 @@ Notation: wir schreiben Vektorgrößen als $\vx,\vy,\vf$ zur Unterscheidung von 
       Differentials anstelle der Ableitung, lässt also überall den
       Nenner $dt$ weg.
 \end{frame}
-Dann fällt aber der Charakter der Ableitung weg, weshalb in der
+
+\mode<article>{Dann fällt aber der Charakter der Ableitung weg, weshalb in der
 Mathematikdidaktik lieber mit Ableitungen operiert wird. Ein
 Differential allein ist nur in der Integration von Bedeutung und dort
 haben wir gesehen, wie sich durch Substitution Differentiale
 transformieren. Wenn wir hingegen hier das $1/dt$ weglassen, so ist
-die Ableitung immer mitgedacht.
+die Ableitung immer mitgedacht.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
@@ -530,26 +527,29 @@ die Ableitung immer mitgedacht.
   \end{itemize}
 \end{frame}
 
-Wie sind wir auf diese Formel gekommen?
-Wir erweitern zunächst den Weg $\vx(t)$ um eine Komponente und erhalten
-\begin{gather*}
-  \tilde\vx(t) =
-  \begin{pmatrix}
-    t\\\vx(t)
-  \end{pmatrix},\qquad
-  \tilde\vx'(t) =
-  \begin{pmatrix}
-    1\\vx'(t)
-  \end{pmatrix}
-\end{gather*}
+\begin{onlyenv}<article>
+  Wie sind wir auf diese Formel gekommen?
+  Wir erweitern zunächst den Weg $\vx(t)$ um eine Komponente und erhalten
+  \begin{gather*}
+    \tilde\vx(t) =
+    \begin{pmatrix}
+      t\\\vx(t)
+    \end{pmatrix},\qquad
+    \tilde\vx'(t) =
+    \begin{pmatrix}
+      1\\vx'(t)
+    \end{pmatrix}
+  \end{gather*}
+  
+  Damit können wir dann die gewöhnliche Ableitung entlang des Wegs einsetzen und erhalten
+  \begin{align*}
+    \frac{d}{dt}f(t,\vx(t))
+    &= \frac{d}{dt}f(\tilde\vx(t))\\
+    &= \partial_t f + \sum_{k=1}^n \partial_{x_k} f x_k'.
+  \end{align*}
+\end{onlyenv}
 
-Damit können wir dann die gewöhnliche Ableitung entlang des Wegs einsetzen und erhalten
-\begin{align*}
-  \frac{d}{dt}f(t,\vx(t))
-  &= \frac{d}{dt}f(\tilde\vx(t))\\
-  &= \partial_t f + \sum_{k=1}^n \partial_{x_k} f x_k'.
-\end{align*}
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Totale vs. partielle Ableitung}
   \begin{itemize}
   \item Die \textbf{partielle} Ableitung
@@ -614,23 +614,23 @@ c_0 e^{-kt} \frac{\pi v}{L} \cos\left(\frac{\pi vt}{L}\right)
 
 \end{frame}
 
+\begin{onlyenv}<article>
 Die biochemische Interpretation dieser Formeln könnte etwa wie folgt aussehen:
 \begin{itemize}
 \item Der Term \( \frac{\partial c}{\partial t} \) beschreibt die lokale zeitliche Änderung der Konzentration, z.\,B. durch enzymatischen Abbau oder Zerfall des Stoffes.
 \item Der Term \( \frac{\partial c}{\partial x} \frac{dx}{dt} \) beschreibt die Änderung entlang des Weges, da sich das Molekül durch einen räumlichen Konzentrationsgradienten bewegt (z.\,B. Diffusion oder gerichteter Transport).
 \item Die totale Ableitung \( \frac{dc}{dt} \) gibt somit die tatsächlich vom Molekül „erlebte“ Konzentrationsänderung entlang seiner Trajektorie an.
 \end{itemize}
+\end{onlyenv}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Abschlussfragen}
-  \begin{enumerate}
-  \item Wie sieht die Kettenregel für zwei Funktionen
-    $f\colon \R^n\to \R$ und $\vg\colon \R \to \R^n$ aus?
-  \item Wie berechnet man die totale Ableitung?
-  \item Wir unterscheiden die partielle Ableitung $\partial_t f$ und die totale Ableitung $d_t f$?
-    \item Wie unterscheiden sich Weglängen in der Ebene von solchen auf \glqq{}Funktionsflächen\grqq{}?
-  \end{enumerate}
-\end{frame}
+\begin{Abschluss}
+\item Wie sieht die Kettenregel für zwei Funktionen
+  $f\colon \R^n\to \R$ und $\vg\colon \R \to \R^n$ aus?
+\item Wie berechnet man die totale Ableitung?
+\item Wir unterscheiden die partielle Ableitung $\partial_t f$ und die totale Ableitung $d_t f$?
+\item Wie unterscheiden sich Weglängen in der Ebene von solchen auf \glqq{}Funktionsflächen\grqq{}?
+\end{Abschluss}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -751,6 +751,7 @@ Die biochemische Interpretation dieser Formeln könnte etwa wie folgt aussehen:
   \end{itemize}
 \end{frame}
 
+\begin{onlyenv}<article>
 \begin{itemize}
 \item Die Funktion \(R(G,O_2)\) beschreibt die Wachstumsrate von Mikroorganismen im Bioreaktor.
 \item Der Arbeitspunkt \((G^*, O_2^*)\) entspricht einem gewünschten Betriebszustand.
@@ -763,6 +764,7 @@ Die biochemische Interpretation dieser Formeln könnte etwa wie folgt aussehen:
 \item Dies entspricht einer lokalen Sensitivitätsanalyse und wird in der Praxis zur Prozessregelung verwendet.
 \item Die Regelung sorgt dafür, dass \(G-G^*\) und \(O_2 - O_2^*\) klein bleiben, die lineare Näherung bleibt hinreichend genau
 \end{itemize}
+\end{onlyenv}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Taylor-Reihen in höheren Dimensionen}
@@ -854,17 +856,15 @@ Die biochemische Interpretation dieser Formeln könnte etwa wie folgt aussehen:
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Abschlussfragen}
-  \begin{enumerate}
-  \item Mit welchem \glqq{}Trick\grqq{} kann man Taylor-Entwicklung in
-    höheren Dimensionen einführen?
-  \item Was hat die lineare Näherung mit der Richtungsableitung zu tun?
-  \item Wie sieht die lineare Näherung aus?
-  \item Wie sieht die quadratische Näherung aus?
-  \item Was ist die Hesse-Matrix?
-  \item Welche wichtige Eigenschaft hat sie?
-  \end{enumerate}
-\end{frame}
+\begin{Abschluss}
+\item Mit welchem \glqq{}Trick\grqq{} kann man Taylor-Entwicklung in
+  höheren Dimensionen einführen?
+\item Was hat die lineare Näherung mit der Richtungsableitung zu tun?
+\item Wie sieht die lineare Näherung aus?
+\item Wie sieht die quadratische Näherung aus?
+\item Was ist die Hesse-Matrix?
+\item Welche wichtige Eigenschaft hat sie?
+\end{Abschluss}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1095,12 +1095,15 @@ E = E(r,\vartheta)
 \end{itemize}
 \end{frame}
 
+\begin{onlyenv}<article>
 Das Minimum \( (r^*,\vartheta^*) \) beschreibt den stabilen gebundenen Zustand. Die Energie verhält sich in der Nähe dieses Zustands wie eine „Schüssel“ mit positiv definiter Hesse-Matrix.
 Große Werte von \( \frac{\partial^2 E}{\partial r^2} \) bedeuten, dass der Abstand ist stark fixiert ist (steife Bindung).
 Große Werte von \( \frac{\partial^2 E}{\partial \vartheta^2} \) bedeuten, dass die Konformation ist stark eingeschränkt ist.
 Die gemischte Ableitung beschreibt Kopplung, z.\,B. dass sich die Bindungstasche beim Annähern des Liganden mitverformt.
 Diese quadratische Näherung ist die Grundlage der harmonischen Approximation in der Molekülphysik.
+\end{onlyenv}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
   \begin{block}{Fazit}
     Oft schließt man ais physikalischen Eigenschaften des Systems auf
@@ -1108,21 +1111,17 @@ Diese quadratische Näherung ist die Grundlage der harmonischen Approximation in
   \end{block}
 \end{frame}
 
-\begin{frame}{Abschlussfragen}
-  \begin{enumerate}
-  \item Was sind lokale Extrema?
-  \item Wie sind sie charakterisiert?
-  \item Was ist ein Sattelpunkt?
-  \item Was ist eine positiv definite Matrix?
-  \item Wie hängt das mit den Eigenwerten zusammen?
-  \end{enumerate}
-\end{frame}
+\begin{Abschluss}
+\item Was sind lokale Extrema?>
+\item Wie sind sie charakterisiert?
+\item Was ist ein Sattelpunkt?
+\item Was ist eine positiv definite Matrix?
+\item Wie hängt das mit den Eigenwerten zusammen?
+\end{Abschluss}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Vektorfelder und Koordinatensysteme}
-
-\mrnote{vorläufig sind die Folien aus Carl Herrmanns Teil zu Koordinatensystemen eingefügt. Die Beispiele beziehen sich noch auf Kapitel 2, da der Themenkomplex ursprünglich dort angesiedelt war}
 
 \begin{frame}{Mehrdimensionale Funktionen mehrerer Variablen}
   \begin{gather*}
@@ -1628,16 +1627,14 @@ Kugelkoordinaten $\longrightarrow$ kartesische Koordinaten:
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Abschlussfragen}
-  \begin{enumerate}
-  \item Was ist die Jacobi-Matrix und was ist ihr Bezug zum Gradienten?
-  \item Was kann man mit Vektorfeldern darstellen?
-  \item Wozu dienen Koordinatensysteme?
-  \item Was ist ein Koordinatenwechsel?
-  \item Wie sieht die Kettenregel für $f\bigl(\vg(\vx)\bigr)$ aus?
-  \item Wie verhält sich die Jacobi-Matrix der Umkehrfunktion zu der der ursprünglichen Funktion?
-  \end{enumerate}
-\end{frame}
+\begin{Abschluss}
+\item Was ist die Jacobi-Matrix und was ist ihr Bezug zum Gradienten?
+\item Was kann man mit Vektorfeldern darstellen?
+\item Wozu dienen Koordinatensysteme?
+\item Was ist ein Koordinatenwechsel?
+\item Wie sieht die Kettenregel für $f\bigl(\vg(\vx)\bigr)$ aus?
+\item Wie verhält sich die Jacobi-Matrix der Umkehrfunktion zu der der ursprünglichen Funktion?
+\end{Abschluss}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % \begin{frame}
@@ -1934,15 +1931,13 @@ Kugelkoordinaten $\longrightarrow$ kartesische Koordinaten:
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Abschlussfragen}
-  \begin{enumerate}
-  \item Wie kann ich mehrdimensionale Integrale allgemein auswerten?
-  \item Wie vereinfacht sich das Integral für Funktionen der Form $f(x)g(y)h(z)$?
-  \item Wie lautet der Transformationssatz?
-  \item Was hat er mit der Substitutionsregel gemeinsam?
-  \item Wie sehen Integrale in Polar- und Kugelkoordinaten aus?
-  \end{enumerate}
-\end{frame}
+\begin{Abschluss}
+\item Wie kann ich mehrdimensionale Integrale allgemein auswerten?
+\item Wie vereinfacht sich das Integral für Funktionen der Form $f(x)g(y)h(z)$?
+\item Wie lautet der Transformationssatz?
+\item Was hat er mit der Substitutionsregel gemeinsam?
+\item Wie sehen Integrale in Polar- und Kugelkoordinaten aus?
+\end{Abschluss}
 
 \begin{envmrerror}{Ergänzungen aus der aktuellen Vorlesung}
 \begin{itemize}
