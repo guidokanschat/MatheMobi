@@ -10,6 +10,7 @@
 \usetikzlibrary{arrows.meta,calc}
 \usepackage{amsthm}
 \usepackage{float}
+\usepackage{environ}
 
 \title{Mathematik für Molekulare Biotechnologie B}
 \author{Guido Kanschat}
@@ -23,7 +24,7 @@
 \FXRegisterAuthor{mr}{envmr}{MR}
 
 \theoremstyle{remark}
-\newenvironment{Aufgabe}{\subsubsection{Aufgabe}}{}
+\newenvironment{Aufgabe}{\begin{onlyenv}<article>\subsubsection{Aufgabe}}{\end{onlyenv}}
 \newenvironment{Wdh}{\begin{onlyenv}<article>\textbf{Wiederholung: }}%
 {\end{onlyenv}}
 \newenvironment{Vertiefung}{\begin{onlyenv}<article>\textbf{Vertiefung: }}%
@@ -35,11 +36,21 @@
     \end{exampleblock}%
   \end{onlyenv}%
 }
+\NewEnviron{Abschluss}{%
+  \begin{frame}[label=Abschluss]
+    \frametitle{Abschlussfragen \thesection.\thesubsection}
+    \begin{enumerate}
+      \BODY
+    \end{enumerate}%
+  \end{frame}%
+}
 
 \let\epsilon\varepsilon
 \let\phi\varphi
 \let\theta\vartheta
 \def\vecsym#1{\mathbf{#1}}
+\def\ds{\,ds}
+\def\dt{\,dt}
 \def\vx{\vecsym x}
 \def\vy{\vecsym y}
 \def\vd{\vecsym d}

@@ -1,10 +1,9 @@
-\mode*
 \section{Integration}
 \subsection{Einführung}
 
-%\mmode<article>{
+\mode<article>{
 Wir beginnen die Einführung des Integrals mit einem Beispiel aus dem täglichen Leben. In der Schule lernt man den Ausdruck \glqq{}Strecke ist Zeit mal Geschwindigkeit\grqq{}. Dies gilt aber nur für konstante Geschwindigkeit. Hier schauen wir uns diesen Sachverhalt im Detail an und entwickeln daraus ein neues Konzept.
-%}
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Beispiel: Strecke als Integral der Geschwindigkeit}
@@ -31,7 +30,8 @@ Wir beginnen die Einführung des Integrals mit einem Beispiel aus dem täglichen
     \end{itemize}    
 \end{frame}
 
-Ist die Geschwindigkeit variabel, so müssen wir das Konzept erweitern. Wie wir am folgenden Bild einer Geschwindigkeitskurve sehen, können wir nicht wie vorher einfach ein Rechteck zeichnen. Statt des einfachen Produkts der Geschwindigkeit mit der Zeit führen wir einen neuen mathematischen Begriff ein, das \textit{Integral}. Im Folgenden überlegen wir dann, wie wir diesen Begriff so definieren, dass er einerseits der Intuition des täglichen Lebens genügt, andererseits aber mathematisch präzise genug ist, um ihn zuverlässig verwenden zu können.
+\mode<article>{Ist die Geschwindigkeit variabel, so müssen wir das Konzept erweitern. Wie wir am folgenden Bild einer Geschwindigkeitskurve sehen, können wir nicht wie vorher einfach ein Rechteck zeichnen. Statt des einfachen Produkts der Geschwindigkeit mit der Zeit führen wir einen neuen mathematischen Begriff ein, das \textit{Integral}. Im Folgenden überlegen wir dann, wie wir diesen Begriff so definieren, dass er einerseits der Intuition des täglichen Lebens genügt, andererseits aber mathematisch präzise genug ist, um ihn zuverlässig verwenden zu können.}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle<presentation>{Variable Geschwindigkeit}
@@ -46,7 +46,8 @@ Ist die Geschwindigkeit variabel, so müssen wir das Konzept erweitern. Wie wir 
      \end{gather*}
 \end{frame}
 
-Wir versuchen uns nun dem Integral anzunähern, indem wir es von unten und oben einschließen. Dazu bestimmen wir die minimale und maximale Geschwindigkeit.
+\mode<article>{Wir versuchen uns nun dem Integral anzunähern, indem wir es von unten und oben einschließen. Dazu bestimmen wir die minimale und maximale Geschwindigkeit.}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle<presentation>{Variable Geschwindigkeit -- erste Näherung}
@@ -65,7 +66,8 @@ Das Integral liegt zwischen den Strecken, die wir bei konstanter Minimal- bzw. M
 \end{gather*}
 \end{frame}
 
-Das ist offensichtlich eine sehr grobe Abschätzung. Wir können sie aber verbessern, wenn wir kleinere Intervalle nehmen.
+\mode<article>{Das ist offensichtlich eine sehr grobe Abschätzung. Wir können sie aber verbessern, wenn wir kleinere Intervalle nehmen.}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle<presentation>{Variable Geschwindigkeit -- Teilung der Intervalle}
@@ -114,7 +116,8 @@ Das ist offensichtlich eine sehr grobe Abschätzung. Wir können sie aber verbes
     \end{minipage}
 \end{center}
 \end{frame}
-Die Bilder zeigen exemplarisch, wie sich die Maxima und Minima immer mehr dem Graphen der Funktion annähern. Auch sehen wir, wie die Fläche des blauen Bereichs, die gerade die Differenz zwischen Unter- und Obersumme darstellt, schrumpft.
+
+\mode<article>{Die Bilder zeigen exemplarisch, wie sich die Maxima und Minima immer mehr dem Graphen der Funktion annähern. Auch sehen wir, wie die Fläche des blauen Bereichs, die gerade die Differenz zwischen Unter- und Obersumme darstellt, schrumpft.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Das Integral als Grenzwert}
@@ -210,7 +213,6 @@ Wir überlassen diese Details gern den Mathematikern und benutzen die Integrale 
     berechnen, indem wir für $n$ Teilintervalle der Länge $\Delta t = \nicefrac xn$ die Unter- und Obersummen berechnen und den Grenzwert für $n\to\infty$ untersuchen.
 \end{frame}
 
-%\mmode<article>{
 \begin{Aufgabe}
   Ziel dieser Aufgabe ist es, für einen Punkt $x$ das Integral
   \begin{gather*}
@@ -230,16 +232,13 @@ Wir überlassen diese Details gern den Mathematikern und benutzen die Integrale 
       \item (Denkaufgabe ohne Bewertung) Können Sie sich einen Ersatz für Unter- und Obersummen denken, der das Integral wesentlich besser approximiert?
   \end{enumerate}
 \end{Aufgabe}
-%}
 
-\begin{frame}{Abschlussfragen}
-    \begin{enumerate}
-        \item Für welche Objekte können wir die Flächen elementar berechnen?
-        \item Was ist der mathematische Begriff für die Fläche unter/über einer Funktion?
-        \item Wie kann diese Fläche angenähert werden?
-        \item Wie ist sie definiert?
-    \end{enumerate}
-\end{frame}
+\begin{Abschluss}
+\item Für welche Objekte können wir die Flächen elementar berechnen?
+\item Was ist der mathematische Begriff für die Fläche unter/über einer Funktion?
+\item Wie kann diese Fläche angenähert werden?
+\item Wie ist sie definiert?
+\end{Abschluss}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -429,13 +428,15 @@ Notation des Integrals
     \end{columns}
 \end{frame}
 
+\mode<article>{
 Nun teilen wir durch $h$ und lassen $h$ gegen null konvergieren. Es gilt dann
 \begin{gather*}
     \lim_{h\to 0}\frac{F(x+h)-F(x)}{h}
     = \lim_{h\to 0} f(z) = f(x),
 \end{gather*}
 wobei wir benutzt haben, dass für beliebiges $h$ der Punkt $z$ zwischen $x$ und $x+h$ liegt und daher $z\to x$ konvergiert.
-Wir gelangen somit zum sogenannten Hauptsatz der Differential- und Integralrechnung: 
+Wir gelangen somit zum sogenannten Hauptsatz der Differential- und Integralrechnung:}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle<presentation>{\glqq{}Hauptsatz\grqq{} der Differential- und Integralrechnung}
@@ -470,16 +471,14 @@ Dann ist $F$ stetig differenzierbar und es gilt
      \end{itemize}
 \end{frame}
 
-\begin{frame}{Abschlussfragen}
-\begin{enumerate}
-    \item Warum kann es praktisch sein zu betrachten, ob eine Funktion gerade bzw. ungerade ist?
-    \item Was erhalten Sie, wenn Sie eine Stammfunktion der Funktion $f$ ableiten?
-    \item Was erhalten Sie, wenn Sie $F$ ableiten und die Stammfunktion der Ableitung bilden?
-    \item Wie hilft die Stammfunktion bei der Bestimmung unbestimmter und bestimmter Integrale?
-\end{enumerate}    
-\end{frame}
+\begin{Abschluss}
+\item Warum kann es praktisch sein zu betrachten, ob eine Funktion gerade bzw. ungerade ist?
+\item Was erhalten Sie, wenn Sie eine Stammfunktion der Funktion $f$ ableiten?
+\item Was erhalten Sie, wenn Sie $F$ ableiten und die Stammfunktion der Ableitung bilden?
+\item Wie hilft die Stammfunktion bei der Bestimmung unbestimmter und bestimmter Integrale?
+\end{Abschluss}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Berechnung von Integralen}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -498,6 +497,7 @@ Dann ist $F$ stetig differenzierbar und es gilt
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\gkerror{Hier für das Skript Zwischentexte einfügen}
 \begin{frame}{Beispiele}
     \begin{gather*}
         f(x) = x,\quad f(x) = x^2, \quad f(x) = x^n
@@ -544,6 +544,7 @@ Dann ist $F$ stetig differenzierbar und es gilt
     Achtung: es wird keine Stammfunktion berechnet, sondern ein (un-)bestimmtes Integral!
 \end{frame}
 
+\mode<article>{
 Ein Beispiel ist das Integral des Logarithmus. Nehmen wir an, dass $a>b>0$, dann gilt:
 \begin{align*}
     \int_a^b \ln t\,dt
@@ -559,6 +560,7 @@ und ersetzen wir nun die feste Grenze $b$ durch die Variable Grenze $x$, so erha
 \begin{gather*}
     F(x) = x\ln x - x + C.
 \end{gather*}
+}
 
 \begin{Aufgabe}
 Berechnen Sie folgende Integrale mittels partieller Integration. \textit{Hinweis:} Sie müssen diese Methoden ggf. mehrfach anwenden.
@@ -645,7 +647,8 @@ Berechnen Sie folgende Integrale mittels partieller Integration. \textit{Hinweis
     \end{block}
 \end{frame}
 
-Der Ausdruck $\phi^{-1}(x)$ bezeichnet hier die Umkehrfunktion zu $\phi(t)$. Deren Existenz ist es auch, die die Monotonie erfordert.
+\mode<article>{
+Der Ausdruck $\phi^{-1}(x)$ bezeichnet hier die Umkehrfunktion zu $\phi(t)$. Deren Existenz ist es auch, die die Monotonie erfordert.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Beispiel}
@@ -736,18 +739,16 @@ Wichtige trigonometrische Identitäten:
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Abschlussfragen}
-    \begin{enumerate}
-        \item Sie haben eine Stammfunktion gefunden. Wie stellen Sie fest, ob sie korrekt ist?
-        \item Welche Stammfunktionen sollten sie ohne Hilfe finden?
-        \item Wann hilft partielle Integration?
-        \item Welcher Ableitungsregel entspricht
-        \begin{itemize}
-            \item partielle Integration?
-            \item Substitution?
-        \end{itemize}
-    \end{enumerate}
-\end{frame}
+\begin{Abschluss}
+\item Sie haben eine Stammfunktion gefunden. Wie stellen Sie fest, ob sie korrekt ist?
+\item Welche Stammfunktionen sollten sie ohne Hilfe finden?
+\item Wann hilft partielle Integration?
+\item Welcher Ableitungsregel entspricht
+  \begin{itemize}
+  \item partielle Integration?
+  \item Substitution?
+  \end{itemize}
+\end{Abschluss}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -825,7 +826,7 @@ Wichtige trigonometrische Identitäten:
   \begin{itemize}
   \item Ist die Stammfunktion am Intervallende beschränkt und stetig,
     konvergiert das uneigentliche Integral
-  \item ISt die Stammfunktion am Intervallende unstetig oder
+  \item Ist die Stammfunktion am Intervallende unstetig oder
     unbeschränkt, divergiert es
   \end{itemize}
 \end{frame}
@@ -929,17 +930,15 @@ Wichtige trigonometrische Identitäten:
     \end{Wdh}
 \end{frame}
 
-\begin{frame}{Abschlussfragen}
-    \begin{enumerate}
-        \item Warum führt man uneigentliche Integrale ein?
-        \item Wie berechnet man das uneigentliche Integral, wenn die Stammfunktion zur Integralgrenze hin beschränkt bleibt?
-        \item Welche Möglichkeit hat man, wenn die Stammfunktion unbekannt ist?
-        \item Was ist bei diesem Integral zu beachten:
-        \begin{gather*}
-            \int_{-\infty}^\infty f(t)\,dt
-        \end{gather*}
-    \end{enumerate}
-\end{frame}
+\begin{Abschluss}
+\item Warum führt man uneigentliche Integrale ein?
+\item Wie berechnet man das uneigentliche Integral, wenn die Stammfunktion zur Integralgrenze hin beschränkt bleibt?
+\item Welche Möglichkeit hat man, wenn die Stammfunktion unbekannt ist?
+\item Was ist bei diesem Integral zu beachten:
+  \begin{gather*}
+    \int_{-\infty}^\infty f(t)\,dt
+  \end{gather*}
+\end{Abschluss}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1024,20 +1023,18 @@ Wichtige trigonometrische Identitäten:
 \end{Vertiefung}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Abschlussfragen}
-\begin{enumerate}
-    \item Was ist der Wert des folgenden Integrals?
-    \begin{gather*}
-        \int_{-1}^1 f(t)\,dt,
-        \qquad f(t) = \begin{cases}
-            -1 & t<0\\
-            17 & t=0\\
-            1 & t>0
-        \end{cases}
-    \end{gather*}
-    \item (Schwieriger) Ist es egal, ob ich über das abgeschlossene Intervall $[a,b]$ integriere oder über das offene $(a,b)$?
-\end{enumerate}
-\end{frame}
+\begin{Abschluss}
+\item Was ist der Wert des folgenden Integrals?
+  \begin{gather*}
+    \int_{-1}^1 f(t)\,dt,
+    \qquad f(t) = \begin{cases}
+      -1 & t<0\\
+      17 & t=0\\
+      1 & t>0
+    \end{cases}
+  \end{gather*}
+\item (Schwieriger) Ist es egal, ob ich über das abgeschlossene Intervall $[a,b]$ integriere oder über das offene $(a,b)$?
+\end{Abschluss}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1078,7 +1075,7 @@ Wichtige trigonometrische Identitäten:
     \end{itemize}
 \end{frame}
 
-Die Unter- und Obersummen aus der Herleitung des Integrals sind zu dieser Approximation aus zwei Gründen nicht geeignet:
+\mode<article>{Die Unter- und Obersummen aus der Herleitung des Integrals sind zu dieser Approximation aus zwei Gründen nicht geeignet:}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
@@ -1227,7 +1224,8 @@ Anwenden der binomischen Formel und Kürzen ergibt die Trapezregel.
     \end{gather*}
 \end{itemize}
 \end{frame}
-Da hier nur ein Wert der Funktion $f$ zur Verfügung steht, um das Polynom zu bestimmen, müssen wir das Argument, warum die Formel für lineare Polynome exakt ist, abwandeln. Dazu legen wir eine Gerade mit beliebiger Steigung $\alpha$ durch den Mittelpunkt:
+
+\mode<article>{Da hier nur ein Wert der Funktion $f$ zur Verfügung steht, um das Polynom zu bestimmen, müssen wir das Argument, warum die Formel für lineare Polynome exakt ist, abwandeln. Dazu legen wir eine Gerade mit beliebiger Steigung $\alpha$ durch den Mittelpunkt:
 \begin{gather*}
     p(t) = f(\overline x_i) + \alpha (t-\overline x_i).
 \end{gather*}
@@ -1236,6 +1234,7 @@ Da $t-\overline x_i$ bezüglich $\overline x_i$ eine ungerade Funktion ist, ist 
     \int_{x_i}^{x_{i+1}} p(t)\,dt = \int_{x_i}^{x_{i+1}} f(\overline x_i) \,dt
     = f(\overline x_i) (x_{i+1}-x_i).
 \end{gather*}
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Die Simpsonregel}
@@ -1307,7 +1306,8 @@ In der Literatur werden Quadraturformeln in der Regel für das Intervall $[0,1]$
   \end{itemize}
 \end{frame}
 
-Im Plenum diskutieren wir, wie aus der tabellierten Simpsonregel die vorher präsentierte Summenformel wird.
+\mode<article>{Im Plenum diskutieren wir, wie aus der tabellierten Simpsonregel die vorher präsentierte Summenformel wird.}
+\gkerror{Hier ergänzen!}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Benutzung der Fehlerabschätzung}
@@ -1406,14 +1406,12 @@ Im Plenum diskutieren wir, wie aus der tabellierten Simpsonregel die vorher prä
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Abschlussfragen}
-    \begin{enumerate}
-        \item Wann ist die Approximation des Integrals mittels Trapez- und Mittelpunktsregel größer bzw. kleiner als die tatsächliche Fläche?
-        \item Warum sind diese Approximationen exakt, wenn $f$ auf dem Teilintervall ein lineares Polynom ist?
-        \item Was können Sie aus der Tabellierung der Gauß-Quadratur über die Genauigkeit der Approximation für $n \leq 3$ schließen?
-        \item Warum beschäftigt man sich überhaupt mit Approximationen von Integralen?
-    \end{enumerate}
-\end{frame}
+\begin{Abschluss}
+\item Wann ist die Approximation des Integrals mittels Trapez- und Mittelpunktsregel größer bzw. kleiner als die tatsächliche Fläche?
+\item Warum sind diese Approximationen exakt, wenn $f$ auf dem Teilintervall ein lineares Polynom ist?
+\item Was können Sie aus der Tabellierung der Gauß-Quadratur über die Genauigkeit der Approximation für $n \leq 3$ schließen?
+\item Warum beschäftigt man sich überhaupt mit Approximationen von Integralen?
+\end{Abschluss}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1563,4 +1561,4 @@ Im Plenum diskutieren wir, wie aus der tabellierten Simpsonregel die vorher prä
     \end{minipage}
 \end{Aufgabe}
 
-\mode<all>
+\gkerror{Abschlussfragen!}
