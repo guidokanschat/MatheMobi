@@ -420,16 +420,14 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{Abschluss}
-  \item Wie kann man das Zeitverhalten von Wachstumsprozessen modellieren?
-  \item Was ist die Kontinuumshypothese?
-  \item Wie hängen Volterrasche Integralgleichung und Differentialgleichung zusammen?
-  \item Was ist exponentielles Wachstum?
-  \item Wie modelliert man Populationsentwicklung bei beschränkten Ressourcen?
-  \item Wie überprüft man die Lösung einer Differentialgleichung?
-  \end{enumerate}
-\end{frame}
-
-
+\item Wie kann man das Zeitverhalten von Wachstumsprozessen modellieren?
+\item Was ist die Kontinuumshypothese?
+\item Wie hängen Volterrasche Integralgleichung und Differentialgleichung zusammen?
+\item Was ist exponentielles Wachstum?
+\item Wie modelliert man Populationsentwicklung bei beschränkten Ressourcen?
+\item Wie überprüft man die Lösung einer Differentialgleichung?
+\end{Abschluss}
+  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Grundbegriffe}
@@ -763,12 +761,11 @@
  \item Welche Typen von Fixpunkten haben wir kennengelernt?
  \end{Abschluss}
  
- \end{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Systeme von Differentialgleichungen}
 
-\begin{frame}{Erweiterung auf zweite Species}
+\begin{frame}{Erweiterung auf zweite Komponente}
   Modellannahmen
   \begin{itemize}
   \item Sardinen finden optimale Nahrung und werden von
@@ -786,15 +783,15 @@
 
 \begin{frame}{Modellierung}
   \begin{itemize}
-  \item<+-> Sardinen:
+  \item<+-> Sardinen $x$:
     \begin{itemize}
     \item Vermehrung mit fester Rate: $ax$
-    \item Sterberate abhängig vom Thunfisch: $-bxy$
+    \item Verringerung abhängig vom Thunfisch: $-bxy$
     \end{itemize}
     \begin{gather*}
       x' = ax-bxy
     \end{gather*}
-  \item<+-> Thunfisch:
+  \item<+-> Thunfisch $y$:
     \begin{itemize}
     \item Feste Sterberate: $-cy$
     \item Vermehrung abhängig von Sardinen: $dxy$
@@ -814,21 +811,23 @@
     \end{aligned}
   \end{gather*}
 
-  \begin{block}{System von Differentialgleichungen}
-    Mehrere Differentialgleichungen für mehrere Funktionen bilden ein
-    System von DGln. Die Anzahl der Gln./Funktionen ist die Dimension
-    des Systems.
-  \end{block}
+  Autonomes System der Dimension zwei
+  \begin{itemize}
+  \item[$\Rightarrow$] die Entwicklung hängt nur von $(x,y)$ ab 
+  \end{itemize}
 \end{frame}
 
 \begin{frame}{Phasenraumdiagramme}
   \begin{itemize}
-  \item Die Lotka-Volterra-Gleichungen sind autonom
+  \item Man bezeichnet den Raum der möglichen Zustände $(x,y)$ als Phasenraum
+  \item Die Abbildung $t\mapsto(x(t),y(t))$ ist ein Weg im Phasenraum
+  \item Sein Geschwindigkeitsvektor $(x',y')$ ist die rechte Seite der Dgl.
+  \item Wieder können wir Richtungsfelder zeichnen
     \begin{itemize}
-    \item[$\Rightarrow$] die Entwicklung hängt nur von $(x,y)$ ab 
+    \item In jedem Punkt $(x,y)$ hängt der Geschwindigkeitsvektor von $x$ und $y$ ab
+    \item Die Vektoren sind immer tangential zur Lösungskurve
+    \item In diesem Bild gibt es keine Zeit (Kurve!)
     \end{itemize}
-  \item Man bezeichnet den Raum der möglichen Zustände als Phasenraum
-  \item Auch dort können wir wieder Richtungsfelder zeichnen
   \end{itemize}
 \end{frame}
 
@@ -841,13 +840,45 @@
 \begin{frame}{Lösung im Phasenraum}
   \begin{center}
     \includegraphics[width=.7\textwidth]{octave/volterra-phasespace-crop.pdf}
-  \end{center}  
+  \end{center}
+  Eine als Beispiel berechnete Lösungskurve
 \end{frame}
 
 \begin{frame}{Lösung als Funktion der Zeit}
   \begin{center}
     \includegraphics[width=.7\textwidth]{octave/volterra-timeseries-crop.pdf}
-  \end{center}  
+  \end{center}
+  Die Lösung als Weg
+\end{frame}
+
+\begin{frame}{Fixpunkte}
+  \only<1>{
+    \begin{Denkpause}
+      Gibt es Fixpunkte?
+    \end{Denkpause}
+  }
+  \pause
+  \begin{itemize}
+  \item Fixpunkte des Systems sind Nullstellen der rechten Seite
+    \begin{gather*}
+      \begin{aligned}
+        x' &=& ax &-bxy\\
+        y' &=& -cy & +dxy
+      \end{aligned}
+    \end{gather*}
+  \item Offensichtlich ist $(0,0)$ ein Fixpunkt
+    \begin{itemize}
+    \item Es gibt keine Individuen, die sich vermehren könnten
+    \end{itemize}
+    \pause
+  \item Ein zweiter Fixpunkt ist
+    \begin{gather*}
+      x=\frac cd,\qquad y=\frac ab
+    \end{gather*}
+    \begin{itemize}
+    \item Tunfisch und Sardinen sind im Gleichgewicht
+    \end{itemize}
+  \end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -860,8 +891,8 @@
   \begin{itemize}
   \item Es gibt die beiden Fixpunkte $(0,0)^T$ und
     $\left(\tfrac cd,\tfrac ab\right)^T$
-  \item Lösungen sind periodisch
   \item Es gibt diverse Erhaltungssätze
+  \item Lösungen sind periodisch
   \end{itemize}
 \end{frame}
 
@@ -871,8 +902,52 @@
   \end{center}    
 \end{frame}
 
+\begin{frame}{Ideen zur Steuerung des Systems}
+  Aufgabe: Sie wollen durch das Abfischen von Tunfisch die Sardinenpopulation erhöhen
+  \begin{itemize}
+  \item Wird das jederzeit funktionieren?
+  \visible<3->{
+    \begin{itemize}
+    \item Es ist die Kenntnis der relativen Position zum Fixpunkt nötig, um gezielt zu steuern.
+    \end{itemize}
+  }
+  \item Kann es langfristig Erfolg haben?
+  \visible<4->{
+    \begin{itemize}
+    \item Langfristig wird das System um denselben Fixpunkt oszillieren
+    \end{itemize}
+  }
+  \end{itemize}
+  \visible<2>{
+    \begin{Denkpause}
+      Argumentieren Sie anhand der vorherigen Grafik
+    \end{Denkpause}
+  }
+  \visible<5>{
+    \begin{block}{}
+      Wir haben soeben einen ersten Einblick in die Steuerung \textbf{dynamischer Systeme} gewonnen
+    \end{block}
+  }
+\end{frame}
+
+\begin{onlyenv}<article>
+  \begin{envgkerror}{Ausarbeiten}
+    \begin{Aufgabe}
+      \begin{enumerate}
+      \item Modifizieren Sie die Lotka-Volterra-Gleichungen für den
+        Fall, dass Tunfische mit einer Rate $ey$ gefangen werden.
+      \item Finden Sie Fixpunkte der modifizierten Gleichungen
+      \item Skizzieren Sie das zugehörige Vektorfeld
+      \end{enumerate}
+    \end{Aufgabe}
+  \end{envgkerror}
+\end{onlyenv}
+
 \begin{Abschluss}
-\item Phasenraumdiagramme können qualitatives Lösungsverhalten vermitteln
+\item Was wird im Phasenraumdiagramm dargestellt?
+\item Welcher Bezug besteht zwischen Vektorfeld und der Kurve einer Lösung?
+\item Wie erkennen Sie stationäre Punkte?
+\item Wie erkennen Sie die Auswirkung von Eingriffen in das System?
 \end{Abschluss}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -881,7 +956,7 @@
 
 \begin{frame}{Kompartimentmodelle}
   \begin{itemize}
-  \item Komplexe Verhältnisse werden durch wenige diskrete Kompartimente ersetzt
+  \item Komplexe Verhältnisse werden durch wenige diskrete \glqq{}Kompartimente\grqq{} (compartments) ersetzt
     \begin{itemize}
     \item Personengruppen in der Epidemiologie
     \item Regionen in Zellen
@@ -889,9 +964,209 @@
   \item Jedes der Kompartimente wird homogen angenommen
     \begin{itemize}
     \item Bzgl. des Modell gleiche Eigenschaften
+    \item Vollständige Durchmischung
+    \item Epidemiologie: keine räumliche Auflösung
+    \end{itemize}
+  \item Der Austausch zwischen den Gruppen ist homogen
+    \begin{itemize}
+    \item Epidemiologie: die Wahrscheinlichkeit, jemanden aus einer
+      der Gruppen zu treffen ist gleich
+    \item Das zusammentreffen von Personen ist zeitlich homogen
     \end{itemize}
   \end{itemize}
 \end{frame}
+
+\begin{frame}{Das SIR-Modell}
+  Drei Personengruppen mit konstanter Gesamtzahl $N$
+  \begin{gather*}
+    N = S+I+R
+  \end{gather*}
+  \begin{description}
+  \item[Susceptible] $S$ Personen, die sich anstecken können
+  \item[Infectious] $I$ infizierte Personen, die die Krankheit weitergeben können
+  \item[Removed] $R$ Personen, die nach der Erkrankung immun sind
+  \end{description}
+  \pause
+  \begin{block}{Ethische Komponente}
+    In diesen Modellen werden Personen nicht mehr als Menschen
+    betrachtet, sondern als komponenten in einem mathematischen
+    System. So nützlich Modelle dieser Art sind, so sind sie doch
+    prinzipiell nicht mit §1 GG verträglich. Das muss bei ihrer
+    Anwendung immer berücksichtigt werden.
+  \end{block}
+\end{frame}
+
+\begin{frame}{Übergänge zwischen den Gruppen}
+  \begin{description}
+  \item[$S\to I$] Eine Person $S$ trifft eine infektiöse Person $I$ und wird mit
+    der Wahrscheinlichkeit $\hat \beta$ infiziert.
+    \begin{itemize}
+    \item Personen treffen kontinuierlich andere Personen mit der Rate $m$ pro Zeiteinheit
+    \item Die Wahrscheinlichkeit, dass die andere Person infektiös ist, ist $I/N$.
+    \end{itemize}
+  \item[$I\to R$] Eine infizierte Person erholt sich oder stirbt mit
+    einer Rate $\gamma$ pro Zeiteinheit
+  \end{description}
+  \pause Anmerkung: $\hat\beta$ ist die Übertragungswahrscheinlichkeit
+  einer Begegnung. Wir machen die Annahme, dass die Übertragungsrate
+  linear mit der Anzahl der Begegnunen wächst und setzen
+  $\beta = m \hat\beta$. Auf diese Art sind alle Parameter bezüglich
+  derselben Zeiteinheit, typischerweise Tage.
+\end{frame}
+
+\begin{frame}{Die Gleichungen}
+  \begin{block}{In der Einheit \glqq{}Personen\grqq{}}
+    \begin{align*}
+      d_t S &=-\beta S\frac IN\\
+      d_t I &=\beta S\frac IN - \gamma I\\
+      d_t R &=\gamma I
+    \end{align*}  
+  \end{block}
+
+  \begin{onlyenv}<article> Die Gleichungen in der Einheit Personen
+    sind mathematisch unhandlich, auch wenn die Ergebnisse sofort
+    anwendbar sind. Eleganter ist die Darstellung un
+    Bevölkerungsanteilen, indem jede Größe durch $N$ dividiert
+    wird. Da damit auch die Ableitung entsprechend dividiert wird,
+    werden die Gleichungen unabhängig von $N$ und gelten für beliebige
+    Bevölgerungen.
+  \end{onlyenv}
+  \begin{block}{In der Einheit \glqq{}Bevölkerungsanteil\grqq{}}
+    \begin{align*}
+      d_t S &=-\beta SI\\
+      d_t I &=\beta SI - \gamma I\\
+      d_t R &=\gamma I
+    \end{align*}  
+  \end{block}
+\end{frame}
+
+\begin{frame}{Eigenschaften der Lösung}
+  \begin{align*}
+    d_t S &=-\beta SI\\
+    d_t I &=\beta SI - \gamma I\\
+    d_t R &=\gamma I
+  \end{align*}  
+  \begin{itemize}
+  \item Alle Größen liegen im Intervall $[0,1]$
+  \item $S$ ist monoton fallend und $R$ steigend
+    \begin{itemize}
+    \item Daher konvergieren beide für $t\to\infty$
+    \end{itemize}
+  \item Jeder Punkt $(S,0,R)$ ist ein Fixpunkt
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Reproduktionszahlen}
+  \begin{gather*}
+    d_t I = \beta SI-\gamma I = (R_0S-1) \gamma I
+  \end{gather*}
+  \begin{block}{Basisreproduktionszahl $R_0$}
+    $R_0$ gibt an, wieviele Personen von einer infektiösen Person
+    angesteckt werden, wenn $S\approx 1$, also zu Beginn der
+    Epidemie. Sie ergibt sich als
+    \begin{gather*}
+      R_0 = \frac\beta\gamma
+    \end{gather*}
+  \end{block}
+
+  \begin{block}{Effektive Reproduktionszahl $R_e$}
+    $R_e = SR_0$ gibt an, wieviele Personen im Verlauf der Epidemie
+    von einer infektiösen Person angesteckt werden.
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle<presentation>{Entwicklung von $I$}
+  \begin{gather*}
+    d_t I = (R_e-1) \gamma I
+  \end{gather*}
+  \begin{description}
+  \item[$R_e>1$] Die Anzahl der Infektiösen wächst
+    \begin{itemize}
+    \item Für $R_0>1$ beginnt die Epidemie mit exponentiellem Wachstum
+    \item Dies wird gebremst, wenn $S$ deutlich unter 1 liegt
+    \end{itemize}
+  \item[$R_e<1$] Die Anzahl der Infektiösen schrumpft
+    \begin{itemize}
+    \item Für $R_0<1$ bricht keine Epidemie aus
+    \item Im Endstadium schrumpft die Zahl der Infektiösen exponenziell
+    \end{itemize}
+  \item[$R_e=1$] Grenzfall $d_t I = 0$
+    \begin{itemize}
+    \item Falls $I>0$, ist $S$ streng monoton fallend, es ist also kein Fixpunkt
+    \item Eintritt der \glqq{}Herdenimmunität\grqq{}
+    \end{itemize}
+  \end{description}
+\end{frame}
+
+\begin{frame}{Der Grenzwert für unendliche Zeit}
+  \begin{itemize}
+  \item Wir haben bereits gesehen:
+    \begin{itemize}
+    \item $I\to 0$ wenn $t\to \infty$
+    \item Die Grenzwerte $S_\infty$ und $R_\infty$ existieren 
+    \end{itemize}
+  \item Es gilt dann $S_\infty+R_\infty = 1$
+  \item Aufwändige mathematische Berechnungen ergeben
+    \begin{gather*}
+      S_\infty = e^{R_0(S_\infty-1)}
+    \end{gather*}
+    \begin{itemize}
+    \item Beispiel für $R_0=3$ ist $S_\infty \approx 5.95\%$
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{Aufgabe}
+  \begin{enumerate}
+  \item Modifizieren Sie das SIR-Modell, so dass die Immunität der Gruppe
+  $R$ exponentiell abklingt.
+  \item Welche Grundannahmen der Analyse für $t\to\infty$ ändern sich dadurch?
+  \end{enumerate}
+\end{Aufgabe}
+
+\begin{frame}{Das SEIR-Modell}
+  \begin{itemize}
+  \item Modellierung von Inkubationszeiten
+  \item Zusätzlich zum SIR-Modell fügen wir eine weitere Gruppe hinzu
+    \begin{itemize}
+    \item $E$ (exposed) Infiziert, aber (noch) nicht infektiös
+    \end{itemize}
+  \item Es gibt eine Übergangsrate $\sigma$ von $E$ nach $I$
+  \end{itemize}
+  \begin{align*}
+    d_t S &=-\beta SI\\
+    {\color{blue}d_t E} &{\color{blue}=\beta SI - \sigma E}\\
+    d_t I &={\color{blue}\sigma E} - \gamma I\\
+    d_t R &=\gamma I
+  \end{align*}  
+\end{frame}
+
+\begin{frame}{Schwächen der Modelle}
+  Im Plenum möchte ich gern diskutieren, wo bei den SIR- und
+  SEIR-Modellen eine fundamentale Schwäche liegt und wie man sie
+  beheben sollte.
+\end{frame}
+
+\begin{frame}{Was ist ein mathematisches Modell}
+  \begin{itemize}
+  \item Es ist ein System von mathematischen Formeln, das den
+    modellierten Prozess mit einer für die Anwendung hinreichenden
+    Genauigkeit beschreibt
+  \item Es ist eine Abstraktion und damit Vereinfachung
+  \item Es beruht auf expliziten Annahmen und erlaubt Schlüsse aus diesen
+  \item Es ist in dem Sinne überprüfbar, dass Messwerte und Rechnungen
+    hinreichend nah beieinander liegen
+  \item Es ist \textbf{nicht} eine wahre oder falsche Aussage über die Natur
+  \end{itemize}
+\end{frame}
+
+\begin{Abschluss}
+\item Was ist ein Kompartimentmodell?
+\item Wie modellieren Sie die \glqq{}Reaktion\grqq{} zwischen zwei Gruppen?
+\item Welche Grundannahmen stecken im SIR-Modell
+\item Wie entwickeln sich seine Lösungen mit der Zeit?
+\end{Abschluss}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
