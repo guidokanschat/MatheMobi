@@ -815,6 +815,12 @@
   \begin{itemize}
   \item[$\Rightarrow$] die Entwicklung hängt nur von $(x,y)$ ab 
   \end{itemize}
+
+  \begin{block}{Dynamische Systeme}
+    Ein solches System von Differentialgleichungen ist ein besonderer
+    Fall eines dynamischen Systems. Wir werden im Folgenden Argumente
+    zur Untersuchung dynamischer Systeme auf dieses System anwenden.
+  \end{block}
 \end{frame}
 
 \begin{frame}{Phasenraumdiagramme}
@@ -848,7 +854,7 @@
   \begin{center}
     \includegraphics[width=.7\textwidth]{octave/volterra-timeseries-crop.pdf}
   \end{center}
-  Die Lösung als Weg
+  Die Lösung als Weg: was ist $x$, was ist $y$?
 \end{frame}
 
 \begin{frame}{Fixpunkte}
@@ -881,6 +887,35 @@
   \end{itemize}
 \end{frame}
 
+\begin{frame}{Erhaltungssätze}
+  \begin{itemize}
+  \item Wir führen die folgende Größe ein:
+    \begin{gather*}
+      V(x,y) = dx - c \ln x + by - a \ln y
+    \end{gather*}
+  \item Für jede Lösung der Lotka-Volterra-Gleichungen $(x(t),y(t))$ gilt
+    \begin{gather*}
+      d_t V\bigl(x(t),y(t)\bigr) = 0
+    \end{gather*}
+    \pause
+  \item Eine solche Aussage nennt man \textbf{Erhaltungssatz}, $V$
+    nennt man eine \textbf{Erhaltungsgröße}
+  \item Erhaltungsgrößen spielen eine wichtige Rolle für das
+    Verständnis von dynamischen Systemen
+  \item Mit Ihnen zeigt man Eigenschaften von Lösungen, z.B.
+    \begin{itemize}
+    \item beschränkt
+    \item periodisch
+    \end{itemize}
+  \end{itemize}
+  
+\end{frame}
+
+\begin{Aufgabe}
+  Zeigen Sie, dass die Erhaltungsgleichung
+  $d_t V\bigl(x(t),y(t)\bigr) = 0$ tatsächlich für jede Lösung der Lotka-Volterra-Gleichungen $(x(t),y(t))$ gilt.
+\end{Aufgabe}
+
 \begin{frame}
   \begin{block}{Warnung}
     Für die Lotka-Volterra-Gleichungen gibt es keine geschlossene
@@ -891,7 +926,7 @@
   \begin{itemize}
   \item Es gibt die beiden Fixpunkte $(0,0)^T$ und
     $\left(\tfrac cd,\tfrac ab\right)^T$
-  \item Es gibt diverse Erhaltungssätze
+  \item Es gibt Erhaltungssätze
   \item Lösungen sind periodisch
   \end{itemize}
 \end{frame}
@@ -925,7 +960,7 @@
   }
   \visible<5>{
     \begin{block}{}
-      Wir haben soeben einen ersten Einblick in die Steuerung \textbf{dynamischer Systeme} gewonnen
+      Wir haben soeben einen ersten Einblick in die Steuerung dynamischer Systeme gewonnen
     \end{block}
   }
 \end{frame}
@@ -1016,6 +1051,8 @@
 
 \begin{frame}{Die Gleichungen}
   \begin{block}{In der Einheit \glqq{}Personen\grqq{}}
+
+    \only<presentation>{\vspace*{-2ex}}
     \begin{align*}
       d_t S &=-\beta S\frac IN\\
       d_t I &=\beta S\frac IN - \gamma I\\
@@ -1032,6 +1069,7 @@
     Bevölgerungen.
   \end{onlyenv}
   \begin{block}{In der Einheit \glqq{}Bevölkerungsanteil\grqq{}}
+    \only<presentation>{\vspace*{-2ex}}
     \begin{align*}
       d_t S &=-\beta SI\\
       d_t I &=\beta SI - \gamma I\\
@@ -1048,6 +1086,10 @@
   \end{align*}  
   \begin{itemize}
   \item Alle Größen liegen im Intervall $[0,1]$
+    \begin{itemize}
+    \item Folgt aus dem Ansatz als Bevölkerungsanteil
+    \item Muss für Lösungen überprüft werden
+    \end{itemize}
   \item $S$ ist monoton fallend und $R$ steigend
     \begin{itemize}
     \item Daher konvergieren beide für $t\to\infty$
