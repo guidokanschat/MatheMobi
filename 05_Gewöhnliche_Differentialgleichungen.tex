@@ -1283,35 +1283,185 @@
   \end{gather*}
 \end{frame}
 
-\begin{frame}{Integrierende Faktoren}
+\begin{frame}
+  \begin{block}{Definition: integrierender Faktor}
+    Die Funktion
+    \begin{gather*}
+      m(t) = \exp\left(-\int_{t_0}^t a(s)\,ds \right)
+    \end{gather*}
+    heißt \textbf{integrierender Faktor} der Anfangswertaufgabe
+    \begin{gather*}
+      x'(t) - a(t)x(t) = b(t),\qquad x(t_0) = x_0
+    \end{gather*}
+  \end{block}
+  \pause
+  Bemerkung: $m(t)\neq 0$ und
+  \begin{gather*}
+    \frac1{m(t)} = \exp\left(\int_{t_0}^t a(s)\,ds \right)
+  \end{gather*}
 \end{frame}
 
+\begin{frame}
+  \begin{block}{Lösung mit integrierendem Faktor}
+    Die Anfangswertaufgabe
+    \begin{gather*}
+      x'(t) - a(t)x(t) = b(t),\qquad x(t_0) = x_0
+    \end{gather*}
+    wird gelöst von der Funktion
+    \begin{align*}
+      x(t)
+      &= \exp\left({\scriptstyle\int\limits_{t_0}^t a(s)\,ds}\right)
+        \left[
+        x_0 + \int\limits_{t_0}^t \exp
+        \left({\scriptstyle
+        -\int\limits_{t_0}^s a(u)\,du
+        }\right) b(s)\,ds
+        \right]\\
+      &= \frac1{m(t)} x_0 + \frac1{m(t)} \int_{t_0}^t m(s) b(s)\,ds
+    \end{align*}
+  \end{block}
+  \pause
+  \begin{itemize}
+  \item Aufspaltung: Anfangswert und rechte Seite
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Herleitung}
+  \begin{itemize}
+  \item<+-> Zunächst beobachten wir:
+    \begin{align*}
+      d_t \bigl(m(t)x(t)\bigr)
+      &= m(t) x'(t) + m'(t) x(t)\\
+      &= \exp\left({\scriptstyle -\int\limits_{t_0}^t a(s)\,ds}\right) x'(t)
+        - \exp\left({\scriptstyle-\int\limits_{t_0}^t a(s)\,ds}\right) a(t) x(t)
+      \\
+      &= m(t) x'(t) - m(t) a(t) x(t)
+    \end{align*}
+  \item<+-> Nun multiplizieren wir die Gleichung mit $m(t)$
+    \begin{gather*}
+      m(t) x'(t) - m(t) a(t) x(t) = m(t) b(t)
+    \end{gather*}
+  \item<+-> Integration auf beiden Seiten von $t_0$ bis $t$
+    \begin{gather*}
+      m(t)x(t) = \int_{t_0}^t m(s)b(s)\,ds
+    \end{gather*}
+  \item<+-> Resultiert in einer Lösung mit $x_0=0$
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle<presentation>{Herleitung II}
+  \begin{itemize}
+  \item<+-> Betrachte nun $x(t) = x_0/m(t)$
+    \begin{gather*}
+      m(t) x'(t) - m(t) a(t) x(t)
+      = 
+      d_t \bigl(m(t)x(t)\bigr)
+      = x_0 d_t\left(\frac{m(t)}{m(t)}\right) = 0 
+    \end{gather*}
+  \item <+-> Resultiert in einer Lösung der homogenen Gleichung
+  \item <+-> Die Summe der beiden Lösungen löst die Anfangswertaufgabe
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Beispiele}
+  \begin{gather*}
+    x' - 2x = 1, \qquad x(0) = 3
+  \end{gather*}
+  \begin{itemize}
+  \item Integrierender Faktor
+    \begin{gather*}
+      m(t) = \exp\left(-\int_0^t 2\,ds\right) = e^{-2t}
+    \end{gather*}
+  \item Integral der rechten Seite
+    \begin{gather*}
+      \int_{0}^t e^{-2s} 1 \,ds = \left[-\frac12 e^{-2s}\right]_0^t
+      = \frac12\left(1-e^{-2t}\right)
+    \end{gather*}
+  \item Lösung der Anfangswertaufgabe
+    \begin{gather*}
+      x(t) = 3 e^{2t} + \frac12 \left(e^{2t}-1\right) = \frac72 e^{2t} - \frac12
+    \end{gather*}
+  \end{itemize}
+\end{frame}
+
+\mode<article>{Als nächstes betrachten wir ein Beispiel mit
+  nicht-konstantem Koeffizienten $a(t)=t$ und nicht konstanter rechter
+  Seite $b(t)=t$.}
+\begin{frame}
+  \frametitle<presentation>{Weiteres Beispiel}
+  \begin{gather*}
+    x' - tx = t, \qquad x(0) = 1
+  \end{gather*}
+  \begin{itemize}
+  \item Integrierender Faktor
+    \begin{gather*}
+      m(t) = \exp\left(-\int_0^t t\,ds\right) = e^{-\frac{t^2}{2}}
+    \end{gather*}
+  \item Integral der rechten Seite
+    \begin{gather*}
+      \int_{0}^t e^{-\frac{s^2}{2}} s \,ds = \left[-e^{-\frac{s^2}{2}}\right]_0^t
+      = 1-e^{-\frac{t^2}{2}}
+    \end{gather*}
+  \item Lösung der Anfangswertaufgabe
+    \begin{gather*}
+      x(t) = e^{\frac{t^2}{2}} + e^{\frac{t^2}{2}} -1 = 2e^{\frac{t^2}{2}} -1
+    \end{gather*}
+  \end{itemize}  
+\end{frame}
+
+\begin{Aufgabe}
+  Lösen Sie jeweils mit Hilfe von integrierenden Faktoren für den
+  Anfangswert $x(0)=0$. Da die Rechnung aufwändig ist und Sie
+  ggf. Integrale nachschlagen, Überprüfen Sie die Richtigkeit der
+  Lösung.
+  \begin{xalignat*}{2}
+    a)&\quad x' - \sin t x = \sin t\\
+    b)&\quad x' -tx = t^3
+  \end{xalignat*}
+\end{Aufgabe}
+
+\begin{Abschluss}
+  \item Was ist ein linearer Differentialoperator?
+  \item Wie kann man die Lösung einer Anfangswertaufgabe mit linearer,
+    inhomogener Differentialgleichung als Summe aufspalten?
+  \item Wie sieht der integrierende Faktor der Gleichung $x'-ax = b$ aus?
+  \item Wie kann ich mit ihm die Lösung berechnen?
+\end{Abschluss}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Lösung linearer Systeme von Dgln.}
+\subsection{Lösung linearer Systeme von Differentialgleichungen}
 
 \begin{frame}
   \begin{block}{Lineares System von Differentialgleichungen}
-    Ein lineares System von DGl. erster Ordnung der Dimension $n$ hat
+    Ein lineares System von Differentialgleichungen erster Ordnung der Dimension $n$ hat
     die Form
     \begin{gather*}
-      x' = Ax + f
+      \vx' = A\vx + \vb
       \qquad\text{oder}\qquad
-      x'(t) = A(t)x(t) + b(t)
+      \vx'(t) = A(t)\vx(t) + \vb(t)
     \end{gather*}
-    Es sind $x(t), x'(t), b(t) \in \R^n$ und $A(t)\in \Rnn$.
+    Es sind $\vx(t), \vx'(t), \vb(t) \in \R^n$ und $A(t)\in \Rnn$.
     
-    Falls $A$ und $b$ nicht von der Zeit $t$ abhängen, ist das System
-    autonom, es ist homogen, falls $b\equiv0$.
+    Falls $A$ und $\vb$ nicht von der Zeit $t$ abhängen, ist das System
+    autonom, es ist homogen, falls $\vb\equiv0$.
   \end{block}
+\end{frame}
 
-  \begin{block}{Lösung der AWA im homogenen, autonomen Fall}
-    Wie im Falle der linearen Wachstumsgleichung schreiben wir die
-    Lösung der Anfangswertaufgabe mit einem Startvektor $x(0) = x_0\in\R^n$:
+\begin{frame}
+  \begin{itemize}
+  \item Wir wollen dieselben Techniken wie in einer Dimension anwenden
+  \item Der autonome, homogene Fall: $\vb\equiv 0$ und $A$ unabhängig von $t$:
     \begin{gather*}
-      x(t) = e^{At} x_0.
+      x(t) = x_0 e^{ax}
     \end{gather*}
-  \end{block}
+  \item Integrierender Faktor:
+    \begin{gather*}
+      m(t) = \exp\left(-\int_{t_0}^t a(s)\,ds\right)
+    \end{gather*}
+    Wir müssen also die Exponentialfunktion und das Integral auf Matrizen erweitern
+  \end{itemize}
 \end{frame}
 
 \begin{frame}{Exponentialfunktion einer Diagonalmatrix}
