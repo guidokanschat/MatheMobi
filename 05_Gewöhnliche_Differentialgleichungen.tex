@@ -1364,6 +1364,20 @@
   \end{itemize}
 \end{frame}
 
+\begin{frame}{Qualitative Betrachtungen}
+  \begin{itemize}
+  \item Für einen konstanten Koeffizienten $a(t) \equiv a$ und $t_0=0$ gilt
+    \begin{gather*}
+      x(t) = e^{at} x_0+ e^{at}\int_{t_0}^t e^{-as} b(s)\,ds
+    \end{gather*}
+  \item Ist z.B. $a<0$, so beobachten wir
+    \begin{itemize}
+    \item Der Einfluss des Startwerts $x_0$ verschwindet exponenziell
+    \item Die rechte Seite wird im Integral zum Ende hin deutlich stärker gewichtet
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
 \begin{frame}{Beispiele}
   \begin{gather*}
     x' - 2x = 1, \qquad x(0) = 3
@@ -1421,6 +1435,8 @@
   \end{xalignat*}
 \end{Aufgabe}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{Abschluss}
   \item Was ist ein linearer Differentialoperator?
   \item Wie kann man die Lösung einer Anfangswertaufgabe mit linearer,
@@ -1454,7 +1470,7 @@
   \item Wir wollen dieselben Techniken wie in einer Dimension anwenden
   \item Der autonome, homogene Fall: $\vb\equiv 0$ und $A$ unabhängig von $t$:
     \begin{gather*}
-      x(t) = x_0 e^{ax}
+      x(t) = x_0 e^{at}
     \end{gather*}
   \item Integrierender Faktor:
     \begin{gather*}
@@ -1464,26 +1480,118 @@
   \end{itemize}
 \end{frame}
 
+\begin{frame}{Integral und Ableitung einer Matrixfunktion}
+  \begin{itemize}
+  \item Sei $A(t)$ eine zeitabhängige Matrix oder äquivalent eine Funktion, deren Werte Matrizen sind, also
+    \begin{gather*}
+      A(t) =
+      \begin{pmatrix}
+        a_{11}(t) &\dots& a_{1n}(t)\\
+        \vdots && \vdots\\
+        a_{m1}(t) & \dots &a_{mn}(t)
+      \end{pmatrix}
+    \end{gather*}
+  \item Deren Integral ist
+    \begin{gather*}
+      \int A(t)\,dt =
+      \begin{pmatrix}
+        \int a_{11}(t)\,dt &\dots&\int a_{1n}(t)\,dt\\
+        \vdots && \vdots\\
+        \int a_{m1}(t)\,dt & \dots &\int a_{mn}(t)\,dt
+      \end{pmatrix}
+    \end{gather*}
+  \item Ebenso bilden wir die Ableitung komponentenweise und erhalten die Matrix $A'(t)$
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Exponentialfunktion als Taylorreihe}
+  \begin{itemize}
+  \item Wir beginnen mit der Darstellung der Exponentialfunktion als Taylorreihe
+    \begin{gather*}
+      e^{a} = \sum_{k=0}^\infty \frac1{k!} a^k
+    \end{gather*}
+  \item Alle Operationen, also Summe und Potenz, sind auch für Matrizen definiert:
+    \begin{gather*}
+      e^{A} = \sum_{k=0}^\infty \frac1{k!} A^k
+    \end{gather*}
+  \item Diese Summe ist schwer zu berechnen
+  \end{itemize}
+\end{frame}
+
+
 \begin{frame}{Exponentialfunktion einer Diagonalmatrix}
+  \begin{itemize}
+  \item Wenn die Matrix $A$ diagonal ist, wird dies einfacher
+    \begin{gather*}
+      D =
+      \begin{pmatrix}
+        d_1\\ &\ddots\\ &&d_n
+      \end{pmatrix}
+      \qquad\Rightarrow\qquad
+      D^k =
+      \begin{pmatrix}
+        d_1^k\\ &\ddots\\ &&d_n^k
+      \end{pmatrix}
+    \end{gather*}
+  \item Das Aufsummieren funktioniert auch je Eintrag
+    \begin{gather*}
+      e^D
+      = \sum_{k=0}^\infty \frac1{k!}
+      \begin{pmatrix}
+        d_{1}^k&\\&\ddots\\&&d_{n}^k
+      \end{pmatrix}
+      =
+      \begin{pmatrix}
+        e^{d_1}&\\&\ddots\\&&e^{d_{n}}
+      \end{pmatrix}
+    \end{gather*}
+  \end{itemize}
+  \pause
+  \begin{Denkpause}
+    Was können wir tun, wenn die Matrix nicht diagonal ist?
+  \end{Denkpause}
 \end{frame}
 
 \begin{frame}{Exponentialfunktion einer diagonalisierbaren Matrix}
-  
+  \begin{itemize}
+  \item Diagonalisierung mit Eigenwerten (EW) und Eigenvektoren (EV)
+    \begin{gather*}
+      A = S \Lambda S^{-1},\qquad
+      \Lambda =
+      \begin{pmatrix}
+        \lambda_1\\ &\ddots\\ &&\lambda_n
+      \end{pmatrix}
+    \end{gather*}
+  \item Potenzen von $A$
+    \begin{gather*}
+      A^k = \bigl(S \Lambda S^{-1}\bigr)^k
+      = S \Lambda S^{-1}S \Lambda S^{-1}\dots S \Lambda S^{-1}
+      = S \Lambda^k S^{-1}
+    \end{gather*}
+  \item Potenzreihen von $A$
+    \begin{gather*}
+      e^A = \sum_{k=0}^\infty \frac1{k!} S \Lambda^k S^{-1}
+      = S \left[\sum_{k=0}^\infty \frac1{k!}  \Lambda^k\right] S^{-1}
+      = S e^\Lambda S^{-1}
+    \end{gather*}
+  \end{itemize}
 \end{frame}
 
 \begin{frame}{Eigenschaften der Matrix-Exponentialfunktion}
   Für beliebige Matrizen $A$ und invertierbare Matrizen $S$ gilt
   \begin{align*}
-    e^0 &= \mathbb I\\
     e^{S^{-1}AS} &= S^{-1} e^A S\\
+    e^0 &= \mathbb I\\
     e^{\alpha A} e^{\beta A} &= e^{(\alpha+\beta) A}\\
-    e^{A}e^{-A} &= \mathbb I\\
+    e^{A}e^{-A} &= \mathbb I
   \end{align*}
   \begin{itemize}
+  \item Aus der ersten Eigenschaft folgt, dass die Eigenvektoren von
+    $e^A$ identisch mit denen von $A$ sind.
+    \item Die zweite Gleichung folgt direkt aus der Taylorreihe
+  \item Die dritte ist die übliche Rechenregel für $e^x$ git aber nur mit derselben Matrix!
   \item Aus der letzten Gleichung folgt insbesondere, dass $e^A$ für jede
     Matrix $A$ invertierbar ist und $e^{-A}$ die Inverse ist.
-  \item Aus der zweiten Eigenschaft folgt, dass die Eigenvektoren von
-    $e^A$ identisch mit denen von $A$ sind.
   \end{itemize}
 \end{frame}
 
@@ -1492,61 +1600,60 @@
     A =
     \begin{pmatrix}
       0 & 1\\k^2 & 0
-    \end{pmatrix},
-    \qquad \lambda_{1/2} = \pm k,
-    \qquad v_1 =
-    \begin{pmatrix}
-      1\\k
-    \end{pmatrix},
-    \quad
-    v_2 =
-    \begin{pmatrix}
-      1 \\ -k
-    \end{pmatrix}.
-  \end{gather*}
-  \pause
-  Sei $S$ die Matrix mit Spalten $v_1$ und $v_2$, dann gilt
-  \begin{gather*}
-    A = S^{-1}
-    \begin{pmatrix}
-      k \\ &-k
-    \end{pmatrix}
-    S,
-    \qquad
-    S^{-1} =
-    \frac12
-    \begin{pmatrix}
-      1 & \tfrac1k\\
-      1 & -\tfrac1k\\
     \end{pmatrix}
   \end{gather*}
-  \pause
-  Nun exponenzieren wir die Eigenwerte und erhalten
-  \begin{gather*}
-    e^A =  S^{-1}
-    \begin{pmatrix}
-      e^k \\ &e^{-k}
-    \end{pmatrix}
-    S
-    = \frac12
-    \begin{pmatrix}
-      e^k + e^{-k} & \tfrac 1k (e^k - e^{-k}) \\
-      k (e^k - e^{-k}) & e^k + e^{-k}
-    \end{pmatrix}
-    =
-    \begin{pmatrix}
-      \cosh(k) & \tfrac 1k \sinh(k) \\
-      k \sinh(k) & \cosh(k)
-    \end{pmatrix}
-  \end{gather*}
-  \vspace*{.9\textheight}
+  \begin{itemize}
+  \item<+-> Das Charakteristische Polynom ist $\chi(A) = \lambda^2-k^2$, daher
+    \begin{gather*}
+      \lambda_{1/2} = \pm k,
+      \qquad \vv_1 =
+      \begin{pmatrix}
+        1\\k
+      \end{pmatrix},
+      \quad
+      \vv_2 =
+      \begin{pmatrix}
+        1 \\ -k
+      \end{pmatrix}.
+    \end{gather*}
+  \item<+->
+    Sei $S$ die Matrix mit Spalten $\vv_1$ und $\vv_2$, dann gilt
+    \begin{gather*}
+      A = S
+      \begin{pmatrix}
+        k \\ &-k
+      \end{pmatrix}
+      S^{-1},
+      \qquad
+      S^{-1} =
+      \frac12
+      \begin{pmatrix}
+        1 & \tfrac1k\\
+        1 & -\tfrac1k\\
+      \end{pmatrix}
+    \end{gather*}
+  \item<+-> Nun exponenzieren wir die Eigenwerte und erhalten
+    \begin{gather*}
+      e^A =  S
+      \begin{pmatrix}
+        e^k \\ &e^{-k}
+      \end{pmatrix}
+      S^{-1}
+      = \frac12
+      \begin{pmatrix}
+        e^k + e^{-k} & \tfrac 1k (e^k - e^{-k}) \\
+        k (e^k - e^{-k}) & e^k + e^{-k}
+      \end{pmatrix}
+    \end{gather*}
+  \end{itemize}
 \end{frame}
 
-\begin{frame}{Lösung des allgemeinen linearen Systems}
+\begin{frame}%{Lösung des allgemeinen linearen Systems}
+  Dies setzen wir nun zusammen und erhalten:
   \begin{block}{Integrierender Faktor}
     Zum System
     \begin{gather*}
-      x'(t) = A(t) x(t) + b(t)
+      \vx'(t) = A(t) \vx(t) + \vb(t)
     \end{gather*}
     definieren wir den integrierenden Faktor
     \begin{gather*}
@@ -1564,45 +1671,263 @@
   \begin{block}{Lösung mit integrierendem Faktor}
     Für die Anwangswertaufgabe
     \begin{gather*}
-      x'(t) = A(t)x(t)+ b(t),
+      \vx'(t) = A(t)\vx(t)+ \vb(t),
       \qquad
-      x(0) = x_0,
+      \vx(0) = \vx_0,
     \end{gather*}
     lässt sich die Lösung mit dem integrierenden Faktor $M(t)$ über die Formel
     \begin{gather*}
-      x(t) = M^{-1}(t)
-      \left(
-        x_0 + \int_0^t M(s) b(s) \,ds
-      \right)
+      \vx(t) = M^{-1}(t) \vx_0 + M^{-1}(t) \int_0^t M(s) \vb(s) \,ds
     \end{gather*}
     darstellen.
   \end{block}
+  \begin{itemize}
+  \item Wieder Summe aus
+    \begin{itemize}
+    \item Lösung der homogenen Gleichung
+    \item Lösung er inhomogenen Gleichung mit Startwert null
+    \end{itemize}
+  \end{itemize}
 \end{frame}
+
+\begin{frame}{Beispiel}
+  \begin{gather*}
+    \vx'(t) =
+    \begin{pmatrix}
+      0 & 1\\k^2 & 0      
+    \end{pmatrix}\vx(t) +
+    \begin{pmatrix}
+      0\\1
+    \end{pmatrix}
+  \end{gather*}
+  \begin{itemize}
+  \item Der integrierende Faktor ist $M(t) = e^{-tA}$
+  \item Der Startwert ist null, daher  nur der zweite Teil:
+    \begin{gather*}
+      \vx(t) = \left[M^{-1}(t) \int_{0}^t M(s)\,ds\right]
+      \begin{pmatrix}
+        0\\1
+      \end{pmatrix}
+      = \left[e^{tA} \int_0^t e^{-sA}\,ds\right]
+      \begin{pmatrix}
+        0\\1
+      \end{pmatrix}
+    \end{gather*}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle<presentation>{Abschluss der Berechnung}
+  \begin{itemize}
+  \item Wir vereinfachen das Integral und benutzen die vorher berechnete Matrix
+    \begin{multline*}
+      \left[e^{tA} \int_0^t e^{-sA}\,ds\right]
+      \begin{pmatrix}
+        0\\1
+      \end{pmatrix}
+      = 
+      \int_0^t e^{(t-s)A}
+      \begin{pmatrix}
+        0\\1
+      \end{pmatrix}
+      \,ds
+      \\
+      =  \frac12\int_0^t
+      \begin{pmatrix}
+        \frac{e^{k(t-s)} - e^{-k(t-s)}}k\\
+        e^{k(t-s)} + e^{-k(t-s)}
+      \end{pmatrix}\,ds
+    \end{multline*}
+  \item Wir integrieren den Vektor
+    \begin{gather*}
+      \frac12\int_0^t
+      \begin{pmatrix}
+        \frac{e^{k(t-s)} - e^{-k(t-s)}}k\\
+        e^{k(t-s)} + e^{-k(t-s)}
+      \end{pmatrix}\,ds
+      =\frac12
+      \begin{pmatrix}
+        \frac{e^{kt} + e^{-kt}-2}{k^2}\\
+        \frac{e^{kt} - e^{-kt}}k
+      \end{pmatrix}
+    \end{gather*}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Anpassung an die Anfangswerte}
+  \begin{itemize}
+  \item Bisher haben wir die inhomogene Gleichung mit Anfangswert null gelöst.
+  \item Die Lösung der homogenen Gleichung mit Anfangswert $\vx_0$ ergibt sich aus der Formel
+    \begin{gather*}
+      \vx(t) = M^{-1}(t) \vx_0
+    \end{gather*}
+  \item Insbesondere kann man für die Einheitsvektoren $\ve_k$ Lösungen
+    \begin{gather*}
+      \vx_k = M^{-1}(t) \ve_k
+    \end{gather*}
+    berechnen, die wegen der Invertierbarkeit von $M(t)$ linear unabhängig sind
+  \end{itemize}
+\end{frame}
+
+\begin{Wdh}
+  Die Einheitsvektoren $\ve_k\in \R^n$ sind so definiert, dass der
+  $k$-te Eintrag von $\ve_k$ eins ist und alle anderen null.
+\end{Wdh}
+
 
 \begin{frame}
   \begin{block}{Lösungsraum}
     Die Lösungen des homogenen, linearen Systems der Dimension $n$
     \begin{gather*}
-      x'(t) = A(t)x(t)
+      \vx'(t) = A(t)\vx(t)
     \end{gather*}
-    bilden einen Vektorraum der Dimension $n$
+    bilden einen Vektorraum der Dimension $n$.
   \end{block}
   \pause
   Begründung:
   \begin{enumerate}
-  \item Mit zwei Lösungsfunktionen $x_1$ und $x_2$ ist auch
+  \item Mit zwei Lösungsfunktionen $\vx_1$ und $\vx_2$ ist auch
     $ax_1+bx_2$ eine Lösung
-  \item Aufgrund der Invertierbarkeit der Exponentialfunktion bildet
+  \item Die Funktionen $\vx_1(t)$ bis $\vx_n(t)$ bilden eine Basis mit
     \begin{gather*}
-      x_1 = M^{-1} e_1, x_2 = M^{-1} e_2,\dots, x_n = M^{-1} e_n,
+      \vx_1(t) = M^{-1}(t) \ve_1, \vx_2(t) = M^{-1}(t) \ve_2,\dots, \vx_n(t) = M^{-1}(t) \ve_n
     \end{gather*}
-    mit der Einheitsbasis $e_1,\dots,e_n$ eine Basis.
   \end{enumerate}
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Beispiel}
+  \begin{gather*}
+    \vx'(t) =
+    \begin{pmatrix}
+      0 & -1 \\ 1 & 0
+    \end{pmatrix} \vx(t),\qquad \vx(0) =
+    \begin{pmatrix}
+      1 \\ 0
+    \end{pmatrix}
+  \end{gather*}
+  \begin{itemize}
+  \item<+-> Das charakteristische Polynom ist
+    \begin{gather*}
+      \chi(\lambda) = \lambda^2+1
+    \end{gather*}
+    \only<1>{
+      \begin{Denkpause}
+        Wie können wir dieses Polynom auflösen?
+      \end{Denkpause}
+    }
+  \item<+-> Wir können die Nullstelle mit komplexen Zahlen ausdrücken
+    \begin{gather*}
+      \lambda_1 = \ii,\qquad \lambda_2 = -\ii.
+    \end{gather*}
+  \item<+-> Wir sagen, die Matrix hat \textbf{komplexe Eigenwerte}
+  \item<+-> Die Eigenvektoren sind dann auch komplex
+    \begin{gather*}
+      \vv_1 =
+      \begin{pmatrix}
+        1\\\ii
+      \end{pmatrix},\qquad
+      \vv_2 =
+      \begin{pmatrix}
+        1\\-\ii
+      \end{pmatrix}.     
+    \end{gather*}
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \begin{block}{Skalierte Drehung}
+    Die Matrix
+    \begin{gather*}
+      A =
+      \begin{pmatrix}
+        r & -\phi\\
+        \phi & r
+      \end{pmatrix} = S\Lambda S^{-1}
+    \end{gather*}
+    hat die Eigenwerte $\lambda_{1/2} = r \pm\ii\phi$ und es gilt
+    \begin{gather*}
+      S =
+      \begin{pmatrix}
+        1 & 1 \\ \ii & -\ii
+      \end{pmatrix},\qquad
+      S^{-1} = \frac12
+      \begin{pmatrix}
+        1 & \ii\\1 & -\ii
+      \end{pmatrix}
+    \end{gather*}
+  \end{block}
+  \only<2>{Wie sieht die Exponentialfunktion für komplexe Zahlern aus?}
+\end{frame}
+
+\begin{frame}
+  \frametitle<presentation>{Skalierte Drehung}
+  \begin{itemize}
+  \item Für komplexe Zahlen gilt
+    \begin{gather*}
+      e^{r\pm\ii\phi} = e^r (\cos \phi\pm\ii\sin\phi)
+    \end{gather*}
+  \item Wir wenden die Transformation an und erhalten
+    \begin{gather*}
+      e^{tA} = e^{rt}
+      \begin{pmatrix}
+        \cos(\phi t) & -\sin(\phi t)\\
+        \sin(\phi t) & \cos(\phi t)
+      \end{pmatrix}
+    \end{gather*}
+  \item Diese Matrix beschreibt eine Skalierung mit $e^{rt}$ und
+    gleichzeitig eine Drehung um den Winkel $\phi t$.
+    \pause
+  \item $e^{-tA}$ ist der integrierende Faktor für
+    \begin{gather*}
+      \vx'(t) = A\vx(t)
+    \end{gather*}
+    \item Gelöst wird die Gleichung von $\vx(t) = e^{tA} \vx_0$
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Komplexe Eigenwerte}
+  \begin{block}{Satz}
+    Hat eine reelle Matrix komplexe Eigenwerte, so treten sie als
+    komplex konjugierte Paare mit ebensolchen Paaren von Eigenvektoren
+    auf.
+  \end{block}
+  \pause
+  Sei nun $r\pm i\phi$ ein solches Paar mit den Eigenvektoren $\vu\pm \ii\vv$
+  \begin{align*}
+    A (\vu\pm \ii\vv) &= (r+\ii\phi) (\vu\pm \ii\vv),\\
+    e^A (\vu\pm \ii\vv) &= e^{r+i\phi} (\vu\pm \ii\vv) = e^r (\cos\phi \pm \ii \sin\phi)(\vu\pm \ii\vv).
+  \end{align*}
+\end{frame}
+
+\begin{frame}
+  \begin{block}{Reelle Lösungen}
+    Hat die Matrix $A$ ein komplexes Eigenwertpaar
+    $\lambda_{1/2} = r\pm \ii\phi$ mit zugehörigen Eigenvektoren
+    $\vu\pm \ii\vv$, so ersetzen wir in der Transformationsmatrix die
+    Eigenvektoren durch $\vu$ und $\vv$ und erhalten für $e^A$ eine
+    quasi-Diagonalmatrix mit Block
+    \begin{gather*}
+      e^r
+      \begin{pmatrix}
+        \cos\phi & \sin\phi\\
+        -\sin\phi & \cos \phi
+      \end{pmatrix}
+    \end{gather*}
+  \end{block}
+
+  Anstatt, dass die Eigenvektoren auf Vielfache von sich selbst
+  abgebildet werden, werden Paare von Eigenvektoren auf ihre
+  Linearkombinationen abgebildet
+\end{frame}
+
+\gkerror{Höhere Dimensionen}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Fixpunkte}
   \begin{gather*}
-    x' = Ax+f
+    \vx'(t) = A\vx(t)+\vb
   \end{gather*}
   \begin{exampleblock}{Frage}
     Welche Bedingung stellen Sie an einen Fixpunkt des Systems?
@@ -1614,80 +1939,100 @@
   \begin{block}{Satz}
   Das autonome System
   \begin{gather*}
-    x' = Ax+f
+    \vx'(t) = A\vx(t)+\vb
   \end{gather*}
   hat unter der Bedingung, dass $A$ invertierbar ist, genau einen Fixpunkt
   \begin{gather*}
-    x_F = -A^{-1}f.
+    \vx_F = -A^{-1}\vb.
   \end{gather*}
-  Das Spektrum von $A$ entscheidet dabei über den Charakter des Fixpunkts.    
+  Das \textbf{Spektrum}, also die Menge der Eigenwerte von $A$ entscheidet dabei über den Charakter des Fixpunkts.    
   \end{block}
 \end{frame}
 
 
-\begin{frame}{Beispiele}
-  \begin{center}
-    \includegraphics[width=.32\textwidth]{gnuplot/linear-pp-crop.pdf}
-    \hfill
-    \includegraphics[width=.32\textwidth]{gnuplot/linear-mm-crop.pdf}
-    \hfill
-    \includegraphics[width=.32\textwidth]{gnuplot/linear-pm-crop.pdf}
-  \end{center}
+\begin{frame}{Beispiele: reelle Eigenwerte}
+  \begin{columns}
+    \begin{column}[t]{.32\textwidth}
+      \begin{center}
+        \includegraphics[width=\textwidth]{gnuplot/linear-pp-crop.pdf}
+
+        $\lambda_1>0$, $\lambda_2>0$
+
+        abstoßend
+      \end{center}
+    \end{column}
+    \begin{column}[t]{.32\textwidth}
+      \begin{center}
+        \includegraphics[width=\textwidth]{gnuplot/linear-mm-crop.pdf}
+
+        $\lambda_1<0$, $\lambda_2<0$
+
+        anziehend
+      \end{center}
+    \end{column}
+    \begin{column}[t]{.32\textwidth}
+      \begin{center}
+        \includegraphics[width=\textwidth]{gnuplot/linear-pm-crop.pdf}
+
+        $\lambda_1>0$, $\lambda_2<0$
+
+        abstoßend
+      \end{center}
+    \end{column}
+  \end{columns}
 \end{frame}
 
-\begin{frame}
-  \begin{exampleblock}{Diskussion}
-    Reelle Matrizen können komplexe Eigenwerte haben. Offensichtlich
-    wollen wir aber keine komplexwertigen Lösungen unserer AWA.
-  \end{exampleblock}
+
+\begin{frame}{Beispiele: komplexe Eigenwerte}
+  \begin{columns}
+    \begin{column}[t]{.32\textwidth}
+      \begin{center}
+        \includegraphics[width=\textwidth]{gnuplot/linear-cp-crop.pdf}
+
+        $\lambda=r\pm\ii\phi, r>0$
+
+        abstoßend
+      \end{center}
+    \end{column}
+    \begin{column}[t]{.32\textwidth}
+      \begin{center}
+        \includegraphics[width=\textwidth]{gnuplot/linear-cm-crop.pdf}
+
+        $\lambda=r\pm\ii\phi, r<0$
+
+        anziehend
+      \end{center}
+    \end{column}
+    \begin{column}[t]{.32\textwidth}
+      \begin{center}
+        \includegraphics[width=\textwidth]{gnuplot/linear-c0-crop.pdf}
+
+        $\lambda=r\pm\ii\phi, r=0$
+      \end{center}
+    \end{column}
+  \end{columns}
 \end{frame}
 
-\begin{frame}{Komplexe Eigenwerte}
-  \begin{block}{Satz}
-    Hat eine reelle Matrix komplexe Eigenwerte, so treten sie als
-    komplex konjugierte Paare mit ebensolchen Paaren von Eigenvektoren
-    auf.
-  \end{block}
-  \pause
-  Sei nun $r\pm i\phi$ ein solches Paar mit den Eigenvektoren $u\pm iv$
-  \begin{align*}
-    A (u\pm iv) &= {r+i\phi} (u\pm iv),\\
-    e^A (u\pm iv) &= e^{r+i\phi} (u\pm iv) = e^r (\cos\phi \pm i \sin\phi)(u\pm iv).
-  \end{align*}
+\gkerror{Höhere Dimensionen}
 
-  \vspace*{4cm}
-\end{frame}
-
-\begin{frame}
-  \begin{block}{Reelle Lösungen}
-    Hat die Matrix $A$ ein komplexes Eigenwertpaar
-    $\lambda_{1/2} = r\pm i\phi$ mit zugehörigen Eigenvektoren
-    $u\pm iv$, so ersetzen wir in der Transformationsmatrix die
-    Eigenvektoren durch $u$ und $v$ und erhalten für $e^A$ eine
-    quasi-Diagonalmatrix mit Block
-    \begin{gather*}
-      e^r
-      \begin{pmatrix}
-        \cos\phi & \sin\phi\\
-        -\sin\phi & \cos \phi
-      \end{pmatrix}
-    \end{gather*}
-  \end{block}
-\end{frame}
-
-\begin{frame}{Beispiele}
-  \begin{center}
-    \includegraphics[width=.32\textwidth]{gnuplot/linear-cp-crop.pdf}
-    \hfill
-    \includegraphics[width=.32\textwidth]{gnuplot/linear-cm-crop.pdf}
-    \hfill
-    \includegraphics[width=.32\textwidth]{gnuplot/linear-c0-crop.pdf}
-  \end{center}  
-\end{frame}
+\begin{Abschluss}
+\item Wie unterscheidet sich das Lösungsverfahren für lineare Systeme
+  von einfachen Differentialgleichungen?
+\item Wie sind Ableitungen und Integrale von Matrizen definiert?
+\item Wie berechnet man die Exponentialfunktion einer Matrix?
+\item Welche Eigenschaft hat die Menge der Lösungen eines homogenen,
+  linearen Systems von Differentialgleichungen?
+\item Wie diagonalisiert man, wenn das charakteristische Polynom keine
+  Nullstellen hat?
+\item Wie erhält man trotzdem reelle Lösungen?
+\item Was wissen wir über Anzahl und Lage von Fixpunkten?
+\item Wie erkennen wir, wie sich die Lösung um Fixpunkte verhält?
+\end{Abschluss}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Berechnung von Lösungen anderer Gleichungen}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
