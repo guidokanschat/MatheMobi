@@ -1159,8 +1159,8 @@ Wichtige trigonometrische Identitäten:
 \begin{Vertiefung}
 Das Prinzip hinter der Trapezregel ist, dass sie lineare Polynome exakt integriert und dass bereits mit dieser Anforderung die Formel eindeutig festgelegt ist. Wir wissen bereits, dass eine Gerade in der Ebene durch zwei Punkte $\bigl(x_i,f(x_i)\bigr)$ und $\bigl(x_{i+1},f(x_{i+1})\bigr)$ eindeutig bestimmt ist. Im Folgenden bestimmen wir diese Gerade, betrachten sie als Funktion, und berechnen das Integral. Die Punkte werden interpoliert durch die Gerade
     \begin{gather*}
-        p(t) = f(x_i) \frac{t-x_i}{x_{i+1}-x_i}
-        + f(x_{i+1}) \frac{x_{i+1}-t}{x_{i+1}-x_i}
+        p(t) = f(x_i) \frac{x_{i+1}-t}{x_{i+1}-x_i}
+        + f(x_{i+1}) \frac{t-x_{i}}{x_{i+1}-x_i}
     \end{gather*}
     Das Integral von $p$ ist
     \begin{multline*}
