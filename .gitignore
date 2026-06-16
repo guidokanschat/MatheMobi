@@ -5,6 +5,7 @@
 *.out
 *.snm
 *.toc
+*.vrb
 main.pdf
 print.pdf
 slides.pdf

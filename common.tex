@@ -39,9 +39,10 @@
     \end{exampleblock}%
   \end{onlyenv}%
 }
+
 \NewEnviron{Abschluss}{%
   \begin{frame}[label=Abschluss]
-    \frametitle{Abschlussfragen \thesection.\thesubsection}
+    \frametitle{Abschlussfragen \only<presentation>{\thesection.}\thesubsection}
     \begin{enumerate}
       \BODY
     \end{enumerate}%
