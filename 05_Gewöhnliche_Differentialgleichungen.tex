@@ -2129,6 +2129,7 @@
         \item Freie Software
         \item Sehr gut für uns geeignet
         \item Besserer DGL-Löser?
+        \item Über bwJupyter direkt verfügbar
         \end{itemize}
       \end{block}
     \end{column}
@@ -2151,8 +2152,22 @@
   \end{itemize}
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Numerische Löser sind Integrationsverfahren}
+  \begin{itemize}
+  \item Alle numerischen Verfahren lösen die Volterrasche Integralgleichung
+    \begin{gather*}
+      x(t) = x(t_0) + \int_{t_0}^t f\bigl(s, x(s)\bigr) \ds.      
+    \end{gather*}
+  \item Sie benötigen damit immer einen Anfangswert
+  \item Sie implementieren im Kern numerische Integration
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{lsode (Octave)}
-  Die Funktion \lstinline!lsode(@fun, x0, tinv)! löst
+  Die Funktion\footnote{Livermore Solver for Ordinary Differential Equations}
+  \lstinline!lsode(@fun, x0, tinv)! löst
   \begin{gather*}
     x' = \text{fun}(x,t), \qquad x(t_0) = x0.
   \end{gather*}
@@ -2184,7 +2199,7 @@
   \item \lstinline!tinv = [t0,tend]! ist das Zeitintervall
   \item \lstinline!x0! ist der Startwert, immer als Vektor
   \end{enumerate}
-  Die Funktion gibt einen Vektor mit Zeitpukten und einen mit
+  Die Funktion gibt einen Vektor mit Zeitpunkten und einen mit
   Funktionswerten zurück.
 \end{frame}
 
@@ -2194,10 +2209,242 @@
   \lstinputlisting{octave/simple_ode45.m}
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\subsection{Zeitschrittmethoden}
 
+\begin{frame}{Einführung in Zeitschrittverfahren}
+  \begin{itemize}
+  \item Kenntnis der grundlegenden Methode
+  \item Grundverständnis der Konvergenz der Verfahren
+  \item Grenzen der Aussagekraft numerischer Lösungen
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Eulersches Polygonzugverfahren}
+  \begin{columns}
+    \begin{column}{.58\textwidth}
+      \begin{gather*}
+        x_{k} = x_{k-1} + h_k f(t_{k-1},x_{k-1})
+      \end{gather*}
+      \begin{center}
+        \includegraphics[width=.99\textwidth]{fig/euler-logistic.pdf}
+      \end{center}
+      logistische Differentialgleichung
+      \begin{gather*}
+        x'= f(t,x) = f(x) = x(1-x)
+      \end{gather*}
+    \end{column}
+    \pause
+    \begin{column}{.38\textwidth}
+      \begin{gather*}
+        x_0 = 0.2,\qquad h_k \equiv h = 0.1
+      \end{gather*}
+      \begin{align*}
+        x_0 &= 0.2\\
+        x_1 &= x_0 + h f(x_0) = 0.216\\
+        x_2 &= x_1 + h f(x_1) = 0.232934\\
+        x_3 &= x_2 + h f(x_2) = 0.250802\\
+        \vdots&\\
+        x_{10} &= x_9 + h f(x_9) = 0.399697\\
+        \vdots&\\
+        x_{100} &= 0.9998735
+      \end{align*}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \begin{center}
+    \only<1>{\includegraphics[width=.8\textwidth]{fig/Euler-LV-80-crop.pdf}}
+    \only<2>{\includegraphics[width=.8\textwidth]{fig/Euler-LV-160-crop.pdf}}
+    \only<3>{\includegraphics[width=.8\textwidth]{fig/Euler-LV-320-crop.pdf}}
+    \only<4>{\includegraphics[width=.8\textwidth]{fig/Euler-LV-640-crop.pdf}}
+  \end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Verbesserung der Lösungen}
+  \begin{itemize}
+  \item Lösungen des Eulerverfahrens approximieren nicht sehr gut
+  \item Kleinere Schrittweite $h$ führt zu besserer Approximation
+  \item Die Bahnen sind nicht mehr geschlossen!
+    \pause
+  \item Erster Schritt des Verfahrens
+    \begin{multline*}
+      \vx(t_0+h) = \vx_0
+      + \int_{t_0}^{t_0+h} \vf\bigl(s,\vx(s)\bigr) \,ds
+      \\
+      \visible<3->{
+      \approx \vx_0 + h \vf(t_0,\vx_0) = \vx_1}
+    \end{multline*}
+  \end{itemize}
+  \visible<4->{
+    \begin{Denkpause}
+      Wie können wir das Integral besser approximieren?
+    \end{Denkpause}
+}
+\end{frame}
+
+
+
+\begin{frame}{Das allgemeine Konzept}
+  Beginnend mit dem Startwert $\vx_0$ ,an der Stelle $t_0$,
+  berechne rekursiv weitere Werte der approximierten Lösung $\vx_k$ für $k=1,2,\ldots$:
+  \begin{align*}
+    t_k &= t_{k-1} + h_k\\
+    \vx_k &= \vx_{k-1} + h_k \vF_{h_k}(t_{k-1},\vx_{k-1}).
+  \end{align*}
+  \begin{itemize}
+  \item $h_k$ ist die \textbf{Schrittweite} im Schritt $k$
+  \item $\vF_{h}(t,\vx)$ ist die \textbf{Verfahrensfunktion}
+  \item Das Resultat ist eine Zerlegung des Zeitintervalls in kleine
+    Intervalle der Länge $h_k$
+        \begin{tikzpicture}
+      \draw(0,1) --  (9,1);
+      \draw[thick](0,.9) node[anchor=north]{$0$} -- (0,1.1);
+      \draw[thick](9,.9) node[anchor=north]{$t$} --(9,1.1);
+
+      \draw(0,0)-- (1,0);
+      \draw(1,0)-- (2,0);
+      \draw(4,0)-- (5,0);
+      \draw(7,0)-- (8,0);
+      \draw(8,0)-- (9,0);
+      \draw[dotted](2,0)--(4,0);
+      \draw[dotted](5,0)--(7,0);
+      \draw[thick](0,-.1) node[anchor=north]{$t_0$} -- (0,.12);
+      \draw(1,-.1) node[anchor=north]{$t_1$} --(1,.1);
+      \draw(2,-.1) node[anchor=north]{$t_2$} --(2,.1);
+      \draw(4,-.1) node[anchor=north]{$t_{k-1}$} --(4,.1);
+      \draw(5,-.1) node[anchor=north]{$t_k$} --(5,.1);
+      \draw(7,-.1) node[anchor=north]{$t_{n-2}$} --(7,.1);
+      \draw(8,-.1) node[anchor=north]{$t_{n-1}$} --(8,.1);
+      \draw[thick](9,-.1) node[anchor=north]{$t_n$} --(9,.12);
+    \end{tikzpicture}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Die Wahl der Verfahrensfunktion $\vF_h(t,\vx)$}
+  \begin{itemize}
+  \item Wähle $\vF_{h}(t,\vx)$, so dass allgemein
+    \begin{gather*}
+      \vx + h \vF_{h}(t,\vx)
+      \approx \vx + \int_t^{t+h} f\bigl(s,\vy(s)\bigr)\,ds,
+    \end{gather*}
+    wobei $\vy(s)$ Lösung der Volterraschen Integralgleichung mit
+    Startwert $\vx$ zum Zeitpunkt $t$ ist.
+  \item Wir können nun bessere Quadraturformeln benutzen
+    \pause
+  \item Achtung! Die Lösung am zweiten Quadraturpunkt hängt von der am
+    ersten ab, etc.
+  \item Die Simpson-Regel ist leider nicht direkt anwendbar
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Beispiel: das \glqq{}klassische\grqq{} Runge-Kutta-Verfahren}
+  \begin{xalignat*}2
+    && \vk_1 &= \vf\left(t,\vx\right)\\
+    \vy_1 &= \vx+\tfrac12 h\vk_1 &  \vk_2 &= f\left(t+\tfrac12 h,\vy_1\right)\\
+    \vy_2 &= \vx+\tfrac12 h\vk_2 & \vk_3 &= f\left(t+\tfrac12 h,\vy_2\right)\\
+    \vy_3 &= \vx+ h\vk_3 & \vk_4 &= f\left(t+h,\vy_3\right)\\
+  \end{xalignat*}
+  \vspace{-1.5cm}
+  \begin{gather*}
+    \vF_h(t,\vx) = h\left(\tfrac16\vk_1+\tfrac13\vk_2+\tfrac13\vk_3+\tfrac16\vk_4\right)    
+  \end{gather*}
+  Die Punkte $\vy_1,\dots,\vy_3$ sind Hilfskoordinaten, die ähnlich dem
+  Euler-Verfahren konstruiert werden, die Verfahrensfunktion ist dann
+  eine geeignete Quadraturformel der Funktionswerte an diesen Punkten.
+
+  \pause
+  Die Werte $\vk_1,\dots,\vk_4$ hei\ss{}en \textbf{Stufen}, wir haben also ein vierstufiges Verfahren
+\end{frame}
+
+\begin{frame}{Berechung mit dem Runge-Kutta-Verfahren}
+  Wir wollen die Zahl $e$ als Wert $x(1)$ mit der Lösung der Aufgabe
+  \begin{gather*}
+    x'=x,\qquad x(0) = 1
+  \end{gather*}
+  berechnen. Die Schrittweite sei $h=1$
+
+  \only<2>{
+    \begin{Denkpause}
+      Überlegen Sie sich, wie das mit dem Eulerschen Polygonzugverfahren und mit dem Runge-Kutta-Verfahren gehen könnte.
+    \end{Denkpause}
+  }
+  \begin{itemize}
+  \item<3-> $f(x_0) = x_0 = 1$. Daher gilt mit Euler:
+    \begin{gather*}
+      e = x(1) \approx x_0 + h f(x_0) = 2
+    \end{gather*}
+  \item<4-> Die Stufen des Runge-Kutta-Verfahrens sind mit $k_1=1$
+    \begin{align*}
+      k_2 = y_1 &= 1+ 1/2 = 3/2\\
+      k_3 = y_2 &= 1+ 3/4 = 7/4\\
+      k_4 = y_3 &= 1+7/4 = 11/4
+    \end{align*}
+  \item<5-> Anwendung der Formel für die Verfahrensfunktion
+    \begin{gather*}
+      x(1) \approx 1 + \frac16 + \frac{3}{2\cdot 3} + \frac{7}{3\cdot4}
+      + \frac{11}{4 \cdot 6} = \frac{65}{24} \approx 2.70833
+    \end{gather*}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \begin{center}
+    \includegraphics[width=.8\textwidth]{fig/RK4-LV-40-crop.pdf}
+  \end{center}
+\end{frame}
+
+\begin{frame}{ode45}
+  Das Verfahren zur \textbf{Schrittweitensteuerung} von Dormand und Prince
+  \begin{itemize}
+  \item Zwei Zeitschrittverfahren mit 4 und 5 Stufen
+  \item Schätze den lokalen Fehler durch die Differenz der Lösungen
+  \item Wähle einen Steuerungsparameter
+  \item Reduziere $h_k$, wenn der lokale Fehler zu groß ist.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \begin{center}
+    \only<1>{\includegraphics[width=.7\textwidth]{fig/DP45-LV-crop.pdf}}
+    \only<2>{\includegraphics[width=.7\textwidth]{fig/DP45-LV-zoom-crop.pdf}}
+  \end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Approximation und qualitative Eigenschaften}
+  \begin{itemize}
+  \item Die Lösung mit \lstinline!ode45! ist sehr genau
+    \begin{itemize}
+    \item gesteuert durch Parameter in Matlab oder Octave
+    \item Der Erhaltungssatz ist mit derselben Genauigkeit erfüllt
+    \end{itemize}
+  \item Der Erhaltungssatz gilt \textbf{nicht} für das numerische Verfahren
+    \only<2>{
+      \begin{Denkpause}
+        Wann kann das zu einem Problem werden?
+      \end{Denkpause}
+    }
+  \item<3-> Bei vielen Umläufen addieren sich diese Fehler wieder auf
+  \item<4-> Es werden auch spezielle numerische Verfahren mit
+    Erhaltungseigenschaft entwickelt
+  \end{itemize}
+\end{frame}
+
+\begin{Abschluss}
+\item Welche Funktion in Matlab/Octave \glqq{}löst\grqq{} Differentialgleichungen quasi automatisch?
+\item Was ist die Schrittweite und welche Auswirkung hat sie auf
+  die Genauigkeit?
+\item Wie wählt man die Verfahrensfunktion?
+\item Wie funktioniert Schrittweitensteuerung?
+\item Erfüllen numerische Verfahren Erhaltungssätze?
+\end{Abschluss}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\subsection{Fehler und Berechenbarkeit}
+\subsection{Fehler bei der Simulation}
 
 \begin{frame}{Fehlerquellen bei der Simulation einer AWA}
   \begin{enumerate}
@@ -2221,40 +2468,51 @@
     \item Inexakte Berechnungen im Algorithmus
     \end{itemize}
   \end{enumerate}
+  \only<2>{
+    \begin{block}{}
+      Nicht gemeint sind Programmierfehler!
+    \end{block}
+}
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Modellierung von Mess- und Modellfehler}
-  \begin{xalignat*}2
-    \text{tatsächlich:}\qquad x' &= f(x,t) & x(0) &= x_0\\
-    \text{Modell:}\qquad y' &= g(y,t) & y(0) &= y_0
-  \end{xalignat*}
-  Für ein kleines Teilintervall mit Startwerten $x_0,y_0$ setzt sich der Fehler $y(t)-x(t)$ am Ende aus 3 Komponenten zusammen:
-  \begin{enumerate}
-  \item Differenz $y(0)-x(0)$ am Anfang
-  \item Differenz $g(y,t) - f(y,t)$ im Intervall
-  \item Differenz $f(y,t) - f(x,t)$ im Intervall
-  \end{enumerate}
+  \begin{itemize}
+  \item Mess- und Rundungsfehler bei den Startwerten modellieren wir,
+    indem wir für den natürlichen Prozess und das Modell verschiedene
+    Startwerte $\vx_0$ und $\vy_0$ annehmen
+  \item Alle anderen Modell-, Diskretisierungs- und Rechenfehler
+    werden durch zwei verschiedene rechte Seiten modelliert
+  \end{itemize}
+  \begin{align*}
+    \text{tatsächlich:}\qquad \vx(t)
+    &= \vx_0 + \int_{t_0}^t \vf\bigl(s,\vx(s)\bigr)\,ds \\
+    \text{Modell:}\qquad \vy(t)
+    &= \vy_0 + \int_{t_0}^t \vg\bigl(s,\vy(s)\bigr)\,ds
+  \end{align*}
 \end{frame}
 
 \begin{frame}{Fehlerdarstellung}
   \begin{gather*}
-    y(t)-x(t) = y_0-x_0
-    + \int_0^t \bigl[
-    g(y(s),s) - f(x(s),s)\bigr] \,ds
+    \vy(t)-\vx(t) = \vy_0-\vx_0
+    + \int_0^t \Bigl[
+    \vg\bigl(s,\vy(s)\bigr) - \vf\bigl(s,\vx(s)\bigr)\Bigr] \,ds
   \end{gather*}
   \pause
   Ergänzen einer null
-  \begin{gather*}
-    y(t)-x(t) = y_0-x_0
-    + \int_0^t \bigl[
-    g(y(s),s) - f(y(s),s)\bigr] \,ds
-    + \int_0^t \bigl[
-    f(y(s),s) - f(x(s),s)\bigr] \,ds
-  \end{gather*}
+  \begin{multline*}
+    \vy(t)-\vx(t) = \colorbox{cyan!30!white}{\(\displaystyle \vy_0-\vx_0\)}
+    + \colorbox{red!40!white}{\(\displaystyle
+      \int_0^t \Bigl[
+      \vg\bigl(s,\vy(s)\bigr) - \vf\bigl(s,\vy(s)\bigr)\Bigr] \,ds\)}\\
+    + \colorbox{yellow}{\(\displaystyle
+      \int_0^t \Bigl[
+    \vf\bigl(s,\vy(s)\bigr) - \vf\bigl(s,\vx(s)\bigr)\Bigr] \,ds\)}
+  \end{multline*}
   \begin{enumerate}
-  \item Anfangswertfehler
-  \item Modellfehler
-  \item Fortpflanzung des Anfangswertfehlers
+  \item \colorbox{cyan!40!white}{Anfangswertfehler}: Genauigkeit der Messung
+  \item \colorbox{red!40!white}{Modellfehler}: Genauigkeit des Modells und der Numerik
+  \item \colorbox{yellow}{Fehlerfortpflanzung}: Eigenschaften von $f$
   \end{enumerate}
 \end{frame}
 
@@ -2266,9 +2524,13 @@
   \end{xalignat*}
   \small
   \begin{alignat*}2
-    \int_0^t \bigl[g(y(s))-f(y(s))\bigr] &= \int_0^t 0.31 e^{2.1s} &&= \tfrac{0.31}{2.1}\bigl(e^{2.1t}-1\bigr)
+    \colorbox{red!40!white}{\(\displaystyle
+      \int_0^t \bigl[g(y)-f(y)\bigr]\)}
+    &= \int_0^t 0.31 e^{2.1s} &&= \tfrac{0.31}{2.1}\bigl(e^{2.1t}-1\bigr)
     \\
-    \int_0^t \bigl[f(y(s))-f(x(s))\bigr] &= \int_0^t 2(3.1e^{2.1s} - 3e^{2s}) &&= \tfrac{6.2}{2.1}\bigl(e^{2.1t}-1\bigr) - 3\bigl(e^{2t}-1\bigr)
+    \colorbox{yellow}{\(\displaystyle
+      \int_0^t \bigl[f(y)-f(x)\bigr]\)}
+    &= \int_0^t 2(3.1e^{2.1s} - 3e^{2s}) &&= \tfrac{6.2}{2.1}\bigl(e^{2.1t}-1\bigr) - 3\bigl(e^{2t}-1\bigr)
   \end{alignat*}
   \begin{columns}
     \begin{column}{.7\textwidth}
@@ -2286,40 +2548,42 @@
   \end{columns}
 \end{frame}
 
-\begin{frame}{Diskussion}
-  Der Fehler des Startwerts 0.1 zum Zeitpunkt $t=0$ hat sich zu $t=1$ auf
-  3.148 erhöht.
+\gkerror{Wieder einführen?}
 
-  \vspace{1cm}
+% \begin{frame}{Diskussion}
+%   Der Fehler des Startwerts 0.1 zum Zeitpunkt $t=0$ hat sich zu $t=1$ auf
+%   3.148 erhöht.
+
+%   \vspace{1cm}
   
-  \only<1>{
-    \begin{exampleblock}{Frage}
-      Ist das nicht ein katastrophales, unnützes Ergebnis?
-    \end{exampleblock}
-  }
-\end{frame}
+%   \only<1>{
+%     \begin{exampleblock}{Frage}
+%       Ist das nicht ein katastrophales, unnützes Ergebnis?
+%     \end{exampleblock}
+%   }
+% \end{frame}
 
-\begin{frame}[fragile]
-\begin{block}{Definition}
-    Für die Differenz zwischen der exakten Lösung $x$ einer
-    Aufgabe und einer Approximation $y$ führen wir folgende Fehlermaße
-    ein:
-    \begin{align*}
-      \text{absoluter Fehler:}& \norm{y-x}\\
-      \text{relativer Fehler:}& \frac{\norm{y-x}}{\norm x}.      
-    \end{align*}
-    Die Doppelstriche $\norm\cdot$ bezeichnen eine Norm im
-    $\mathbb R^n$ oder den Absolutbetrag in einer Dimension.
-  \end{block}
-  \begin{gather*}
-    \begin{array}{cccc}
-    %   t & x & \norm{y-x} & \frac{\norm{y-x}}{\norm x}
-    %   \\\hline
-    %   0 & 3 & 0.1 & 0.0333\\
-    %   1 & 22.167 & 3.148 & 0.142
-    \end{array}
-  \end{gather*}
-\end{frame}
+% \begin{frame}[fragile]
+% \begin{block}{Definition}
+%     Für die Differenz zwischen der exakten Lösung $x$ einer
+%     Aufgabe und einer Approximation $y$ führen wir folgende Fehlermaße
+%     ein:
+%     \begin{align*}
+%       \text{absoluter Fehler:}& \norm{y-x}\\
+%       \text{relativer Fehler:}& \frac{\norm{y-x}}{\norm x}.      
+%     \end{align*}
+%     Die Doppelstriche $\norm\cdot$ bezeichnen eine Norm im
+%     $\mathbb R^n$ oder den Absolutbetrag in einer Dimension.
+%   \end{block}
+%   \begin{gather*}
+%     \begin{array}{cccc}
+%     %   t & x & \norm{y-x} & \frac{\norm{y-x}}{\norm x}
+%     %   \\\hline
+%     %   0 & 3 & 0.1 & 0.0333\\
+%     %   1 & 22.167 & 3.148 & 0.142
+%     \end{array}
+%   \end{gather*}
+% \end{frame}
 
 \begin{frame}{Schranken für die Fehlerterme}
   Mess- und Modellierungsfehler seien aus der Anwendung bekannt,
@@ -2330,14 +2594,24 @@
   $E_1$ darf hierbei auch von $t$ abhängen,
   \pause
   \begin{block}{Lipschitzbedingung}
-    Für alle relevanten $x,y,t$ gelte
+    Es gibt eine Konstante $L$, so dass für alle relevanten $x,y,t$ gilt:
     \begin{gather*}
       \norm{f(y,t) - f(x,t)} \le L \norm{y-x}.
     \end{gather*}
   \end{block}
 \end{frame}
 
-\begin{frame}{Was ist relevant?}
+\begin{frame}
+  \begin{block}{Fehlerabschätzung}
+    Es gelten die angegebenen Schranken für die Fehlerterme, besonders
+    die Lipschitzbedingung. Dann gilt
+    \begin{gather*}
+       \norm{e(t)}\le e^{Lt} \left[ E_0+\int_0^t E_1(s)\,ds\right]
+    \end{gather*}
+  \end{block}
+\end{frame}
+
+\begin{frame}{Was bedeutet relevant?}
   \begin{itemize}
   \item In der mathematischen Formulierung finden Sie Ausdrücke, die
     zu korrekten Resultaten führen, aber eventuell nicht erfüllbar
@@ -2358,30 +2632,6 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}
-  Sei $e(t) = y(t)-x(t)$. Es gilt dann
-  \begin{gather*}
-    \norm{e(t)} = \underbrace{\norm{e(0)}}_{\le E_0}
-    + \int_0^t \underbrace{\bigl[
-      g(y,s) - f(y,s)\bigr]}_{\le E_1(s)} \,ds
-    + \int_0^t \underbrace{\bigl[
-      f(y,s) - f(x,s)\bigr]}_{\le L \norm{y-x}} \,ds
-  \end{gather*}
-  daher gilt
-  \begin{gather*}
-    \norm{e(t)}\le E_0 + \int_0^t L \norm{e(s)}\,ds
-    +\int_0^t E_1(s)\,ds
-  \end{gather*}
-
-  \begin{block}{Fehlerabschätzung}
-    Es gelten die angegebenen Schranken für die Fehlerterme, besonders
-    die Lipschitzbedingung. Dann gilt
-    \begin{gather*}
-       \norm{e(t)}\le e^{Lt} \left[ E_0+\int_0^t E_1(s)\,ds\right]
-    \end{gather*}
-  \end{block}
-\end{frame}
-
 \begin{frame}{Beispiel}
   \begin{xalignat*}3
     x' &= 2x & x(0) &= 3 & x(t) &= 3e^{2t}\\
@@ -2397,40 +2647,41 @@
   \end{gather*}  
 \end{frame}
 
-\begin{frame}{Negatives Beispiel}
-  \begin{xalignat*}3
-    x' &= -2x & x(0) &= 3 & x(t) &= 3e^{-2t}\\
-    y' &= -2y & y(0) &= 3.1 & y(t) &= 3.1 e^{-2t}
-  \end{xalignat*}
-  Es ist noch immer $E_0 = 0.1$, $E_1 = 0$ und $L=2$ und
-  \begin{gather*}
-    \norm{e(t)} \le 0.1 e^{2t}.
-  \end{gather*}
-  Für den relativen Fehler gilt
-  \begin{gather*}
-    \frac{\norm{e(t)}}{\norm{x(t)}} \le 0.0334 e^{4t},
-  \end{gather*}
-  was bestenfalls nutzlos ist.
-\end{frame}
+\gkerror{Wieder einfügen?}
+% \begin{frame}{Negatives Beispiel}
+%   \begin{xalignat*}3
+%     x' &= -2x & x(0) &= 3 & x(t) &= 3e^{-2t}\\
+%     y' &= -2y & y(0) &= 3.1 & y(t) &= 3.1 e^{-2t}
+%   \end{xalignat*}
+%   Es ist noch immer $E_0 = 0.1$, $E_1 = 0$ und $L=2$ und
+%   \begin{gather*}
+%     \norm{e(t)} \le 0.1 e^{2t}.
+%   \end{gather*}
+%   Für den relativen Fehler gilt
+%   \begin{gather*}
+%     \frac{\norm{e(t)}}{\norm{x(t)}} \le 0.0334 e^{4t},
+%   \end{gather*}
+%   was bestenfalls nutzlos ist.
+% \end{frame}
 
-\begin{frame}
-  \begin{block}{Einseitige Lipschitzbedingung}
-    Für alle relevanten $x,y,t$ gilt
-    \begin{gather*}
-      \scal({f(y,t)-f(x,t)},y-x) \le \mu \norm{y-x}^2.
-    \end{gather*}
-  \end{block}
+% \begin{frame}
+%   \begin{block}{Einseitige Lipschitzbedingung}
+%     Für alle relevanten $x,y,t$ gilt
+%     \begin{gather*}
+%       \scal({f(y,t)-f(x,t)},y-x) \le \mu \norm{y-x}^2.
+%     \end{gather*}
+%   \end{block}
 
-  $\mu$ kann, wie in unserem Beispiel, negativ sein!
+%   $\mu$ kann, wie in unserem Beispiel, negativ sein!
   
-  \begin{block}{Verbesserte Fehlerabschätzung}
-    Es sei der Einfachheit halber $E_1=0$ und es gelte
-    die einseitige Lipschitzbedingung. Dann gilt
-    \begin{gather*}
-       \norm{e(t)}\le  E_0 e^{\mu t}
-    \end{gather*}
-  \end{block}
-\end{frame}
+%   \begin{block}{Verbesserte Fehlerabschätzung}
+%     Es sei der Einfachheit halber $E_1=0$ und es gelte
+%     die einseitige Lipschitzbedingung. Dann gilt
+%     \begin{gather*}
+%        \norm{e(t)}\le  E_0 e^{\mu t}
+%     \end{gather*}
+%   \end{block}
+% \end{frame}
 
 \begin{frame}
   \begin{block}{Bemerkung}
@@ -2438,148 +2689,16 @@
     lineare Differentialgleichung gibt, deren Lösung schneller wächst
     als die der Gleichung mit rechter Seite $f(x,t)$.
   \end{block}
+
+  \pause
+
+  Der Term $e^{Lt}$ wächst in der Regel schnell. Deswegen gibt es für
+  viele Gleichungen angepasste Bedingungen an $f(t,\vx)$, die bessere
+  Abschätzungen erlauben.
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\subsection{Zeitschrittmethoden}
-
-\begin{frame}{Das allgemeine Konzept}
-  Beginnend mit dem Startwert $\hat x_0 = x_0$ ,an der Stelle $t_0$,
-  berechne rekursiv weitere Werte der approximierten Lösung $\hat x_k$ für $k=1,2,\ldots$:
-  \begin{align*}
-    t_k &= t_{k-1} + h_k\\
-    \hat x_k &= \hat x_{k-1} + h_k F_{h_k}(\hat x_{x-1},t_{k-1}).
-  \end{align*}
-  \begin{itemize}
-  \item $h_k$ ist die Schrittweite im Schritt $k$
-  \item $F_{h_k}(\hat x_{x-1},t_{k-1})$, so dass allgemein
-    \begin{gather*}
-      h F_{h}(y,t) \approx \int_t^{t+h} f(y(s),s)\,ds,
-    \end{gather*}
-    wobei $y(s)$ Lösung der Volterraschen Integralgleichung mit
-    Startwert $y$ zum Zeitpunkt $t$ ist.
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{Beispiel: Eulersches Polygonzugverfahren}
-  \begin{gather*}
-    x_{k} = x_{k-1} + h_k f(x_{k-1},t_{k-1})
-  \end{gather*}
-  \begin{center}
-    \includegraphics[width=.6\textwidth]{fig/euler-logistic.pdf}
-  \end{center}
-\end{frame}
-
-\begin{frame}
-  \begin{center}
-    \only<1>{\includegraphics[width=.8\textwidth]{fig/Euler-LV-80-crop.pdf}}
-    \only<2>{\includegraphics[width=.8\textwidth]{fig/Euler-LV-160-crop.pdf}}
-    \only<3>{\includegraphics[width=.8\textwidth]{fig/Euler-LV-320-crop.pdf}}
-    \only<4>{\includegraphics[width=.8\textwidth]{fig/Euler-LV-640-crop.pdf}}
-  \end{center}
-\end{frame}
-
-\begin{frame}{Beispiel: das \glqq{}klassische\grqq{} Runge-Kutta-Verfahren}
-  \begin{xalignat*}2
-    && k_1 &= f\left(y,t\right)\\
-    y_1 &= y+\tfrac12 hk_1 &  k_2 &= f\left(y_1, t+\tfrac12 h\right)\\
-    y_2 &= y+\tfrac12 hk_2 & k_3 &= f\left(y_2, t+\tfrac12 h\right)\\
-    y_3 &= y+ hk_3 & k_4 &= f\left(y_3, t+h\right)\\
-  \end{xalignat*}
-  \vspace{-1.5cm}
-  \begin{gather*}
-    F_h(y,t) = y+h\left(\tfrac16k_1+\tfrac13k_2+\tfrac13k_3+\tfrac16k_4\right)    
-  \end{gather*}
-  Die Punkte $y_1,\dots,y_3$ sind Hilfskoordinaten, die ähnlich dem
-  Euler-Verfahren konstruiert werden, die Verfahrensfunktion ist dann
-  eine geeignete Kombination der Funktionswerte an diesen Punkten.
-\end{frame}
-
-\begin{frame}
-  \begin{center}
-    \includegraphics[width=.8\textwidth]{fig/RK4-LV-40-crop.pdf}
-  \end{center}
-\end{frame}
-
-% \begin{frame}{Fehleranalyse}
-%   \begin{block}{Lokaler Fehler}
-%     Der lokale Fehler eines Zeitschrittverfahrens ist für Lösungen der
-%     Volterraschen Integralgleichung beginnend in $(y,t)$
-%     \begin{gather*}
-%       \eta(y,h) =  \left\|h F(y,t) - \int_t^{t+h}f(y(s),t)\,ds\right\|,
-%     \end{gather*}
-%     bzw. $\eta_k = \eta(\hat x_k, h_k)$.
-%   \end{block}
-  
-%   \begin{block}{Konsistenzordnung}
-%     Die Verfahrensfunktion heißt konsistent von Ordnung $p$, wenn für
-%     glatte Funktionen $f(y,t)$ mit einer Konstanten $c$ gilt
-%     \begin{gather*}
-%       \eta(y,h) \le c h^{p+1}.
-%     \end{gather*}
-%   \end{block}
-
-%   Das Eulerverfahren hat Konsistenzordnung 1, das klassische
-%   Runge-Kutta-Verfahren hat Ordnung 4.
-% \end{frame}
-
-% \begin{frame}{Fehleranalyse}
-%   \begin{block}{Abschätzung für festes $h_k=h$}
-%     Eine Methode mit Konsistenzordnung $p$ erlaubt die Abschätzung
-%     \begin{gather*}
-%       \norm{\hat x(T) - x(T)} \le c e^{L_h(T-t_0)} h^p,
-%     \end{gather*}
-%     wobei $L_h$ die Lipschitzkonstante der Funktion $F_h(y,t)$ ist.
-%   \end{block}
-
-%   Der Fehler wird also kleiner, wenn man die Schrittweite $h$ kleiner
-%   wählt oder die Konsistenzordnung $p$ erhöht.
-% \end{frame}
-
-\begin{frame}{ode45}
-  Das Verfahren zur Schrittweitensteuerung von Dormand und Prince
-  \begin{itemize}
-  \item Zwei Zeitschrittverfahren, Ordnung 4 und 5
-  \item Schätze den lokalen Fehler durch die Differenz der Lösungen
-  \item Reduziere $h_k$, wenn der lokale Fehler zu groß ist.
-  \end{itemize}
-\end{frame}
-
-\begin{frame}
-  \begin{center}
-    \only<1>{\includegraphics[width=.7\textwidth]{fig/DP45-LV-crop.pdf}}
-    \only<2>{\includegraphics[width=.7\textwidth]{fig/DP45-LV-zoom-crop.pdf}}
-  \end{center}
-\end{frame}
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{Abschluss}
-\item Unter Annahme der Kontinuumshypothese können wir
-  Wachtumsprozesse durch Differentialgleichungen
-  beschreiben.
-\item Populationsdynamik mehrerer Spezies führt zu Systemen von DGln.
-\item Diese DGLn. haben unendlich viele Lösungen, was uns eigentlich interessiert, ist die Lösung einer Anfangswertaufgabe (AWA)
-\item Das Ergebnis der eigentlichen Modellierung war die
-  Volterrasche Integralgleichung
+\item Welche Fehlerquellen sind zu berücksichtigen?
+\item In welche Komponenten kann man den Fehler aufspalten?
+\item Welche Bedeutung hat die Lipschitzbedingung in der Fehlerabschätzung?
 \end{Abschluss}
-
-
-\begin{frame}{Zusammenfassung Analyse}
-  \begin{enumerate}
-  \item Qualitative Diskussion zum Verständnis der Modelle
-    \begin{itemize}
-    \item Richtungsfelder
-    \item Phasenraumdiagramme
-    \end{itemize}
-  \item Verhalten für große Zeiten
-    \begin{itemize}
-    \item Fixpunkte
-    \end{itemize}
-  \item Wir haben die allgemeine Lösung der DGl. geraten und an den
-    Anfangswert angeglichen
-  \end{enumerate}
-\end{frame}
-
