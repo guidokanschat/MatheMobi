@@ -22,7 +22,7 @@
 
   \node[font=\normalsize] at (2.55,1.6) {$A\cap B$};
 
-  \node[font=\normalsize] at (3,-0.55) {$P(A\mid B)=\dfrac{1}{4}$};
+  \node[font=\normalsize] at (3,-0.55) {$P(A\mid B)=\tfrac{1}{4}$};
 
 \end{scope}
 
@@ -41,11 +41,11 @@
 
   \node[font=\normalsize] at (2.55,1.65) {$A\cap B$};
 
-  \node[font=\normalsize] at (3,-0.55) {$P(A\mid B)=\dfrac{1}{6}$};
+  \node[font=\normalsize] at (3,-0.55) {$P(A\mid B)=\tfrac{1}{6}$};
 
 \end{scope}
 
 % ---------- Titel oben ----------
-\node[font=\normalsize] at (6.5,4.35) {$P(A\cap B)=\dfrac{1}{20}$};
+\node[font=\normalsize] at (6.5,4.35) {$P(A\cap B)=\tfrac{1}{20}$};
 
 \end{tikzpicture}

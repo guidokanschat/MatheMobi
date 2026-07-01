@@ -8,14 +8,18 @@
     \end{itemize}
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Ereignisse und Wahrscheinlichkeiten}
+
 \begin{frame}{Einführung am Beispiel: Sechsseitiger Würfel}
   \begin{itemize}
-  \item Zufallsexperiment: der Würfel wird geworfen
-  \item Ergebnis ist Element des Ergebnisraums:
+  \item \textbf{Zufallsexperiment}: der Würfel wird geworfen
+  \item \textbf{Ergebnis} ist Element des Ergebnisraums:
     \begin{gather*}
       \Omega=\left\{\dice1,\dice2,\dice3,\dice4,\dice5,\dice6\right\}
     \end{gather*}
-  \item Ereignis ist Teilmenge des Ergebnisraums $\Omega$
+  \item \textbf{Ereignis} ist Teilmenge des Ergebnisraums $\Omega$
     \begin{itemize}
     \item $A = \left\{\dice1\right\}=$ \glqq eine 1 würfeln\grqq 
     \item $B = \left\{\dice2,\dice3\right\}=$\glqq eine 2 oder eine 3 würfeln\grqq 
@@ -28,93 +32,254 @@
   \end{itemize}
 \end{frame}
 
-
-\begin{frame}{Ereignis}
+\begin{frame}{Die Menge der Ereignisse}
+  \begin{itemize}
+  \item \textbf{Potenzmenge} von $\Omega$: alle möglichen Teilmengen
     \begin{itemize}
-        \item Ein Ereignis ist ein Geschehnis, dem man eine \textbf{Wahrscheinlichkeit} zuordnen kann (andere Begriffe: \grqq zufälliges Ereignis\grqq , \textit{\grqq random event\grqq })
-        \item Jedem Ereignis $A$ kann eine Wahrscheinlichkeit $P(A)$ zugeordnet werden
-        \item Ereignisse können anhand von Konzepten aus der \textbf{Mengenlehre} beschrieben werden:
-        \begin{itemize}
-            \item Menge $\Omega$: Ereignismenge
-            \item Ereignis $A$ ist eine Teilmenge von $\Omega$  ($A \subseteq \Omega$)
-            \item Leere Menge $\emptyset$: unmögliches Ereignis
-            \item Schnittmenge $A\cap B$: gleichzeitiges Eintreten der Ereignisse $A$ und $B$
-            \item Vereinigungsmenge $A \cup B$: Eintreten der Ereignisse $A$ oder $B$ (evtl. auch gleichzeitig)
-            \item Komplementäre Menge $A^c$: nicht-Eintreten des Ereignisses $A$
-        \end{itemize}
+    \item Achtung: $\{X,Y\} = \{Y,X\}$
     \end{itemize}
+    \begin{multline*}
+      \ereignisraum = \Bigl\{\emptyset
+      ,\left\{\dice1\right\}
+      ,\left\{\dice2\right\}
+      ,\left\{\dice3\right\}
+      ,\left\{\dice4\right\}
+      ,\left\{\dice5\right\}
+      ,\left\{\dice6\right\}
+      ,\left\{\dice1,\dice2\right\}
+      ,\dots
+      ,\left\{\dice1,\dice6\right\}
+      ,\\\left\{\dice2,\dice3\right\}      
+      ,\left\{\dice3,\dice4\right\}
+      ,\dots
+      ,\left\{\dice3,\dice6\right\}      
+      ,\dots
+      ,\left\{\dice5,\dice6\right\}
+      ,\\\left\{\dice1,\dice2,\dice3\right\}      
+      ,\dots
+      ,\left\{\dice1,\dice3,\dice4\right\}      
+      ,\dots
+      ,\left\{\dice4,\dice5,\dice6\right\} 
+      ,\\\left\{\dice1,\dice2,\dice3,\dice4\right\}
+      ,\left\{\dice3,\dice4,\dice5,\dice6\right\} 
+      ,\\\left\{\dice1,\dice2,\dice3,\dice4,\dice5\right\}
+      ,\left\{\dice2,\dice3,\dice4,\dice5,\dice6\right\} 
+      ,\Omega\Bigr\}
+    \end{multline*}
+    \item Insgesamt $2^6$ Elemente
+  \end{itemize}
 \end{frame}
-
-
-\mrwarning{F nicht wie in Folien}
-\begin{frame}{Ereignismenge und $\sigma$-Algebra}
-    \begin{itemize}
-        \item Um Wahrscheinlichkeiten zu definieren, muss die Ereignismenge $\Omega$ auf die \textbf{Menge der Teilmengen} $\mathcal{F}(\Omega)$ erweitert werden         \item Die Menge $\mathcal{F}(\Omega)$ ist folgendermaßen definiert:
-        \begin{itemize}
-            \item $\mathcal{F}(\Omega)$ ist eine Menge von Teilmengen von $\Omega$
-            \item $\Omega\in\mathcal{F}(\Omega)$
-            \item Ist $A \in \mathcal{F}(\Omega)$, dann ist $A^c \in \mathcal{F}(\Omega)$
-            \item Sind $A_i \in \mathcal{F}(\Omega)$, dann sind auch $\cup_iA_i\in \mathcal{F}(\Omega)$ (alle Vereinigungsmengen aus den Mengen $A_i$ sind in $\mathcal{F}(\Omega)$)
-        \end{itemize}
-        \item Man sagt, dass $\mathcal{F}(\Omega)$ eine $\sigma$-\textbf{Algebra} auf $\Omega$ ist.
-    \end{itemize}
-    \end{frame}
-
-\begin{frame}{Beispiel: Sechsseitiger Würfel}
-    Ein sechsseitiger Würfel wird geowrfen
-    \begin{itemize}
-        \item $\Omega=\left\{1,2,3,4,5,6\right\}$
-        \item Die Elemente der Menge $\Omega$ beschreiben jeweils ein \textbf{Elementarereignis} (z.B. \grqq eine 4 wird gewürfelt\grqq )
-        \item Es können aber auch andere Ereignisse definiert werden: \grqq eine 2 oder 3 würfeln\grqq , \grqq eine gerade Zahl würfeln\grqq , \grqq eine 7 würfeln\grqq , ...
-        \item Diese Ereignisse sind nicht in $\Omega$, dafür aber in $\mathcal{F}(\Omega)$:
-        \begin{align*}
-            \mathcal{F}(\Omega)=&\{\emptyset, \{1\}, \{2\}, ..., \{1,2\}, \{1,3\} \\
-            &\{1,2,3\}, \{1,2,4\}, \dots, \{1,2,3,4\}, \dots, \{1,2,3,4,5,6\}\}
-        \end{align*}
-        \item Beispiel: \grqq eine 1 oder eine 2\grqq = $\{1\}\cup\{2\} \equiv \{1,2\}$
-    \end{itemize}
-\end{frame}
-
-\begin{Denkpause}
-Was wäre die $\sigma$-Algebra $\mathcal{F}$ bei einem doppelten Münzwurf?
-\end{Denkpause}
 
 \begin{frame}{Wahrscheinlichkeiten}
-    Die \textbf{Wahrscheinlichkeit} ist eine Abbildung $P:\mathcal{F}\rightarrow[0,1]$, die folgende Eigenschaften besitzt:
+  Die Wahrscheinlichkeit $P$ auf dem Ereignisraum $\ereignisraum$ ordnet
+  jedem Element $A\in \ereignisraum$ eine Zahl zu. Es gilt:
+  \begin{itemize}
+  \item $0 \le P(A) \le 1$
+  \item $P(\Omega) = 1$
+  \item $P(A\cup B) = P(A)+P(B)$ falls $A\cap B=\emptyset$
     \begin{itemize}
-        \item für ein $A\in\mathcal{F}$ gilt: $0\leq P(A) \leq1$
-        \item $P(\Omega)=1$
-        \item Für Ereignisse $A_i$ die jeweils eine leere Schnittmenge haben gilt: 
-        $P(\cup_iA_i)=\sum_iP(A_i)$
+    \item $P(A\cup B)$, Wahrscheinlichkeit, dass $A$ oder $B$ eintritt
     \end{itemize}
+    \pause
+  \item Dies gilt auch für beliebige Vereinigungen, wenn die Mengen
+    sich paarweise nicht schneiden
+    \begin{gather*}
+      P\left(\bigcup_i A_i\right) = \sum_i P(A_i)
+    \end{gather*}
+  \end{itemize}
 \end{frame}
 
-\begin{frame}{Beispiel 1}
-    Würfelspiel:
-    \begin{itemize}
-        \item $A=$ \grqq Zahl kleiner gleich 2\grqq: $A=\{1,2\}$, $P(A)=\frac{2}{6}=\frac{|A|}{|\Omega|}$
-        \item $B=$ \grqq Zahl größer gleich 4\grqq: $B=\{4,5,6\}, P(B)=\frac{3}{6}$
-        \item Es gilt: $A\cap B = \emptyset$
-        \item Gesucht wird die Wahrscheinlichkeit \grqq Zahl kleiner 2 ODER größer gleich 4\grqq:
-        $$
-        P(A\cup B)= P(A)+P(B) = \frac{2}{6}+\frac{3}{6}=\frac{5}{6}
-        $$
-    \end{itemize}
+\begin{frame}{Beispiel: sechsseitiger Würfel}
+  \begin{itemize}
+  \item Der Würfel ist nicht gezinkt:
+    \begin{gather*}
+      P(\{\dice1\}) = P(\{\dice2\}) = P(\{\dice3\}) = P(\{\dice4\}) = P(\{\dice5\}) = P(\{\dice6\}) = \frac16
+    \end{gather*}
+  \item Für Teilmengen $A$ mit $m$ Elementen gilt $P(A)=m/6$
+    \begin{gather*}
+      P(\{\dice1,\dice4\}) = \frac26=\frac13,
+      \qquad
+      P(\{\dice1,\dice4,\dice5\}) = \frac36=\frac12
+    \end{gather*}
+  \end{itemize}
 \end{frame}
 
-\begin{frame}{Beispiel 2}
-    Würfelspiel:
+\begin{frame}{Beispiel: zwei sechsseitige Würfel}
+  \begin{itemize}
+  \item Zufallsexperiment: zwei identische Würfel werden gleichzeitig geworfen.
+    \begin{gather*}
+      \Omega = \left\{
+        \begin{bmatrix}
+          \dice1\\\dice1
+        \end{bmatrix}
+        ,
+        \begin{bmatrix}
+          \dice1\\\dice2
+        \end{bmatrix}
+        ,\dots,
+        \begin{bmatrix}
+          \dice1\\\dice6
+        \end{bmatrix}
+        ,
+        \begin{bmatrix}
+          \dice2\\\dice1
+        \end{bmatrix}
+        ,\dots,
+        \begin{bmatrix}
+          \dice2\\\dice6
+        \end{bmatrix}
+        ,
+        \begin{bmatrix}
+          \dice3\\\dice1
+        \end{bmatrix}
+        ,\dots,
+        \begin{bmatrix}
+          \dice6\\\dice6
+        \end{bmatrix}
+        \right\}
+      \end{gather*}
+    \item<3-> Bei identischen Würfeln kann die Reihenfolge nicht
+      beobachtet werden, also nicht die Ereignisse
+      \begin{gather*}
+        \left\{\begin{bmatrix}
+          \dice1\\\dice2
+        \end{bmatrix}\right\}
+        \quad\text{und}\quad
+        \left\{\begin{bmatrix}
+          \dice2\\\dice1
+        \end{bmatrix}\right\}
+      \quad\text{aber die Vereinigung}\quad
+        \left\{\begin{bmatrix}
+          \dice1\\\dice2
+        \end{bmatrix}
+        ,\begin{bmatrix}
+          \dice2\\\dice1
+        \end{bmatrix}\right\}
+    \end{gather*}
+  \item<3-> Wir definieren also den Ereignisraum
+    \begin{gather*}
+      \hspace*{-1em}
+      \ereignisraum = \left\{\!
+        \left\{\!
+          \begin{bmatrix}
+            \dice1\\\dice1
+          \end{bmatrix}
+          \!\right\}\!,\!
+        \left\{\!
+          \begin{bmatrix}
+            \dice1\\\dice2
+          \end{bmatrix}
+          \!\!,\!\!
+          \begin{bmatrix}
+            \dice2\\\dice1
+          \end{bmatrix}
+          \!\right\}\!,\!
+        \left\{\!
+          \begin{bmatrix}
+            \dice1\\\dice3
+          \end{bmatrix}
+          \!\!,\!\!
+          \begin{bmatrix}
+            \dice3\\\dice1
+          \end{bmatrix}
+          \!\right\}
+        ,\dots,
+        \left\{\!
+          \begin{bmatrix}
+            \dice2\\\dice2
+          \end{bmatrix}
+          \!\right\}
+        \!,\!
+        \left\{
+          \begin{bmatrix}
+            \dice2\\\dice3
+          \end{bmatrix}
+          \!\!,\!\!
+          \begin{bmatrix}
+            \dice3\\\dice2
+          \end{bmatrix}
+          \!\right\},\dots        
+        \!\right\}
+    \end{gather*}
+    
+  \end{itemize}
+  \only<2>{
+    \begin{Denkpause}
+      Sind alle Ergebnisse beobachtbar?
+    \end{Denkpause}
+  }
+\end{frame}
+
+\begin{frame}{Ereignisraum und $\sigma$-Algebra}
+  Ist $\ereignisraum$ nicht die Potenzmenge von $\Omega$, sondern eine
+  andere Menge von Teilmengen, dann fordern wir folgende
+  Eigenschaften:
+  \begin{enumerate}
+  \item $\Omega\in\ereignisraum$
+  \item Falls $A\in\ereignisraum$, dann ist das Komplement $A^c\in\ereignisraum$.
+  \item Falls $A_i\in\ereignisraum$ für $i=1,2,\dots$, dann ist
+    \begin{gather*}
+      \bigcup_{i} A_i\in\ereignisraum
+    \end{gather*}
+  \end{enumerate}
+  Eine Menge von Teilmengen von $\Omega$ mit diesen Eigenschaften
+  nennt man eine $\sigma$-Algebra über $\Omega$.
+
+  \pause
+
+  Auf einer $\sigma$-Algebra $\ereignisraum$ kann eine
+  Wahrscheinlichkeit $P$ definiert werden.
+\end{frame}
+
+\begin{frame}{Beispiel: Konzentrationen}
+  \begin{itemize}
+  \item Ergebnis eines Zufallsexperiments: pH-Wert
     \begin{itemize}
-        \item $A=$ \grqq Gerade Zahl\grqq: $A=\{2,4,6\}, P(A)=\frac{3}{6}$
-        \item $B=$ \grqq Zahl größer gleich 3\grqq: $B=\{3,4,5,6\}, P(B)=\frac{4}{6}$
-        \item Hier gilt: $A\cap  B \not= \emptyset$
-        \item Gesucht wird die Wahrscheinlichkeit \grqq Gerade Zahl ODER Zahl größer gleich 3\grqq:
-        \begin{align*}
-        A \cup B &= \{2,3,4,5,6\}, P(A\cup B) = \frac{5}{6} \\
-        \text{aber:} \\
-        P(A)+P(B) &= \frac{3}{6} + \frac{4}{6} = \frac{7}{6 }> 1
-        \end{align*}
+    \item $\Omega = (0,14]$ (halboffen aus praktischen Gründen)
+    \item Die Potenzmenge der reellen Zahlen ist ein mathematisches Monster
+      \begin{itemize}
+      \item Ungeeignet für die Definition der Wahrscheinlichkeit
+      \end{itemize}
     \end{itemize}
+    \pause
+  \item Sie haben ein billiges pH-Meter, das nur ganzzahlig ausgibt
+    \begin{itemize}
+    \item Die \glqq{}Atome\grqq{} der passenden $\sigma$-Algebra sind die Mengen
+      \begin{gather*}
+        \bigl\{ x\in(0,14]\big| i-1<x\le i\bigr\},\quad i=1,\dots,14
+      \end{gather*}
+    \item Alle weiteren Teilmengen, inklusive $\Omega$ entstehen
+      durch Vereinigungen
+    \item Die $\sigma$-Algebra bildet mögliches Wissen über die Zufallsergebnisse ab
+    \end{itemize}
+    \pause
+  \item Die sogenannte Borelsche $\sigma$-Algebra bildet den
+    Informationsgehalt der reellen Zahlen ab
+  \end{itemize}
+\end{frame}
+
+\begin{Aufgabe}
+  Was wäre die $\sigma$-Algebra $\ereignisraum $ bei einem doppelten Münzwurf, falls
+  \begin{enumerate}
+  \item zwei Münzen gleichzeitig geworfen werden?
+  \item zwei Münzen nacheiander geworfen werden?
+  \end{enumerate}
+\end{Aufgabe}
+
+\begin{frame}{Überlappende Ereignisse}
+  \begin{gather*}
+    A\cap B \neq \emptyset
+  \end{gather*}
+  \begin{itemize}
+  \item Die beiden Ereignisse können gleichzeitig eintreten
+  \item  Beispiel Würfel:
+    \begin{align*}
+      A&=\left\{\dice2,\dice4,\dice6\right\},
+      \\B&=\left\{\dice1,\dice2,\dice3\right\},
+      \\A\cap B&= \left\{\dice2\right\} \\
+      P(A\cap B) &= \frac{1}{6}
+    \end{align*}
+  \end{itemize}
 \end{frame}
 
 \begin{frame}{Siebformel für überlappende Ereignisse}
@@ -123,9 +288,11 @@ Was wäre die $\sigma$-Algebra $\mathcal{F}$ bei einem doppelten Münzwurf?
         \begin{gather*}
             P(A\cup B) = P(A) +P(B)-P(A\cap B)    
         \end{gather*}
-        \item Vorheriges Beispiel:
+        \item  Beispiel Würfel:
         \begin{gather*}
-            A=\left\{2,4,6\right\}, \ B=\left\{3,4,5,6\right\}, \ A\cap B= \left\{4,6\right\} \\
+          A=\left\{\dice2,\dice4,\dice6\right\},
+          \ B=\left\{\dice3,\dice4,\dice5,\dice6\right\},
+          \ A\cap B= \left\{\dice4,\dice6\right\} \\
             \Rightarrow P(A\cap B) = \frac{2}{6}
         \end{gather*}
         \item also gilt 
@@ -136,19 +303,30 @@ Was wäre die $\sigma$-Algebra $\mathcal{F}$ bei einem doppelten Münzwurf?
 \end{frame}
 
 \begin{frame}{Siebformel für überlappende Ereignisse}
-    Für $n$ Ereignisse gilt allgemein:
-    \begin{gather*}
-        P(\cup_iA_i)=\sum_iP(A_i)-\sum_{i<j}P(A_i\cap A_j) + \sum_{i<j<k}P(A_i\cap A_j \cap A_k) - \dots
-    \end{gather*}
+  Für $n$ Ereignisse gilt allgemein:
+  \begin{multline*}
+    P\left(\bigcup_iA_i\right)
+    =\sum_iP(A_i)-\sum_{i<j}P(A_i\cap A_j) \\
+    + \sum_{i<j<k}P(A_i\cap A_j \cap A_k) - \dots
+  \end{multline*}
+
+  \begin{itemize}
+  \item Zunächst subtrahiert man von der Summe alle Schnitte, da diese
+    doppelt gezählt wurden
+  \item Dabei hat man aber die Schnitte dreier Ereignisse zweimal
+    subtrahiert, deswegen addiert man sie wieder
+  \item Nun hat man denselben Fehler mit Schnitten von vier Ereignissen gemacht
+  \item ...
+  \end{itemize}
 \end{frame}
 
 \begin{frame}{Eigenschaften der Wahrscheinlichkeit}
-    \begin{itemize}
-        \item $P(A^c)=1-P(A)$
-        \item $P(\emptyset)=0$
-        \item wenn $A\subseteq B \Rightarrow P(A) \leq P(B)$
-        \item $P(A\cup B)\leq P(A)+P(B)$
-    \end{itemize}
+  \begin{itemize}
+  \item Komplement $P(A^c) = 1-P(A)$, Wahrscheinlichkeit, dass $A$ nicht eintritt
+  \item Unmögliches Ereignis $P(\emptyset)=0$
+  \item wenn $A\subseteq B \Rightarrow P(A) \leq P(B)$
+  \item $P(A\cup B)\leq P(A)+P(B)$
+  \end{itemize}
 \end{frame}
 
 \begin{frame}{Bedingte Wahrscheinlichkeit}
@@ -160,26 +338,42 @@ Was wäre die $\sigma$-Algebra $\mathcal{F}$ bei einem doppelten Münzwurf?
         \end{gather*}
         \item \textit{"Wie oft sind $A$ und $B$ aufgetreten, gemessen an der Häufigkeit von $B$ allein?}
     \end{itemize} 
-    \includegraphics[width=0.9\textwidth]{fig/bedingte_Wahrscheinlichkeit.tikz}
+    \includegraphics[width=0.8\textwidth]{fig/bedingte_Wahrscheinlichkeit.tikz}
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-    \frametitle{Bayes Formel}
-
+\begin{frame}{Vorsorgetests}
+  \begin{itemize}
+  \item Sie testen auf eine seltene, zunächst syptomlose Erkrankung
     \begin{itemize}
-        \item da $P(A\cap B) = P(B \cap A)$ können wir bei der Formel für die bedingte Wahrscheinlichkeit $A$ und $B$ vertauschen; daher gilt:
-        $$
-        P(A\cap B) = P(A|B)\,P(B) = P(B|A)\,P(A)
-        $$  
-        \item Daraus leiten wir die {\bf Bayes Formel} her:
-        $$
-        P(A|B) = \frac{P(B|A)}{P(B)}\,P(A)
-        $$
-        \item $P(A)$ ist die {\em a priori} Wahrscheinlichkeit von $A$ (ohne vorheriges Wissen über andere Ereignisse!)
-        \item $P(A|B)$ ist die {\em a posteriori} Wahrscheinlichkeit nach der Beobachtung von $B$
-        \item Grundlage der bayeschen Statistik
+    \item Prävalenz 0.1\%
     \end{itemize}
+  \item Die gesamte Bevölkerung wird getestet
+    \begin{itemize}
+    \item Sensitivität 99\%
+    \item Spezifität 99\%
+    \end{itemize}
+  \item<3-> Bei Bevölkerung 1M sind 1000 erkrankt
+    \begin{itemize}
+    \item Positive Tests $1000\cdot 99\%=990$
+    \end{itemize}
+  \item<4-> Es sind $1M-1000= 999000$ gesund
+    \begin{itemize}
+    \item Positive Tests $999000\cdot 1\% = 9990$
+    \end{itemize}
+  \item<5-> Seien $T$ und $K$ die Ereignisse pos. Test und krank
+    \begin{gather*}
+      P(T) = \frac{10980}{1M},\quad
+      P(T\cap K) = \frac{990}{1M},\quad
+      P(K|T) = \frac{990}{10980} \approx 9\%
+    \end{gather*}
+    \item<5-> Die bedingte Wahrscheinlichkeit hängt von der Prävalenz ab
+  \end{itemize}
+  \begin{onlyenv}<2>
+    \begin{Denkpause}
+      Wie hoch ist bei einem positiven Testergebnis die
+      Wahrscheinlichkeit, erkrankt zu sein?
+    \end{Denkpause}
+  \end{onlyenv}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -190,30 +384,78 @@ Was wäre die $\sigma$-Algebra $\mathcal{F}$ bei einem doppelten Münzwurf?
         \includegraphics[width=.6\textwidth]{fig/prob03.png}
     \end{center}
     \begin{itemize}
-        \item $A_i$ disjunkte Ereignisse, sodass $\cup_i A_i = \Omega$
-        \item Dann gilt für ein Ereignis $B$:
-        $$
-        P(B) = \sum_i P(A_i)\,P(B|A_i)
-        $$
+    \item $A_i$ disjunkte Ereignisse, sodass $\cup_i A_i = \Omega$
+    \item Dann gilt für ein Ereignis $B$:
+      \begin{gather*}
+        P(B) = \sum_i P(A_i)\frac{P(B\cap A_i)}{P(A_i)}
+        \visible<2>{= \sum_i P(A_i)\,P(B|A_i)}
+      \end{gather*}
     \end{itemize}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Bayes' Formel}
+
+    \begin{itemize}
+        \item Da $P(A\cap B) = P(B \cap A)$ können wir bei der Formel für die bedingte Wahrscheinlichkeit $A$ und $B$ vertauschen; daher gilt:
+        $$
+        P(A\cap B) = P(A|B)\,P(B) = P(B|A)\,P(A)
+        $$  
+        \item Daraus leiten wir die {\bf Bayessche Formel} her:
+        $$
+        P(A|B) = \frac{P(B|A)}{P(B)}\,P(A)
+        $$
+        \item $P(A)$ ist die {\em a priori} Wahrscheinlichkeit von $A$ (ohne vorheriges Wissen über andere Ereignisse!)
+        \item $P(A|B)$ ist die {\em a posteriori} Wahrscheinlichkeit nach der Beobachtung von $B$
+        \item Grundlage der Bayeschen Statistik
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Beispiel Vorsorgetest}
+  \begin{itemize}
+  \item Mit der Bayesschen Formel können wir die bedingte
+    Wahrscheinlichkeit direkt ausrechnen:
+    \begin{itemize}
+    \item $P(K)$ Prävalenz
+    \item $P(T|K)$ Sensitivität
+    \item $1-P(T|K^c)$ Spezifität
+    \end{itemize}
+  \item Zu berechnen: $P(T)$
+    \only<article>{unter Benutzung der totalen Wahrscheinlichkeit.}
+    \begin{align*}
+      P(T) &= P(T|K)P(K) + P(T|K^c)P(K^c) \\
+      &= 0.99\times0.001 + 0.01\times 0.999 = 0.01098
+    \end{align*}
+  \item Einsetzen in Bayes' Formel ergibt
+    \begin{align*}
+      P(K|T) &= \frac{P(T|K)}{P(T)}P(K)\\
+             &= \frac{0.99}{0.01098} \times  0.001 \approx 0.09016
+    \end{align*}
+  \end{itemize}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-    \frametitle{Bayes Formel}
+  \frametitle{Bayes Formel und totale Wahrscheinlichkeit}
 
-    \begin{itemize}
-        \item $A_i$ disjunkte Ereignisse, sodass $\cup_i A_i = \Omega$
-        \item Dann gilt für ein Ereignis $B$:
-        $$
-        P(A_j|B) =  \frac{P(B|A_j)}{\sum_i P(B|A_i)P(A_i)}\,P(A_j)
-        $$
-    \end{itemize}
-    
-
+  Wir haben soeben folgende Eigenschaft benutzt, die sich aus der
+  Kombination der Bayesschen Formel mit der totalen Wahrscheinlichkeit
+  ergibt:
+  \begin{itemize}
+  \item $A_i$ disjunkte Ereignisse, sodass
+    \begin{gather*}
+      \bigcup_i A_i = \Omega
+    \end{gather*}
+  \item Dann gilt für ein Ereignis $B$:
+    \begin{gather*}
+      P(A_j|B) =  \frac{P(B|A_j)}{\sum_i P(B|A_i)P(A_i)}\,P(A_j)
+    \end{gather*}
+  \end{itemize}
 \end{frame}
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
@@ -228,7 +470,7 @@ Was wäre die $\sigma$-Algebra $\mathcal{F}$ bei einem doppelten Münzwurf?
         \item Lösung: wir suchen $P(M_1|F)$:
         \begin{eqnarray*}
         P(M_1|F) &=& \frac{P(F|M_1)}{P(F|M_1)P(M_1)+ P(F|M_2)P(M_2)}\,P(M_1) \\
-        &=& \frac{0.05}{0.05*0.4 + 0.08*0.6}*0.4 = 29.4\%
+        &=& \frac{0.05}{0.05\times 0.4 + 0.08\times 0.6}\times 0.4 = 29.4\%
         \end{eqnarray*}
     \end{itemize}
 \end{frame}
@@ -254,58 +496,220 @@ Was wäre die $\sigma$-Algebra $\mathcal{F}$ bei einem doppelten Münzwurf?
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-    \frametitle{Unabhängige Ereignisse}
-
-    \begin{itemize}
-        \item Achtung: Unabhängigkeit und Disjunktheit sind nicht identisch!
-        \item Disjunktheit von $A$ und $B$: $P(A \cap B) =0$
-        \item Unabhängigkeit von $A$ und $B$: $P(A \cap B) =P(A)\,P(B)$
-        \item {\bf Totale Unabhängigkeit} bei mehreren Ereignissen $A_i,i=1,\ldots,b$: wenn für jede Wahl von $k$ Ereignissen $A_{i_1},\ldots,A_{i_k}$ gilt:
-$$
-    P(A_{i_1} \cap \ldots \cap A_{i_k}) = P(A_{i_1})\,P(A_{i_2})\ldots P(A_{i_k})
-$$
-    \end{itemize}
-    
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-    \frametitle{Kombinatorik}
-
-    \begin{itemize}
-        \item Anzahl der möglichen {\bf Permutationen} von $n$ Objekten ("die Reihenfolge zählt!"):
-        $$
-        n! = 1\cdot 2\cdot \ldots \cdot n
-        $$
-        \item Anzahl der möglichen {\bf Kombinationen} von $k$ Objekten aus $n$ ("die Reihenfolge der $k$ Objekte ist unwichtig"):
-        $$
-\binom{n}{k} = \frac{n!}{k!(n-k)!}
-        $$
-        \item Anzahl der möglichen {\bf Variationen} von $k$ Objekten aus $n$ ("die Reihenfolge der $k$ Objekte zählt!"):
-        $$
-\binom{n}{k}k! = \frac{n!}{(n-k)!}
-        $$
-    \end{itemize}
-    
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-    \frametitle{Abschlussfragen}
-
-    \begin{enumerate}
-        \item Was ist die $\sigma$-Algebra $\mathcal{S}$ bei dem Münzwerfspiel?
-        \item Wieviele Anträge hätte $M_1$ bearbeiten müssen damit bei einem fehlerhaften Antrag eine 50/50 Chance besteht, dass er von $M_1$ bearbeitet wurde?
-        \item Wenn Sie sich das Bild von Folie \ref{totprob} anschauen, wie könnte man $P(B)$ sonst noch ausdrücken?
-        \item Was ist wahrscheinlicher:
-        \begin{enumerate}
-            \item A : bei 4 Würfen mit einen Würfel wird mindestens eine 6 geworfen;
-            \item B : bei 24 Würfen mit 2 Würfeln wird mindestens eine Doppelsechs geworfen
-        \end{enumerate}
-    \end{enumerate}
-  \end{frame}
+  \frametitle{Unabhängige Ereignisse}
   
+  \begin{itemize}
+  \item Achtung: Unabhängigkeit und Disjunktheit sind nicht identisch!
+  \item Disjunktheit von $A$ und $B$:
+    \begin{gather*}
+      P(A \cap B) =0
+    \end{gather*}
+  \item Unabhängigkeit von $A$ und $B$:
+    \begin{gather*}
+      P(A \cap B) =P(A)\,P(B)
+    \end{gather*}
+  \item \textbf{Vollständige} oder \textbf{gegenseitige} Unabhängigkeit bei mehreren Ereignissen $A_1,\ldots,A_k$: für jede Wahl von $k$ Ereignissen $A_{i_1},\ldots,A_{i_k}$ gilt:
+    $$
+    P(A_{i_1} \cap \ldots \cap A_{i_k}) = P(A_{i_1})\,P(A_{i_2})\ldots P(A_{i_k})
+    $$
+  \end{itemize}    
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Beispiel: wiederholte Würfe eines Würfels}
+  \begin{itemize}
+  \item Ein sechsseitiger Würfel werde $5$ mal geworfen.
+  \item In jedem Wurf ist die Wahrscheinlichkeit jeder Zahl 1/6
+    \begin{itemize}
+    \item ...unabhängig von allen vorherigen Würfen
+    \end{itemize}
+  \end{itemize}
+  \begin{multline*}
+    P\!\left(
+      \begin{matrix}
+        \dice6\\\dice6\\\dice6\\\dice6\\\dice6
+      \end{matrix}
+    \right)
+    =
+    P\!\left(
+      \begin{matrix}
+        \dice6\\ \\ \\ \\\phantom{\dice6}
+      \end{matrix}
+    \right)\times
+    P\!\left(
+      \begin{matrix}
+        \\\dice6 \\ \\ \\\phantom{\dice6}
+      \end{matrix}
+    \right)\times
+    P\!\left(
+      \begin{matrix}
+        \\ \\\dice6 \\ \\\phantom{\dice6}
+      \end{matrix}
+    \right)\times
+    P\!\left(
+      \begin{matrix}
+        \\ \\ \\\dice6 \\\phantom{\dice6}
+      \end{matrix}
+    \right)\times
+    P\!\left(
+      \begin{matrix}
+        \\ \\ \\ \\\dice6
+      \end{matrix}
+    \right)\\
+    =\frac16\frac16\frac16\frac16\frac16 = \frac1{7776}
+  \end{multline*}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\begin{frame}
+  \frametitle{Abschlussfragen}
+  
+  \begin{enumerate}
+  \item Was ist die Potenzmenge $\mathcal{S}$ beim Münzwurf (Kopf oder Zahl)?
+  \item Müssen Sie Sensitivität oder Spezifität erhöhen, um den Test
+    signifikant zu verbessern?
+  \item Wieviele Anträge hätte $M_1$ bearbeiten müssen damit bei einem
+    fehlerhaften Antrag eine 50/50 Chance besteht, dass er von $M_1$
+    bearbeitet wurde?
+  \end{enumerate}
+\end{frame}
+  
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Kombinatorik}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Zählen}
+  \begin{itemize}
+  \item Bei endlichen Ergebnismengen benötigt man die Anzahl aller
+    Ergebnisse, um die Wahrscheinlichkeit zu berechnen
+    \begin{gather*}
+      P(A) = \frac{\#A}{\#\Omega}
+    \end{gather*}
+  \item Kombinatorik beschäftigt sich mit dem Zählen möglicher Ergebnisse
+  \item Kombinatorik untersucht, wie viele verschiedene Anordnungen,
+    Auswahlen oder Zuordnungen unter gegebenen Bedingungen möglich
+    sind.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Permutationen}
+  \begin{itemize}
+  \item Permutationen von $n$ Objekten sind die möglichen Vertauschungen der Reihenfolge
+  \item Ihre Anzahl ist
+    \begin{gather*}
+      n! = 1\cdot 2\cdot \ldots \cdot n      
+    \end{gather*}
+  \item Beispiel: $3!=6$
+    \begin{gather*}
+      (\dice1,\dice3,\dice5),(\dice1,\dice5,\dice3),\\
+      (\dice3,\dice1,\dice5),(\dice3,\dice5,\dice1),\\
+      (\dice5,\dice3,\dice1),(\dice1,\dice1,\dice3)\phantom{,}
+    \end{gather*}
+  \end{itemize}
+\end{frame}
+
+
+
+\begin{frame}
+  \frametitle{Kombinationen}
+  \begin{itemize}
+  \item Auswahl von $k$ Objekten aus $n$
+  \item Reihenfolge ist irrelevant
+  \item Ihre Anzahl ist der Binomialkoeffizient
+    \begin{gather*}
+      \binom{n}{k} = \frac{n!}{k!(n-k)!}
+    \end{gather*}
+  \item Beispiel: Lotto 6 aus 49
+    \begin{gather*}
+      \frac{49!}{6!\,43!} = \frac{44\times 45\times \dots\times 49}{6!}
+      = \frac{10068347520}{720} = 13983816
+    \end{gather*}
+  \end{itemize}
+\end{frame}    
+
+\begin{frame}
+  \frametitle{Variationen}
+  \begin{itemize}
+  \item Auswahl von $k$ Objekten aus $n$
+  \item Die Reihenfolge zählt
+  \item Ihre Anzahl ist
+    \begin{gather*}
+      \binom{n}{k}k! = \frac{n!}{(n-k)!}
+    \end{gather*}
+  \item Beispiel: Alle Ketten von zwei der DNA-Basen Adenin, Cytosin, Guanin und Thymin
+    \begin{gather*}
+      A-C 
+    \end{gather*}
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Variationen mit Wiederholungen}
+  \begin{itemize}
+  \item Auswahl von $k$ Objekten aus $n$
+  \item Die Reihenfolge zählt
+  \item Objekte dürfen mehrfach auftreten
+  \item Ihre Anzahl ist
+    \begin{gather*}
+      n^k
+    \end{gather*}
+  \item Beispiel: Alle Ketten von zwei der DNA-Basen Adenin, Cytosin, Guanin und Thymin
+    \begin{gather*}
+      \begin{matrix}
+        A-A& A-C& A-G& A-T\\
+        C-A& C-C& C-G& C-T\\
+        G-A& G-C& G-G& G-T\\
+        T-A& T-C& T-G& T-T
+      \end{matrix}
+      \qquad 4^2=16
+    \end{gather*}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Kombinationen mit Wiederholungen}
+  \begin{itemize}
+  \item Auswahl von $k$ Objekten aus $n$
+  \item Reihenfolge irrelevant
+  \item Objekte dürfen mehrfach auftreten
+  \item Ihre Anzahl ist
+    \begin{gather*}
+      \binom{n+k-1}{k}
+    \end{gather*}
+  \item Beispiel: eine Schachtel mit 2 Macaron aus den Sorten Cassis, Framboise und Myrtille
+    \begin{gather*}
+      \{C,C\}, \{C,F\},\{C,M\},\{F,F\},\{F,M\},\{M,M\}
+      \qquad
+      \binom{3+2-1}{2} = \binom{4}{2} = 6
+    \end{gather*}
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{Abschluss}
+\item Wie viele DNA-Sequenzen der Länge 20 gibt es?
+\item Wie viele verschiedene Reihenfolgen können fünf Gene haben?
+\item Wie viele Möglichkeiten gibt es, drei Proben aus zehn auszuwählen?  
+\item Was ist wahrscheinlicher:
+  \begin{enumerate}
+  \item bei 4 Würfen mit einen Würfel wird mindestens eine 6 geworfen;
+  \item bei 24 Würfen mit 2 Würfeln wird mindestens eine Doppelsechs geworfen
+  \end{enumerate}
+\item Wieviele Möglichkeiten gibt es, eine Schachtel mit 3 Macarons
+  der Sorten Cassis, Framboise, Myrtille und Pamplemousse zu füllen,
+  wobei beliebig viele von allen, Myrtille aber maximal einmal, drin
+  sein dürfen?
+\end{Abschluss}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \subsection{Zufallsvariablen}
 \begin{itemize}
 \item Wir definieren jetzt die {\bf Wahrscheinlichkeit} $P_X$ der Zufallsvariablen $X$ 
